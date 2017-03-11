@@ -3,7 +3,7 @@ package datastructures;
 import java.lang.Comparable;
 import java.lang.IllegalArgumentException;
 
-class FibonacciHeap<T extends Comparable<T>> {
+public class FibonacciHeap<T extends Comparable<T>> {
 
     private Node<T> min;
     private int size;

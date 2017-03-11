@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import datastructures.FibonacciHeap;
 import datastructures.FibonacciHeap.Node;
@@ -16,8 +17,8 @@ class TestFiconacciHeap {
             t.insert((i<<i)%10);
         }
 
-        for(int i = 0; i < 10; i++) {
-            assertEquals(t.minimum().key   , i);
+        for(Integer i = 0; i < 10; i++) {
+            assertEquals(t.minimum().key, i);
             assertEquals(t.extractMin().key, i);
         }
     }
@@ -26,14 +27,14 @@ class TestFiconacciHeap {
     @DisplayName("Testing DELETE")
     void testDelete() {
         FibonacciHeap<Integer> t = new FibonacciHeap<Integer>();
-        Node<T> node5 = t.insert(5);
-        Node<T> node1 = t.insert(1);
-        Node<T> node3 = t.insert(3);
-        Node<T> node4 = t.insert(4);
-        Node<T> node2 = t.insert(2);
+        FibonacciHeap.Node<Integer> node5 = t.insert(5);
+        FibonacciHeap.Node<Integer> node1 = t.insert(1);
+        FibonacciHeap.Node<Integer> node3 = t.insert(3);
+        FibonacciHeap.Node<Integer> node4 = t.insert(4);
+        FibonacciHeap.Node<Integer> node2 = t.insert(2);
 
         /* { 3, 4, 2, min(1), 5 }*/
-        t.delete(1);
+        t.delete(node1);
         assertEquals(t.minimum(), node2);
         assertEquals(t.minimum().right, node5);
         
