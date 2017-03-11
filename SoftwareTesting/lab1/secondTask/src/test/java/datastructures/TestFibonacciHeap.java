@@ -55,22 +55,22 @@ class TestFiconacciHeap {
     }
 
 
-	@Test
-	@DisplayName("Testing DECREASE_KEY")
-	void testDecreaseKey() {
+    @Test
+    @DisplayName("Testing DECREASE_KEY")
+    void testDecreaseKey() {
         FibonacciHeap<Integer> t = new FibonacciHeap<Integer>();
         FibonacciHeap.Node<Integer> node5 = t.insert(5);
         FibonacciHeap.Node<Integer> node3 = t.insert(3);
         FibonacciHeap.Node<Integer> node4 = t.insert(4);
         FibonacciHeap.Node<Integer> node2 = t.insert(2);
         
-		t.decreaseKey(node5, 1);
-		assertEquals(t.minimum(), node5);
+        t.decreaseKey(node5, 1);
+        assertEquals(t.minimum(), node5);
 
-		t.decreaseKey(node4, 0);
-		assertEquals(t.minimum(), node4);
+        t.decreaseKey(node4, 0);
+        assertEquals(t.minimum(), node4);
 
-		t.decreaseKey(node3, 0);
-		assertEquals(t.minimum(), node4);
-	}
+        t.decreaseKey(node3, 0);
+        assertEquals(t.minimum(), node4);
+    }
 }
