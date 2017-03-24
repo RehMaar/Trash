@@ -1,0 +1,81 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        03/24/2017  15:29:05  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\PROGRAM FILES (X86)\KEIL\C51\BIN\BL51.EXE Clock.obj TO Clock RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  Clock.obj (CLOCK)
+
+
+LINK MAP OF MODULE:  Clock (CLOCK)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+                    0008H     0028H                  *** GAP ***
+            IDATA   0030H     000AH     ABSOLUTE     
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+                    0006H     000DH                  *** GAP ***
+            CODE    0013H     0003H     ABSOLUTE     
+                    0016H     002AH                  *** GAP ***
+            CODE    0040H     0021H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  Clock (CLOCK)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        CLOCK
+  D:00E0H         SYMBOL        ACC
+  C:004AH         SYMBOL        CIKL
+  B:00A8H.7       SYMBOL        EA
+  C:004DH         SYMBOL        EX00
+  C:0057H         SYMBOL        EX01
+  D:00B0H         SYMBOL        P3
+  D:0081H         SYMBOL        SP
+  I:0030H         SYMBOL        STACK
+  C:0040H         SYMBOL        START
+  C:0000H         LINE#         4
+  C:0003H         LINE#         7
+  C:0013H         LINE#         9
+  C:0040H         LINE#         13
+  C:0043H         LINE#         14
+  C:0044H         LINE#         15
+  C:0046H         LINE#         16
+  C:0047H         LINE#         17
+  C:0048H         LINE#         18
+  C:004AH         LINE#         19
+  C:004BH         LINE#         20
+  C:004DH         LINE#         23
+  C:004FH         LINE#         24
+  C:0051H         LINE#         25
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/24/2017  15:29:05  PAGE 2
+
+
+  C:0052H         LINE#         26
+  C:0054H         LINE#         27
+  C:0056H         LINE#         28
+  C:0057H         LINE#         31
+  C:0059H         LINE#         32
+  C:005BH         LINE#         33
+  C:005CH         LINE#         34
+  C:005EH         LINE#         35
+  C:0060H         LINE#         36
+  -------         ENDMOD        CLOCK
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 002AH BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=18.0 xdata=0 code=42
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

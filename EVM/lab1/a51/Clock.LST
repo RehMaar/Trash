@@ -1,0 +1,150 @@
+A51 MACRO ASSEMBLER  CLOCK                                                                03/24/2017 14:40:33 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN Clock.OBJ
+ASSEMBLER INVOKED BY: C:\Program Files (x86)\keil\C51\BIN\A51.EXE Clock.a51 SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     cseg at 0b
+
+0000 802E              2             jmp main
+
+----                   3     cseg at 0bh
+
+000B 8030              4             jmp intt0
+
+----                   5     cseg at 0030h
+
+  REG                  6     count equ r0
+
+  REG                  7     time equ r1
+
+  REG                  8     sec equ r2
+
+  REG                  9     min equ r3
+
+                      10     ;Turn on bank reg 1
+
+                      11     USING 1
+
+0030                  12     main:
+
+                      13             ; FUNCTION main (START)
+
+                      14             ; Setup params interrupt
+
+0030 758901           15             MOV     TMOD, #01H
+
+                      16             ; mask TF0
+
+0033 D2A9             17             SETB ET0
+
+0035 D28C             18             SETB TR0
+
+                      19             ; turn on interrupt
+
+0037 D2AF             20             SETB EA
+
+                      21             ;cycle
+
+0039                  22             whl:
+
+0039 8A90             23             MOV P1, sec
+
+003B 80FC             24             SJMP whl
+
+                      25             ; FUNCTION main (END)
+
+003D                  26     intt0:
+
+003D C0E0             27             PUSH ACC
+
+003F C0D0             28             PUSH PSW      
+
+                      29             
+
+0041 75A000           30             MOV P2, #00H
+
+                      31             ; setup params for timer
+
+0044 758C3C           32             MOV TH0, #03CH
+
+                      33             ; const recalc for timer
+
+0047 758AB0           34             MOV TL0, #0B0H
+
+                      35             ; counter overflow
+
+004A 08               36             INC count
+
+004B 740A             37             MOV A, #0AH
+
+004D 29               38             ADD A, time
+
+004E F9               39             MOV time, A
+
+004F E8               40             MOV A, count
+
+0050 B41403           41             CJNE A, #014H, ifcount
+
+0053 0A               42             INC sec
+
+0054 7800             43             MOV count, #00H
+
+0056                  44             ifcount:
+
+0056 EA               45             MOV A, sec
+
+0057 B43C03           46             CJNE A, #03CH,ifsec
+
+005A 0B               47             INC min
+
+005B 7A00             48             MOV sec, #00H
+
+005D                  49             ifsec:
+
+005D 75A07F           50             MOV P2, #07FH
+
+0060 D0D0             51             POP PSW
+
+0062 D0E0             52             POP ACC
+
+0064 32               53     RETI
+
+                      54     END
+
+A51 MACRO ASSEMBLER  CLOCK                                                                03/24/2017 14:40:33 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+COUNT. . . . . . .    REG    R0          
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+IFCOUNT. . . . . .  C ADDR   0056H   A   
+IFSEC. . . . . . .  C ADDR   005DH   A   
+INTT0. . . . . . .  C ADDR   003DH   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+MIN. . . . . . . .    REG    R3          
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+SEC. . . . . . . .    REG    R2          
+TH0. . . . . . . .  D ADDR   008CH   A   
+TIME . . . . . . .    REG    R1          
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+WHL. . . . . . . .  C ADDR   0039H   A   
+
+
+REGISTER BANK(S) USED: 0 1 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

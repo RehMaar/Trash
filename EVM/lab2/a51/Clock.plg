@@ -1,0 +1,14 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+E:\Dropbox\Учёба такая учёба\Организация ЭВМ\[8051]\last lab\Lab 5\a51\Clock.uvproj
+Project File Date:  03/13/2011
+
+<h2>Output:</h2>
+Build target 'Clock'
+assembling Clock.a51...
+linking...
+Program Size: data=11.0 xdata=0 code=84
+"Clock" - 0 Error(s), 0 Warning(s).

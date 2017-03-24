@@ -1,0 +1,108 @@
+A51 MACRO ASSEMBLER  CLOCK                                                                03/24/2017 15:29:05 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN Clock.OBJ
+ASSEMBLER INVOKED BY: C:\Program Files (x86)\keil\C51\BIN\A51.EXE Clock.a51 SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     iseg at 30h
+
+0030                   2     Stack: ds 10
+
+----                   3     cseg at 0
+
+0000 020040            4     ljmp start
+
+                       5     
+
+----                   6     cseg at 3h
+
+0003 02004D            7     ljmp ex00
+
+----                   8     cseg at 13h
+
+0013 020057            9     ljmp ex01
+
+                      10     
+
+----                  11     cseg at 40h
+
+0040                  12     start: 
+
+0040 75812F           13     mov SP, #Stack-1
+
+0043 E4               14     clr A
+
+0044 F5B0             15     mov P3, A
+
+0046 C3               16     clr c
+
+0047 B3               17     cpl c
+
+0048 92AF             18     mov EA, c
+
+004A 04               19     cikl: inc a
+
+004B 80FD             20     jmp cikl
+
+                      21     
+
+004D                  22     ex00: 
+
+004D C0E0             23       push ACC
+
+004F E5B0             24       mov A, P3
+
+0051 04               25       inc A
+
+0052 F5B0             26       mov P3, A
+
+0054 D0E0             27       pop ACC
+
+0056 32               28       Reti
+
+                      29     
+
+0057                  30     ex01:
+
+0057 C0E0             31       push ACC
+
+0059 E5B0             32       mov A, P3
+
+005B 14               33       dec A
+
+005C F5B0             34       mov P3, A
+
+005E D0E0             35       pop ACC
+
+0060 32               36       Reti
+
+                      37     
+
+                      38     end
+
+A51 MACRO ASSEMBLER  CLOCK                                                                03/24/2017 15:29:05 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+CIKL . . . . . . .  C ADDR   004AH   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EX00 . . . . . . .  C ADDR   004DH   A   
+EX01 . . . . . . .  C ADDR   0057H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+STACK. . . . . . .  I ADDR   0030H   A   
+START. . . . . . .  C ADDR   0040H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

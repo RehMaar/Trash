@@ -1,0 +1,138 @@
+C51 COMPILER V9.56.0.0   MAIN                                                           03/24/2017 15:00:01 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN Main.OBJ
+COMPILER INVOKED BY: C:\Program Files (x86)\keil\C51\BIN\C51.EXE Main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND C
+                    -ODE NOCOND PAGEWIDTH(117) TABS(2)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #define con (0x10000-10000)/256;
+   3          #define con2 (0x10000-10000)%256;
+   4          unsigned int  x, abs; 
+   5          
+   6          void signal_handler() interrupt 0
+   7          {
+   8   1          x = (TL1 + (TH1<<8))*2;
+   9   1        TL1 = 0;
+  10   1        TH1 = 0;
+  11   1      }
+  12          
+  13          
+  14          void time_handler() interrupt 1
+  15          {
+  16   1        TL0 = con2;
+  17   1        TH0 = con;
+  18   1          P3 ^= 0x7F;
+  19   1      }
+  20          
+  21          void main()
+  22          { 
+  23   1        
+  24   1        TR0 = 1;  
+  25   1        IT0 = 1;
+  26   1        TMOD = 0x91;
+  27   1        TR1 = 1;  
+  28   1        ET0 = 1;  
+  29   1        EX0 = 1;  
+  30   1        EA = 1;   
+  31   1        for(;;);
+  32   1      }
+C51 COMPILER V9.56.0.0   MAIN                                                           03/24/2017 15:00:01 PAGE 2   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION signal_handler (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C0D0              PUSH    PSW
+0004 75D000            MOV     PSW,#00H
+0007 C004              PUSH    AR4
+0009 C005              PUSH    AR5
+000B C006              PUSH    AR6
+000D C007              PUSH    AR7
+                                           ; SOURCE LINE # 6
+                                           ; SOURCE LINE # 8
+000F AF8D              MOV     R7,TH1
+0011 EF                MOV     A,R7
+0012 FE                MOV     R6,A
+0013 AD8B              MOV     R5,TL1
+0015 7C00              MOV     R4,#00H
+0017 E4                CLR     A
+0018 2D                ADD     A,R5
+0019 FF                MOV     R7,A
+001A EC                MOV     A,R4
+001B 3E                ADDC    A,R6
+001C FE                MOV     R6,A
+001D EF                MOV     A,R7
+001E 25E0              ADD     A,ACC
+0020 F500        R     MOV     x+01H,A
+0022 EE                MOV     A,R6
+0023 33                RLC     A
+0024 F500        R     MOV     x,A
+                                           ; SOURCE LINE # 9
+0026 758B00            MOV     TL1,#00H
+                                           ; SOURCE LINE # 10
+0029 758D00            MOV     TH1,#00H
+                                           ; SOURCE LINE # 11
+002C D007              POP     AR7
+002E D006              POP     AR6
+0030 D005              POP     AR5
+0032 D004              POP     AR4
+0034 D0D0              POP     PSW
+0036 D0E0              POP     ACC
+0038 32                RETI    
+             ; FUNCTION signal_handler (END)
+
+             ; FUNCTION time_handler (BEGIN)
+                                           ; SOURCE LINE # 14
+                                           ; SOURCE LINE # 16
+0000 758AF0            MOV     TL0,#0F0H
+                                           ; SOURCE LINE # 17
+0003 758CD8            MOV     TH0,#0D8H
+                                           ; SOURCE LINE # 18
+0006 63B07F            XRL     P3,#07FH
+                                           ; SOURCE LINE # 19
+0009 32                RETI    
+             ; FUNCTION time_handler (END)
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 21
+                                           ; SOURCE LINE # 22
+                                           ; SOURCE LINE # 24
+0000 D28C              SETB    TR0
+                                           ; SOURCE LINE # 25
+C51 COMPILER V9.56.0.0   MAIN                                                           03/24/2017 15:00:01 PAGE 3   
+
+0002 D288              SETB    IT0
+                                           ; SOURCE LINE # 26
+0004 758991            MOV     TMOD,#091H
+                                           ; SOURCE LINE # 27
+0007 D28E              SETB    TR1
+                                           ; SOURCE LINE # 28
+0009 D2A9              SETB    ET0
+                                           ; SOURCE LINE # 29
+000B D2A8              SETB    EX0
+                                           ; SOURCE LINE # 30
+000D D2AF              SETB    EA
+                                           ; SOURCE LINE # 31
+000F         ?C0003:
+000F 80FE              SJMP    ?C0003
+             ; FUNCTION main (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     84    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

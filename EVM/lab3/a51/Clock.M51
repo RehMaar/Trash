@@ -1,0 +1,106 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        03/24/2017  15:02:10  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\PROGRAM FILES (X86)\KEIL\C51\BIN\BL51.EXE Clock.obj TO Clock RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  Clock.obj (CLOCK)
+
+
+LINK MAP OF MODULE:  Clock (CLOCK)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+                    0008H     0028H                  *** GAP ***
+            IDATA   0030H     000AH     ABSOLUTE     
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     0005H                  *** GAP ***
+            CODE    0013H     0003H     ABSOLUTE     
+                    0016H     002AH                  *** GAP ***
+            CODE    0040H     0043H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  Clock (CLOCK)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        CLOCK
+  D:00E0H         SYMBOL        ACC
+  C:0057H         SYMBOL        CIKL
+  B:00A8H.7       SYMBOL        EA
+  B:00A8H.1       SYMBOL        ET0
+  C:0059H         SYMBOL        EX00
+  C:0072H         SYMBOL        EX01
+  B:00A8H.2       SYMBOL        EX1
+  B:0088H.1       SYMBOL        IE0
+  B:0088H.2       SYMBOL        IT1
+  C:006FH         SYMBOL        NZERO
+  D:0090H         SYMBOL        P1
+  D:00A0H         SYMBOL        P2
+  D:00B0H         SYMBOL        P3
+  D:0081H         SYMBOL        SP
+  I:0030H         SYMBOL        STACK
+  C:0040H         SYMBOL        START
+  D:008CH         SYMBOL        TH0
+  D:008DH         SYMBOL        TH1
+  D:008AH         SYMBOL        TL0
+  D:008BH         SYMBOL        TL1
+  D:0089H         SYMBOL        TMOD
+  B:0088H.4       SYMBOL        TR0
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/24/2017  15:02:10  PAGE 2
+
+
+  B:0088H.6       SYMBOL        TR1
+  C:006CH         SYMBOL        ZERO
+  C:0000H         LINE#         4
+  C:000BH         LINE#         7
+  C:0013H         LINE#         10
+  C:0040H         LINE#         14
+  C:0043H         LINE#         15
+  C:0046H         LINE#         16
+  C:0049H         LINE#         17
+  C:004BH         LINE#         18
+  C:004DH         LINE#         19
+  C:004FH         LINE#         20
+  C:0051H         LINE#         21
+  C:0053H         LINE#         22
+  C:0055H         LINE#         23
+  C:0057H         LINE#         24
+  C:0059H         LINE#         27
+  C:005BH         LINE#         28
+  C:005EH         LINE#         29
+  C:0061H         LINE#         30
+  C:0063H         LINE#         31
+  C:0065H         LINE#         32
+  C:0067H         LINE#         33
+  C:006AH         LINE#         34
+  C:006CH         LINE#         35
+  C:006FH         LINE#         37
+  C:0071H         LINE#         38
+  C:0072H         LINE#         41
+  C:0074H         LINE#         42
+  C:0077H         LINE#         43
+  C:007AH         LINE#         44
+  C:007DH         LINE#         45
+  C:0080H         LINE#         46
+  C:0082H         LINE#         47
+  -------         ENDMOD        CLOCK
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 004CH BYTE ( 3%) *
+******************************************************************************
+
+Program Size: data=18.0 xdata=0 code=76
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

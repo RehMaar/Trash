@@ -1,0 +1,3 @@
+"Main.obj" 
+TO "Clock" 
+NOPRINT RAMSIZE(256) 

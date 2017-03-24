@@ -1,0 +1,145 @@
+A51 MACRO ASSEMBLER  CLOCK                                                                03/24/2017 15:02:10 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN Clock.OBJ
+ASSEMBLER INVOKED BY: C:\Program Files (x86)\keil\C51\BIN\A51.EXE Clock.a51 SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     iseg at 30h
+
+0030                   2     Stack: ds 10
+
+----                   3     cseg at 0
+
+0000 020040            4     ljmp start
+
+                       5     
+
+----                   6     cseg at 0Bh
+
+000B 020059            7     ljmp ex00
+
+                       8     
+
+----                   9     cseg at 13h
+
+0013 020072           10     ljmp ex01
+
+                      11     
+
+----                  12     cseg at 40h
+
+0040                  13     start:
+
+0040 75B000           14     mov P3, #0
+
+0043 75812F           15     mov SP, #Stack-1
+
+0046 758911           16     mov TMOD, #11h
+
+0049 D2AF             17     setb EA
+
+004B D2AA             18     setb EX1
+
+004D D28A             19     setb IT1
+
+004F D28E             20     setb TR1
+
+0051 D28C             21     setb TR0
+
+0053 D2A9             22     setb ET0
+
+0055 D289             23     setb IE0
+
+0057 80FE             24     cikl: jmp cikl
+
+                      25     
+
+0059                  26     ex00: 
+
+0059 C0E0             27       push ACC
+
+005B 758AEF           28       mov TL0, #0xEF
+
+005E 758CD8           29       mov TH0, #0xD8
+
+0061 E5B0             30       mov a, P3
+
+0063 947E             31       subb a, #0x7E
+
+0065 6005             32       jz zero
+
+0067 75B07F           33       mov P3, #0x7F
+
+006A 8003             34       jmp nzero
+
+006C 75B000           35       zero: mov P3, #0
+
+006F                  36       nzero:
+
+006F D0E0             37       pop ACC
+
+0071 32               38       Reti
+
+                      39     
+
+0072                  40     ex01:
+
+0072 C0E0             41       push ACC
+
+0074 858DA0           42       mov P2, TH1
+
+0077 858B90           43       mov P1, TL1
+
+007A 758D00           44       mov TH1, #0
+
+007D 758B00           45       mov TL1, #0
+
+0080 D0E0             46       pop ACC
+
+0082 32               47       Reti
+
+                      48     
+
+                      49     end
+
+A51 MACRO ASSEMBLER  CLOCK                                                                03/24/2017 15:02:10 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+CIKL . . . . . . .  C ADDR   0057H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+EX00 . . . . . . .  C ADDR   0059H   A   
+EX01 . . . . . . .  C ADDR   0072H   A   
+EX1. . . . . . . .  B ADDR   00A8H.2 A   
+IE0. . . . . . . .  B ADDR   0088H.1 A   
+IT1. . . . . . . .  B ADDR   0088H.2 A   
+NZERO. . . . . . .  C ADDR   006FH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+STACK. . . . . . .  I ADDR   0030H   A   
+START. . . . . . .  C ADDR   0040H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+ZERO . . . . . . .  C ADDR   006CH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
