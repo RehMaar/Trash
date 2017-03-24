@@ -16,7 +16,7 @@ public class Calc {
         try {
             Double xn = 1.0, prevSum = 0.0, sum = 1.0;
             final Double EPS = 1e-10, INF = 1.0e8;
-            x = CalibrateX(x);
+       //     x = CalibrateX(x);
 
             for(Integer n = 0; Math.abs(sum - prevSum) > EPS; n++)
             {
