@@ -1,5 +1,8 @@
+package math;
+
 import java.lang.IllegalArgumentException;
 
+import math.LogarithmicBase;
 
 public class LogarithmicFunctions {
 

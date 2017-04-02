@@ -1,3 +1,7 @@
+package math;
+
+import math.LogarithmicExpression;
+
 public class LogarithmicExpression {
 
     LogarithmicFunctions fn;
