@@ -1,6 +1,7 @@
+package math;
+
 import math.LogarithmicExpression;
 import math.TrigonometricExpression;
-
 
 public class SystemSolver {
 
