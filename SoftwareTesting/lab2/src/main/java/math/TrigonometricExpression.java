@@ -2,7 +2,7 @@
  * Created by skyD9 on 02.04.2017.
  */
 public class TrigonometricExpression {
-    public static Double calcInequality(Double x){
+    public Double eval(Double x) {
         TrigonometricFunctions f = new TrigonometricFunctions();
         TrigonometricBase b = new TrigonometricBase();
         return (Math.pow((f.calcSec(x)-f.calcCos(x)),3)-
