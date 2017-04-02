@@ -17,7 +17,7 @@ public class LogarithmicBase {
 
 	public Double ln(Double x) throws IllegalArgumentException {
 
-		if (x < 0) {
+		if (x <= 0) {
 			throw new IllegalArgumentException();
 		}
 
