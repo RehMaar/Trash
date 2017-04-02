@@ -1,6 +1,7 @@
 /**
  * Created by skyD9 on 02.04.2017.
  */
+package math;
 public class TrigonometricBase {
     private Double CalibrateX(Double x) {
         double del = Math.PI * 2;
