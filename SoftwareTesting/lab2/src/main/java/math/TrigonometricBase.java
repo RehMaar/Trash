@@ -2,24 +2,30 @@
  * Created by skyD9 on 02.04.2017.
  */
 public class TrigonometricBase {
-    public Double calcSin(Double x){
-        Double stx,sint,e;
-        Integer i,fakt,z;
-
-        e=1e-10; //accuracy
-        stx= x;  //x in rate
-        fakt= 1;  //factorial value
-        sint= 0.0;  //first element
-        i= 1;  //counter
-        z= 1;  //sigh of element
-
-        while (stx/fakt>=e) {  // while element don't less than accuracy
-            sint=sint + z * stx / fakt;
-            i=i+2;
-            stx=stx * x * x;
-            fakt=fakt * (i - 1) * i;
-            z=z * (-1); //change sigh
+    private Double CalibrateX(Double x) {
+        double del = Math.PI * 2;
+        if (x < 0)
+            del *= -1;
+        while (Math.abs(x) > 30.0) {
+            x -= del;
         }
-        return sint;
+        return x;
+    }
+
+    public Double calcSin(Double x) {
+        x = CalibrateX(x);
+        Double xn = x;
+        Double prevSum = 0.0;
+        Double sum = x;
+        final Double EPS = 1e-10, INF = 1.0e8;
+
+
+        for (Integer n = 1; Math.abs(Math.abs(sum) - Math.abs(prevSum)) > EPS; n++) {
+            prevSum = sum;
+            xn *= (-x*x)/((2*n+1)*2*n);
+            sum += xn;
+        }
+        return Math.abs(sum) > INF ? INF : sum;
+
     }
 }
