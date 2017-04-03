@@ -4,19 +4,31 @@
 package math;
 public class TrigonometricFunctions {
     TrigonometricBase b = new TrigonometricBase();
+    private Logger log_obj = new Logger();
+    private Double y;
     public Double calcSin(Double x){
-        return b.calcSin(x);
+        y = b.calcSin(x);
+        log_obj.log(x,y,"src/logs/sin.csv");
+        return y;
     }
     public Double calcCos(Double x){
-        return b.calcSin(2 * x) / (2*b.calcSin(x));
+        y = b.calcSin(2 * x) / (2*b.calcSin(x));
+        log_obj.log(x,y,"src/logs/cos.csv");
+        return y;
     }
     public Double calcTan(Double x){
-        return b.calcSin(x)/calcCos(x);
+        y = b.calcSin(x)/calcCos(x);
+        log_obj.log(x,y,"src/logs/tan.csv");
+        return y;
     }
     public Double calcCot(Double x){
-        return calcCos(x)/b.calcSin(x);
+        y = calcCos(x)/b.calcSin(x);
+        log_obj.log(x,y,"src/logs/cot.csv");
+        return y;
     }
     public Double calcSec(Double x){
-        return 1/calcCos(x);
+        y = 1/calcCos(x);
+        log_obj.log(x,y,"src/logs/sec.csv");
+        return y;
     }
 }
