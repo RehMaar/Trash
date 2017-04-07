@@ -1,12 +1,12 @@
 package math;
 
+import math.LogarithmicExpression;
+import math.TrigonometricExpression;
+
 public class SystemSolver {
 
 	private LogarithmicExpression log;
 	private TrigonometricExpression trig;
-
-	private Logger log_obj = new Logger();
-	private Double y;
 
 	public SystemSolver() {
 		this.log = new LogarithmicExpression();
@@ -14,8 +14,6 @@ public class SystemSolver {
 	}
 	
 	public Double solve(Double x) {
-		y =  x <= 0 ? trig.eval(x) : log.eval(x);
-		log_obj.log(x,y,"src/logs/main.csv");
-		return y;
+		return x <= 0 ? trig.eval(x) : log.eval(x);
 	}
 }
