@@ -1,0 +1,208 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{fancyhdr}
+\usepackage{caption}
+
+\usepackage{listings,longtable,amsmath,amsfonts,graphicx,tikz,tabularx,pgf}
+\usetikzlibrary{arrows,automata}
+
+\captionsetup{labelsep=period}
+\pagestyle{fancy}
+
+\lstset{
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    extendedchars=true,
+    keepspaces=true,
+    keywordstyle=\bfseries,
+    numbers=left,
+    numbersep=3pt,
+    numberstyle=\tiny,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    stepnumber=1,
+    stringstyle=\emph,
+    tabsize=2
+}
+
+\usepackage[left=1.5cm,right=1.5cm,top=2cm,bottom=1.5cm,bindingoffset=0cm]{geometry}
+
+\captionsetup{labelsep=period}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L] {\thepage\bf}
+\fancyfoot[C] {}
+
+\graphicspath{ {img/} }
+
+\begin{document}
+    \begin{titlepage}
+        \begin{center}
+            \large
+            САНКТ-ПЕТЕРБУРГСКИЙ НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ ИНФОРМАЦИОННЫХ ТЕХНОЛОГИЙ, МЕХАНИКИ И ОПТИКИ \\
+
+
+            \vspace{3cm}
+
+
+            Кафедра вычислительной техники
+            \vspace{4cm}
+
+            \textsc{ \textbf{Отчёт по лабораторной работе  № 1} \\
+            по дисциплине <<Теория автоматов>>\\}
+            Вариант №4\\[8mm]
+
+            \bigskip
+        \end{center}
+        \vspace{3cm}
+
+        \hfill\begin{flushright}
+             Студент: \\ Куклина М. \\ P3301 \\ 
+             \vfill
+             Преподаватель:\\ Ожиганов А.А.
+        \end{flushright}
+        \vfill
+        \vfill
+        \vfill
+        \vfill
+        \vfill
+        \begin{center}
+            Санкт-Петербург \\2017 г.
+        \end{center}
+    \end{titlepage}
+\newpage
+
+\section*{Цель и постановка задачи}
+    \subsection*{Цель}
+		Овладение навыками минимизации полностью определённых абстрактных автоматов.
+    \subsection*{Постановка задачи}
+		Задан абстрактный автомат табличным способом.
+		Найти минимальный автомат в классе эквивалентных между собой автоматов.
+		Для минимизации абстрактного автомата использовать алгоритм Ауфенкампа-Хона. 
+
+\section*{Исходный абстрактный автомат}
+	\begin{table}[h!]
+		\center
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			$\delta$ & $a_1$ & $a_2$ & $a_3$ & $a_4$ & $a_5$ \\ \hline 
+			 $z_1$	 & $a_1$ & $a_4$ & $a_5$ & $a_1$ & $a_1$ \\ \hline 
+			 $z_2$   & $a_4$ & $a_3$ & $a_2$ & $a_3$ & $a_2$ \\ \hline
+		\end{tabular}
+		\caption{Функция переходов}
+    \end{table}
+	\begin{table}[h!]
+		\center
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			$\lambda$ & $a_1$ & $a_2$ & $a_3$ & $a_4$ & $a_5$ \\ \hline 
+			 $z_1$	  & $w_2$ & $w_1$ & $w_1$ & $w_2$ & $w_2$ \\ \hline 
+			 $z_2$    & $w_1$ & $w_2$ & $w_2$ & $w_2$ & $w_2$ \\ \hline
+		\end{tabular}
+		\caption{Функция выходов}
+    \end{table}
+
+\section*{Граф исходного автомата}
+    \begin{tikzpicture}[->,>=stealth',shorten >=2pt,auto,node distance=4cm, semithick] 
+        \tikzstyle{every state}=[draw=black,text=black,fill=white,thick,scale=1]
+        \foreach \s in {1,3} {
+                \node[state] (a\s) at ({360/5 *(\s+1)}:0.25\textwidth) {$a_\s$};
+        }
+        \node[state] (a4) at ({360/5 *(6)}:0.25\textwidth) {$a_4$};
+        \node[state] (a2)[below of=a4] {$a_2$};
+        \node[state] (a5) at ({360/5 *(3)}:0.25\textwidth) {$a_5$};
+
+		\path (a1) edge[loop]         node               {$z_1/w_2$} (a1)
+		      (a1) edge[bend left]    node               {$z_2/w_1$} (a4)
+		      (a2) edge               node               {$z_1/w_1$} (a4)
+		      (a2) edge[bend left]    node[left,pos=0.8] {$z_2/w_2$} (a3)
+		      (a3) edge               node               {$z_1/w_1$} (a5)
+		      (a3) edge[bend left]    node[pos=0.4]      {$z_2/w_2$} (a2)
+		      (a4) edge[bend left]    node[pos=0.8]      {$z_1/w_2$} (a1)
+		      (a4) edge[bend left=50] node               {$z_2/w_2$} (a3)
+		      (a5) edge               node               {$z_1/w_2$} (a1)
+		      (a5) edge               node[pos=0.3]      {$z_2/w_2$} (a2);
+	\end{tikzpicture}
+\section*{Минимизация автомата}
+	Разделим состояния автомата на классы эквивалентности. \\
+	$b_1 = { a_1 }$ \\ 
+	$b_2 = { a_2, a_3 }$ \\
+	$b_3 = { a_4, a_5 }$ \\
+	$P_1 = { b_1, b_2, b_3 }$ \\
+	Строим таблицу переходов с соответствующими классами эквивалентности. \\
+	\begin{table}[h!]
+		\center
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			$\delta$ & $a_1$ & $a_2$ & $a_3$ & $a_4$ & $a_5$ \\ \hline 
+			 $z_1$	 & $b_1$ & $b_3$ & $b_3$ & $b_1$ & $b_1$ \\ \hline 
+			 $z_2$   & $b_3$ & $b_2$ & $b_2$ & $b_2$ & $b_2$ \\ \hline
+		\end{tabular}
+		\caption{Функция переходов}
+    \end{table}
+	\begin{table}[h!]
+		\center
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			$\lambda$ & $b_1$ & $b_2$ & $b_3$ \\ \hline 
+			 $z_1$	  & $w_2$ & $w_1$ & $w_2$ \\ \hline 
+			 $z_2$    & $w_1$ & $w_2$ & $w_2$ \\ \hline
+		\end{tabular}
+		\caption{Функция выходов}
+    \end{table}
+	Разделим состояния автомата на классы эквивалентности. \\
+	$b_1 = { b_1 }$ \\ 
+	$b_2 = { b_2 }$ \\
+	$b_3 = { b_2 }$ \\
+	$P_2 = { b_1, b_2, b_3 }$ \\
+	Так как разбиения $P_1 = P_2$, значит, мы нашли минимальное число состояний. \\
+		 
+	\begin{table}[h!]
+		\center
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			$\delta$ & $b_1$ & $b_2$ & $b_3$ \\ \hline 
+			 $z_1$	 & $b_1$ & $b_3$ & $b_1$ \\ \hline 
+			 $z_2$   & $b_3$ & $b_2$ & $b_2$ \\ \hline
+		\end{tabular}
+		\caption{Функция переходов}
+    \end{table}
+	\begin{table}[h!]
+		\center
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			$\lambda$ & $b_1$ & $b_2$ & $b_3$ \\ \hline 
+			 $z_1$	  & $w_2$ & $w_1$ & $w_2$ \\ \hline 
+			 $z_2$    & $w_1$ & $w_2$ & $w_2$ \\ \hline
+		\end{tabular}
+		\caption{Функция выходов}
+    \end{table}
+
+    \begin{tikzpicture}[->,>=stealth',shorten >=2pt,auto,node distance=4cm, semithick] 
+        \tikzstyle{every state}=[draw=black,text=black,fill=white,thick,scale=1]
+        \node[state] (b1) {$b_1$};
+        \node[state] (b3)[below of =b1] {$b_3$};
+        \node[state] (b2)[right of=b3] {$b_2$};
+
+		\path (b1) edge[loop]        node {$z_1/w_2$} (b1)
+			  (b1) edge[bend left]	 node {$z_2/w_1$} (b3)
+			  (b2) edge[bend left]   node {$z_1/w_1$} (b3)
+			  (b2) edge[loop right]  node {$z_2/w_2$} (b2)
+			  (b3) edge[bend left]	 node {$z_1/w_2$} (b1)
+			  (b3) edge[bend left]	 node {$z_2/w_2$} (b2);
+	\end{tikzpicture}
+	
+\section*{Выходное слово минимальной длины}
+    $z_1 z_2 z_2 z_2 z_1 z_1$
+\section*{Реакции исходного и минимизированного автомата на входное слово}
+	Реакция исходного:    $w_2 w_1 w_2 w_2 w_1 w_2 $
+	Реакция минимального: $w_2 w_1 w_2 w_2 w_1 w_2$ 
+\section*{Вывод}
+	В ходе выполнения лабораторной работы был изучен алгоритм минимизации
+	абстрактных автоматов. Из автомата Мили с пятью состояниями был
+    получен автомат с тремя, полностью соответствующий исходному.
+\end{document}
