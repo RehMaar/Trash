@@ -3,17 +3,18 @@ package math;
 import java.lang.IllegalArgumentException;
 
 import math.LogarithmicBase;
+import math.IBase;
 
 public class LogarithmicFunctions {
 
-    private LogarithmicBase base;
+    private IBase base;
 
     public LogarithmicFunctions() {
         this.base = new LogarithmicBase();
     }
 
-    public LogarithmicFunctions(Double eps) {
-        this.base = new LogarithmicBase(eps);
+    public LogarithmicFunctions(IBase base) {
+        this.base = base;
     }
 
     public Double lb(Double x) {
