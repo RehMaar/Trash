@@ -22,12 +22,4 @@ public class LogarithmicExpression {
                 )
                 / Math.pow((fn.log_3(x) * fn.ln(x)), 2);
     }
-
-    public static void main(String[] args) {
-		LogarithmicExpression expr = new LogarithmicExpression();
-
-		for (Double i = 0.1; i < 2.0; i += 0.1) {
-			System.out.println(i + ": " + expr.eval(i));
-		}
-    }
 }
