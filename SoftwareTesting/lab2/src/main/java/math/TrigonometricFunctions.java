@@ -12,10 +12,7 @@ public class TrigonometricFunctions {
         return y;
     }
     public Double calcCos(Double x){
-        if (b.calcSin(x) % 2*Math.PI == 0)
-            y = 1.0;
-        else
-            y = b.calcSin(2 * x) / (2*b.calcSin(x));
+        y = b.calcSin(2 * x) / (2*b.calcSin(x));
         log_obj.log(x,y,"src/logs/cos.csv");
         return y;
     }
