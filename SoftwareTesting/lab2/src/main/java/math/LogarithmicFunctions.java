@@ -3,17 +3,18 @@ package math;
 import java.lang.IllegalArgumentException;
 
 import math.LogarithmicBase;
-import math.IBase;
+import math.IBaseLog;
+import math.IFunctionsLog;
 
-public class LogarithmicFunctions {
+public class LogarithmicFunctions implements IFunctionsLog {
 
-    private IBase base;
+    private IBaseLog base;
 
     public LogarithmicFunctions() {
         this.base = new LogarithmicBase();
     }
 
-    public LogarithmicFunctions(IBase base) {
+    public LogarithmicFunctions(IBaseLog base) {
         this.base = base;
     }
 
@@ -28,4 +29,5 @@ public class LogarithmicFunctions {
     public Double ln(Double x) {
         return base.ln(x);
     }
+
 }

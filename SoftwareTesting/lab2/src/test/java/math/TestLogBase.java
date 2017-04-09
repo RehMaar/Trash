@@ -1,7 +1,5 @@
 import static org.junit.jupiter.api.Assertions.*;
-//import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.*;
-//import java.util.Iterator;
 
 import java.lang.IllegalArgumentException;
 import math.LogarithmicBase;
@@ -15,24 +13,24 @@ public class TestLogBase {
         this.fn = new LogarithmicBase();
 	}
 	
-    @Test
+	@Test
     public void testBaseNegative() {
-        try {
+    	try {
             Double res = fn.ln(-1.0);
-        } catch (IllegalArgumentException e) {
-            return;
-        }
-        fail("No excpetions on negative value.");
+    	} catch (IllegalArgumentException e) {
+        	return;
+    	}
+    	fail("No exception on negative value");
     }
 
 	@Test
     public void testBaseZero() {
-        try {
+    	try {
             Double res = fn.ln(0.0);
-        } catch (IllegalArgumentException e) {
-            return;
-        }
-        fail("No excpetions on zero value.");
+    	} catch (IllegalArgumentException e) {
+        	return;
+    	}
+    	fail("No exception on zero value");
     }
 
     @Test

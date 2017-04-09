@@ -1,9 +1,9 @@
 package math;
 
 import java.lang.IllegalArgumentException;
-import math.IBase;
+import math.IBaseLog;
 
-public class LogarithmicBase implements IBase {
+public class LogarithmicBase implements IBaseLog {
 
 	private final Double ln10 = 2.302585092994045684017991454684364207601101488628772976033;
 	private Double eps;
@@ -37,4 +37,5 @@ public class LogarithmicBase implements IBase {
 		}
 		return result;
 	}
+
 }

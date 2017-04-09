@@ -1,5 +1,5 @@
 package math;
 
-public interface IBase {
+public interface IBaseLog {
 	public Double ln(Double x);
 }
