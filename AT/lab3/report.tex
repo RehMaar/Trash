@@ -1,0 +1,344 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{fancyhdr}
+\usepackage{caption}
+
+\usepackage{listings,longtable,amsmath,amsfonts,graphicx,tikz,tabularx,pgf}
+\usepackage{circuitikz}
+\usetikzlibrary{arrows,automata}
+
+\captionsetup{labelsep=period}
+\pagestyle{fancy}
+
+\lstset{
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    extendedchars=true,
+    keepspaces=true,
+    keywordstyle=\bfseries,
+    numbers=left,
+    numbersep=3pt,
+    numberstyle=\tiny,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    stepnumber=1,
+    stringstyle=\emph,
+    tabsize=2
+}
+
+\usepackage[left=1.5cm,right=1.5cm,top=2cm,bottom=1.5cm,bindingoffset=0cm]{geometry}
+
+\captionsetup{labelsep=period}
+\pagestyle{fancy}
+
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L] {\thepage\bf}
+\fancyfoot[C] {}
+
+\graphicspath{ {img/} }
+
+\begin{document}
+    \begin{titlepage}
+        \begin{center}
+            \large
+            САНКТ-ПЕТЕРБУРГСКИЙ НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ ИНФОРМАЦИОННЫХ ТЕХНОЛОГИЙ, МЕХАНИКИ И ОПТИКИ \\
+
+
+            \vspace{3cm}
+
+
+            Кафедра вычислительной техники
+            \vspace{4cm}
+
+            \textsc{ \textbf{Отчёт по лабораторной работе  № 3} \\
+            по дисциплине <<Теория автоматов>>\\}
+            Вариант №4\\[8mm]
+
+            \bigskip
+        \end{center}
+        \vspace{3cm}
+
+        \hfill\begin{flushright}
+             Студент: \\ Куклина М. \\ P3301 \\ 
+             \vfill
+             Преподаватель:\\ Ожиганов А.А.
+        \end{flushright}
+        \vfill
+        \vfill
+        \vfill
+        \vfill
+        \vfill
+        \begin{center}
+            Санкт-Петербург \\2017 г.
+        \end{center}
+    \end{titlepage}
+\newpage
+
+\section*{Цель и постановка задачи}
+    \subsection*{Цель}
+		Освоение метода перехода от абстрактного автомата к структурному автомату.
+
+    \subsection*{Постановка задачи}
+        Абстрактный автомат задан табличным способом. Причем абстрактный автомат 
+        Мили представлен таблицами переходов и выходов, а абстрактный автомат Мура - 
+        одной отмеченной таблицей переходов. Для синтеза структурного автомата 
+        использовать функционально полную систему логических элементов И, ИЛИ, НЕ и 
+        автомат Мура, обладающий полнотой переходов и полнотой выходов. 
+        Синтезированный структурный автомат представить в виде ПАМЯТИ и 
+        КОМБИНАЦИОННОЙ СХЕМЫ. 
+
+\section*{Исходный абстрактный автомат}
+	\begin{table}[h!]
+		\center
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			$\delta$ & $a_1$ & $a_2$ & $a_3$ & $a_4$ \\ \hline 
+			 $z_1$	 & $a_2$ & $a_2$ & $a_4$ & $a_2$ \\ \hline 
+			 $z_2$   & $a_3$ & $a_1$ & $a_2$ & $a_3$ \\ \hline
+		\end{tabular}
+		\caption{Функция переходов}
+    \end{table}
+	\begin{table}[h!]
+		\center
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			$\lambda$ & $a_1$ & $a_2$ & $a_3$ & $a_4$ \\ \hline 
+			 $z_1$	  & $w_2$ & $w_2$ & $w_1$ & $w_1$ \\ \hline 
+			 $z_2$    & $w_2$ & $w_1$ & $w_2$ & $w_2$ \\ \hline
+		\end{tabular}
+		\caption{Функция выходов}
+    \end{table}
+
+\section*{Граф исходного автомата}
+    \begin{tikzpicture}[->,>=stealth',shorten >=2pt,auto,node distance=4cm, semithick] 
+        \tikzstyle{every state}=[draw=black,text=black,fill=white,thick,scale=1]
+        \foreach \s in {1,3} {
+                \node[state] (a\s) at ({360/4 *(\s+1)}:0.25\textwidth) {$a_\s$};
+        }
+        \node[state] (a2) at ({360/4 *(4+1)}:0.25\textwidth) {$a_2$};
+        \node[state] (a4) at ({360/4 *(2+1)}:0.25\textwidth) {$a_4$};
+
+		\path (a1) edge[bend left]    node {$z_1/w_2$} (a2)
+		      (a1) edge               node[pos=0.8] {$z_2/w_2$} (a3)
+		      (a2) edge[loop]         node {$z_1/w_2$} (a2)
+		      (a2) edge[bend left]    node {$z_2/w_1$} (a1)
+		      (a3) edge[bend left]    node {$z_1/w_1$} (a4)
+		      (a3) edge               node {$z_2/w_2$} (a2)
+		      (a4) edge               node[pos=0.7,right] {$z_1/w_2$} (a2)
+		      (a4) edge[bend left]    node {$z_2/w_2$} (a3);
+	\end{tikzpicture}
+
+\section*{Переход к структурному автомату}
+	\subsection*{Кодирование абстрактного автомата}
+		\begin{table}[h!]
+			\center
+			\begin{tabular}{|c|c|}
+				\hline
+				  $\delta$ & $x_0$ \\ \hline
+					$z_1$  &   0   \\ \hline
+					$z_2$  &   1   \\ \hline
+			\end{tabular}
+			\caption{Кодирование входов автомата}
+		\end{table}
+		\begin{table}[h!]
+			\center
+			\begin{tabular}{|c|c|}
+				\hline
+				  $\delta$ & $y_0$ \\ \hline
+					$w_2$  &   0   \\ \hline
+					$w_1$  &   1   \\ \hline
+			\end{tabular}
+			\caption{Кодирование выходов автомата}
+		\end{table}
+
+		\begin{table}[h!]
+			\center
+			\begin{tabular}{|c|c|c|}
+				\hline
+				  $\lambda$ & $Q_0$ & $Q_1$ \\ \hline
+					$a_2$  &   0   &   0   \\ \hline
+					$a_3$  &   0   &   1   \\ \hline
+					$a_1$  &   1   &   0   \\ \hline
+					$a_4$  &   1   &   1   \\ \hline
+			\end{tabular}
+			\caption{Кодирование состояний автомата}
+		\end{table}
+
+		Получившийся структурный автомат имеет один вход, один выход и четыре состояния. \\
+
+		\begin{tikzpicture}
+			\node (a) {$x_0$};
+			\node[draw,rectangle,right of=a,text depth=1cm] (s) {$CK$};
+			\node (c)[right of=s] {$y_0$};
+
+			\draw[->] (a) -- (s);
+			\draw[->] (s) -- (c);
+		\end{tikzpicture}
+
+	\subsection*{Структурный автомат}
+		\begin{table}[h!]
+		\center
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+    		 $Q_0Q_1$ & 00 & 01 & 10 & 11 \\ 
+			 $x_0$    &    &	&	 &    \\ \hline
+    			 0	  & 00 & 11 & 00 & 00 \\ \hline 
+    			 1    & 10 & 00 & 01 & 01 \\ \hline
+		\end{tabular}
+		\caption{Функция переходов}
+    \end{table}
+	Функция переходов автомата: $Q_0Q_1 = \delta(Q_0,Q_1,x_0)$.
+
+	\begin{table}[h!]
+		\center
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			  $Q_0Q_1$& 00 & 01 & 10 & 11 \\ 
+			  $x_0$   &    &    &    &    \\ \hline
+	      	     0    &  0 &  1 & 0  & 1  \\ \hline 
+		         1    &  1 &  0 & 0  & 0  \\ \hline
+		\end{tabular}
+		\caption{Функция выходов}
+    \end{table}	
+	Функция выходов автомата: $y_0 = \lambda(Q_0,Q_1,x_0)$. \\
+
+	По таблице выходов строим ДНФ:
+	$y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$
+
+    \subsection*{Сигналы функции возбуждения для триггеров}
+		\subsubsection*{D-триггер}
+    		\begin{table}[h!]
+				\center
+    			\begin{tabular}{|c|c|c|}
+					\hline
+					 Q & 0 & 1 \\
+					 x &   &   \\ \hline
+					 0 & 0 & 0 \\ \hline
+					 1 & 1 & 1 \\ \hline
+				\end{tabular}
+    			\caption{Закон функционирования D-триггера}
+    		\end{table}
+
+			На основе закона функционирования D-триггера по таблице переходов структурного автомата
+			строим таблицу сигналов функции возбуждения. \\
+
+    		\begin{table}[h!]
+				\center
+            		\begin{tabular}{|c|c|c|c|c|}
+            			\hline
+                		 $Q_0Q_1$ & 00       & 01       & 10       & 11 \\ 
+            			 $x_0$    &          &	        &	       &    \\ \hline
+                			 0	  & 00       & 11       & 00       & 00 \\ \hline 
+                			 1    & 10       & 00       & 01       & 01 \\ \hline
+								  & $D_0D_1$ & $D_0D_1$ & $D_0D_1$ & $D_0D_1$ \\ \hline
+            		\end{tabular}
+    			\caption{Таблица сигналов функции возбуждения: $D_0D_1 = \mu(Q_0,Q_1,x_0)$}
+    		\end{table}
+
+        	ДНФ для сигналов функции возбуждения: \\
+				$D_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0}$ \\
+				$D_1 = \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 x_0$.
+
+		Для построения функциональной схемы рассмотрим ДНФ: \\
+    	$y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$ \\
+		$D_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0}$ \\
+		$D_1 = \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 x_0$.
+
+		Или: \\
+    	$y_0 = D_0 \lor Q_0 \phi$ \\
+		$D_0 = \bar{Q_0} ( Q_1 \oplus x_0)$ \\
+		$D_1 = \bar{Q_0} \phi \lor Q_0  x_0 $. \\
+		$\phi = Q_1 \bar{x_0}$
+
+		\begin{figure}[h!]
+			\begin{circuitikz}
+				\draw
+                    % (0,2) node[and port] (myand1) {}
+                    % (0,0) node[and port] (myand2) {}
+                    % (2,1) node[xnor port] (myxnor) {}
+					(0,4) node[and port] (and1) {1}
+					(0,0) node[xor port] (xor5) {5}
+
+					(2,7) node[and port] (and2) {2}
+					(2,5) node[and port] (and3) {3}
+					(2,3) node[and port] (and4) {4}
+					(2,1) node[and port] (and8) {8}
+
+					(4,6) node[or port]   (or6) {6}
+					(4,2) node[or port]   (or7) {7}
+					(4,1) node			  (out8) {}
+
+                    %(myand1.out) -- (myxnor.in 1)
+                    %(myand2.out) -- (myxnor.in 2);			
+					 (and1.in 1) node[anchor=east] {$Q_1$}
+					 (and1.in 2) node[anchor=east] {$\bar{x_0}$}
+					 (xor5.in 1) node[anchor=east] {$Q_1$}
+					 (xor5.in 2) node[anchor=east] {$x_0$}
+					 (and2.in 1) node[anchor=east] {$Q_0$}
+					 (and2.in 2) node[anchor=east] {$x_0$}
+					 (and3.in 1) node[anchor=east] {$\bar{Q_0}$}
+					 (and1.out) -| (and3.in 2)
+					 (and1.out) -| (and4.in 1)
+					 (and4.in 2) node[anchor=east] {$Q_0$}
+					 (and8.in 1) node[anchor=east] {$\bar{Q_0}$}
+					 (xor5.out) -| (and8.in 2)
+					 (and2.out) -| (or6.in 1)
+					 (and3.out) -| (or6.in 2)
+					 (and4.out) -| (or7.in 1)
+					 (and8.out) -| (or7.in 2)
+					 (or7.out) node[anchor=south] {$y_0$}
+					 (or6.out) node[anchor=south] {$Q_1$}
+					 (and8.out) -| (out8)
+					 (out8) node[anchor=south] {$Q_0$}
+					;
+			\end{circuitikz}
+		\end{figure}
+
+
+		\subsubsection*{T-триггер}
+    		\begin{table}[h!]
+				\center
+    			\begin{tabular}{|c|c|c|}
+					\hline
+					 Q & 0 & 1 \\
+					 x &   &   \\ \hline
+					 0 & 0 & 1 \\ \hline
+					 1 & 1 & 0 \\ \hline
+				\end{tabular}
+    			\caption{Закон функционирования T-триггера}
+    		\end{table}
+
+			На основе закона функционирования T-триггера по таблице переходов структурного автомата
+			строим таблицу сигналов функции возбуждения. \\
+
+    		\begin{table}[h!]
+				\center
+        		\begin{tabular}{|c|c|c|c|c|}
+        			\hline
+            		 $Q_0Q_1$ & 00       & 01       & 10       & 11 \\ 
+        			 $x_0$    &          &	        &	       &    \\ \hline
+            			 0	  & 00       & 10       & 10       & 11 \\ \hline 
+            			 1    & 10       & 01       & 11       & 10 \\ \hline
+							  & $T_0T_1$ & $T_0T_1$ & $T_0T_1$ & $T_0T_1$ \\ \hline
+        		\end{tabular}
+    			\caption{Таблица сигналов функции возбуждения: $T_0T_1 = \mu(Q_0,Q_1,x_0)$}
+    		\end{table}
+
+			ДНФ для сигналов функции возбуждения: \\
+			$T_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 \bar{Q_1} \bar{x_0} \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 \bar{x_0} \lor Q_0 Q_1 x_0 $ \\
+			$T_1 = \bar{Q_0} Q_1 x_0 \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 \bar{x_0}$.
+
+			Или: \\
+			$T_0 = \bar{Q_0} (Q_1 \oplus x_0)\lor Q_0$ \\
+			$T_1 = \bar{Q_0} Q_1 x_0 \lor Q_0 (Q_1 \oplus x_0)$
+
+	 		Рассмотрим выведенные ДНФ: \\
+        	$y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$ \\
+			$T_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 \bar{Q_1} \bar{x_0} \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 \bar{x_0} \lor Q_0 Q_1 x_0 $ \\
+			$T_1 = \bar{Q_0} Q_1 x_0 \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 \bar{x_0}$. \\
+
+\section*{Вывод}
+\end{document}
