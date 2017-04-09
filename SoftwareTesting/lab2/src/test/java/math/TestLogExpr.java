@@ -1,3 +1,4 @@
+package math;
 import java.lang.IllegalArgumentException;
 
 import static org.junit.Assert.*;

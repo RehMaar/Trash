@@ -1,3 +1,5 @@
+package math;
+
 import static org.junit.Assert.*;
 import org.junit.*;
 
