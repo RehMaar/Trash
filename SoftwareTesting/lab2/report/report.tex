@@ -87,8 +87,8 @@
 Провести интеграционное тестирование программы, осуществляющей вычисление системы функций.
 \[
     \begin{cases}
-        ((((sec(x) - cos(x)) ^ 3) - tan(x) - tan(x)) \cdot sec(x) \cdot ((\frac {sec(x) + tan(x) + sin(x) \cdot cos(x)} {\frac {cot(x) ^ 2} {sec(x)}} + (\frac {sin(x)} {sec(x)} \cdot cot(x)))) & \quad \text{if } x <= 0 \\
-        \frac {(((\frac {log_2(x)} {ln(x)}) \cdot log_2(x) ^ 2) ^ 3) \cdot log_3(x)} {(log_3(x) \cdot ln(x)) ^ 2} & \quad \text{if } x > 0 \\
+        (((sec(x) - cos(x)) ^ 3 - (tan(x) - tan(x))) \cdot sec(x) \cdot (\frac {sec(x) + tan(x) + sin(x) \cdot cos(x)} {\frac {cot(x)^2} {sec(x)}} + \frac {sin(x)} {sec(x)} \cdot cot(x)))) & \quad \text{if } x <= 0 \\
+        \frac {((\frac {log_2(x)} {ln(x)} \cdot log_2(x) ^ 2) ^ 3) \cdot log_3(x)} {(log_3(x) \cdot ln(x)) ^ 2} & \quad \text{if } x > 0 \\
     \end{cases}
 \]
 
@@ -96,10 +96,22 @@
 
 \section*{Тестовое покрытие}
     \subsection*{Модуль базовой функции $ln()$}
-    	\begin{figure}[h!]
-			\caption{График функции натурального логарифма}
-			\includegraphics[scale=0.5]{./images/ln.png}
-		\end{figure} 
+		\begin{figure}[h!]
+			\caption{График функции ln(x)}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    domain=0.125:10,
+                    xmin=0, xmax=7,
+                    ymin=-3, ymax=3,
+                    samples=500,
+                    axis y line=center,
+                    axis x line=middle,
+					height = 5cm
+                ]
+                \addplot+[mark=none] {ln(x)};
+                \end{axis}
+            \end{tikzpicture}
+		\end{figure}
 
 		Область определения функции $(0, \infty)$. 
 		\begin{enumerate}
@@ -111,26 +123,52 @@
 		\end{enumerate}
 
     \subsection*{Модуль логарифмических функций}
-		\subsubsection*{$lb$}
-	    	\begin{figure}[h!]
-    			\caption{График функции  двоичного логарифма}
-    			\includegraphics[scale=0.1]{./images/lb.png}
-    		\end{figure} 
+		\subsubsection*{Функция $lb$}
+		\begin{figure}[h!]
+			\caption{График функции lb()}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    domain=0.125:10,
+                    xmin=0, xmax=7,
+                    ymin=-3, ymax=3,
+                    samples=500,
+                    axis y line=center,
+                    axis x line=middle,
+					height = 5cm
+                ]
+                \addplot+[mark=none] {ln(x)/ln(2)};
+                \end{axis}
+            \end{tikzpicture}
+		\end{figure}
+
     		Функция выражена через натуральный логарифм: $lb(x) = ln(x)/ln(2)$.
     		Так как в данном модуле мы используем предположительно оттестированную функцию и математически обоснованное
     		преобразование функции, для тестирования функции двоичного логарифма достаточно оттестировать ряд значений,
     		являющихся степенью двойки.
-		\subsubsection*{$log_3$}
-	    	\begin{figure}[h!]
-    			\caption{График функции  двоичного логарифма}
-    			\includegraphics[scale=0.5]{./images/log3.png}
-    		\end{figure} 
-			Аналогично для логарифма по основанию 3.
+		\subsubsection*{Функция $log_3$}
 
-    \subsection*{Модуль выражения с логарифмическими функциями}
+		\begin{figure}[h!]
+			\caption{График функции $log_3()$}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    domain=0.125:10,
+                    xmin=0, xmax=7,
+                    ymin=-3, ymax=3,
+                    samples=500,
+                    axis y line=center,
+                    axis x line=middle,
+					height = 5cm
+                ]
+                \addplot+[mark=none] {ln(x)/ln(3)};
+                \end{axis}
+            \end{tikzpicture}
+		\end{figure}
+		Аналогично для логарифма по основанию 3.
+
+    \subsection*{Модуль исходного логарифмического выражения}
 		
 		\begin{figure}[h!]
-			\caption{График функции}
+			\caption{График исходной логарифмической функции}
             \begin{tikzpicture}
                 \begin{axis}[
                     domain=0.125:10,
@@ -154,9 +192,101 @@
 		\end{enumerate}
 
     \subsection*{Модуль базовой функции $sin()$}
+		\begin{figure}[h!]
+			\caption{График функции $sin()$}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    domain=-10:10,
+                    xmin=-10, xmax=10,
+                    ymin=-1, ymax=1,
+                    samples=500,
+                    axis y line=center,
+                    axis x line=middle,
+					height = 5cm
+                ]
+                    \addplot+[mark=none] {sin(deg(x))};
+                \end{axis}
+            \end{tikzpicture}
+		\end{figure}
+		Классы эквивалентности.
     \subsection*{Модуль тригонометрических функции} 
+		\subsubsection*{Функция $cos()$}
+    		\begin{figure}[h!]
+    			\caption{График функции $cos()$}
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-10:10,
+                        xmin=-10, xmax=10,
+                        ymin=-1, ymax=1,
+                        samples=500,
+                        axis y line=center,
+                        axis x line=middle,
+    					height = 5cm
+                    ]
+                        \addplot+[mark=none] {cos(deg(x))};
+                    \end{axis}
+                \end{tikzpicture}
+    		\end{figure}
+		Классы эквивалентности.
+		\subsubsection*{Функция $tan()$}
+    		\begin{figure}[h!]
+    			\caption{График функции $tan()$}
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-2:2,
+                        xmin=-2, xmax=2,
+                        ymin=-10, ymax=10,
+                        samples=500,
+                        axis y line=center,
+                        axis x line=middle,
+    					height = 5cm
+                    ]
+                        \addplot+[mark=none] {tan(deg(x))};
+                    \end{axis}
+                \end{tikzpicture}
+    		\end{figure}
+		Классы эквивалентности.
+		\subsubsection*{Функция $cot()$}
+    		\begin{figure}[h!]
+    			\caption{График функции $cot()$}
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-2:2,
+                        xmin=-2, xmax=2,
+                        ymin=-10, ymax=10,
+                        samples=500,
+                        axis y line=center,
+                        axis x line=middle,
+    					height = 5cm
+                    ]
+                        \addplot+[mark=none] {cot(deg(x))};
+                    \end{axis}
+                \end{tikzpicture}
+    		\end{figure}
+		Классы эквивалентности.
+		\subsubsection*{Функция $sec()$}
+    		\begin{figure}[h!]
+    			\caption{График функции $sec()$}
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-2:2,
+                        xmin=-2, xmax=2,
+                        ymin=-10, ymax=10,
+                        samples=500,
+                        axis y line=center,
+                        axis x line=middle,
+    					height = 5cm
+                    ]
+                        \addplot+[mark=none] {sec(deg(x))};
+                    \end{axis}
+                \end{tikzpicture}
+    		\end{figure}
+		Классы эквивалентности.
     \subsection*{Модуль выражения с тригонометрическими функциями}
-    
+    	\begin{figure}[h!]
+			\caption{График исходной тригонометрической функции}
+			\includegraphics[scale=0.5]{./images/trigExpr.png}
+		\end{figure} 
 \section*{Графики, полученные в процессе интеграции}
 \section*{Вывод}
 
