@@ -1,5 +1,5 @@
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.*;
+import static org.junit.Assert.*;
+import org.junit.*;
 
 import java.lang.IllegalArgumentException;
 import math.LogarithmicBase;
@@ -8,29 +8,16 @@ public class TestLogBase {
 
     private LogarithmicBase fn;
 
-	@BeforeEach
+	@Before
 	public void init() {
         this.fn = new LogarithmicBase();
 	}
-	
-	@Test
-    public void testBaseNegative() {
-    	try {
-            Double res = fn.ln(-1.0);
-    	} catch (IllegalArgumentException e) {
-        	return;
-    	}
-    	fail("No exception on negative value");
-    }
 
 	@Test
-    public void testBaseZero() {
-    	try {
-            Double res = fn.ln(0.0);
-    	} catch (IllegalArgumentException e) {
-        	return;
-    	}
-    	fail("No exception on zero value");
+    public void testBaseEmptySet() {
+        for (Double i = 0.0; i > -2.0; i = i - 0.1) {
+            assertTrue(fn.ln(i).isNaN());
+        }
     }
 
     @Test

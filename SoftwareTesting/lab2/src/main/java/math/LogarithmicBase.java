@@ -1,6 +1,5 @@
 package math;
 
-import java.lang.IllegalArgumentException;
 import math.IBaseLog;
 
 public class LogarithmicBase implements IBaseLog {
@@ -16,10 +15,10 @@ public class LogarithmicBase implements IBaseLog {
 		this.eps = eps;
 	}
 
-	public Double ln(Double x) throws IllegalArgumentException {
+	public Double ln(Double x) {
 
 		if (x <= 0) {
-			throw new IllegalArgumentException();
+    		return Double.NaN;
 		}
 
 		Double result = 0.0, tmp = 1.0;

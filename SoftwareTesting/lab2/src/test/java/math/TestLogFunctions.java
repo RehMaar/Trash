@@ -1,37 +1,41 @@
-import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import org.junit.*;
+
 
 import math.LogarithmicFunctions;
 import stub.LogBaseStub;
 
+
 public class TestLogFunctions {
 
-	LogarithmicFunctions fn;
-	Double eps = 0.0001;
+	private final Double eps = 0.0001;
+	private LogarithmicFunctions fn;
 
-	@BeforeEach
+	@Before
 	public void init() {
 		fn = new LogarithmicFunctions(new LogBaseStub());
 	}
 
 	@Test
-    public void testLbNegative() {
-    	try {
-            Double res = fn.lb(-1.0);
-    	} catch (IllegalArgumentException e) {
-        	return;
-    	}
-    	fail("No exception on negative value");
+    public void testLnEmptySet() {
+        for (Double i = 0.0; i > -2.0; i = i - 0.1) {
+			assertTrue(fn.ln(i).isNaN());
+        }
     }
 
 	@Test
-    public void testLbZero() {
-    	try {
-            Double res = fn.lb(0.0);
-    	} catch (IllegalArgumentException e) {
-        	return;
-    	}
-    	fail("No exception on zero value");
+    public void testLnResults() {
+        Double eps = 0.0001;
+		for (Double i = 0.01; i < 10; i += 0.1) {
+			assertTrue(Math.abs(fn.ln(i) - Math.log(i)) <= eps);
+		}
+    }
+
+	@Test
+    public void testLbEmptySet() {
+        for (Double i = 0.0; i > -2.0; i = i - 0.1) {
+			assertTrue(fn.lb(i).isNaN());
+        }
     }
 
     @Test
@@ -67,24 +71,12 @@ public class TestLogFunctions {
 		assertTrue(Math.abs(5.0 - (Double)fn.lb(32.0)) <= eps);
 	}
 
-	@Test
-    public void testLog3Negative() {
-    	try {
-            Double res = fn.log_3(-1.0);
-    	} catch (IllegalArgumentException e) {
-        	return;
-    	}
-    	fail("No exception on negative value");
-    }
 
 	@Test
-    public void testLog3Zero() {
-    	try {
-            Double res = fn.log_3(0.0);
-    	} catch (IllegalArgumentException e) {
-        	return;
-    	}
-    	fail("No exception on zero value");
+    public void testLog3EmptySet() {
+        for (Double i = 0.0; i > -2.0; i = i - 0.1) {
+			assertTrue(fn.lb(i).isNaN());
+        }
     }
 
     @Test

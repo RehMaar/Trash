@@ -1,7 +1,5 @@
 package math;
 
-import java.lang.IllegalArgumentException;
-
 import math.LogarithmicBase;
 import math.IBaseLog;
 import math.IFunctionsLog;
