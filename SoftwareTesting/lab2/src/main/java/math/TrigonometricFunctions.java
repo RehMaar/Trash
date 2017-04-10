@@ -11,18 +11,21 @@ public class TrigonometricFunctions {
     }
 
     public Double calcCos(Double x){
-        return x == 0 ? 1 : b.calcSin(2 * x) / (2*b.calcSin(x));
+        return ((Math.abs(x / Math.PI) - (double)((int)Math.abs(x / Math.PI)))< 1e-6) ? 1 : b.calcSin(2 * x) / (2*b.calcSin(x));
     }
 
     public Double calcTan(Double x){
-        return b.calcSin(x)/calcCos(x);
+        Double eps = 1e-6;
+        return  Math.abs(calcCos(x)) < eps ? Double.NaN : b.calcSin(x)/calcCos(x);
     }
 
     public Double calcCot(Double x){
-        return calcCos(x)/b.calcSin(x);
+        Double eps = 1e-6;
+        return Math.abs(b.calcSin(x)) < eps ? Double.NaN : calcCos(x)/b.calcSin(x);
     }
 
     public Double calcSec(Double x){
-        return 1/calcCos(x);
+        Double eps = 1e-6;
+        return Math.abs(calcCos(x)) < eps ? Double.NaN : 1/calcCos(x);
     }
 }
