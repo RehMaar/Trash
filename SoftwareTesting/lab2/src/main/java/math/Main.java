@@ -156,7 +156,7 @@ public class Main {
 			"eval name min max step -- evaluate function from `min` to `max` with `step`\n" +
 		    "log filename expr min max step -- log results of evaluation to the `filename`\n" +
 		    "	Functions: sin, cos, tan, cot, sec,\n" +
-		    "    ln, lb, log3, logexpr, trigexpr, system\n" +
+		    "    ln, lb, log3, logexpr, trigexpr, system\n"
 		);
 	}
 
