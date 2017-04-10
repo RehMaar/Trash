@@ -1,9 +1,6 @@
 package math;
 
-import math.LogarithmicFunctions;
-import math.IFunctionsLog;
-
-public class LogarithmicExpression {
+public class LogarithmicExpression implements IExpression {
 
     private IFunctionsLog fn;
 
