@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2017.3.13)  9 APR 2017 11:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2017.3.13)  10 APR 2017 17:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1323,57 +1323,69 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 88.
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<./images/ln.png, id=13, 389.455pt x 289.08pt>
-File: ./images/ln.png Graphic file (type png)
- <use ./images/ln.png>
-Package pdftex.def Info: ./images/ln.png used on input line 101.
-(pdftex.def)             Requested size: 194.72702pt x 144.53964pt.
+<./images/uml.jpg, id=13, 861.9703pt x 467.49657pt>
+File: ./images/uml.jpg Graphic file (type jpg)
+ <use ./images/uml.jpg>
+Package pdftex.def Info: ./images/uml.jpg used on input line 97.
+(pdftex.def)             Requested size: 517.18617pt x 280.50009pt.
 
-<./images/lb.png, id=14, 1204.5pt x 959.585pt>
-File: ./images/lb.png Graphic file (type png)
- <use ./images/lb.png>
-Package pdftex.def Info: ./images/lb.png used on input line 117.
-(pdftex.def)             Requested size: 120.45705pt x 95.96411pt.
+Overfull \hbox (5.03654pt too wide) in paragraph at lines 97--98
+[][] 
+ []
 
-<./images/log3.png, id=16, 194.97844pt x 184.43906pt>
-File: ./images/log3.png Graphic file (type png)
- <use ./images/log3.png>
-Package pdftex.def Info: ./images/log3.png used on input line 126.
-(pdftex.def)             Requested size: 97.48897pt x 92.2193pt.
+[1 <./images/uml.jpg>] <./images/logExpr.png, id=31, 499.8675pt x 683.55376pt>
+File: ./images/logExpr.png Graphic file (type png)
 
+<use ./images/logExpr.png>
+Package pdftex.def Info: ./images/logExpr.png used on input line 163.
+(pdftex.def)             Requested size: 99.97173pt x 136.70833pt.
+ [2 <./images/logExpr.png>] [3]
+<./images/trigonometric_graphic.png, id=40, 1284.8pt x 964.60374pt>
+File: ./images/trigonometric_graphic.png Graphic file (type png)
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+<use ./images/trigonometric_graphic.png>
+Package pdftex.def Info: ./images/trigonometric_graphic.png used on input line 
+274.
+(pdftex.def)             Requested size: 256.95544pt x 192.91733pt.
+ [4 <./images/trigonometric_graphic.png>] <./images/system.png, id=44, 750.805p
+t x 704.6325pt>
+File: ./images/system.png Graphic file (type png)
 
-[1 <./images/ln.png> <./images/lb.png>] [2 <./images/log3.png>] (./report.aux) 
-) 
+<use ./images/system.png>
+Package pdftex.def Info: ./images/system.png used on input line 287.
+(pdftex.def)             Requested size: 225.24323pt x 211.39139pt.
+ [5 <./images/system.png>] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 28007 strings out of 493013
- 668755 string characters out of 6139317
- 945395 words of memory out of 5000000
- 31062 multiletter control sequences out of 15000+600000
- 18886 words of font info for 51 fonts, out of 8000000 for 9000
+ 28071 strings out of 493013
+ 670023 string characters out of 6139317
+ 994797 words of memory out of 5000000
+ 31120 multiletter control sequences out of 15000+600000
+ 19813 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,11n,103p,702b,1932s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/maar/.texlive/texmf-var/fonts/pk/ljfour/public/amsfonts/symbols/msbm10
-.600pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr12.pk> </hom
-e/maar/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmmi12.600pk> </home/maar/.
-texlive/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1200.600pk> </home/maar/.texliv
-e/texmf-var/fonts/pk/ljfour/public/cm/cmr5.600pk> </home/maar/.texlive/texmf-va
-r/fonts/pk/ljfour/public/cm/cmmi5.600pk> </usr/share/texmf-dist/fonts/pk/ljfour
-/public/cm/dpi600/cmsy7.pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dp
-i600/cmmi7.pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr7.pk>
- </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy10.pk> </usr/share
-/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi10.pk> </usr/share/texmf-dist/
-fonts/pk/ljfour/public/cm/dpi600/cmr10.pk> </usr/share/texmf-dist/fonts/pk/ljfo
-ur/public/cm/dpi600/cmex10.pk> </home/maar/.texlive/texmf-var/fonts/pk/ljfour/l
-h/lh-t2a/labx1440.600pk> </home/maar/.texlive/texmf-var/fonts/pk/ljfour/lh/lh-t
-2a/larm1000.600pk> </home/maar/.texlive/texmf-var/fonts/pk/ljfour/lh/lh-t2a/lac
-c1200.600pk> </home/maar/.texlive/texmf-var/fonts/pk/ljfour/lh/lh-t2a/laxc1200.
-600pk> </home/maar/.texlive/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm1200.600pk>
-Output written on report.pdf (3 pages, 152247 bytes).
+ 62i,12n,103p,702b,1802s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/maar/.texlive/texmf-var/font
+s/pk/ljfour/lh/lh-t2a/labx1000.600pk> </usr/share/texmf-dist/fonts/pk/ljfour/pu
+blic/cm/dpi600/cmbx10.pk> </home/maar/.texlive/texmf-var/fonts/pk/ljfour/public
+/amsfonts/symbols/msbm10.600pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/c
+m/dpi600/cmr12.pk> </home/maar/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmm
+i12.600pk> </home/maar/.texlive/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1200.60
+0pk> </home/maar/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmmi5.600pk> </ho
+me/maar/.texlive/texmf-var/fonts/pk/ljfour/public/cm/cmr5.600pk> </usr/share/te
+xmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy7.pk> </usr/share/texmf-dist/font
+s/pk/ljfour/public/cm/dpi600/cmmi7.pk> </usr/share/texmf-dist/fonts/pk/ljfour/p
+ublic/cm/dpi600/cmr7.pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi60
+0/cmsy10.pk> </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi10.pk>
+ </usr/share/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr10.pk> </usr/share/
+texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmex10.pk> </home/maar/.texlive/tex
+mf-var/fonts/pk/ljfour/lh/lh-t2a/labx1440.600pk> </home/maar/.texlive/texmf-var
+/fonts/pk/ljfour/lh/lh-t2a/larm1000.600pk> </home/maar/.texlive/texmf-var/fonts
+/pk/ljfour/lh/lh-t2a/lacc1200.600pk> </home/maar/.texlive/texmf-var/fonts/pk/lj
+four/lh/lh-t2a/laxc1200.600pk> </home/maar/.texlive/texmf-var/fonts/pk/ljfour/l
+h/lh-t2a/larm1200.600pk>
+Output written on report.pdf (6 pages, 379174 bytes).
 PDF statistics:
- 360 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
+ 395 PDF objects out of 1000 (max. 8388607)
+ 97 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 28 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 33 words of extra memory for PDF output out of 10000 (max. 10000000)
 

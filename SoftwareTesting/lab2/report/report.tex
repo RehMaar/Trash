@@ -68,7 +68,7 @@
         \vspace{3cm}
 
         \hfill\begin{flushright}
-             Студенты: \\ Куклина М. \\ Кириллова А. 
+             Студенты: \\ Куклина М. \\ Кириллова А. \\ гр. P3301
              \vfill
              Преподаватель: \\ Клименков C.В. 
         \end{flushright}
@@ -87,19 +87,30 @@
 Провести интеграционное тестирование программы, осуществляющей вычисление системы функций.
 \[
     \begin{cases}
-        ((((sec(x) - cos(x)) ^ 3) - tan(x) - tan(x)) \cdot sec(x) \cdot ((\frac {sec(x) + tan(x) + sin(x) \cdot cos(x)} {\frac {cot(x) ^ 2} {sec(x)}} + (\frac {sin(x)} {sec(x)} \cdot cot(x)))) & \quad \text{if } x <= 0 \\
-        \frac {(((\frac {log_2(x)} {ln(x)}) \cdot log_2(x) ^ 2) ^ 3) \cdot log_3(x)} {(log_3(x) \cdot ln(x)) ^ 2} & \quad \text{if } x > 0 \\
+        ((((\sec(x) - \cos(x)) ^ 3) - \tan(x) - \tan(x)) \cdot \sec(x) \cdot ((\frac {\sec(x) + \tan(x) + \sin(x) \cdot \cos(x)} {\frac {\cot(x) ^ 2} {\sec(x)}} + (\frac {\sin(x)} {\sec(x)} \cdot \cot(x)))) & \quad \text{if } x <= 0 \\
+        \frac {(((\frac {log_2(x)} {\ln(x)}) \cdot log_2(x) ^ 2) ^ 3) \cdot log_3(x)} {(log_3(x) \cdot \ln(x)) ^ 2} & \quad \text{if } x > 0 \\
     \end{cases}
 \]
 
-\section*{UML диаграмма}
-
+\section*{UML-диаграмма}
+		\begin{figure}[h!]
+			\includegraphics[scale=0.6]{./images/uml.jpg}
+		\end{figure}
 \section*{Тестовое покрытие}
     \subsection*{Модуль базовой функции $ln()$}
-    	\begin{figure}[h!]
-			\caption{График функции натурального логарифма}
-			\includegraphics[scale=0.5]{./images/ln.png}
-		\end{figure} 
+            \begin{tikzpicture}
+                \begin{axis}[
+                    domain=0.125:10,
+                    xmin=0, xmax=7,
+                    ymin=-5, ymax=5,
+                    samples=500,
+                    axis y line=center,
+                    axis x line=middle,
+					height = 5cm
+                ]
+                    \addplot+[mark=none] {ln(x)};
+                \end{axis}
+            \end{tikzpicture}
 
 		Область определения функции $(0, \infty)$. 
 		\begin{enumerate}
@@ -111,40 +122,46 @@
 		\end{enumerate}
 
     \subsection*{Модуль логарифмических функций}
-		\subsubsection*{$lb$}
-	    	\begin{figure}[h!]
-    			\caption{График функции  двоичного логарифма}
-    			\includegraphics[scale=0.1]{./images/lb.png}
-    		\end{figure} 
-    		Функция выражена через натуральный логарифм: $lb(x) = ln(x)/ln(2)$.
-    		Так как в данном модуле мы используем предположительно оттестированную функцию и математически обоснованное
-    		преобразование функции, для тестирования функции двоичного логарифма достаточно оттестировать ряд значений,
-    		являющихся степенью двойки.
-		\subsubsection*{$log_3$}
-	    	\begin{figure}[h!]
-    			\caption{График функции  двоичного логарифма}
-    			\includegraphics[scale=0.5]{./images/log3.png}
-    		\end{figure} 
-			Аналогично для логарифма по основанию 3.
-
-    \subsection*{Модуль выражения с логарифмическими функциями}
-		
-		\begin{figure}[h!]
-			\caption{График функции}
+		\subsubsection*{$lb()$}
             \begin{tikzpicture}
                 \begin{axis}[
                     domain=0.125:10,
                     xmin=0, xmax=7,
-                    ymin=-200, ymax=200,
+                    ymin=-5, ymax=5,
                     samples=500,
                     axis y line=center,
                     axis x line=middle,
+					height = 5cm
                 ]
-                    \addplot+[mark=none] {ln(3)*(ln(x)^3)/(ln(2)^9)};
+                    \addplot+[mark=none] {ln(x)/ln(2)};
                 \end{axis}
             \end{tikzpicture}
-		\end{figure}
 
+    		Функция выражена через натуральный логарифм: $lb(x) = ln(x)/ln(2)$.
+    		Так как в данном модуле мы используем предположительно оттестированную функцию и математически обоснованное
+    		преобразование функции, для тестирования функции двоичного логарифма достаточно оттестировать ряд значений,
+    		являющихся степенью двойки.
+		\subsubsection*{$log_3()$}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    domain=0.125:10,
+                    xmin=0, xmax=7,
+                    ymin=-5, ymax=5,
+                    samples=500,
+                    axis y line=center,
+                    axis x line=middle,
+					height = 5cm
+                ]
+                    \addplot+[mark=none] {ln(x)/ln(3)};
+                \end{axis}
+            \end{tikzpicture}
+			Аналогично для логарифма по основанию 3.
+
+    \subsection*{Модуль выражения с логарифмическими функциями}
+
+		\begin{figure}[h!]
+			\includegraphics[scale=0.2]{./images/logExpr.png}
+		\end{figure}
 		Область определения функции $(0, \infty)$. 
 		\begin{enumerate}
 			\item $\forall x \in (0, 1), f(x) \in (-\infty, 0)$
@@ -153,12 +170,127 @@
 			\item $\forall x \in (-\infty, 0), f(x) \in \varnothing$
 		\end{enumerate}
 
-    \subsection*{Модуль базовой функции $sin()$}
+    \subsection*{Модуль базовой функции $\sin()$}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    domain=-5:5,
+                    xmin=-5, xmax=5,
+                    ymin=-1, ymax=1,
+                    samples=500,
+                    axis y line=center,
+                    axis x line=middle,
+					height = 5cm
+                ]
+                    \addplot+[mark=none] {sin(deg(x))};
+                \end{axis}
+            \end{tikzpicture}
+ Классы эквивалентности:
+ \begin{enumerate}
+ 	\item $\sin(x) > 0 \forall x \in (2\pi n; \pi+2\pi n), n \in \mathbf Z$.
+ 	\item $\sin(x) < 0 \forall x \in (-\pi+2\pi n; 2\pi n), n \in \mathbf Z$.
+ 	\item Промежутки возрастания. $x \in (-\pi +2\pi n;\frac {\pi} {2}+2\pi n),    n \in z$.
+ 	\item Промежутки убывания. $x \in (- \frac {\pi} {2}+2\pi n;\frac {3\pi} {2}+2\pi n), n \in z$.
+  \end{enumerate}
     \subsection*{Модуль тригонометрических функции} 
-    \subsection*{Модуль выражения с тригонометрическими функциями}
-    
-\section*{Графики, полученные в процессе интеграции}
-\section*{Вывод}
+		\subsubsection*{Функция $\cos()$}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    domain=-5:5,
+                    xmin=-5, xmax=5,
+                    ymin=-1, ymax=1,
+                    samples=500,
+                    axis y line=center,
+                    axis x line=middle,
+					height = 5cm
+                ]
+                    \addplot+[mark=none] {cos(deg(x))};
+                \end{axis}
+            \end{tikzpicture}
 
-\end{document}
+	\begin{enumerate}
+		\item  $\cos(x)>0, x \in (-\frac {\pi} {2}+2\pi n; \frac {\pi} {2}+2\pi n), n \in \mathbf Z$.
+		\item  $\cos(x)<0, x \in (\frac {\pi} {2}+2\pi n;3\frac {\pi} {2}+2\pi n), n \in \mathbf Z$.
+		\item  Промежутки возрастания. $x \in (-\pi+2\pi n;2\pi n), n \in \mathbf Z$.
+		\item  Промежутки убывания. $x \in (2\pi n;\pi+2\pi n), n \in \mathbf Z$.
+	\end{enumerate}
+		\subsubsection*{Функция $\tan()$}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    domain=-2:2,
+                    xmin=-2, xmax=2,
+                    ymin=-5, ymax=5,
+                    samples=500,
+                    axis y line=center,
+                    axis x line=middle,
+					height = 5cm
+                ]
+                    \addplot+[mark=none] {tan(deg(x))};
+                \end{axis}
+            \end{tikzpicture}
+			\begin{enumerate}
+				\item  $(-\pi/2+2\pi n; \pi/2+2\pi n), n \in \mathbf Z$.
+				\item  Точки разрыва $\frac {\pi} {2} + 2 \pi n, n \in \mathbf Z$.
+			\end{enumerate}
+       \subsubsection*{Функция $\cot()$}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    domain=-5:5,
+                    xmin=-5, xmax=5,
+                    ymin=-5, ymax=5,
+                    samples=500,
+                    axis y line=center,
+                    axis x line=middle,
+					height = 5cm
+                ]
+                    \addplot+[mark=none] {cot(deg(x))};
+                \end{axis}
+            \end{tikzpicture}
+            \begin{enumerate}
+                \item $(2\pi n; \pi+2\pi n), n \in \mathbf Z$.
+                \item Точки разрыва $\pi+2 \pi n, n \in \mathbf Z$.
+            \end{enumerate}
+		\subsubsection*{Функция $\sec()$}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    domain=-5:5,
+                    xmin=-5, xmax=5,
+                    ymin=-5, ymax=5,
+                    samples=500,
+                    axis y line=center,
+                    axis x line=middle,
+					height = 5cm
+                ]
+                    \addplot+[mark=none] {sec(deg(x))};
+                \end{axis}
+            \end{tikzpicture}
+		\begin{enumerate}
+            \item $(-\frac {\pi} {2}+2\pi n; \frac {\pi} {2}+2\pi n), n \in \mathbf Z.$ 
+            \item $(\frac {\pi} {2}+2\pi n;3\frac {\pi} {2}+2\pi n), n \in \mathbf Z.$ 
+            \item Точки разрыва $\pi +2\pi n, n \in \mathbf Z$.
 		\end{enumerate}
+
+    \subsection*{Модуль выражения с тригонометрическими функциями}
+		\begin{figure}[h!]
+			\includegraphics[scale=0.2]{./images/trigonometric_graphic.png}
+		\end{figure}
+
+    Для конечного неравенства системы были выделены следующие классы эквивалентности:
+    \begin{enumerate}
+    	\item $(-\frac \pi 2+2\pi n;\frac \pi 2+2\pi n), n \in \mathbf Z$.
+    	\item $(\frac \pi 2+2\pi n;3\frac \pi 2+2\pi n), n \in \mathbf Z$.
+    	\item Устранимые точки разрыва в $\pi n, n \in \mathbf Z$.
+    	\item Разрывы второго рода в $\frac \pi 2 + \pi n$
+    \end{enumerate}
+\newpage
+	\subsection*{Итогова система}
+		\begin{figure}[h!]
+			\includegraphics[scale=0.3]{./images/system.png}
+		\end{figure}
+
+		Тестовое покрытие аналогично тестовым покрытиям составляющих её функций на соответствующих диапазонах.
+\section*{Вывод}
+В ходе выполнения лабораторной работы была разработана архитектура проекта, реализующего
+вычисление заданной системы функций. Было проведено модульное тестирование математических
+модулей системы и проведенно интеграционное тестирование, в ходе которого были протестировано
+взаимодействие модулей.
+\end{document}
