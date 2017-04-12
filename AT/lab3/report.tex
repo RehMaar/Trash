@@ -347,7 +347,7 @@
     			\begin{tabular}{|c|c|c|}
 					\hline
 					 Q & 0 & 1 \\
-					 x &   &   \\ \hline
+					 T &   &   \\ \hline
 					 0 & 0 & 1 \\ \hline
 					 1 & 1 & 0 \\ \hline
 				\end{tabular}
@@ -361,8 +361,8 @@
 				\center
         		\begin{tabular}{|c|c|c|c|c|}
         			\hline
-            		 $Q_0Q_1$ & 00       & 01       & 10       & 11 \\ 
-        			 $x_0$    &          &	        &	       &    \\ \hline
+							  &$Q_0Q_1$  &$Q_0Q_1$  &$Q_0Q_1$  &$Q_0Q_1$  \\ \hline
+            		 $x_0$    & 00       & 01       & 10       & 11 \\ \hline
             			 0	  & 00       & 10       & 10       & 11 \\ \hline 
             			 1    & 10       & 01       & 11       & 10 \\ \hline
 							  & $T_0T_1$ & $T_0T_1$ & $T_0T_1$ & $T_0T_1$ \\ \hline
@@ -372,16 +372,121 @@
 
 			ДНФ для сигналов функции возбуждения: \\
 			$T_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 \bar{Q_1} \bar{x_0} \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 \bar{x_0} \lor Q_0 Q_1 x_0 $ \\
-			$T_1 = \bar{Q_0} Q_1 x_0 \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 \bar{x_0}$.
+			$T_1 = \bar{Q_0} Q_1 x_0 \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 \bar{x_0}$ \\
+        	$y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$. \\
 
-			Или: \\
-			$T_0 = \bar{Q_0} (Q_1 \oplus x_0)\lor Q_0$ \\
-			$T_1 = \bar{Q_0} Q_1 x_0 \lor Q_0 (Q_1 \oplus x_0)$
+	 		ДНФ для схемы: \\
+			$T_0 = Q_0 \lor (Q_1 \oplus x_0)$ \\
+			$T_1 = x_0 (Q_0 \oplus Q_1) \lor \phi$ \\
+			$y_0 = \bar{Q_0} (Q_1 \oplus x_0) \lor \phi$ \\
+			$\phi = Q_0 Q_1 \bar{x_0}$.
 
-	 		Рассмотрим выведенные ДНФ: \\
-        	$y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$ \\
-			$T_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 \bar{Q_1} \bar{x_0} \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 \bar{x_0} \lor Q_0 Q_1 x_0 $ \\
-			$T_1 = \bar{Q_0} Q_1 x_0 \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 \bar{x_0}$. \\
+	\subsection*{RS-триггер}
+    		\begin{table}[h!]
+				\center
+    			\begin{tabular}{|c|c|c|}
+					\hline
+					 Q  & 0 & 1 \\
+					 RS &   &   \\ \hline
+					 00 & 0 & 1 \\ \hline
+					 01 & 1 & 1 \\ \hline
+					 10 & 0 & 0 \\ \hline
+					 11 & - & - \\ \hline
+				\end{tabular}
+    			\caption{Закон функционирования RS-триггера}
+    		\end{table}
+    		\begin{table}[h!]
+				\center
+    			\begin{tabular}{|c|c|c|}
+					\hline
+            $Q_i \to Q_{i+1}$  & R & S \\ \hline
+					 $0 \to 0$ & - & 0 \\ \hline
+					 $0 \to 1$ & 0 & 1 \\ \hline
+					 $1 \to 0$ & 1 & 0 \\ \hline
+					 $1 \to 1$ & 0 & - \\ \hline
+				\end{tabular}
+    			\caption{Система подставок RS-триггера}
+    		\end{table}
+    		\begin{table}[h!]
+				\center
+        		\begin{tabular}{|c||c|c||c|c||c|c||c|c||c|c||c|c||c|c||c|c|}
+				 \hline
+			     $x_0$ &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$ \\ \hline
+					   &    0   &   0    &    0   &   1    &    1   &   0    &    1   &   1   \\ \hline
+					0  &   -0   &  -0    &   01   &  0-    &   10   &  0-    &   10   &  10   \\ \hline
+					1  &   01   &  -0    &   -0   &  10    &   10   &  01    &   10   &  0-   \\ \hline
+					   &$R_0S_0$&$R_1S_1$&$R_0S_0$&$R_1S_1$&$R_0S_0$&$R_1S_1$&$R_0S_0$&$R_1S_1$ \\ \hline
+            	%	   & 00              & 11               & 00             & 00 
+            	%	   & 10              & 00               & 01             & 01 
+        		\end{tabular}
+    			\caption{Таблица сигналов функции возбуждения: $R_0S_0R_1S_1 = \mu(Q_0,Q_1,x_0)$}
+    		\end{table}
+		ДНФ: \\
+		$R_0 = \bar{x_0} Q_0 \bar{Q_1} \lor x_0 Q_0 \bar{Q_1} \lor \bar{x_0} Q_0 Q_1 \lor x_0 Q_0 Q_1$ \\
+		$S_0 = x_0 \bar{Q_0} \bar{Q_1} \lor \bar{x_0} \bar{Q_0} Q_1$ \\
+		$R_1 = x_0 \bar{Q_0} Q_1 \lor \bar{x_0} Q_0 Q_1$ \\
+		$S_1 = x_0 Q_0 \bar{Q_1}$ \\
+		
+		ДНФ для схемы: \\
+		$R_0 = Q_0$ \\
+		$S_0 = \bar{Q_0} (x_0 \oplus Q_1)$ \\
+		$R_1 = Q_1 (x_0 \oplus Q_0)$ \\
+		$S_0 = x_0 Q_0 \bar{Q_1}$ \\
+		$y_0 = S_0 || \bar{x_0} Q_0 Q_1 $
 
+	\subsection*{JK-триггер}
+    		\begin{table}[h!]
+				\center
+    			\begin{tabular}{|c|c|c|}
+					\hline
+					 Q  & 0 & 1 \\
+					 JK &   &   \\ \hline
+					 00 & 0 & 1 \\ \hline1
+					 01 & 0 & 0 \\ \hline
+					 10 & 1 & 1 \\ \hline
+					 11 & 1 & 0 \\ \hline
+				\end{tabular}
+    			\caption{Закон функционирования JK-триггера}
+    		\end{table}
+    		\begin{table}[h!]
+				\center
+    			\begin{tabular}{|c|c|c|}
+					\hline
+            $Q_i \to Q_{i+1}$  & J & K \\ \hline
+					 $0 \to 0$ & 0 & - \\ \hline
+					 $0 \to 1$ & 1 & - \\ \hline
+					 $1 \to 0$ & - & 1 \\ \hline
+					 $1 \to 1$ & - & 0 \\ \hline
+				\end{tabular}
+    			\caption{Система подставок JK-триггера}
+    		\end{table}
+    		\begin{table}[h!]
+				\center
+        		\begin{tabular}{|c||c|c||c|c||c|c||c|c||c|c||c|c||c|c||c|c|}
+				 \hline
+			     $x_0$ &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$ \\ \hline
+					   &    0   &   0    &    0   &   1    &    1   &   0    &    1   &   1   \\ \hline
+					0  &   0-   &  0-    &   1-   &  -0    &   -1   &  0-    &   -1   &  -1   \\ \hline
+					1  &   1-   &  0-    &   0-   &  -1    &   -1   &  1-    &   -1   &  -0   \\ \hline
+					   &$J_0K_0$&$J_1K_1$&$J_0K_0$&$J_1K_1$&$J_0K_0$&$J_1K_1$&$J_0K_0$&$J_1K_1$ \\ \hline
+            	%	   & 00              & 11               & 00             & 00 
+            	%	   & 10              & 00               & 01             & 01 
+        		\end{tabular}
+    			\caption{Таблица сигналов функции возбуждения: $R_0S_0R_1S_1 = \mu(Q_0,Q_1,x_0)$}
+    		\end{table}
+
+		ДНФ: \\
+		$J_0 = x_0 \bar{Q_0} \bar{Q_1} \lor \bar{x_0} \bar{Q_0} Q_1$ \\
+		$K_0 = \bar{x_0} Q_0 \bar{Q_1} \lor x_0 Q_0 \bar{Q_1} \lor \bar{x_0} Q_0 Q_1 \lor x_0 Q_0 Q_1$ \\
+		$J_1 = x_0 Q_0 \bar{Q_1}$ \\
+		$K_1 = x_0 \bar{Q_0} Q_1 \lor \bar{x_0} Q_0 Q_1$ \\ 
+    	$y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$ \\
+
+		ДНФ для схемы: \\
+		$J_0 = \bar{Q_0} (x_0 \oplus Q_1)$ \\
+		$K_0 = Q_0$ \\
+		$J_1 = x_0 Q_0 \bar{Q_1}$ \\
+		$K_1 = Q_1 (x_0 \oplus Q_0)$\\
+		$y_0 = J_0 || \bar{x_0} Q_0 Q_1$
 \section*{Вывод}
 \end{document}
