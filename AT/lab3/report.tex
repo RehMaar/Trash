@@ -11,6 +11,7 @@
 \captionsetup{labelsep=period}
 \pagestyle{fancy}
 
+
 \lstset{
     basicstyle=\footnotesize,
     breakatwhitespace=false,
@@ -40,9 +41,40 @@
 
 \graphicspath{ {img/} }
 
+
+% Flip-flop symbol
+\pgfdeclareshape{flipflop}{
+\anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+\anchor{text} % this is used to center the text in the node
+{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+    %\savedanchor\icpina{\pgfpoint{-.75cm}{-.625cm}} % pin 1
+    \savedanchor\dffind{\pgfpoint{-.7cm}{.7cm}} % Input D
+    \anchor{in}{\dffind}
+    \savedanchor\dffoutq{\pgfpoint{.7cm}{.7cm}} % Output Q
+    \anchor{out1}{\dffoutq}
+    \savedanchor\dffoutnq{\pgfpoint{.7cm}{-.7cm}} % Output ~Q
+    \anchor{out2}{\dffoutnq}
+
+    \foregroundpath{ % border and pin numbers are drawn here
+        \pgfsetlinewidth{0.03cm}
+        \pgfpathrectanglecorners{\pgfpoint{.7cm}{1cm}}{\pgfpoint{-.7cm}{-1cm}}
+        \pgfusepath{draw} %draw rectangle
+        \pgfsetlinewidth{0.03cm}
+        %\pgfpathmoveto{\pgfpoint{-1cm}{-.3cm}}
+        %\pgfpatharc{-90}{90}{.3cm}
+        %\pgfusepath{draw} %draw semicircle
+        %\pgftext[bottom,at={\pgfpoint{-.75cm}{-.55cm}}]{\scriptsize 1}
+        %\pgftext[top,at={\pgfpoint{.75cm}{.55cm}}]{\scriptsize 5}
+		\pgftext[top,at={\pgfpoint{-.5cm}{.5cm}}]{}
+		\pgftext[top,at={\pgfpoint{.5cm}{.7cm}}]{\scriptsize $Q_0$}
+		\pgftext[top,at={\pgfpoint{.5cm}{-.6cm}}]{\scriptsize $\bar{Q_0}$}
+	}
+}
+
+
 \begin{document}
     \begin{titlepage}
-        \begin{center}
+       \begin{center}
             \large
             САНКТ-ПЕТЕРБУРГСКИЙ НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ ИНФОРМАЦИОННЫХ ТЕХНОЛОГИЙ, МЕХАНИКИ И ОПТИКИ \\
 
@@ -268,11 +300,14 @@
 					(2,1) node[and port] (and8) {8}
 
 					(4,6) node[or port]   (or6) {6}
-					(4,2) node[or port]   (or7) {7}
-					(4,1) node			  (out8) {}
+					(4,3) node[or port]   (or7) {7}
 
-                    %(myand1.out) -- (myxnor.in 1)
-                    %(myand2.out) -- (myxnor.in 2);			
+					(6,1) node[flipflop] (dff2) {$DFF$}
+					(6,6) node[flipflop] (dff1) {$DFF$}
+					(8,2) node			  (out8) {}
+					(8,7) node			  (out6) {}
+					(8,3) node			  (out7) {}
+
 					 (and1.in 1) node[anchor=east] {$Q_1$}
 					 (and1.in 2) node[anchor=east] {$\bar{x_0}$}
 					 (xor5.in 1) node[anchor=east] {$Q_1$}
@@ -289,10 +324,18 @@
 					 (and3.out) -| (or6.in 2)
 					 (and4.out) -| (or7.in 1)
 					 (and8.out) -| (or7.in 2)
-					 (or7.out) node[anchor=south] {$y_0$}
-					 (or6.out) node[anchor=south] {$Q_1$}
-					 (and8.out) -| (out8)
+					 %(or7.out) node[anchor=south] {$y_0$}
+					 %(or6.out) node[anchor=south] {$Q_1$}
+					 (or7.out) -| (out7)
+					 (out7) node[anchor=south] {$y_0$}
+
+					 (and8.out) -| (dff2.in)%
+					 (dff2.out1) -| (out8)
 					 (out8) node[anchor=south] {$Q_0$}
+
+					 (or6.out) -| (dff1.in)
+					 (dff1.out1) -| (out6)
+					 (out6) node[anchor=south] {$Q_1$}
 					;
 			\end{circuitikz}
 		\end{figure}
