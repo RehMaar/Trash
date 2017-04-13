@@ -54,7 +54,9 @@ graph =  [
          ]
 
 
-cmpRes f = foldl (\b p -> b && cmpPair p) True $ zip (checkG graph 1 list) (check f (True, False) list)
+swp ((a,b), (d,c)) = ((a,d), (b,c))
+cmpRes f = map swp $ zip (checkG graph 1 list) (check f (True, False) list)
+cmpResTotal f = foldl (\b p -> b && cmpPair p) True $ zip (checkG graph 1 list) (check f (True, False) list)
             where cmpPair ((a,b), (d,c)) = a == d && b == c
 
 
@@ -65,14 +67,6 @@ eqOnDFF x0 (q0, q1) = (x0', (q0', q1'))
                     q0' = not q0 && (q1 `xor` x0)
                     x0' = q0' || (q0 && phi)
                     q1' = not q0 && phi || q0 && x0
-
-eqOnTFF :: InputSignal -> State -> (OutputSignal, State)
-eqOnTFF x0 (q0, q1) = (x0', (q0', q1'))
-                where
-                    q0' = not q0 && (q1 `xor` x0) || q0
-                    q1' = x0 && (q0 `xor` q1) || phi
-                    x0' =  not q0 && (q1 `xor` x0) || phi
-                    phi = q0 && q1 && not x0
 
 eqOnRSFF :: InputSignal -> State -> (OutputSignal, State)
 eqOnRSFF x0 (q0, q1) = (x0', (q0', q1'))
@@ -104,3 +98,13 @@ eqOnJKFF x0 (q0, q1) = (x0', (q0', q1'))
                        jk _ False True  = False
                        jk _ True False  = True
                        jk q True True   = not q
+
+eqOnTFF :: InputSignal -> State -> (OutputSignal, State)
+eqOnTFF x0 (q0, q1) = (x0', (q0', q1'))
+                where
+                     x0' = not q0 && (q1 `xor` x0) || q0 && q1 && not x0
+                     q1' = t q1 $ x0 && (q0 `xor` q1) || q0 && q1 && not x0
+                     q0' = t q0 $ not q0 && (q1 `xor` x0) || q0
+                     -- T prev_state new_state
+                     t False q = q
+                     t True  q = not q

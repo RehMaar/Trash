@@ -42,8 +42,56 @@
 \graphicspath{ {img/} }
 
 
-% Flip-flop symbol
-\pgfdeclareshape{flipflop}{
+\pgfdeclareshape{rsff}{
+\anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+\anchor{text} % this is used to center the text in the node
+{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+    \savedanchor\dffinr{\pgfpoint{-.7cm}{.6cm}} % Input R
+    \anchor{in1}{\dffinr}
+    \savedanchor\dffins{\pgfpoint{-.7cm}{-.7cm}} % Input S
+    \anchor{in2}{\dffins}
+    \savedanchor\dffoutq{\pgfpoint{.7cm}{.6cm}} % Output Q
+    \anchor{out1}{\dffoutq}
+    \savedanchor\dffoutnq{\pgfpoint{.7cm}{-.7cm}} % Output ~Q
+    \anchor{out2}{\dffoutnq}
+
+    \foregroundpath{ % border and pin numbers are drawn here
+        \pgfsetlinewidth{0.03cm}
+        \pgfpathrectanglecorners{\pgfpoint{.7cm}{1cm}}{\pgfpoint{-.7cm}{-1cm}}
+        \pgfusepath{draw} %draw rectangle
+		\pgftext[top,at={\pgfpoint{.5cm}{.7cm}}]{\scriptsize $Q$}
+		\pgftext[top,at={\pgfpoint{.5cm}{-.6cm}}]{\scriptsize $\bar{Q}$}
+		\pgftext[top,at={\pgfpoint{-.5cm}{.7cm}}]{\scriptsize $R$}
+		\pgftext[top,at={\pgfpoint{-.5cm}{-.6cm}}]{\scriptsize $S$}
+	}
+}
+
+\pgfdeclareshape{jkff}{
+\anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+\anchor{text} % this is used to center the text in the node
+{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+    \savedanchor\dffinr{\pgfpoint{-.7cm}{.6cm}} % Input R
+    \anchor{in1}{\dffinr}
+    \savedanchor\dffins{\pgfpoint{-.7cm}{-.7cm}} % Input S
+    \anchor{in2}{\dffins}
+    \savedanchor\dffoutq{\pgfpoint{.7cm}{.6cm}} % Output Q
+    \anchor{out1}{\dffoutq}
+    \savedanchor\dffoutnq{\pgfpoint{.7cm}{-.7cm}} % Output ~Q
+    \anchor{out2}{\dffoutnq}
+
+    \foregroundpath{ % border and pin numbers are drawn here
+        \pgfsetlinewidth{0.03cm}
+        \pgfpathrectanglecorners{\pgfpoint{.7cm}{1cm}}{\pgfpoint{-.7cm}{-1cm}}
+        \pgfusepath{draw} %draw rectangle
+		\pgftext[top,at={\pgfpoint{.5cm}{.7cm}}]{\scriptsize $Q$}
+		\pgftext[top,at={\pgfpoint{.5cm}{-.6cm}}]{\scriptsize $\bar{Q}$}
+		\pgftext[top,at={\pgfpoint{-.5cm}{.7cm}}]{\scriptsize $K$}
+		\pgftext[top,at={\pgfpoint{-.5cm}{-.6cm}}]{\scriptsize $J$}
+	}
+}
+
+
+\pgfdeclareshape{latch}{
 \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
 \anchor{text} % this is used to center the text in the node
 {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
@@ -66,8 +114,8 @@
         %\pgftext[bottom,at={\pgfpoint{-.75cm}{-.55cm}}]{\scriptsize 1}
         %\pgftext[top,at={\pgfpoint{.75cm}{.55cm}}]{\scriptsize 5}
 		\pgftext[top,at={\pgfpoint{-.5cm}{.5cm}}]{}
-		\pgftext[top,at={\pgfpoint{.5cm}{.7cm}}]{\scriptsize $Q_0$}
-		\pgftext[top,at={\pgfpoint{.5cm}{-.6cm}}]{\scriptsize $\bar{Q_0}$}
+		\pgftext[top,at={\pgfpoint{.5cm}{.7cm}}]{\scriptsize $Q$}
+		\pgftext[top,at={\pgfpoint{.5cm}{-.6cm}}]{\scriptsize $\bar{Q}$}
 	}
 }
 
@@ -288,22 +336,19 @@
 		\begin{figure}[h!]
 			\begin{circuitikz}
 				\draw
-                    % (0,2) node[and port] (myand1) {}
-                    % (0,0) node[and port] (myand2) {}
-                    % (2,1) node[xnor port] (myxnor) {}
-					(0,4) node[and port] (and1) {1}
-					(0,0) node[xor port] (xor5) {5}
+					(0,4) node[and port] (and1) { }
+					(0,0) node[xor port] (xor5) { }
 
-					(2,7) node[and port] (and2) {2}
-					(2,5) node[and port] (and3) {3}
-					(2,3) node[and port] (and4) {4}
-					(2,1) node[and port] (and8) {8}
+					(2,7) node[and port] (and2) { }
+					(2,5) node[and port] (and3) { }
+					(2,3) node[and port] (and4) { }
+					(2,1) node[and port] (and8) { }
 
-					(4,6) node[or port]   (or6) {6}
-					(4,3) node[or port]   (or7) {7}
+					(4,6) node[or port]   (or6) {}
+					(4,3) node[or port]   (or7) {}
 
-					(6,1) node[flipflop] (dff2) {$DFF$}
-					(6,6) node[flipflop] (dff1) {$DFF$}
+					(6,1) node[latch] (dff2) {$D$}
+					(6,6) node[latch] (dff1) {$D$}
 					(8,2) node			  (out8) {}
 					(8,7) node			  (out6) {}
 					(8,3) node			  (out7) {}
@@ -340,6 +385,9 @@
 			\end{circuitikz}
 		\end{figure}
 
+		Входное закодированное слово: $[0,0,1,1,0,1,0,0,1,1,1]$\\
+		Выходное закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$ \\
+		Ожидаемое закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$
 
 		\subsubsection*{T-триггер}
     		\begin{table}[h!]
@@ -375,11 +423,59 @@
 			$T_1 = \bar{Q_0} Q_1 x_0 \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 \bar{x_0}$ \\
         	$y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$. \\
 
-	 		ДНФ для схемы: \\
+	 		Для схемы: \\
 			$T_0 = Q_0 \lor (Q_1 \oplus x_0)$ \\
 			$T_1 = x_0 (Q_0 \oplus Q_1) \lor \phi$ \\
 			$y_0 = \bar{Q_0} (Q_1 \oplus x_0) \lor \phi$ \\
 			$\phi = Q_0 Q_1 \bar{x_0}$.
+
+		\begin{figure}[h!]
+			\begin{circuitikz}
+				\draw
+					(0,6) node[xor port] (xor1) { }
+					(0,3) node[and port] (and2) { }
+					(0,1) node[xor port] (xor3) { }
+				
+					(2,7) node[or port]  (or4) { }
+					(2,5) node[and port] (and5) { }
+					(2,3) node[and port] (and6) { }
+					(2,1) node[and port] (and7) { }
+					
+					(4,4) node[or port] (or9) { }
+					(4,1) node[or port] (or10) {  }
+					(4,7) node[latch] (tff0) {$T$}
+					(6,1) node[latch] (tff1) {$T$}
+
+                    (xor1.in 1) node[anchor=east] {$Q_1$}
+                    (xor1.in 2) node[anchor=east] {$x_0$}
+                    (xor3.in 2) node[anchor=east] {$Q_0$}
+                    (xor3.in 2) node[anchor=east] {$Q_1$}
+                    (and2.in 1) node[anchor=east] {$Q_0$}
+                    (and2.in 2) node[anchor=east] {$Q_1$}
+                    (or4.in 1) node[anchor=east] {$Q_0$}
+                    (and5.in 2) node[anchor=east] {$\bar{Q_0}$}
+                    (and6.in 1) node[anchor=east] {$\bar{x_0}$}
+                    (and7.in 1) node[anchor=east] {$x_0$}
+
+					(xor1.out) -| (or4.in 2)
+					(xor1.out) -| (and5.in 1)
+					(or4.out) -| (tff0.in)
+					(and5.out) -| (or9.in 1)
+					(and6.out) -| (or9.in 2)
+					(and6.out) -| (or10.in 1)
+					(and2.out) -| (and6.in 2)
+					(xor3.out) -| (and7.in 2)
+					(and7.out) -| (or10.in 2)
+					(or10.out) -| (tff1.in)
+					(tff1.out1) node[anchor=west] {$Q_1$}
+					(tff0.out1) node[anchor=west] {$Q_0$}
+					(or9.out) node[anchor=west] {$x_0$}
+					;
+			\end{circuitikz}
+		\end{figure}
+		Входное закодированное слово: $[0,0,1,1,0,1,0,0,1,1,1]$\\
+		Выходное закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$ \\
+		Ожидаемое закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$
 
 	\subsection*{RS-триггер}
     		\begin{table}[h!]
@@ -427,13 +523,67 @@
 		$R_1 = x_0 \bar{Q_0} Q_1 \lor \bar{x_0} Q_0 Q_1$ \\
 		$S_1 = x_0 Q_0 \bar{Q_1}$ \\
 		
-		ДНФ для схемы: \\
+		Для схемы: \\
 		$R_0 = Q_0$ \\
 		$S_0 = \bar{Q_0} (x_0 \oplus Q_1)$ \\
 		$R_1 = Q_1 (x_0 \oplus Q_0)$ \\
 		$S_0 = x_0 Q_0 \bar{Q_1}$ \\
 		$y_0 = S_0 || \bar{x_0} Q_0 Q_1 $
 
+
+		\begin{figure}[h!]
+			\begin{circuitikz}
+				\draw
+					(0,6) node[xor port] (xor1)   {}
+					(0,4) node[and port] (and2)   {}
+					(0,1.7) node[xor port] (xor3) {}
+					(0,0.3) node[and port] (and4) {}
+				
+					(2,0.3) node[and port] (and8) {}
+					(2,1.7) node[and port] (and7) {}
+					(2,4) node[and port] (and6) {}
+					(2,6) node[and port] (and5) {}
+
+					(4,1) node[rsff] (rsff0) {$RS1$}
+					(4,6.5) node[rsff] (rsff1) {$RS0$}
+					(4,4) node[or port] (or10) {}
+
+				 	(and4.in 1) node[anchor=east] {$Q_0$}
+				 	(and4.in 2) node[anchor=east] {$\bar{Q_1}$}
+				 	(xor3.in 1) node[anchor=east] {$x_0$}
+				 	(xor3.in 2) node[anchor=east] {$Q_0$}
+				 	(and2.in 1) node[anchor=east] {$Q_0$}
+				 	(and2.in 2) node[anchor=east] {$Q_1$}
+				 	(xor1.in 1) node[anchor=east] {$x_0$}
+				 	(xor1.in 2) node[anchor=east] {$Q_1$}
+
+					(and4.out) -| (and8.in 1)
+					(and8.in 2) node[anchor=east] {$x_0$}
+					(xor3.out) -| (and7.in 1)
+					(and7.in 2) node[anchor=east] {$Q_1$}
+					(and2.out) -| (and6.in 1)
+					(and6.in 2) node[anchor=east] {$\bar{x_0}$}
+					(xor1.out) -| (and5.in 1)
+					(and5.in 2) node[anchor=east] {$\bar{Q_0}$}
+					(and5.out) -| (or10.in 1)
+					(and5.out) -| (rsff1.in2)
+					(and6.out) -| (or10.in 2)
+					%(rsff1.in1) node[anchor=east] {$Q_0$}
+					(3,7.1) node[anchor=east] {$Q_0$}
+					(3,7.1) -- (rsff1.in1)
+					(rsff1.out1) -- (5,7.1)
+					(5,7.1) node[anchor=west] {$Q_0'$}
+					(or10.out) node[anchor=west] {$y_0$}
+					(and7.out) -| (rsff0.in1)
+					(and8.out) -| (rsff0.in2)
+					(rsff0.out1) -- (5,1.6)
+					(5,1.6) node[anchor=west] {$Q_1'$}
+					;
+			\end{circuitikz}
+		\end{figure}
+		Входное закодированное слово: $[0,0,1,1,0,1,0,0,1,1,1]$\\
+		Выходное закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$ \\
+		Ожидаемое закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$
 	\subsection*{JK-триггер}
     		\begin{table}[h!]
 				\center
@@ -441,7 +591,7 @@
 					\hline
 					 Q  & 0 & 1 \\
 					 JK &   &   \\ \hline
-					 00 & 0 & 1 \\ \hline1
+					 00 & 0 & 1 \\ \hline
 					 01 & 0 & 0 \\ \hline
 					 10 & 1 & 1 \\ \hline
 					 11 & 1 & 0 \\ \hline
@@ -488,5 +638,64 @@
 		$J_1 = x_0 Q_0 \bar{Q_1}$ \\
 		$K_1 = Q_1 (x_0 \oplus Q_0)$\\
 		$y_0 = J_0 || \bar{x_0} Q_0 Q_1$
+
+		\begin{figure}[h!]
+			\begin{circuitikz}
+				\draw
+					(0,6) node[xor port] (xor1)   {}
+					(0,4) node[and port] (and2)   {}
+					(0,1.7) node[xor port] (xor3) {}
+					(0,0.3) node[and port] (and4) {}
+				
+					(2,0.3) node[and port] (and8) {}
+					(2,1.7) node[and port] (and7) {}
+					(2,4) node[and port] (and6) {}
+					(2,6) node[and port] (and5) {}
+
+					(4,1) node[jkff] (rsff0) {$JK1$}
+					(4,6.5) node[jkff] (rsff1) {$JK0$}
+					(4,4) node[or port] (or10) {$10$}
+
+				 	(and4.in 1) node[anchor=east] {$Q_0$}
+				 	(and4.in 2) node[anchor=east] {$\bar{Q_1}$}
+				 	(xor3.in 1) node[anchor=east] {$x_0$}
+				 	(xor3.in 2) node[anchor=east] {$Q_0$}
+				 	(and2.in 1) node[anchor=east] {$Q_0$}
+				 	(and2.in 2) node[anchor=east] {$Q_1$}
+				 	(xor1.in 1) node[anchor=east] {$x_0$}
+				 	(xor1.in 2) node[anchor=east] {$Q_1$}
+
+					(and4.out) -| (and8.in 1)
+					(and8.in 2) node[anchor=east] {$x_0$}
+					(xor3.out) -| (and7.in 1)
+					(and7.in 2) node[anchor=east] {$Q_1$}
+					(and2.out) -| (and6.in 1)
+					(and6.in 2) node[anchor=east] {$\bar{x_0}$}
+					(xor1.out) -| (and5.in 1)
+					(and5.in 2) node[anchor=east] {$\bar{Q_0}$}
+					(and5.out) -| (or10.in 1)
+					(and5.out) -| (rsff1.in2)
+					(and6.out) -| (or10.in 2)
+					%(rsff1.in1) node[anchor=east] {$Q_0$}
+					(3,7.1) node[anchor=east] {$Q_0$}
+					(3,7.1) -- (rsff1.in1)
+					(rsff1.out1) -- (5,7.1)
+					(5,7.1) node[anchor=west] {$Q_0'$}
+					(or10.out) node[anchor=west] {$y_0$}
+					(and7.out) -| (rsff0.in1)
+					(and8.out) -| (rsff0.in2)
+					(rsff0.out1) -- (5,1.6)
+					(5,1.6) node[anchor=west] {$Q_1'$}
+					;
+			\end{circuitikz}
+		\end{figure}
+		Входное закодированное слово: $[0,0,1,1,0,1,0,0,1,1,1]$\\
+		Выходное закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$ \\
+		Ожидаемое закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$
 \section*{Вывод}
+В ходе лабораторной работы был изучен структурный автомат и принципы постоения схем на его основе.
+Были пострены схемы с памятью на основе исходного автомата на D-, T-, RS- и JK-триггерах. Из всех
+вариантом лучшим считается схема на D-триггерах в силу малого количества элементов и трёх уровней
+вентилей. Корректность полученых схем была подтверждена тестовой проверкой реакции
+схем на выходные сигналы. Все результаты совпали с ожидаемыми.
 \end{document}
