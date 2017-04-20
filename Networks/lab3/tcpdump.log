@@ -1,0 +1,340 @@
+16:06:05.798054 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 102: (tos 0xc0, ttl 64, id 41279, offset 0, flags [none], proto ICMP (1), length 88)
+    192.168.1.1 > 192.168.1.26: ICMP time exceeded in-transit, length 68
+	(tos 0x0, ttl 1, id 9653, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.49742 > 92.242.36.162.33434: [udp sum ok] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 45c0  h....,,V.E.\..E.
+	0x0010:  0058 a13f 0000 4001 553a c0a8 0101 c0a8  .X.?..@.U:......
+	0x0020:  011a 0b00 3890 0000 0000 4500 003c 25b5  ....8.....E..<%.
+	0x0030:  0000 0111 50a6 c0a8 011a 5cf2 24a2 c24e  ....P.....\.$..N
+	0x0040:  829a 0028 8259 4041 4243 4445 4647 4849  ...(.Y@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f                           Z[\]^_
+16:06:05.798440 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 102: (tos 0xc0, ttl 64, id 41280, offset 0, flags [none], proto ICMP (1), length 88)
+    192.168.1.1 > 192.168.1.26: ICMP time exceeded in-transit, length 68
+	(tos 0x0, ttl 1, id 9654, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.43306 > 92.242.36.162.33435: [udp sum ok] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 45c0  h....,,V.E.\..E.
+	0x0010:  0058 a140 0000 4001 5539 c0a8 0101 c0a8  .X.@..@.U9......
+	0x0020:  011a 0b00 3890 0000 0000 4500 003c 25b6  ....8.....E..<%.
+	0x0030:  0000 0111 50a5 c0a8 011a 5cf2 24a2 a92a  ....P.....\.$..*
+	0x0040:  829b 0028 9b7c 4041 4243 4445 4647 4849  ...(.|@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f                           Z[\]^_
+16:06:05.799041 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 102: (tos 0xc0, ttl 64, id 41281, offset 0, flags [none], proto ICMP (1), length 88)
+    192.168.1.1 > 192.168.1.26: ICMP time exceeded in-transit, length 68
+	(tos 0x0, ttl 1, id 9655, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.56856 > 92.242.36.162.33436: [udp sum ok] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 45c0  h....,,V.E.\..E.
+	0x0010:  0058 a141 0000 4001 5538 c0a8 0101 c0a8  .X.A..@.U8......
+	0x0020:  011a 0b00 3890 0000 0000 4500 003c 25b7  ....8.....E..<%.
+	0x0030:  0000 0111 50a4 c0a8 011a 5cf2 24a2 de18  ....P.....\.$...
+	0x0040:  829c 0028 668d 4041 4243 4445 4647 4849  ...(f.@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f                           Z[\]^_
+16:06:05.811436 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 70: (tos 0x0, ttl 254, id 0, offset 0, flags [none], proto ICMP (1), length 56)
+    100.65.232.1 > 192.168.1.26: ICMP time exceeded in-transit, length 36
+	(tos 0x0, ttl 1, id 9656, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.51283 > 92.242.36.162.33437: UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4500  h....,,V.E.\..E.
+	0x0010:  0038 0000 0000 fe01 aebf 6441 e801 c0a8  .8........dA....
+	0x0020:  011a 0b00 2d95 0000 0000 4500 003c 25b8  ....-.....E..<%.
+	0x0030:  0000 0111 50a3 c0a8 011a 5cf2 24a2 c853  ....P.....\.$..S
+	0x0040:  829d 0028 7c51                           ...(|Q
+16:06:05.818220 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 70: (tos 0x0, ttl 254, id 0, offset 0, flags [none], proto ICMP (1), length 56)
+    100.65.232.1 > 192.168.1.26: ICMP time exceeded in-transit, length 36
+	(tos 0x0, ttl 1, id 9657, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.44879 > 92.242.36.162.33438: UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4500  h....,,V.E.\..E.
+	0x0010:  0038 0000 0000 fe01 aebf 6441 e801 c0a8  .8........dA....
+	0x0020:  011a 0b00 2d95 0000 0000 4500 003c 25b9  ....-.....E..<%.
+	0x0030:  0000 0111 50a2 c0a8 011a 5cf2 24a2 af4f  ....P.....\.$..O
+	0x0040:  829e 0028 9554                           ...(.T
+16:06:05.819234 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 70: (tos 0x0, ttl 254, id 0, offset 0, flags [none], proto ICMP (1), length 56)
+    100.65.232.1 > 192.168.1.26: ICMP time exceeded in-transit, length 36
+	(tos 0x0, ttl 1, id 9658, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.37409 > 92.242.36.162.33439: UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4500  h....,,V.E.\..E.
+	0x0010:  0038 0000 0000 fe01 aebf 6441 e801 c0a8  .8........dA....
+	0x0020:  011a 0b00 2d95 0000 0000 4500 003c 25ba  ....-.....E..<%.
+	0x0030:  0000 0111 50a1 c0a8 011a 5cf2 24a2 9221  ....P.....\.$..!
+	0x0040:  829f 0028 b281                           ...(..
+16:06:05.820563 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 70: (tos 0x0, ttl 250, id 0, offset 0, flags [none], proto ICMP (1), length 56)
+    100.127.0.24 > 192.168.1.26: ICMP time exceeded in-transit, length 36
+	(tos 0x0, ttl 1, id 9659, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.37278 > 92.242.36.162.33440: UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4500  h....,,V.E.\..E.
+	0x0010:  0038 0000 0000 fa01 9a6b 647f 0018 c0a8  .8.......kd.....
+	0x0020:  011a 0b00 2d95 0000 0000 4500 003c 25bb  ....-.....E..<%.
+	0x0030:  0000 0111 50a0 c0a8 011a 5cf2 24a2 919e  ....P.....\.$...
+	0x0040:  82a0 0028 b303                           ...(..
+16:06:05.820590 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 70: (tos 0x0, ttl 250, id 0, offset 0, flags [none], proto ICMP (1), length 56)
+    100.127.0.24 > 192.168.1.26: ICMP time exceeded in-transit, length 36
+	(tos 0x0, ttl 1, id 9661, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.48325 > 92.242.36.162.33442: UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4500  h....,,V.E.\..E.
+	0x0010:  0038 0000 0000 fa01 9a6b 647f 0018 c0a8  .8.......kd.....
+	0x0020:  011a 0b00 2d95 0000 0000 4500 003c 25bd  ....-.....E..<%.
+	0x0030:  0000 0111 509e c0a8 011a 5cf2 24a2 bcc5  ....P.....\.$...
+	0x0040:  82a2 0028 87da                           ...(..
+16:06:05.820599 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 70: (tos 0x0, ttl 252, id 0, offset 0, flags [none], proto ICMP (1), length 56)
+    100.127.0.26 > 192.168.1.26: ICMP time exceeded in-transit, length 36
+	(tos 0x0, ttl 1, id 9669, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.45247 > 92.242.36.162.33450: UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4500  h....,,V.E.\..E.
+	0x0010:  0038 0000 0000 fc01 9869 647f 001a c0a8  .8.......id.....
+	0x0020:  011a 0b00 2d95 0000 0000 4500 003c 25c5  ....-.....E..<%.
+	0x0030:  0000 0111 5096 c0a8 011a 5cf2 24a2 b0bf  ....P.....\.$...
+	0x0040:  82aa 0028 93d8                           ...(..
+16:06:05.820607 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 70: (tos 0x0, ttl 252, id 0, offset 0, flags [none], proto ICMP (1), length 56)
+    100.127.0.26 > 192.168.1.26: ICMP time exceeded in-transit, length 36
+	(tos 0x0, ttl 1, id 9670, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.53317 > 92.242.36.162.33451: UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4500  h....,,V.E.\..E.
+	0x0010:  0038 0000 0000 fc01 9869 647f 001a c0a8  .8.......id.....
+	0x0020:  011a 0b00 2d95 0000 0000 4500 003c 25c6  ....-.....E..<%.
+	0x0030:  0000 0111 5095 c0a8 011a 5cf2 24a2 d045  ....P.....\.$..E
+	0x0040:  82ab 0028 7451                           ...(tQ
+16:06:05.820615 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 186: (tos 0x0, ttl 250, id 0, offset 0, flags [DF], proto ICMP (1), length 172)
+    212.48.194.54 > 192.168.1.26: ICMP time exceeded in-transit, length 152
+	(tos 0x0, ttl 1, id 9665, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.51910 > 92.242.36.162.33446: [udp sum ok] UDP, length 32
+	MPLS extension v2, checksum 0x9e81 (correct), length 16
+	  MPLS Stack Entry Object (1), Class-Type: 1, length 12
+	    label 521903, exp 0, ttl 1
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4500  h....,,V.E.\..E.
+	0x0010:  00ac 0000 4000 fa01 2827 d430 c236 c0a8  ....@...('.0.6..
+	0x0020:  011a 0b00 3890 0000 0000 4500 003c 25c1  ....8.....E..<%.
+	0x0030:  0000 0111 509a c0a8 011a 5cf2 24a2 cac6  ....P.....\.$...
+	0x0040:  82a6 0028 79d5 4041 4243 4445 4647 4849  ...(y.@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f 0000 0000 0000 0000 0000  Z[\]^_..........
+	0x0070:  0000 0000 0000 0000 0000 0000 0000 0000  ................
+	0x0080:  0000 0000 0000 0000 0000 0000 0000 0000  ................
+	0x0090:  0000 0000 0000 0000 0000 0000 0000 0000  ................
+	0x00a0:  0000 0000 0000 0000 0000 2000 9e81 000c  ................
+	0x00b0:  0101 7f6a f001 0001 d103                 ...j......
+16:06:05.820625 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 186: (tos 0x0, ttl 250, id 0, offset 0, flags [DF], proto ICMP (1), length 172)
+    212.48.204.195 > 192.168.1.26: ICMP time exceeded in-transit, length 152
+	(tos 0x0, ttl 1, id 9663, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.56396 > 92.242.36.162.33444: [udp sum ok] UDP, length 32
+	MPLS extension v2, checksum 0x5cbd (correct), length 16
+	  MPLS Stack Entry Object (1), Class-Type: 1, length 12
+	    label 791295, exp 0, ttl 1
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4500  h....,,V.E.\..E.
+	0x0010:  00ac 0000 4000 fa01 1d9a d430 ccc3 c0a8  ....@......0....
+	0x0020:  011a 0b00 3890 0000 0000 4500 003c 25bf  ....8.....E..<%.
+	0x0030:  0000 0111 509c c0a8 011a 5cf2 24a2 dc4c  ....P.....\.$..L
+	0x0040:  82a4 0028 6851 4041 4243 4445 4647 4849  ...(hQ@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f 0000 0000 0000 0000 0000  Z[\]^_..........
+	0x0070:  0000 0000 0000 0000 0000 0000 0000 0000  ................
+	0x0080:  0000 0000 0000 0000 0000 0000 0000 0000  ................
+	0x0090:  0000 0000 0000 0000 0000 0000 0000 0000  ................
+	0x00a0:  0000 0000 0000 0000 0000 2000 5cbd 000c  ............\...
+	0x00b0:  0101 c12f f001 0001 d102                 .../......
+16:06:05.821019 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 186: (tos 0x0, ttl 250, id 0, offset 0, flags [DF], proto ICMP (1), length 172)
+    212.48.204.164 > 192.168.1.26: ICMP time exceeded in-transit, length 152
+	(tos 0x0, ttl 1, id 9660, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.34662 > 92.242.36.162.33441: [udp sum ok] UDP, length 32
+	MPLS extension v2, checksum 0x8854 (correct), length 16
+	  MPLS Stack Entry Object (1), Class-Type: 1, length 12
+	    label 350627, exp 0, ttl 1
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4500  h....,,V.E.\..E.
+	0x0010:  00ac 0000 4000 fa01 1db9 d430 cca4 c0a8  ....@......0....
+	0x0020:  011a 0b00 3890 0000 0000 4500 003c 25bc  ....8.....E..<%.
+	0x0030:  0000 0111 509f c0a8 011a 5cf2 24a2 8766  ....P.....\.$..f
+	0x0040:  82a1 0028 bd3a 4041 4243 4445 4647 4849  ...(.:@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f 0000 0000 0000 0000 0000  Z[\]^_..........
+	0x0070:  0000 0000 0000 0000 0000 0000 0000 0000  ................
+	0x0080:  0000 0000 0000 0000 0000 0000 0000 0000  ................
+	0x0090:  0000 0000 0000 0000 0000 0000 0000 0000  ................
+	0x00a0:  0000 0000 0000 0000 0000 2000 8854 000c  .............T..
+	0x00b0:  0101 559a 3001 0001 d101                 ..U.0.....
+16:06:05.842455 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 70: (tos 0x20, ttl 250, id 0, offset 0, flags [none], proto ICMP (1), length 56)
+    100.127.0.29 > 192.168.1.26: ICMP time exceeded in-transit, length 36
+	(tos 0x0, ttl 1, id 9671, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.50982 > 92.242.36.162.33452: UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0038 0000 0000 fa01 9a46 647f 001d c0a8  .8.......Fd.....
+	0x0020:  011a 0b00 2d95 0000 0000 4500 003c 25c7  ....-.....E..<%.
+	0x0030:  0000 0111 5094 c0a8 011a 5cf2 24a2 c726  ....P.....\.$..&
+	0x0040:  82ac 0028 7d6f                           ...(}o
+16:06:05.843130 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 70: (tos 0x20, ttl 250, id 0, offset 0, flags [none], proto ICMP (1), length 56)
+    100.127.0.29 > 192.168.1.26: ICMP time exceeded in-transit, length 36
+	(tos 0x0, ttl 1, id 9673, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.56229 > 92.242.36.162.33453: UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0038 0000 0000 fa01 9a46 647f 001d c0a8  .8.......Fd.....
+	0x0020:  011a 0b00 2d95 0000 0000 4500 003c 25c9  ....-.....E..<%.
+	0x0030:  0000 0111 5092 c0a8 011a 5cf2 24a2 dba5  ....P.....\.$...
+	0x0040:  82ad 0028 68ef                           ...(h.
+16:06:05.877399 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 70: (tos 0x20, ttl 250, id 0, offset 0, flags [none], proto ICMP (1), length 56)
+    100.127.0.29 > 192.168.1.26: ICMP time exceeded in-transit, length 36
+	(tos 0x0, ttl 1, id 9674, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.58986 > 92.242.36.162.33454: UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0038 0000 0000 fa01 9a46 647f 001d c0a8  .8.......Fd.....
+	0x0020:  011a 0b00 2d95 0000 0000 4500 003c 25ca  ....-.....E..<%.
+	0x0030:  0000 0111 5091 c0a8 011a 5cf2 24a2 e66a  ....P.....\.$..j
+	0x0040:  82ae 0028 5e29                           ...(^)
+16:06:05.897268 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 110: (tos 0x20, ttl 248, id 16641, offset 0, flags [none], proto ICMP (1), length 96)
+    188.93.58.222 > 192.168.1.26: ICMP time exceeded in-transit, length 76
+	(tos 0x0, ttl 1, id 9681, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.52327 > 92.242.36.162.33461: [bad udp cksum 0x3dee -> 0x7825!] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0060 4101 0000 f801 c87d bc5d 3ade c0a8  .`A......}.]:...
+	0x0020:  011a 0b00 72b6 0011 0000 4500 003c 25d1  ....r.....E..<%.
+	0x0030:  0000 0111 508a c0a8 011a 5cf2 24a2 cc67  ....P.....\.$..g
+	0x0040:  82b5 0028 3dee 4041 4243 4445 4647 4849  ...(=.@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f 0000 0000 0000 0000       Z[\]^_........
+16:06:05.902408 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 110: (tos 0x20, ttl 248, id 16642, offset 0, flags [none], proto ICMP (1), length 96)
+    188.93.58.222 > 192.168.1.26: ICMP time exceeded in-transit, length 76
+	(tos 0x0, ttl 1, id 9682, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.49111 > 92.242.36.162.33462: [bad udp cksum 0x4a7d -> 0x84b4!] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0060 4102 0000 f801 c87c bc5d 3ade c0a8  .`A......|.]:...
+	0x0020:  011a 0b00 72b6 0011 0000 4500 003c 25d2  ....r.....E..<%.
+	0x0030:  0000 0111 5089 c0a8 011a 5cf2 24a2 bfd7  ....P.....\.$...
+	0x0040:  82b6 0028 4a7d 4041 4243 4445 4647 4849  ...(J}@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f 0000 0000 0000 0000       Z[\]^_........
+16:06:05.902432 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 110: (tos 0x20, ttl 248, id 16643, offset 0, flags [none], proto ICMP (1), length 96)
+    188.93.58.222 > 192.168.1.26: ICMP time exceeded in-transit, length 76
+	(tos 0x0, ttl 1, id 9683, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.32910 > 92.242.36.162.33463: [bad udp cksum 0x89c5 -> 0xc3fc!] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0060 4103 0000 f801 c87b bc5d 3ade c0a8  .`A......{.]:...
+	0x0020:  011a 0b00 72b6 0011 0000 4500 003c 25d3  ....r.....E..<%.
+	0x0030:  0000 0111 5088 c0a8 011a 5cf2 24a2 808e  ....P.....\.$...
+	0x0040:  82b7 0028 89c5 4041 4243 4445 4647 4849  ...(..@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f 0000 0000 0000 0000       Z[\]^_........
+16:06:05.902438 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 70: (tos 0x20, ttl 249, id 0, offset 0, flags [none], proto ICMP (1), length 56)
+    217.107.67.83 > 192.168.1.26: ICMP time exceeded in-transit, length 36
+	(tos 0x0, ttl 1, id 9675, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.38986 > 92.242.36.162.33455: UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0038 0000 0000 f901 e323 d96b 4353 c0a8  .8.......#.kCS..
+	0x0020:  011a 0b00 67cc 0000 0000 4500 003c 25cb  ....g.....E..<%.
+	0x0030:  0000 0111 5090 c0a8 011a 5cf2 24a2 984a  ....P.....\.$..J
+	0x0040:  82af 0028 7211                           ...(r.
+16:06:05.902445 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 110: (tos 0x20, ttl 249, id 21694, offset 0, flags [none], proto ICMP (1), length 96)
+    188.254.92.246 > 192.168.1.26: ICMP time exceeded in-transit, length 76
+	(tos 0x0, ttl 1, id 9680, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.40610 > 92.242.36.162.33460: [bad udp cksum 0x6bb4 -> 0xa5eb!] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0060 54be 0000 f901 9107 bcfe 5cf6 c0a8  .`T.........\...
+	0x0020:  011a 0b00 6b23 3ff3 c7b0 4500 003c 25d0  ....k#?...E..<%.
+	0x0030:  0000 0111 508b c0a8 011a 5cf2 24a2 9ea2  ....P.....\.$...
+	0x0040:  82b4 0028 6bb4 4041 4243 4445 4647 4849  ...(k.@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f 0000 0000 0000 0000       Z[\]^_........
+16:06:05.902451 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 110: (tos 0x20, ttl 249, id 61198, offset 0, flags [none], proto ICMP (1), length 96)
+    188.254.92.246 > 192.168.1.26: ICMP time exceeded in-transit, length 76
+	(tos 0x0, ttl 1, id 9679, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.35589 > 92.242.36.162.33459: [bad udp cksum 0x7f52 -> 0xb989!] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0060 ef0e 0000 f901 f6b6 bcfe 5cf6 c0a8  .`..........\...
+	0x0020:  011a 0b00 6b23 3ff3 c7b0 4500 003c 25cf  ....k#?...E..<%.
+	0x0030:  0000 0111 508c c0a8 011a 5cf2 24a2 8b05  ....P.....\.$...
+	0x0040:  82b3 0028 7f52 4041 4243 4445 4647 4849  ...(.R@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f 0000 0000 0000 0000       Z[\]^_........
+16:06:05.903121 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 70: (tos 0x20, ttl 249, id 0, offset 0, flags [none], proto ICMP (1), length 56)
+    217.107.67.65 > 192.168.1.26: ICMP time exceeded in-transit, length 36
+	(tos 0x0, ttl 1, id 9676, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.53034 > 92.242.36.162.33456: UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0038 0000 0000 f901 e335 d96b 4341 c0a8  .8.......5.kCA..
+	0x0020:  011a 0b00 67cc 0000 0000 4500 003c 25cc  ....g.....E..<%.
+	0x0030:  0000 0111 508f c0a8 011a 5cf2 24a2 cf2a  ....P.....\.$..*
+	0x0040:  82b0 0028 3b30                           ...(;0
+16:06:05.903130 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 70: (tos 0x20, ttl 249, id 0, offset 0, flags [none], proto ICMP (1), length 56)
+    217.107.67.65 > 192.168.1.26: ICMP time exceeded in-transit, length 36
+	(tos 0x0, ttl 1, id 9677, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.52927 > 92.242.36.162.33457: UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0038 0000 0000 f901 e335 d96b 4341 c0a8  .8.......5.kCA..
+	0x0020:  011a 0b00 67cc 0000 0000 4500 003c 25cd  ....g.....E..<%.
+	0x0030:  0000 0111 508e c0a8 011a 5cf2 24a2 cebf  ....P.....\.$...
+	0x0040:  82b1 0028 3b9a                           ...(;.
+16:06:05.903134 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 110: (tos 0x20, ttl 249, id 61199, offset 0, flags [none], proto ICMP (1), length 96)
+    188.254.92.246 > 192.168.1.26: ICMP time exceeded in-transit, length 76
+	(tos 0x0, ttl 1, id 9678, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.35284 > 92.242.36.162.33458: [bad udp cksum 0x8084 -> 0xbabb!] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0060 ef0f 0000 f901 f6b5 bcfe 5cf6 c0a8  .`..........\...
+	0x0020:  011a 0b00 6b23 3ff3 c7b0 4500 003c 25ce  ....k#?...E..<%.
+	0x0030:  0000 0111 508d c0a8 011a 5cf2 24a2 89d4  ....P.....\.$...
+	0x0040:  82b2 0028 8084 4041 4243 4445 4647 4849  ...(..@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f 0000 0000 0000 0000       Z[\]^_........
+16:06:06.031915 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 102: (tos 0x20, ttl 53, id 42490, offset 0, flags [none], proto ICMP (1), length 88)
+    92.242.36.162 > 192.168.1.26: ICMP 92.242.36.162 udp port 33473 unreachable, length 68
+	(tos 0x0, ttl 1, id 9714, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.46662 > 92.242.36.162.33473: [bad udp cksum 0x5403 -> 0x8e3a!] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0058 a5fa 0000 3501 9c34 5cf2 24a2 c0a8  .X....5..4\.$...
+	0x0020:  011a 0303 7ac4 0000 0000 4500 003c 25f2  ....z.....E..<%.
+	0x0030:  0000 0111 5069 c0a8 011a 5cf2 24a2 b646  ....Pi....\.$..F
+	0x0040:  82c1 0028 5403 4041 4243 4445 4647 4849  ...(T.@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f                           Z[\]^_
+16:06:06.034655 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 102: (tos 0x20, ttl 53, id 42491, offset 0, flags [none], proto ICMP (1), length 88)
+    92.242.36.162 > 192.168.1.26: ICMP 92.242.36.162 udp port 33474 unreachable, length 68
+	(tos 0x0, ttl 1, id 9715, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.46127 > 92.242.36.162.33474: [bad udp cksum 0x5619 -> 0x9050!] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0058 a5fb 0000 3501 9c33 5cf2 24a2 c0a8  .X....5..3\.$...
+	0x0020:  011a 0303 7ac4 0000 0000 4500 003c 25f3  ....z.....E..<%.
+	0x0030:  0000 0111 5068 c0a8 011a 5cf2 24a2 b42f  ....Ph....\.$../
+	0x0040:  82c2 0028 5619 4041 4243 4445 4647 4849  ...(V.@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f                           Z[\]^_
+16:06:06.034687 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 102: (tos 0x20, ttl 53, id 42492, offset 0, flags [none], proto ICMP (1), length 88)
+    92.242.36.162 > 192.168.1.26: ICMP 92.242.36.162 udp port 33478 unreachable, length 68
+	(tos 0x0, ttl 2, id 9719, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.34910 > 92.242.36.162.33478: [bad udp cksum 0x81e6 -> 0xbc1d!] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0058 a5fc 0000 3501 9c32 5cf2 24a2 c0a8  .X....5..2\.$...
+	0x0020:  011a 0303 7ac4 0000 0000 4500 003c 25f7  ....z.....E..<%.
+	0x0030:  0000 0211 4f64 c0a8 011a 5cf2 24a2 885e  ....Od....\.$..^
+	0x0040:  82c6 0028 81e6 4041 4243 4445 4647 4849  ...(..@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f                           Z[\]^_
+16:06:06.034699 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 102: (tos 0x20, ttl 53, id 42493, offset 0, flags [none], proto ICMP (1), length 88)
+    92.242.36.162 > 192.168.1.26: ICMP 92.242.36.162 udp port 33475 unreachable, length 68
+	(tos 0x0, ttl 1, id 9716, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.39526 > 92.242.36.162.33475: [bad udp cksum 0x6fe1 -> 0xaa18!] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0058 a5fd 0000 3501 9c31 5cf2 24a2 c0a8  .X....5..1\.$...
+	0x0020:  011a 0303 7ac4 0000 0000 4500 003c 25f4  ....z.....E..<%.
+	0x0030:  0000 0111 5067 c0a8 011a 5cf2 24a2 9a66  ....Pg....\.$..f
+	0x0040:  82c3 0028 6fe1 4041 4243 4445 4647 4849  ...(o.@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f                           Z[\]^_
+16:06:06.034708 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 102: (tos 0x20, ttl 53, id 42494, offset 0, flags [none], proto ICMP (1), length 88)
+    92.242.36.162 > 192.168.1.26: ICMP 92.242.36.162 udp port 33476 unreachable, length 68
+	(tos 0x0, ttl 2, id 9717, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.58119 > 92.242.36.162.33476: [bad udp cksum 0x273f -> 0x6176!] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0058 a5fe 0000 3501 9c30 5cf2 24a2 c0a8  .X....5..0\.$...
+	0x0020:  011a 0303 7ac4 0000 0000 4500 003c 25f5  ....z.....E..<%.
+	0x0030:  0000 0211 4f66 c0a8 011a 5cf2 24a2 e307  ....Of....\.$...
+	0x0040:  82c4 0028 273f 4041 4243 4445 4647 4849  ...('?@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f                           Z[\]^_
+16:06:06.034717 2c:56:dc:45:ec:5c > 68:07:15:f0:c4:2c, ethertype IPv4 (0x0800), length 102: (tos 0x20, ttl 53, id 42495, offset 0, flags [none], proto ICMP (1), length 88)
+    92.242.36.162 > 192.168.1.26: ICMP 92.242.36.162 udp port 33477 unreachable, length 68
+	(tos 0x0, ttl 2, id 9718, offset 0, flags [none], proto UDP (17), length 60)
+    192.168.1.26.59375 > 92.242.36.162.33477: [bad udp cksum 0x2256 -> 0x5c8d!] UDP, length 32
+	0x0000:  6807 15f0 c42c 2c56 dc45 ec5c 0800 4520  h....,,V.E.\..E.
+	0x0010:  0058 a5ff 0000 3501 9c2f 5cf2 24a2 c0a8  .X....5../\.$...
+	0x0020:  011a 0303 7ac4 0000 0000 4500 003c 25f6  ....z.....E..<%.
+	0x0030:  0000 0211 4f65 c0a8 011a 5cf2 24a2 e7ef  ....Oe....\.$...
+	0x0040:  82c5 0028 2256 4041 4243 4445 4647 4849  ...("V@ABCDEFGHI
+	0x0050:  4a4b 4c4d 4e4f 5051 5253 5455 5657 5859  JKLMNOPQRSTUVWXY
+	0x0060:  5a5b 5c5d 5e5f                           Z[\]^_
+
