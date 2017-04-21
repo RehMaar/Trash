@@ -3,12 +3,19 @@
 \usepackage[T2A]{fontenc}
 \usepackage[english, russian] {babel}
 \usepackage[usenames,dvipsnames]{xcolor}
-\usepackage{listings,a4wide,longtable,amsmath,amsfonts,graphicx,tikz}
+\usepackage{listings,a4wide,longtable,amsmath,amsfonts,graphicx,tikz,float}
 \usepackage{pgfplots}
 \usepackage{indentfirst}
 \usepackage{bytefield}
 \usepackage{multirow}
 \usepackage{tabularx}
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@verbatim}
+  {\verbatim@font}
+  {\verbatim@font\footnotesize}
+  {}{}
+\makeatother
 
 \lstset{
     basicstyle=\footnotesize,
@@ -28,9 +35,13 @@
     tabsize=2
 }
 
+\graphicspath{{./img/}}
 
+\usepackage[left=1.5cm,right=1.5cm,top=2cm,bottom=1.5cm,bindingoffset=0cm]{geometry}
 
 \begin{document}
+
+\setcounter{figure}{0}
 \frenchspacing
 \pagestyle{empty}
 \begin{center}
@@ -70,8 +81,8 @@
     \subsection*{Протокол IP}
         Конечный узел: mk.ru.
 
-        Анализ трафика производился на операционной системе Linux, на котрой
-        аналогом требуемой в задании утилиты tracert служить команда
+        Анализ трафика производился на операционной системе семейства Linux, на которой
+        аналогом требуемой в задании утилиты \texttt{tracert} служит команда
         \texttt{traceroute --icmp}.
 
         Структура первого пакета.
@@ -103,12 +114,12 @@ Destination IP:  92.242.36.162
         \item размер пакета, включающий заголовок и данные, определяется
               полем <<Total Length>>, следовательно, данные занимают 40 байт;
         \item поле <<TTL>> равняется 1, что означает максимальное количество узлов на пути следования
-              пакета; в данном случае ровно на первом узле пакет уничтожится и в
-              ответ от текущего узле придёт ICMP Time Exceeded с информацией об узле;
-        \item поле <<Identification>> идентифицирует отдельный пакет и используется 
-              при фрагемнтации (фрагменты с одинаковыми ID собираются в один пакет, 
+              пакета; в данном случае ровно на первом узле пакет уничтожится, и в
+              ответ от текущего узле придёт ICMP Time Exceeded с "информацией об узле";
+        \item поле <<Identification>> идентифицирует отдельный пакет; используется 
+              при фрагемнтации: фрагменты с одинаковыми ID собираются в один пакет, 
               порядок фрагментов определяется полем <<Fragment offset>>, а
-              наличие фрагметов -- полем <<Flags>>).
+              наличие фрагметов -- полем <<Flags>>.
     \end{itemize}
     
     \subsection*{Фрагментация пакетов}
@@ -134,12 +145,12 @@ Source IP:       192.168.1.26       Source IP:    192.168.1.26
 Destination IP:  172.110.10.86      Dest. IP:     172.110.10.86
     \end{verbatim}
     
-    Из этих двух последовательно пойманных пакета видно, что:
+    Из этих двух последовательно пойманных пакетов видно, что:
     \begin{itemize}
         \item имеет место фрагментация пакетов;
         \item первый пакет является фрагементом, чему свидетельствуют значение
               поля <<Flags>> (0x01 -- More fragments), второй пакет является конечным
-              (0x00 для флагов и не нулевое значение поля <<Fragment offset>>);
+              (0x00 в поле флагов и ненулевое значение в поле <<Fragment offset>>);
         \item из всего указанного следует, что пакета всего два.
     \end{itemize}
 
@@ -175,8 +186,8 @@ Seq. num.: 1                        Seq. num: 1
               ICMP Echo Reply.
         \item IP адрес источника: 192.168.1.26; IP адресанта: 104.25.218.21.
         \item Анализ первого пакета. Тип пакета ICMP определяется полями <<Type>> и <<Code>>; в данном случае
-              (8,0) определяют Echo Request. Поля <<ID>> и <<Sequence number>> одинаковы в двух пакетах и служат 
-              для опеределения соответствия пары запрос-ответ. Также ID не меняется при всей ping-сессии для ей 
+              пара (8,0) определяет Echo Request. Поля <<ID>> и <<Sequence number>> одинаковы в двух пакетах и служат 
+              для опеределения соответствия пары запрос-ответ. Также ID не меняется при всей ping-сессии для её
               идентификации. Значение seq инкрементируется с каждым отправленым ICMP Echo Request.
               Поля <<Type>> и <<Code>> занимают 1 байт каждое; <<Cheksum>>, <<Identifier>> и
               <<Sequence number>> -- 2 байта.
@@ -270,7 +281,7 @@ Seq.num: 43
 \end{verbatim}
 
 Пакет ICMP Echo Reply отличается от ICMP Time Exceeded как отличаются друг от друга грозовые и
-перистые облака: ICMP Time Exceeded отправляются с узлов, на которых обнуляется TTL, если
+перистые облака: ICMP Time Exceeded отправляется с узлов, на которых обнуляется TTL, если
 пакет достиг адреса назначения, то с хоста отправляется ICMP Echo Reply. В данном случае
 с хоста отправилось пять пакетов в ответ на запрос с значениями seq от 40 до 44 и
 TTL -- 14 и 15. Как только ответ дошёл до источника, запросы прекратились.
@@ -278,13 +289,125 @@ TTL -- 14 и 15. Как только ответ дошёл до источник
 \section*{Часть 2. Исследование структуры сетевых пакетов с помощью генератора пакетов Ostinato}
 \subsection*{Часть А}
 \subsubsection*{ARP}
-	
-\subsubsection*{UDP}
+	ARP (Address Resolution Protocol) -- протокол сетевого уровня, использующийся для определения аппаратного адреса 
+по данному протокольному в Ethernet сетях. 
 
-\sebsection*{Часть Б}
+	\begin{figure}[h!]
+		\includegraphics[scale=0.5]{ARPStream_without_frag.png}
+		\caption{Конфигурация пакета ARP в Ostinato}
+		\center
+	\end{figure}
+
+	\begin{figure}[h!]
+		\includegraphics[scale=0.4]{./CapturedARP.png}
+		\caption{ARP в Wireshark}
+		\center
+	\end{figure}
+
+\subsubsection*{UDP}
+	UDP (User Datagram Protocol) -- протокол транспортного уровня, использующийся для обмена датаграммами
+без установления соединения.
+
+	\begin{figure}[h!]
+		\includegraphics[scale=0.5]{UDPStream_without_frag.png}
+		\caption{Конфигурация пакета UDP в Ostinato}
+		\center
+	\end{figure}
+
+	\begin{figure}[h!]
+		\includegraphics[scale=0.4]{./CapturedUDP.png}
+		\caption{UDP в Wireshark}
+		\center
+	\end{figure}
+
+\subsubsection*{Конфигурации трафика}
+	Рассмотрим трафик с двумя режимами.
+
+	\begin{figure}[h!]
+		\includegraphics[scale=0.4]{Seq.png}
+		\caption{Sequential Streams}
+		\center
+	\end{figure}
+
+	\begin{figure}[h!]
+		\includegraphics[scale=0.4]{Interleave.png}
+		\caption{Interleaved Streams}
+		\center
+	\end{figure}
+
+	Пойманный Wireshark трафик говорит нам о том, что Ostinato действует в соответствии с
+	документацией.
+
+\subsection*{Часть Б}
+
+\subsubsection*{IPv4}
+	
+	Генерация пакетов IPv4.
+
+	\begin{figure}[h!]
+		\includegraphics[scale=0.5]{IPStream_without_frag.png}
+		\caption{Конфигурация пакета IP в Ostinato}
+		\center
+	\end{figure}
+
+	\begin{figure}[h!]
+		\includegraphics[scale=0.4]{CapturedIP.png}
+		\caption{IP в Wireshark}
+		\center
+	\end{figure}
+
+
+\subsubsection*{ICMP}
+
+	Генерация пакетов ICMPv4.  \\
+	\begin{figure}[h!]
+		\includegraphics[scale=0.5]{ICMPStream_without_frag.png}
+		\caption{Конфигурация пакета ICMP в Ostinato}
+		\center
+	\end{figure}
+
+	\begin{figure}[h!]
+		\includegraphics[scale=0.4]{CapturedICMP.png}
+		\caption{ICMP в Wireshark}
+		\center
+	\end{figure}
+
+\subsubsection*{Конфигурации трафика}
+	Рассмотрим трафик с двумя режимами.
+	\begin{figure}[h!]
+		\includegraphics[scale=0.4]{SeqB.png}
+		\caption{Sequential Streams}
+		\center
+	\end{figure}
+
+	\begin{figure}[h!]
+		\includegraphics[scale=0.4]{InterleavedB.png}
+		\caption{Interleaved Streams}
+		\center
+	\end{figure}
+
+	Пойманный Wireshark трафик говорит нам о том, что Ostinato действует в соответствии с
+	документацией.
+
 
 \section*{Вывод}
-1. Описать алгоритмы traceroute, объяснить, почему он отсылает три пакета
-2. Каждый узел согласно RFC-1122 должен реализовывать ICMP Echo Server.
 
+При выполнении лабораторной работы производилось исследование структуры сетевых пакетов с помощью Wireshark и Ostinato.
+В результате выполнения работы были сделаны следующие выводы и подмечены следующие детали. 
+\begin{enumerate}
+	\item \texttt{traceroute} на каждый TTL отправляет три пакета в силу не совсем очевидных причин;
+		  скорее всего, для точности результатов и повышения вероятности ответа.
+	\item Есть несколько методов работы traceroute: помимо ICMP-метода существует UDP-подход, при котором
+		  при запросе отсылается простой UDP-пакет с TTL=1 и максимальным возможным значением порта (32767);
+		  разработчики утверждают, что они надеются[1], что узел не примет target-порт и в ответ отошлёт
+		  ICMP Destination Unreachable. Данный метод испольуется при предположении, что ICMP Echo Server
+		  может быть не доступен на узле (к примеру, отключён администратором[1]).
+	\item Для ответа на ICMP Echo каждый узел согласно RFC-1122 должен реализовать ICMP Echo Server.
+\end{enumerate}
+
+\section*{Список литературы}
+\begin{enumerate}
+	\item <<Comparing ICMP and  UDP Traceroute Methods>>, ftp://ftp.hp.com/pub/hpcp/UDP-ICMP-Traceroutes.pdf
+	\item https://tools.ietf.org/html/
+\end{enumerate}
 \end{document} 
