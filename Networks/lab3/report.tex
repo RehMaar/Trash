@@ -284,8 +284,11 @@ Seq.num: 43
 перистые облака: ICMP Time Exceeded отправляется с узлов, на которых обнуляется TTL, если
 пакет достиг адреса назначения, то с хоста отправляется ICMP Echo Reply. В данном случае
 с хоста отправилось пять пакетов в ответ на запрос с значениями seq от 40 до 44 и
-TTL -- 14 и 15. Как только ответ дошёл до источника, запросы прекратились.
+TTL -- 14 и 15. Как только ответ дошёл до источника, запросы прекратились. У всех ICMP
+пакетов общими полями являются <<Type>>, <<Code>> и <<Checksum>>, структура оставшегося
+пакета зависит от типа ICMP.
 
+\newpage
 \section*{Часть 2. Исследование структуры сетевых пакетов с помощью генератора пакетов Ostinato}
 \subsection*{Часть А}
 \subsubsection*{ARP}
@@ -304,6 +307,8 @@ TTL -- 14 и 15. Как только ответ дошёл до источник
 		\center
 	\end{figure}
 
+	Фрагментация пакетов не поддерживается в протоколе ARP.
+
 \subsubsection*{UDP}
 	UDP (User Datagram Protocol) -- протокол транспортного уровня, использующийся для обмена датаграммами
 без установления соединения.
@@ -320,8 +325,14 @@ TTL -- 14 и 15. Как только ответ дошёл до источник
 		\center
 	\end{figure}
 
+	\begin{figure}[h!]
+		\includegraphics[scale=0.4]{./UDPFrag.png}
+		\caption{Фрагемнатция для UDP}
+		\center
+	\end{figure}
+
 \subsubsection*{Конфигурации трафика}
-	Рассмотрим трафик с двумя режимами.
+	Рассмотрим трафик с двумя режимами. \\
 
 	\begin{figure}[h!]
 		\includegraphics[scale=0.4]{Seq.png}
@@ -336,13 +347,13 @@ TTL -- 14 и 15. Как только ответ дошёл до источник
 	\end{figure}
 
 	Пойманный Wireshark трафик говорит нам о том, что Ostinato действует в соответствии с
-	документацией.
+	документацией. \\
 
 \subsection*{Часть Б}
 
 \subsubsection*{IPv4}
 	
-	Генерация пакетов IPv4.
+	Генерация пакетов IPv4. \\
 
 	\begin{figure}[h!]
 		\includegraphics[scale=0.5]{IPStream_without_frag.png}
@@ -355,7 +366,11 @@ TTL -- 14 и 15. Как только ответ дошёл до источник
 		\caption{IP в Wireshark}
 		\center
 	\end{figure}
-
+	\begin{figure}[h!]
+		\includegraphics[scale=0.4]{./IPv4Frag.png}
+		\caption{Фрагемнатция для IPv4}
+		\center
+	\end{figure}
 
 \subsubsection*{ICMP}
 
@@ -371,7 +386,11 @@ TTL -- 14 и 15. Как только ответ дошёл до источник
 		\caption{ICMP в Wireshark}
 		\center
 	\end{figure}
-
+	\begin{figure}[h!]
+		\includegraphics[scale=0.4]{./ICMPFrag.png}
+		\caption{Фрагемнатция для ICMP}
+		\center
+	\end{figure}
 \subsubsection*{Конфигурации трафика}
 	Рассмотрим трафик с двумя режимами.
 	\begin{figure}[h!]
@@ -389,7 +408,6 @@ TTL -- 14 и 15. Как только ответ дошёл до источник
 	Пойманный Wireshark трафик говорит нам о том, что Ostinato действует в соответствии с
 	документацией.
 
-
 \section*{Вывод}
 
 При выполнении лабораторной работы производилось исследование структуры сетевых пакетов с помощью Wireshark и Ostinato.
@@ -403,6 +421,7 @@ TTL -- 14 и 15. Как только ответ дошёл до источник
 		  ICMP Destination Unreachable. Данный метод испольуется при предположении, что ICMP Echo Server
 		  может быть не доступен на узле (к примеру, отключён администратором[1]).
 	\item Для ответа на ICMP Echo каждый узел согласно RFC-1122 должен реализовать ICMP Echo Server.
+	\item ARP не работает с IPv6; его функции выполняет ICMPv6.
 \end{enumerate}
 
 \section*{Список литературы}
