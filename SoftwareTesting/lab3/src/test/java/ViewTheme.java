@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class MarkSite2 {
+public class ViewTheme {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -22,12 +22,10 @@ public class MarkSite2 {
   }
 
   @Test
-  public void testMarkSite2() throws Exception {
-    driver.get(baseUrl + "/c/m.exe");
+  public void testViewTheme() throws Exception {
+    driver.get(baseUrl + "/c/m.exe#mark");
     driver.findElement(By.cssSelector("img[alt=\"Forum\"]")).click();
-    driver.findElement(By.linkText("Оценить сайт")).click();
-    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
-    assertEquals("Пожалуйста, заполните поля в анкете, содержащие меню для выбора значений", driver.findElement(By.xpath("//tr[2]/td/table/tbody/tr/td[2]")).getText());
+    driver.findElement(By.linkText("offshore basket (транспортировка труб на судне)")).click();
   }
 
   @After

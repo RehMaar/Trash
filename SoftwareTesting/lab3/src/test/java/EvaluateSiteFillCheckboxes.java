@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class MarkSite2 {
+public class EvaluateSiteFillCheckboxes {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -22,12 +22,15 @@ public class MarkSite2 {
   }
 
   @Test
-  public void testMarkSite2() throws Exception {
-    driver.get(baseUrl + "/c/m.exe");
+  public void testEvaluateSiteFillCheckboxes() throws Exception {
+    driver.get(baseUrl + "/c/m.exe?a=136");
+    driver.findElement(By.cssSelector("img[alt=\"Словарь Мультитран\"]")).click();
     driver.findElement(By.cssSelector("img[alt=\"Forum\"]")).click();
     driver.findElement(By.linkText("Оценить сайт")).click();
+    driver.findElement(By.name("UseWapSite")).click();
+    driver.findElement(By.name("UseMousePopup")).click();
+    driver.findElement(By.name("UseOnlineUpdate")).click();
     driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
-    assertEquals("Пожалуйста, заполните поля в анкете, содержащие меню для выбора значений", driver.findElement(By.xpath("//tr[2]/td/table/tbody/tr/td[2]")).getText());
   }
 
   @After

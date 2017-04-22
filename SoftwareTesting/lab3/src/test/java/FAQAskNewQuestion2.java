@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class MarkSite2 {
+public class FAQAskNewQuestion2 {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -22,12 +22,10 @@ public class MarkSite2 {
   }
 
   @Test
-  public void testMarkSite2() throws Exception {
-    driver.get(baseUrl + "/c/m.exe");
-    driver.findElement(By.cssSelector("img[alt=\"Forum\"]")).click();
-    driver.findElement(By.linkText("Оценить сайт")).click();
-    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
-    assertEquals("Пожалуйста, заполните поля в анкете, содержащие меню для выбора значений", driver.findElement(By.xpath("//tr[2]/td/table/tbody/tr/td[2]")).getText());
+  public void testSeeFAQ2() throws Exception {
+    driver.get(baseUrl + "/c/m.exe?a=136");
+    driver.findElement(By.linkText("FAQ")).click();
+    driver.findElement(By.cssSelector("em")).click();
   }
 
   @After
