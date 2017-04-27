@@ -7,6 +7,7 @@
 \usepackage{listings,longtable,amsmath,amsfonts,graphicx,tikz,tabularx,pgf}
 \usepackage{circuitikz}
 \usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.IEC,circuits.logic.US}
 
 \captionsetup{labelsep=period}
 \pagestyle{fancy}
@@ -41,6 +42,107 @@
 
 \graphicspath{ {img/} }
 
+\pgfdeclareshape{or6}{
+\anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+\anchor{text} % this is used to center the text in the node
+{\pgfpoint{-.15\wd\pgfnodeparttextbox}{-.15\ht\pgfnodeparttextbox}}
+
+    \savedanchor\dffina{\pgfpoint{-.9cm}{-.5cm}} 
+    \anchor{in1}{\dffina}
+    \savedanchor\dffinb{\pgfpoint{-.9cm}{-.3cm}} 
+    \anchor{in2}{\dffinb}
+    \savedanchor\dffinc{\pgfpoint{-.9cm}{-.1cm}} 
+    \anchor{in3}{\dffinc}
+
+    \savedanchor\dffind{\pgfpoint{-.9cm}{.1cm}} 
+    \anchor{in4}{\dffind}
+    \savedanchor\dffine{\pgfpoint{-.9cm}{.3cm}} 
+    \anchor{in5}{\dffine}
+    \savedanchor\dffinf{\pgfpoint{-.9cm}{.5cm}} 
+    \anchor{in6}{\dffinf}
+
+    \savedanchor\dffoutnq{\pgfpoint{.3cm}{.0cm}} % Output ~Q
+    \anchor{out}{\dffoutnq}
+
+    \foregroundpath{ % border and pin numbers are drawn here
+
+        \pgfsetlinewidth{0.01cm}
+        \pgfpathmoveto{\pgfpoint{.04cm}{0cm}}
+		\pgfpathlineto{\pgfpoint{.3cm}{0cm}}
+
+        \pgfpathmoveto{\pgfpoint{-.9cm}{.5cm}}
+		\pgfpathlineto{\pgfpoint{-.62cm}{.5cm}}
+
+        \pgfpathmoveto{\pgfpoint{-.9cm}{-.5cm}}
+		\pgfpathlineto{\pgfpoint{-.68cm}{-.5cm}}
+
+        \pgfpathmoveto{\pgfpoint{-.9cm}{.3cm}}
+		\pgfpathlineto{\pgfpoint{-.6cm}{.3cm}}
+
+        \pgfpathmoveto{\pgfpoint{-.9cm}{-.3cm}}
+		\pgfpathlineto{\pgfpoint{-.62cm}{-.3cm}}
+
+        \pgfpathmoveto{\pgfpoint{-.9cm} {.1cm}}
+		\pgfpathlineto{\pgfpoint{-.54cm}{.1cm}}
+
+        \pgfpathmoveto{\pgfpoint{-.9cm} {-.1cm}}
+		\pgfpathlineto{\pgfpoint{-.54cm}{-.1cm}}
+
+        \pgfsetlinewidth{0.02cm}
+        \pgfpathmoveto{\pgfpoint{-1cm}{-1cm}}
+        \pgfpatharc{-45}{45}{1.5cm}
+        \pgfusepath{draw} 
+        \pgfpathmoveto{\pgfpoint{-1cm}{-1cm}}
+        \pgfpatharc{-90}{90}{1.05cm}
+        \pgfusepath{draw} 
+    }
+}
+\pgfdeclareshape{or4}{
+\anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+\anchor{text} % this is used to center the text in the node
+{\pgfpoint{-.15\wd\pgfnodeparttextbox}{-.15\ht\pgfnodeparttextbox}}
+
+    \savedanchor\dffinb{\pgfpoint{-1cm}{.0cm}} 
+    \anchor{in1}{\dffinb}
+    \savedanchor\dffinc{\pgfpoint{-1cm}{-.2cm}} 
+    \anchor{in2}{\dffinc}
+
+    \savedanchor\dffind{\pgfpoint{-1cm}{-.4cm}} 
+    \anchor{in3}{\dffind}
+    \savedanchor\dffine{\pgfpoint{-1cm}{-.6cm}} 
+    \anchor{in4}{\dffine}
+
+    \savedanchor\dffoutnq{\pgfpoint{-.0cm}{-.3cm}} % Output ~Q
+    \anchor{out}{\dffoutnq}
+
+    \foregroundpath{ % border and pin numbers are drawn here
+
+        \pgfsetlinewidth{0.01cm}
+        \pgfpathmoveto{\pgfpoint{-.3cm}{-.3cm}}
+		\pgfpathlineto{\pgfpoint{ .0cm}{-.3cm}}
+
+        \pgfpathmoveto{\pgfpoint{-1cm}  {.0cm}}
+		\pgfpathlineto{\pgfpoint{-.75cm}{.0cm}}
+
+        \pgfpathmoveto{\pgfpoint{-1cm}  {-.2cm}}
+		\pgfpathlineto{\pgfpoint{-.73cm}{-.2cm}}
+
+        \pgfpathmoveto{\pgfpoint{-1cm}  {-.4cm}}
+		\pgfpathlineto{\pgfpoint{-.73cm}{-.4cm}}
+
+        \pgfpathmoveto{\pgfpoint{-1cm}  {-.6cm}}
+		\pgfpathlineto{\pgfpoint{-.74cm}{-.6cm}}
+
+        \pgfsetlinewidth{0.02cm}
+        \pgfpathmoveto{\pgfpoint{-1cm}{-1cm}}
+        \pgfpatharc{-45}{45}{1cm}
+        \pgfusepath{draw} 
+        \pgfpathmoveto{\pgfpoint{-1cm}{-1cm}}
+        \pgfpatharc{-90}{90}{.7cm}
+        \pgfusepath{draw} 
+    }
+}
+
 
 \pgfdeclareshape{rsff}{
 \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
@@ -59,11 +161,11 @@
         \pgfsetlinewidth{0.03cm}
         \pgfpathrectanglecorners{\pgfpoint{.7cm}{1cm}}{\pgfpoint{-.7cm}{-1cm}}
         \pgfusepath{draw} %draw rectangle
-		\pgftext[top,at={\pgfpoint{.5cm}{.7cm}}]{\scriptsize $Q$}
-		\pgftext[top,at={\pgfpoint{.5cm}{-.6cm}}]{\scriptsize $\bar{Q}$}
-		\pgftext[top,at={\pgfpoint{-.5cm}{.7cm}}]{\scriptsize $R$}
-		\pgftext[top,at={\pgfpoint{-.5cm}{-.6cm}}]{\scriptsize $S$}
-	}
+        \pgftext[top,at={\pgfpoint{.5cm}{.7cm}}]{\scriptsize $Q$}
+        \pgftext[top,at={\pgfpoint{.5cm}{-.6cm}}]{\scriptsize $\bar{Q}$}
+        \pgftext[top,at={\pgfpoint{-.5cm}{.7cm}}]{\scriptsize $S$}
+        \pgftext[top,at={\pgfpoint{-.5cm}{-.6cm}}]{\scriptsize $R$}
+    }
 }
 
 \pgfdeclareshape{jkff}{
@@ -83,11 +185,11 @@
         \pgfsetlinewidth{0.03cm}
         \pgfpathrectanglecorners{\pgfpoint{.7cm}{1cm}}{\pgfpoint{-.7cm}{-1cm}}
         \pgfusepath{draw} %draw rectangle
-		\pgftext[top,at={\pgfpoint{.5cm}{.7cm}}]{\scriptsize $Q$}
-		\pgftext[top,at={\pgfpoint{.5cm}{-.6cm}}]{\scriptsize $\bar{Q}$}
-		\pgftext[top,at={\pgfpoint{-.5cm}{.7cm}}]{\scriptsize $K$}
-		\pgftext[top,at={\pgfpoint{-.5cm}{-.6cm}}]{\scriptsize $J$}
-	}
+        \pgftext[top,at={\pgfpoint{.5cm}{.7cm}}]{\scriptsize $Q$}
+        \pgftext[top,at={\pgfpoint{.5cm}{-.6cm}}]{\scriptsize $\bar{Q}$}
+        \pgftext[top,at={\pgfpoint{-.5cm}{.7cm}}]{\scriptsize $J$}
+        \pgftext[top,at={\pgfpoint{-.5cm}{-.6cm}}]{\scriptsize $K$}
+    }
 }
 
 
@@ -113,10 +215,10 @@
         %\pgfusepath{draw} %draw semicircle
         %\pgftext[bottom,at={\pgfpoint{-.75cm}{-.55cm}}]{\scriptsize 1}
         %\pgftext[top,at={\pgfpoint{.75cm}{.55cm}}]{\scriptsize 5}
-		\pgftext[top,at={\pgfpoint{-.5cm}{.5cm}}]{}
-		\pgftext[top,at={\pgfpoint{.5cm}{.7cm}}]{\scriptsize $Q$}
-		\pgftext[top,at={\pgfpoint{.5cm}{-.6cm}}]{\scriptsize $\bar{Q}$}
-	}
+        \pgftext[top,at={\pgfpoint{-.5cm}{.5cm}}]{}
+        \pgftext[top,at={\pgfpoint{.5cm}{.7cm}}]{\scriptsize $Q$}
+        \pgftext[top,at={\pgfpoint{.5cm}{-.6cm}}]{\scriptsize $\bar{Q}$}
+    }
 }
 
 
@@ -159,7 +261,7 @@
 
 \section*{Цель и постановка задачи}
     \subsection*{Цель}
-		Освоение метода перехода от абстрактного автомата к структурному автомату.
+        Освоение метода перехода от абстрактного автомата к структурному автомату.
 
     \subsection*{Постановка задачи}
         Абстрактный автомат задан табличным способом. Причем абстрактный автомат 
@@ -171,25 +273,25 @@
         КОМБИНАЦИОННОЙ СХЕМЫ. 
 
 \section*{Исходный абстрактный автомат}
-	\begin{table}[h!]
-		\center
-		\begin{tabular}{|c|c|c|c|c|}
-			\hline
-			$\delta$ & $a_1$ & $a_2$ & $a_3$ & $a_4$ \\ \hline 
-			 $z_1$	 & $a_2$ & $a_2$ & $a_4$ & $a_2$ \\ \hline 
-			 $z_2$   & $a_3$ & $a_1$ & $a_2$ & $a_3$ \\ \hline
-		\end{tabular}
-		\caption{Функция переходов}
+    \begin{table}[h!]
+        \center
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            $\delta$ & $a_1$ & $a_2$ & $a_3$ & $a_4$ \\ \hline 
+             $z_1$   & $a_2$ & $a_2$ & $a_4$ & $a_2$ \\ \hline 
+             $z_2$   & $a_3$ & $a_1$ & $a_2$ & $a_3$ \\ \hline
+        \end{tabular}
+        \caption{Функция переходов}
     \end{table}
-	\begin{table}[h!]
-		\center
-		\begin{tabular}{|c|c|c|c|c|}
-			\hline
-			$\lambda$ & $a_1$ & $a_2$ & $a_3$ & $a_4$ \\ \hline 
-			 $z_1$	  & $w_2$ & $w_2$ & $w_1$ & $w_1$ \\ \hline 
-			 $z_2$    & $w_2$ & $w_1$ & $w_2$ & $w_2$ \\ \hline
-		\end{tabular}
-		\caption{Функция выходов}
+    \begin{table}[h!]
+        \center
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            $\lambda$ & $a_1$ & $a_2$ & $a_3$ & $a_4$ \\ \hline 
+             $z_1$    & $w_2$ & $w_2$ & $w_1$ & $w_1$ \\ \hline 
+             $z_2$    & $w_2$ & $w_1$ & $w_2$ & $w_2$ \\ \hline
+        \end{tabular}
+        \caption{Функция выходов}
     \end{table}
 
 \section*{Граф исходного автомата}
@@ -201,497 +303,895 @@
         \node[state] (a2) at ({360/4 *(4+1)}:0.25\textwidth) {$a_2$};
         \node[state] (a4) at ({360/4 *(2+1)}:0.25\textwidth) {$a_4$};
 
-		\path (a1) edge[bend left]    node {$z_1/w_2$} (a2)
-		      (a1) edge               node[pos=0.8] {$z_2/w_2$} (a3)
-		      (a2) edge[loop]         node {$z_1/w_2$} (a2)
-		      (a2) edge[bend left]    node {$z_2/w_1$} (a1)
-		      (a3) edge[bend left]    node {$z_1/w_1$} (a4)
-		      (a3) edge               node {$z_2/w_2$} (a2)
-		      (a4) edge               node[pos=0.7,right] {$z_1/w_2$} (a2)
-		      (a4) edge[bend left]    node {$z_2/w_2$} (a3);
-	\end{tikzpicture}
+        \path (a1) edge[bend left]    node {$z_1/w_2$} (a2)
+              (a1) edge               node[pos=0.8] {$z_2/w_2$} (a3)
+              (a2) edge[loop]         node {$z_1/w_2$} (a2)
+              (a2) edge[bend left]    node {$z_2/w_1$} (a1)
+              (a3) edge[bend left]    node {$z_1/w_1$} (a4)
+              (a3) edge               node {$z_2/w_2$} (a2)
+              (a4) edge               node[pos=0.7,right] {$z_1/w_2$} (a2)
+              (a4) edge[bend left]    node {$z_2/w_2$} (a3);
+    \end{tikzpicture}
 
 \section*{Переход к структурному автомату}
-	\subsection*{Кодирование абстрактного автомата}
-		\begin{table}[h!]
-			\center
-			\begin{tabular}{|c|c|}
-				\hline
-				  $\delta$ & $x_0$ \\ \hline
-					$z_1$  &   0   \\ \hline
-					$z_2$  &   1   \\ \hline
-			\end{tabular}
-			\caption{Кодирование входов автомата}
-		\end{table}
-		\begin{table}[h!]
-			\center
-			\begin{tabular}{|c|c|}
-				\hline
-				  $\delta$ & $y_0$ \\ \hline
-					$w_2$  &   0   \\ \hline
-					$w_1$  &   1   \\ \hline
-			\end{tabular}
-			\caption{Кодирование выходов автомата}
-		\end{table}
+    \subsection*{Кодирование абстрактного автомата}
+        \begin{table}[h!]
+            \center
+            \begin{tabular}{|c|c|}
+                \hline
+                  $\delta$ & $x_0$ \\ \hline
+                    $z_1$  &   0   \\ \hline
+                    $z_2$  &   1   \\ \hline
+            \end{tabular}
+            \caption{Кодирование входов автомата}
+        \end{table}
+        \begin{table}[h!]
+            \center
+            \begin{tabular}{|c|c|}
+                \hline
+                  $\delta$ & $y_0$ \\ \hline
+                    $w_2$  &   0   \\ \hline
+                    $w_1$  &   1   \\ \hline
+            \end{tabular}
+            \caption{Кодирование выходов автомата}
+        \end{table}
 
-		\begin{table}[h!]
-			\center
-			\begin{tabular}{|c|c|c|}
-				\hline
-				  $\lambda$ & $Q_0$ & $Q_1$ \\ \hline
-					$a_2$  &   0   &   0   \\ \hline
-					$a_3$  &   0   &   1   \\ \hline
-					$a_1$  &   1   &   0   \\ \hline
-					$a_4$  &   1   &   1   \\ \hline
-			\end{tabular}
-			\caption{Кодирование состояний автомата}
-		\end{table}
+        \begin{table}[h!]
+            \center
+            \begin{tabular}{|c|c|c|}
+                \hline
+                  $\lambda$ & $Q_0$ & $Q_1$ \\ \hline
+                    $a_2$  &   0   &   0   \\ \hline
+                    $a_3$  &   0   &   1   \\ \hline
+                    $a_1$  &   1   &   0   \\ \hline
+                    $a_4$  &   1   &   1   \\ \hline
+            \end{tabular}
+            \caption{Кодирование состояний автомата}
+        \end{table}
 
-		Получившийся структурный автомат имеет один вход, один выход и четыре состояния. \\
+        Получившийся структурный автомат имеет один вход, один выход и четыре состояния. \\
 
-		\begin{tikzpicture}
-			\node (a) {$x_0$};
-			\node[draw,rectangle,right of=a,text depth=1cm] (s) {$CK$};
-			\node (c)[right of=s] {$y_0$};
+        \begin{tikzpicture}
+            \node (a) {$x_0$};
+            \node[draw,rectangle,right of=a,text depth=1cm] (s) {$CK$};
+            \node (c)[right of=s] {$y_0$};
 
-			\draw[->] (a) -- (s);
-			\draw[->] (s) -- (c);
-		\end{tikzpicture}
+            \draw[->] (a) -- (s);
+            \draw[->] (s) -- (c);
+        \end{tikzpicture}
 
-	\subsection*{Структурный автомат}
-		\begin{table}[h!]
-		\center
-		\begin{tabular}{|c|c|c|c|c|}
-			\hline
-    		 $Q_0Q_1$ & 00 & 01 & 10 & 11 \\ 
-			 $x_0$    &    &	&	 &    \\ \hline
-    			 0	  & 00 & 11 & 00 & 00 \\ \hline 
-    			 1    & 10 & 00 & 01 & 01 \\ \hline
-		\end{tabular}
-		\caption{Функция переходов}
+    \subsection*{Структурный автомат}
+        \begin{table}[h!]
+        \center
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+             $Q_0Q_1$ & 00 & 01 & 10 & 11 \\ 
+             $x_0$    &    &    &    &    \\ \hline
+                 0    & 00 & 11 & 00 & 00 \\ \hline 
+                 1    & 10 & 00 & 01 & 01 \\ \hline
+        \end{tabular}
+        \caption{Функция переходов}
     \end{table}
-	Функция переходов автомата: $Q_0Q_1 = \delta(Q_0,Q_1,x_0)$.
+    Функция переходов автомата: $Q_0Q_1 = \delta(Q_0,Q_1,x_0)$.
 
-	\begin{table}[h!]
-		\center
-		\begin{tabular}{|c|c|c|c|c|}
-			\hline
-			  $Q_0Q_1$& 00 & 01 & 10 & 11 \\ 
-			  $x_0$   &    &    &    &    \\ \hline
-	      	     0    &  0 &  1 & 0  & 1  \\ \hline 
-		         1    &  1 &  0 & 0  & 0  \\ \hline
-		\end{tabular}
-		\caption{Функция выходов}
-    \end{table}	
-	Функция выходов автомата: $y_0 = \lambda(Q_0,Q_1,x_0)$. \\
+    \begin{table}[h!]
+        \center
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+              $Q_0Q_1$& 00 & 01 & 10 & 11 \\ 
+              $x_0$   &    &    &    &    \\ \hline
+                 0    &  0 &  1 & 0  & 1  \\ \hline 
+                 1    &  1 &  0 & 0  & 0  \\ \hline
+        \end{tabular}
+        \caption{Функция выходов}
+    \end{table} 
+    Функция выходов автомата: $y_0 = \lambda(Q_0,Q_1,x_0)$. \\
 
-	По таблице выходов строим ДНФ:
-	$y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$
+    По таблице выходов строим ДНФ:
+    $y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$
 
     \subsection*{Сигналы функции возбуждения для триггеров}
-		\subsubsection*{D-триггер}
-    		\begin{table}[h!]
-				\center
-    			\begin{tabular}{|c|c|c|}
-					\hline
-					 Q & 0 & 1 \\
-					 x &   &   \\ \hline
-					 0 & 0 & 0 \\ \hline
-					 1 & 1 & 1 \\ \hline
-				\end{tabular}
-    			\caption{Закон функционирования D-триггера}
-    		\end{table}
+        \subsubsection*{D-триггер}
+            \begin{table}[h!]
+                \center
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                     Q & 0 & 1 \\
+                     x &   &   \\ \hline
+                     0 & 0 & 0 \\ \hline
+                     1 & 1 & 1 \\ \hline
+                \end{tabular}
+                \caption{Закон функционирования D-триггера}
+            \end{table}
 
-			На основе закона функционирования D-триггера по таблице переходов структурного автомата
-			строим таблицу сигналов функции возбуждения. \\
+            На основе закона функционирования D-триггера по таблице переходов структурного автомата
+            строим таблицу сигналов функции возбуждения. \\
 
-    		\begin{table}[h!]
-				\center
-            		\begin{tabular}{|c|c|c|c|c|}
-            			\hline
-                		 $Q_0Q_1$ & 00       & 01       & 10       & 11 \\ 
-            			 $x_0$    &          &	        &	       &    \\ \hline
-                			 0	  & 00       & 11       & 00       & 00 \\ \hline 
-                			 1    & 10       & 00       & 01       & 01 \\ \hline
-								  & $D_0D_1$ & $D_0D_1$ & $D_0D_1$ & $D_0D_1$ \\ \hline
-            		\end{tabular}
-    			\caption{Таблица сигналов функции возбуждения: $D_0D_1 = \mu(Q_0,Q_1,x_0)$}
-    		\end{table}
+            \begin{table}[h!]
+                \center
+                    \begin{tabular}{|c|c|c|c|c|}
+                        \hline
+                         $Q_0Q_1$ & 00       & 01       & 10       & 11 \\ 
+                         $x_0$    &          &          &          &    \\ \hline
+                             0    & 00       & 11       & 00       & 00 \\ \hline 
+                             1    & 10       & 00       & 01       & 01 \\ \hline
+                                  & $D_0D_1$ & $D_0D_1$ & $D_0D_1$ & $D_0D_1$ \\ \hline
+                    \end{tabular}
+                \caption{Таблица сигналов функции возбуждения: $D_0D_1 = \mu(Q_0,Q_1,x_0)$}
+            \end{table}
 
-        	ДНФ для сигналов функции возбуждения: \\
-				$D_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0}$ \\
-				$D_1 = \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 x_0$.
+            ДНФ для сигналов функции возбуждения: \\
+                $D_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0}$ \\
+                $D_1 = \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 x_0$.
 
-		Для построения функциональной схемы рассмотрим ДНФ: \\
-    	$y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$ \\
-		$D_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0}$ \\
-		$D_1 = \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 x_0$.
+        Для построения функциональной схемы рассмотрим ДНФ: \\
+        $y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$ \\
+        $D_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0}$ \\
+        $D_1 = \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 x_0$.\\
+		$y_0 = 1 \lor 2 \lor 3$ \\
+		$D_0 = 1 \lor 2$ \\
+		$D_1 = 2 \lor 4 \lor 5$
 
-		Или: \\
-    	$y_0 = D_0 \lor Q_0 \phi$ \\
-		$D_0 = \bar{Q_0} ( Q_1 \oplus x_0)$ \\
-		$D_1 = \bar{Q_0} \phi \lor Q_0  x_0 $. \\
-		$\phi = Q_1 \bar{x_0}$
 
-		\begin{figure}[h!]
-			\begin{circuitikz}
-				\draw
-					(0,4) node[and port] (and1) { }
-					(0,0) node[xor port] (xor5) { }
-
-					(2,7) node[and port] (and2) { }
-					(2,5) node[and port] (and3) { }
-					(2,3) node[and port] (and4) { }
-					(2,1) node[and port] (and8) { }
-
-					(4,6) node[or port]   (or6) {}
-					(4,3) node[or port]   (or7) {}
-
-					(6,1) node[latch] (dff2) {$D$}
-					(6,6) node[latch] (dff1) {$D$}
-					(8,2) node			  (out8) {}
-					(8,7) node			  (out6) {}
-					(8,3) node			  (out7) {}
-
-					 (and1.in 1) node[anchor=east] {$Q_1$}
-					 (and1.in 2) node[anchor=east] {$\bar{x_0}$}
-					 (xor5.in 1) node[anchor=east] {$Q_1$}
-					 (xor5.in 2) node[anchor=east] {$x_0$}
-					 (and2.in 1) node[anchor=east] {$Q_0$}
-					 (and2.in 2) node[anchor=east] {$x_0$}
-					 (and3.in 1) node[anchor=east] {$\bar{Q_0}$}
-					 (and1.out) -| (and3.in 2)
-					 (and1.out) -| (and4.in 1)
-					 (and4.in 2) node[anchor=east] {$Q_0$}
-					 (and8.in 1) node[anchor=east] {$\bar{Q_0}$}
-					 (xor5.out) -| (and8.in 2)
-					 (and2.out) -| (or6.in 1)
-					 (and3.out) -| (or6.in 2)
-					 (and4.out) -| (or7.in 1)
-					 (and8.out) -| (or7.in 2)
-					 %(or7.out) node[anchor=south] {$y_0$}
-					 %(or6.out) node[anchor=south] {$Q_1$}
-					 (or7.out) -| (out7)
-					 (out7) node[anchor=south] {$y_0$}
-
-					 (and8.out) -| (dff2.in)%
-					 (dff2.out1) -| (out8)
-					 (out8) node[anchor=south] {$Q_0$}
-
-					 (or6.out) -| (dff1.in)
-					 (dff1.out1) -| (out6)
-					 (out6) node[anchor=south] {$Q_1$}
-					;
-			\end{circuitikz}
-		\end{figure}
-
-		Входное закодированное слово: $[0,0,1,1,0,1,0,0,1,1,1]$\\
-		Выходное закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$ \\
-		Ожидаемое закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$
-
-		\subsubsection*{T-триггер}
-    		\begin{table}[h!]
-				\center
-    			\begin{tabular}{|c|c|c|}
-					\hline
-					 Q & 0 & 1 \\
-					 T &   &   \\ \hline
-					 0 & 0 & 1 \\ \hline
-					 1 & 1 & 0 \\ \hline
-				\end{tabular}
-    			\caption{Закон функционирования T-триггера}
-    		\end{table}
-
-			На основе закона функционирования T-триггера по таблице переходов структурного автомата
-			строим таблицу сигналов функции возбуждения. \\
-
-    		\begin{table}[h!]
-				\center
-        		\begin{tabular}{|c|c|c|c|c|}
-        			\hline
-							  &$Q_0Q_1$  &$Q_0Q_1$  &$Q_0Q_1$  &$Q_0Q_1$  \\ \hline
-            		 $x_0$    & 00       & 01       & 10       & 11 \\ \hline
-            			 0	  & 00       & 10       & 10       & 11 \\ \hline 
-            			 1    & 10       & 01       & 11       & 10 \\ \hline
-							  & $T_0T_1$ & $T_0T_1$ & $T_0T_1$ & $T_0T_1$ \\ \hline
-        		\end{tabular}
-    			\caption{Таблица сигналов функции возбуждения: $T_0T_1 = \mu(Q_0,Q_1,x_0)$}
-    		\end{table}
-
-			ДНФ для сигналов функции возбуждения: \\
-			$T_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 \bar{Q_1} \bar{x_0} \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 \bar{x_0} \lor Q_0 Q_1 x_0 $ \\
-			$T_1 = \bar{Q_0} Q_1 x_0 \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 \bar{x_0}$ \\
-        	$y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$. \\
-
-	 		Для схемы: \\
-			$T_0 = Q_0 \lor (Q_1 \oplus x_0)$ \\
-			$T_1 = x_0 (Q_0 \oplus Q_1) \lor \phi$ \\
-			$y_0 = \bar{Q_0} (Q_1 \oplus x_0) \lor \phi$ \\
-			$\phi = Q_0 Q_1 \bar{x_0}$.
-
-		\begin{figure}[h!]
-			\begin{circuitikz}
-				\draw
-					(0,6) node[xor port] (xor1) { }
-					(0,3) node[and port] (and2) { }
-					(0,1) node[xor port] (xor3) { }
-				
-					(2,7) node[or port]  (or4) { }
-					(2,5) node[and port] (and5) { }
-					(2,3) node[and port] (and6) { }
-					(2,1) node[and port] (and7) { }
+        \begin{figure}[h!]
+            \begin{circuitikz}
+                \draw
+                    (0,0)   node[and port] (and1) {4}
+					(0,1.5) node[and port] (and2) {2}
+					(0,3)   node[and port] (and3) {5}
 					
-					(4,4) node[or port] (or9) { }
-					(4,1) node[or port] (or10) {  }
-					(4,7) node[latch] (tff0) {$T$}
-					(6,1) node[latch] (tff1) {$T$}
+					(2,1.5) node[or port] (or1) { }
+	
+                    (3,1.5) node[latch] (tff1) {$D$}
 
-                    (xor1.in 1) node[anchor=east] {$Q_1$}
-                    (xor1.in 2) node[anchor=east] {$x_0$}
-                    (xor3.in 2) node[anchor=east] {$Q_0$}
-                    (xor3.in 2) node[anchor=east] {$Q_1$}
-                    (and2.in 1) node[anchor=east] {$Q_0$}
-                    (and2.in 2) node[anchor=east] {$Q_1$}
-                    (or4.in 1) node[anchor=east] {$Q_0$}
-                    (and5.in 2) node[anchor=east] {$\bar{Q_0}$}
-                    (and6.in 1) node[anchor=east] {$\bar{x_0}$}
-                    (and7.in 1) node[anchor=east] {$x_0$}
+					(and3.out) -| (or1.in 1)
+					(and1.out) -| (or1.in 2)
+					(and2.out) --  ([xshift=0.43cm,yshift=-0.27cm]or1.in 1) %($(or1.in 1)!0.50!(or1.in 2)$)
 
-					(xor1.out) -| (or4.in 2)
-					(xor1.out) -| (and5.in 1)
-					(or4.out) -| (tff0.in)
-					(and5.out) -| (or9.in 1)
-					(and6.out) -| (or9.in 2)
-					(and6.out) -| (or10.in 1)
-					(and2.out) -| (and6.in 2)
-					(xor3.out) -| (and7.in 2)
-					(and7.out) -| (or10.in 2)
-					(or10.out) -| (tff1.in)
-					(tff1.out1) node[anchor=west] {$Q_1$}
-					(tff0.out1) node[anchor=west] {$Q_0$}
-					(or9.out) node[anchor=west] {$x_0$}
-					;
-			\end{circuitikz}
-		\end{figure}
-		Входное закодированное слово: $[0,0,1,1,0,1,0,0,1,1,1]$\\
-		Выходное закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$ \\
-		Ожидаемое закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$
+					(or1.out) -- ([yshift=-0.7cm]tff1.in)
+                    (tff1.out1) -- ([xshift=0.4cm]tff1.out1)
+                    ([xshift=0.4cm]tff1.out1) node[anchor=west] {$D_1'$}
 
-	\subsection*{RS-триггер}
-    		\begin{table}[h!]
-				\center
-    			\begin{tabular}{|c|c|c|}
-					\hline
-					 Q  & 0 & 1 \\
-					 RS &   &   \\ \hline
-					 00 & 0 & 1 \\ \hline
-					 01 & 1 & 1 \\ \hline
-					 10 & 0 & 0 \\ \hline
-					 11 & - & - \\ \hline
-				\end{tabular}
-    			\caption{Закон функционирования RS-триггера}
-    		\end{table}
-    		\begin{table}[h!]
-				\center
-    			\begin{tabular}{|c|c|c|}
-					\hline
+					(and3.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and3.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) node[anchor=east] {$x_0$}
+					(and3.in 2) node[anchor=east] {$Q_1$}
+
+					(and2.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and2.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and2.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and2.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and2.in 2) node[anchor=east] {$Q_1$}
+
+					(and1.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and1.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and1.in 2) node[anchor=east] {$Q_1$}
+%y0
+
+                    (0,4.5) node[and port] (and1) {1}
+					(0,6)   node[and port] (and2) {2}
+					(0,7.5) node[and port] (and3) {3}
+					
+					(2,6) node[or port] (or1) { }
+					(and3.out) -| (or1.in 1)
+					(and1.out) -| (or1.in 2)
+					(and2.out) --  ([xshift=0.43cm,yshift=-0.27cm]or1.in 1) %($(or1.in 1)!0.50!(or1.in 2)$)
+                    (or1.out) node[anchor=west] {$y_0$}
+
+					(and3.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and3.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and3.in 2) node[anchor=east] {$Q_1$}
+
+					(and2.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and2.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and2.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and2.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and2.in 2) node[anchor=east] {$Q_1$}
+
+					(and1.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and1.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) node[anchor=east] {$x_0$}
+					(and1.in 2) node[anchor=east] {$\bar{Q_1}$}
+
+
+                    (0,9)    node[and port] (and1) {2}
+					(0,10.5) node[and port] (and3) {1}
+					(2,10)   node[or port]  (or1) { }
+                    (3,10)   node[latch]    (tff1) {$D$}
+
+					(and3.out) -| (or1.in 1)
+					(and1.out) -| (or1.in 2)
+
+					(or1.out) -- ([yshift=-0.7cm]tff1.in)
+                    (tff1.out1) -- ([xshift=0.4cm]tff1.out1)
+                    ([xshift=0.4cm]tff1.out1) node[anchor=west] {$D_0'$}
+
+					(and3.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and3.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) node[anchor=east] {$x_0$}
+					(and3.in 2) node[anchor=east] {$\bar{Q_1}$}
+
+					(and1.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and1.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and1.in 2) node[anchor=east] {$Q_1$}
+
+%                    (0,4) node[and port] (and1) { }
+%                    (0,0) node[xor port] (xor5) { }
+%
+%                    (2,7) node[and port] (and2) { }
+%                    (2,5) node[and port] (and3) { }
+%                    (2,3) node[and port] (and4) { }
+%                    (2,1) node[and port] (and8) { }
+%
+%                    (4,6) node[or port]   (or6) {}
+%                    (4,3) node[or port]   (or7) {}
+%
+%                    (6,1) node[latch] (dff2) {$D$}
+%                    (6,6) node[latch] (dff1) {$D$}
+%                    (8,2) node            (out8) {}
+%                    (8,7) node            (out6) {}
+%                    (8,3) node            (out7) {}
+%
+%                     (and1.in 1) node[anchor=east] {$Q_1$}
+%                     (and1.in 2) node[anchor=east] {$\bar{x_0}$}
+%                     (xor5.in 1) node[anchor=east] {$Q_1$}
+%                     (xor5.in 2) node[anchor=east] {$x_0$}
+%                     (and2.in 1) node[anchor=east] {$Q_0$}
+%                     (and2.in 2) node[anchor=east] {$x_0$}
+%                     (and3.in 1) node[anchor=east] {$\bar{Q_0}$}
+%                     (and1.out) -| (and3.in 2)
+%                     (and1.out) -| (and4.in 1)
+%                     (and4.in 2) node[anchor=east] {$Q_0$}
+%                     (and8.in 1) node[anchor=east] {$\bar{Q_0}$}
+%                     (xor5.out) -| (and8.in 2)
+%                     (and2.out) -| (or6.in 1)
+%                     (and3.out) -| (or6.in 2)
+%                     (and4.out) -| (or7.in 1)
+%                     (and8.out) -| (or7.in 2)
+%                     %(or7.out) node[anchor=south] {$y_0$}
+%                     %(or6.out) node[anchor=south] {$Q_1$}
+%                     (or7.out) -> (out7)
+%                     (out7) node[anchor=south] {$y_0$}
+%
+%                     (and8.out) -| (dff2.in)%
+%                     (dff2.out1) -| (out8)
+%                     (out8) node[anchor=south] {$Q_0$}
+%
+%                     (or6.out) -| (dff1.in)
+%                     (dff1.out1) -| (out6)
+%                     (out6) node[anchor=south] {$Q_1$}
+                    ;
+            \end{circuitikz}
+        \end{figure}
+
+        Входное закодированное слово: $[0,0,1,1,0,1,0,0,1,1,1]$\\
+        Выходное закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$ \\
+        Ожидаемое закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$
+
+\newpage
+        \subsubsection*{T-триггер}
+            \begin{table}[h!]
+                \center
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                     Q & 0 & 1 \\
+                     T &   &   \\ \hline
+                     0 & 0 & 1 \\ \hline
+                     1 & 1 & 0 \\ \hline
+                \end{tabular}
+                \caption{Закон функционирования T-триггера}
+            \end{table}
+
+            На основе закона функционирования T-триггера по таблице переходов структурного автомата
+            строим таблицу сигналов функции возбуждения.
+
+            \begin{table}[h!]
+                \center
+                \begin{tabular}{|c|c|c|c|c|}
+                    \hline
+                              &$Q_0Q_1$  &$Q_0Q_1$  &$Q_0Q_1$  &$Q_0Q_1$  \\ \hline
+                     $x_0$    & 00       & 01       & 10       & 11 \\ \hline
+                         0    & 00       & 10       & 10       & 11 \\ \hline 
+                         1    & 10       & 01       & 11       & 10 \\ \hline
+                              & $T_0T_1$ & $T_0T_1$ & $T_0T_1$ & $T_0T_1$ \\ \hline
+                \end{tabular}
+                \caption{Таблица сигналов функции возбуждения: $T_0T_1 = \mu(Q_0,Q_1,x_0)$}
+            \end{table}
+
+            ДНФ для сигналов функции возбуждения: \\
+            $T_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 \bar{Q_1} \bar{x_0} \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 \bar{x_0} \lor Q_0 Q_1 x_0 $ \\
+            $T_1 = \bar{Q_0} Q_1 x_0 \lor Q_0 \bar{Q_1} x_0 \lor Q_0 Q_1 \bar{x_0}$ \\
+            $y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$. \\
+			$T_0 = 1 \lor 2 \lor 3 \lor 4 \lor 5 \lor 6 $ \\
+			$T_1 = 7 \lor 4 \lor 5$ \\
+			$y_0 = 1 \lor 2 \lor 5$
+
+        \begin{figure}[h!]
+            \begin{circuitikz}
+                \draw
+% T0
+                    (2.5,7.4)  node[and port] (and7)  { 6}
+					(1,8.3)    node[and port] (and8)  { 5}
+					(0,9.4)    node[and port] (and9)  { 4}
+                    (0,10.6)   node[and port] (and10) { 3}
+					(1,11.7)   node[and port] (and11) { 2}
+					(2.5,12.6) node[and port] (and12) { 1}
+					
+					(4,10) node[or6] (or2) { }
+	
+                    (6,10) node[latch] (tff2) {$T$}
+				
+					(and7.out) |- (or2.in1)
+					(and8.out) |- (or2.in2)
+					(and9.out) |- (or2.in3)
+					(and10.out) |- (or2.in4)
+					(and11.out) |- (or2.in5)
+					(and12.out) |- (or2.in6)
+
+					%(and3.out) -| (or1.in 1)
+					%(and1.out) -| (or1.in 2)
+					%(and2.out) --  ([xshift=0.43cm,yshift=-0.27cm]or1.in 1) %($(or1.in 1)!0.50!(or1.in 2)$)
+
+					(or2.out) -- ([yshift=-0.7cm]tff2.in)
+                    (tff2.out1) -- ([xshift=0.4cm]tff2.out1)
+                    ([xshift=0.4cm]tff2.out1) node[anchor=west] {$T_0'$}
+
+					(and7.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and7.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and7.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and7.in 1) node[anchor=east] {$x_0$}
+					(and7.in 2) node[anchor=east] {$Q_1$}
+
+					(and8.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and8.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and8.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and8.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and8.in 2) node[anchor=east] {$Q_1$}
+
+					(and9.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and9.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and9.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and9.in 1) node[anchor=east] {$x_0$}
+					(and9.in 2) node[anchor=east] {$\bar{Q_1}$}
+
+					(and10.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and10.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and10.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and10.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and10.in 2) node[anchor=east] {$\bar{Q_1}$}
+
+					(and11.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and11.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and11.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and11.in 1) node[anchor=east] {$x_0$}
+					(and11.in 2) node[anchor=east] {$\bar{Q_1}$}
+
+					(and12.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and12.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and12.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and12.in 1) node[anchor=east] {$x_0$}
+					(and12.in 2) node[anchor=east] {$\bar{Q_1}$}
+
+% T1
+                    (0,0)   node[and port] (and1) {5}
+					(0,1.3) node[and port] (and2) {4}
+					(0,2.6) node[and port] (and3) {7}
+					
+					(2,1.3) node[or port] (or1) { }
+	
+                    (3,1.3) node[latch] (tff1) {$T$}
+
+					(and3.out) -| (or1.in 1)
+					(and1.out) -| (or1.in 2)
+					(and2.out) --  ([xshift=0.43cm,yshift=-0.27cm]or1.in 1) %($(or1.in 1)!0.50!(or1.in 2)$)
+
+					(or1.out) -- ([yshift=-0.7cm]tff1.in)
+                    (tff1.out1) -- ([xshift=0.4cm]tff1.out1)
+                    ([xshift=0.4cm]tff1.out1) node[anchor=west] {$T_1'$}
+
+					(and3.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and3.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) node[anchor=east] {$x_0$}
+					(and3.in 2) node[anchor=east] {$Q_1$}
+
+					(and2.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and2.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and2.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and2.in 1) node[anchor=east] {$x_0$}
+					(and2.in 2) node[anchor=east] {$\bar{Q_1}$}
+
+					(and1.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and1.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and1.in 2) node[anchor=east] {$Q_1$}
+
+% y0
+                    (0,3.9) node[and port] (and4) {1}
+					(0,5.2) node[and port] (and5) {2}
+					(0,6.5) node[and port] (and6) {5}
+					
+					(2,5.2) node[or port] (or1) { }
+					(and6.out) -| (or1.in 1)
+					(and4.out) -| (or1.in 2)
+					(and5.out) --  ([xshift=0.43cm,yshift=-0.27cm]or1.in 1) %($(or1.in 1)!0.50!(or1.in 2)$)
+					(or1.out) node[anchor=west] {$y_0$}
+
+					(and6.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and6.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and6.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and6.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and6.in 2) node[anchor=east] {$Q_1$}
+
+					(and5.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and5.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and5.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and5.in 1) node[anchor=east] {$x_0$}
+					(and5.in 2) node[anchor=east] {$\bar{Q_1}$}
+
+					(and4.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and4.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and4.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and4.in 1) node[anchor=east] {$x_0$}
+					(and4.in 2) node[anchor=east] {$\bar{Q_1}$}
+                ;
+%                   (0,6) node[xor port] (xor1) { }
+%                   (0,3) node[and port] (and2) { }
+%                   (0,1) node[xor port] (xor3) { }
+%               
+%                   (2,7) node[or port]  (or4) { }
+%                   (2,5) node[and port] (and5) { }
+%                   (2,3) node[and port] (and6) { }
+%                   (2,1) node[and port] (and7) { }
+%                   
+%                   (4,4) node[or port] (or9) { }
+%                   (4,1) node[or port] (or10) {  }
+%                   (4,7) node[latch] (tff0) {$T$}
+%                   (6,1) node[latch] (tff1) {$T$}
+%
+%                    (xor1.in 1) node[anchor=east] {$Q_1$}
+%                    (xor1.in 2) node[anchor=east] {$x_0$}
+%                    (xor3.in 2) node[anchor=east] {$Q_0$}
+%                    (xor3.in 2) node[anchor=east] {$Q_1$}
+%                    (and2.in 1) node[anchor=east] {$Q_0$}
+%                    (and2.in 2) node[anchor=east] {$Q_1$}
+%                    (or4.in 1) node[anchor=east] {$Q_0$}
+%                    (and5.in 2) node[anchor=east] {$\bar{Q_0}$}
+%                    (and6.in 1) node[anchor=east] {$\bar{x_0}$}
+%                    (and7.in 1) node[anchor=east] {$x_0$}
+%
+%                   (xor1.out) -| (or4.in 2)
+%                   (xor1.out) -| (and5.in 1)
+%                   (or4.out) -| (tff0.in)
+%                   (and5.out) -| (or9.in 1)
+%                   (and6.out) -| (or9.in 2)
+%                   (and6.out) -| (or10.in 1)
+%                   (and2.out) -| (and6.in 2)
+%                   (xor3.out) -| (and7.in 2)
+%                   (and7.out) -| (or10.in 2)
+%                   (or10.out) -| (tff1.in)
+%                   (tff0.out1) -- (5,7.7)
+%                   (5,7.7) node[anchor=west] {$Q_0'$}
+%                   (tff1.out1) -- (7,1.7)
+%                   (7,1.7) node[anchor=west] {$Q_1'$}
+%                   (or9.out) node[anchor=west] {$x_0$}
+%                   ;
+            \end{circuitikz}
+        \end{figure}
+        Входное закодированное слово: $[0,0,1,1,0,1,0,0,1,1,1]$\\
+        Выходное закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$ \\
+        Ожидаемое закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$
+
+    \subsection*{RS-триггер}
+            \begin{table}[h!]
+                \center
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                     Q  & 0 & 1 \\
+                     RS &   &   \\ \hline
+                     00 & 0 & 1 \\ \hline
+                     01 & 1 & 1 \\ \hline
+                     10 & 0 & 0 \\ \hline
+                     11 & - & - \\ \hline
+                \end{tabular}
+                \caption{Закон функционирования RS-триггера}
+            \end{table}
+            \begin{table}[h!]
+                \center
+                \begin{tabular}{|c|c|c|}
+                    \hline
             $Q_i \to Q_{i+1}$  & R & S \\ \hline
-					 $0 \to 0$ & - & 0 \\ \hline
-					 $0 \to 1$ & 0 & 1 \\ \hline
-					 $1 \to 0$ & 1 & 0 \\ \hline
-					 $1 \to 1$ & 0 & - \\ \hline
-				\end{tabular}
-    			\caption{Система подставок RS-триггера}
-    		\end{table}
-    		\begin{table}[h!]
-				\center
-        		\begin{tabular}{|c||c|c||c|c||c|c||c|c||c|c||c|c||c|c||c|c|}
-				 \hline
-			     $x_0$ &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$ \\ \hline
-					   &    0   &   0    &    0   &   1    &    1   &   0    &    1   &   1   \\ \hline
-					0  &   -0   &  -0    &   01   &  0-    &   10   &  0-    &   10   &  10   \\ \hline
-					1  &   01   &  -0    &   -0   &  10    &   10   &  01    &   10   &  0-   \\ \hline
-					   &$R_0S_0$&$R_1S_1$&$R_0S_0$&$R_1S_1$&$R_0S_0$&$R_1S_1$&$R_0S_0$&$R_1S_1$ \\ \hline
-            	%	   & 00              & 11               & 00             & 00 
-            	%	   & 10              & 00               & 01             & 01 
-        		\end{tabular}
-    			\caption{Таблица сигналов функции возбуждения: $R_0S_0R_1S_1 = \mu(Q_0,Q_1,x_0)$}
-    		\end{table}
-		ДНФ: \\
-		$R_0 = \bar{x_0} Q_0 \bar{Q_1} \lor x_0 Q_0 \bar{Q_1} \lor \bar{x_0} Q_0 Q_1 \lor x_0 Q_0 Q_1$ \\
-		$S_0 = x_0 \bar{Q_0} \bar{Q_1} \lor \bar{x_0} \bar{Q_0} Q_1$ \\
-		$R_1 = x_0 \bar{Q_0} Q_1 \lor \bar{x_0} Q_0 Q_1$ \\
-		$S_1 = x_0 Q_0 \bar{Q_1}$ \\
-		
-		Для схемы: \\
-		$R_0 = Q_0$ \\
-		$S_0 = \bar{Q_0} (x_0 \oplus Q_1)$ \\
-		$R_1 = Q_1 (x_0 \oplus Q_0)$ \\
-		$S_0 = x_0 Q_0 \bar{Q_1}$ \\
-		$y_0 = S_0 || \bar{x_0} Q_0 Q_1 $
+                     $0 \to 0$ & - & 0 \\ \hline
+                     $0 \to 1$ & 0 & 1 \\ \hline
+                     $1 \to 0$ & 1 & 0 \\ \hline
+                     $1 \to 1$ & 0 & - \\ \hline
+                \end{tabular}
+                \caption{Система подставок RS-триггера}
+            \end{table}
+            \begin{table}[h!]
+                \center
+                \begin{tabular}{|c||c|c||c|c||c|c||c|c||c|c||c|c||c|c||c|c|}
+                 \hline
+                 $x_0$ &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$ \\ \hline
+                       &    0   &   0    &    0   &   1    &    1   &   0    &    1   &   1   \\ \hline
+                    0  &   -0   &  -0    &   01   &  0-    &   10   &  0-    &   10   &  10   \\ \hline
+                    1  &   01   &  -0    &   -0   &  10    &   10   &  01    &   10   &  0-   \\ \hline
+                       &$R_0S_0$&$R_1S_1$&$R_0S_0$&$R_1S_1$&$R_0S_0$&$R_1S_1$&$R_0S_0$&$R_1S_1$ \\ \hline
+                %      & 00              & 11               & 00             & 00 
+                %      & 10              & 00               & 01             & 01 
+                \end{tabular}
+                \caption{Таблица сигналов функции возбуждения: $R_0S_0R_1S_1 = \mu(Q_0,Q_1,x_0)$}
+            \end{table}
+        ДНФ: \\
+        $R_0 = \bar{x_0} Q_0 \bar{Q_1} \lor x_0 Q_0 \bar{Q_1} \lor \bar{x_0} Q_0 Q_1 \lor x_0 Q_0 Q_1$ \\
+        $S_0 = x_0 \bar{Q_0} \bar{Q_1} \lor \bar{x_0} \bar{Q_0} Q_1$ \\
+        $R_1 = x_0 \bar{Q_0} Q_1 \lor \bar{x_0} Q_0 Q_1$ \\
+        $S_1 = x_0 Q_0 \bar{Q_1}$ \\
+        $y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$ \\
+		$R_0 = 1 \lor 2 \lor 3 \lor 4 $\\
+		$S_0 = 5 \lor 6$ \\
+		$R_1 = 7 \lor 3$ \\
+		$S_1 = 2$\\
+		$y_0 = 5 \lor 6 \lor 3$
+\newpage
+        \begin{figure}[h!]
+            \begin{circuitikz}
+                \draw
+% R0
+                    (1,0)   node[and port] (and1) {1}
+                    (0,1.5) node[and port] (and2) {2}
+					(0,3)   node[and port] (and3) {3}
+                    (1,4.5) node[and port] (and4) {4}
+					(3,2) 	node[or4]  (or1) { }
 
+					(and4.out) |- (or1.in1)
+					(and3.out) |- (or1.in2)
+					(and2.out) |- (or1.in3)
+					(and1.out) |- (or1.in4)
 
-		\begin{figure}[h!]
-			\begin{circuitikz}
-				\draw
-					(0,6) node[xor port] (xor1)   {}
-					(0,4) node[and port] (and2)   {}
-					(0,1.7) node[xor port] (xor3) {}
-					(0,0.3) node[and port] (and4) {}
-				
-					(2,0.3) node[and port] (and8) {}
-					(2,1.7) node[and port] (and7) {}
-					(2,4) node[and port] (and6) {}
-					(2,6) node[and port] (and5) {}
+					(and1.in 1) node[anchor=east] {$\bar{Q_1}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and1.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and1.in 2) node[anchor=east] {$Q_0$}
 
-					(4,1) node[rsff] (rsff0) {$RS1$}
-					(4,6.5) node[rsff] (rsff1) {$RS0$}
-					(4,4) node[or port] (or10) {}
+					(and2.in 1) node[anchor=east] {$\bar{Q_1}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and2.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and2.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and2.in 1) node[anchor=east] {$x_0$}
+					(and2.in 2) node[anchor=east] {$Q_1$}
 
-				 	(and4.in 1) node[anchor=east] {$Q_0$}
-				 	(and4.in 2) node[anchor=east] {$\bar{Q_1}$}
-				 	(xor3.in 1) node[anchor=east] {$x_0$}
-				 	(xor3.in 2) node[anchor=east] {$Q_0$}
-				 	(and2.in 1) node[anchor=east] {$Q_0$}
-				 	(and2.in 2) node[anchor=east] {$Q_1$}
-				 	(xor1.in 1) node[anchor=east] {$x_0$}
-				 	(xor1.in 2) node[anchor=east] {$Q_1$}
+					(and3.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and3.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and3.in 2) node[anchor=east] {$Q_1$}
 
-					(and4.out) -| (and8.in 1)
-					(and8.in 2) node[anchor=east] {$x_0$}
-					(xor3.out) -| (and7.in 1)
-					(and7.in 2) node[anchor=east] {$Q_1$}
-					(and2.out) -| (and6.in 1)
-					(and6.in 2) node[anchor=east] {$\bar{x_0}$}
-					(xor1.out) -| (and5.in 1)
-					(and5.in 2) node[anchor=east] {$\bar{Q_0}$}
-					(and5.out) -| (or10.in 1)
-					(and5.out) -| (rsff1.in2)
-					(and6.out) -| (or10.in 2)
-					%(rsff1.in1) node[anchor=east] {$Q_0$}
-					(3,7.1) node[anchor=east] {$Q_0$}
-					(3,7.1) -- (rsff1.in1)
-					(rsff1.out1) -- (5,7.1)
-					(5,7.1) node[anchor=west] {$Q_0'$}
-					(or10.out) node[anchor=west] {$y_0$}
-					(and7.out) -| (rsff0.in1)
-					(and8.out) -| (rsff0.in2)
-					(rsff0.out1) -- (5,1.6)
-					(5,1.6) node[anchor=west] {$Q_1'$}
-					;
-			\end{circuitikz}
-		\end{figure}
-		Входное закодированное слово: $[0,0,1,1,0,1,0,0,1,1,1]$\\
-		Выходное закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$ \\
-		Ожидаемое закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$
-	\subsection*{JK-триггер}
-    		\begin{table}[h!]
-				\center
-    			\begin{tabular}{|c|c|c|}
-					\hline
-					 Q  & 0 & 1 \\
-					 JK &   &   \\ \hline
-					 00 & 0 & 1 \\ \hline
-					 01 & 0 & 0 \\ \hline
-					 10 & 1 & 1 \\ \hline
-					 11 & 1 & 0 \\ \hline
-				\end{tabular}
-    			\caption{Закон функционирования JK-триггера}
-    		\end{table}
-    		\begin{table}[h!]
-				\center
-    			\begin{tabular}{|c|c|c|}
-					\hline
+					(and4.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and4.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and4.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and4.in 1) node[anchor=east] {$x_0$}
+					(and4.in 2) node[anchor=east] {$Q_1$}
+
+% S0
+                    (0,6)   node[and port] (and1) {5}
+					(0,7.5) node[and port] (and3) {6}
+					(2,7)   node[or port]  (or2) { }
+
+					(and3.out) -| (or2.in 1)
+					(and1.out) -| (or2.in 2)
+
+					(and3.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and3.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and3.in 2) node[anchor=east] {$Q_1$}
+
+					(and1.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and1.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) node[anchor=east] {$x_0$}
+					(and1.in 2) node[anchor=east] {$\bar{Q_1}$}
+
+                    (6,5) node[rsff]    (rsff0) {$RS$}
+% RS
+					(or2.out) |- (rsff0.in1)
+					(or1.out) |- (rsff0.in2)
+					(rsff0.out1) -- ([xshift=0.4cm]rsff0.out1)
+					([xshift=0.4cm]rsff0.out1) node[anchor=west] {$Q_0'$}
+					
+% R1
+                    (0,9.5) node[and port] (and1) {3}
+					(0,11)  node[and port] (and3) {7}
+					(2,10)  node[or port]  (or1) { }
+
+					(and3.out) -| (or1.in 1)
+					(and1.out) -| (or1.in 2)
+
+					(and3.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and3.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and3.in 2) node[anchor=east] {$Q_1$}
+
+					(and1.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and1.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and1.in 2) node[anchor=east] {$Q_1$}
+% S
+					(0,12.5) node[and port] (and2) {2}
+
+					(and2.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and2.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and2.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and2.in 1) node[anchor=east] {$x_0$}
+					(and2.in 2) node[anchor=east] {$Q_1$}
+
+                    (4,11) node[rsff]    (rsff1) {$RS$}
+% RS
+					(or1.out) |- (rsff1.in2)
+					(and2.out) |- (rsff1.in1)
+					(rsff1.out1) -- ([xshift=0.4cm]rsff1.out1)
+					([xshift=0.4cm]rsff1.out1) node[anchor=west] {$Q_1'$}
+
+%                    (0,6) node[xor port] (xor1)   {}
+%                    (0,4) node[and port] (and2)   {}
+%                    (0,1.7) node[xor port] (xor3) {}
+%                    (0,0.3) node[and port] (and4) {}
+%                
+%                    (2,0.3) node[and port] (and8) {}
+%                    (2,1.7) node[and port] (and7) {}
+%                    (2,4) node[and port] (and6) {}
+%                    (2,6) node[and port] (and5) {}
+%
+%                    (4,1) node[rsff] (rsff0) {$RS1$}
+%                    (4,6.5) node[rsff] (rsff1) {$RS0$}
+%                    (4,4) node[or port] (or10) {}
+%
+%                    (and4.in 1) node[anchor=east] {$Q_0$}
+%                    (and4.in 2) node[anchor=east] {$\bar{Q_1}$}
+%                    (xor3.in 1) node[anchor=east] {$x_0$}
+%                    (xor3.in 2) node[anchor=east] {$Q_0$}
+%                    (and2.in 1) node[anchor=east] {$Q_0$}
+%                    (and2.in 2) node[anchor=east] {$Q_1$}
+%                    (xor1.in 1) node[anchor=east] {$x_0$}
+%                    (xor1.in 2) node[anchor=east] {$Q_1$}
+%
+%                    (and4.out) -| (and8.in 1)
+%                    (and8.in 2) node[anchor=east] {$x_0$}
+%                    (xor3.out) -| (and7.in 1)
+%                    (and7.in 2) node[anchor=east] {$Q_1$}
+%                    (and2.out) -| (and6.in 1)
+%                    (and6.in 2) node[anchor=east] {$\bar{x_0}$}
+%                    (xor1.out) -| (and5.in 1)
+%                    (and5.in 2) node[anchor=east] {$\bar{Q_0}$}
+%                    (and5.out) -| (or10.in 1)
+%                    (and5.out) -| (rsff1.in2)
+%                    (and6.out) -| (or10.in 2)
+%                    %(rsff1.in1) node[anchor=east] {$Q_0$}
+%                    (3,7.1) node[anchor=east] {$Q_0$}
+%                    (3,7.1) -- (rsff1.in1)
+%                    (rsff1.out1) -- (5,7.1)
+%                    (5,7.1) node[anchor=west] {$Q_0'$}
+%                    (or10.out) node[anchor=west] {$y_0$}
+%                    (and7.out) -| (rsff0.in1)
+%                    (and8.out) -| (rsff0.in2)
+%                    (rsff0.out1) -- (5,1.6)
+%                    (5,1.6) node[anchor=west] {$Q_1'$}
+                    ;
+            \end{circuitikz}
+        \end{figure}
+        Входное закодированное слово: $[0,0,1,1,0,1,0,0,1,1,1]$\\
+        Выходное закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$ \\
+        Ожидаемое закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$
+\newpage
+    \subsection*{JK-триггер}
+            \begin{table}[h!]
+                \center
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                     Q  & 0 & 1 \\
+                     JK &   &   \\ \hline
+                     00 & 0 & 1 \\ \hline
+                     01 & 0 & 0 \\ \hline
+                     10 & 1 & 1 \\ \hline
+                     11 & 1 & 0 \\ \hline
+                \end{tabular}
+                \caption{Закон функционирования JK-триггера}
+            \end{table}
+            \begin{table}[h!]
+                \center
+                \begin{tabular}{|c|c|c|}
+                    \hline
             $Q_i \to Q_{i+1}$  & J & K \\ \hline
-					 $0 \to 0$ & 0 & - \\ \hline
-					 $0 \to 1$ & 1 & - \\ \hline
-					 $1 \to 0$ & - & 1 \\ \hline
-					 $1 \to 1$ & - & 0 \\ \hline
-				\end{tabular}
-    			\caption{Система подставок JK-триггера}
-    		\end{table}
-    		\begin{table}[h!]
-				\center
-        		\begin{tabular}{|c||c|c||c|c||c|c||c|c||c|c||c|c||c|c||c|c|}
-				 \hline
-			     $x_0$ &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$ \\ \hline
-					   &    0   &   0    &    0   &   1    &    1   &   0    &    1   &   1   \\ \hline
-					0  &   0-   &  0-    &   1-   &  -0    &   -1   &  0-    &   -1   &  -1   \\ \hline
-					1  &   1-   &  0-    &   0-   &  -1    &   -1   &  1-    &   -1   &  -0   \\ \hline
-					   &$J_0K_0$&$J_1K_1$&$J_0K_0$&$J_1K_1$&$J_0K_0$&$J_1K_1$&$J_0K_0$&$J_1K_1$ \\ \hline
-            	%	   & 00              & 11               & 00             & 00 
-            	%	   & 10              & 00               & 01             & 01 
-        		\end{tabular}
-    			\caption{Таблица сигналов функции возбуждения: $R_0S_0R_1S_1 = \mu(Q_0,Q_1,x_0)$}
-    		\end{table}
+                     $0 \to 0$ & 0 & - \\ \hline
+                     $0 \to 1$ & 1 & - \\ \hline
+                     $1 \to 0$ & - & 1 \\ \hline
+                     $1 \to 1$ & - & 0 \\ \hline
+                \end{tabular}
+                \caption{Система подставок JK-триггера}
+            \end{table}
+            \begin{table}[h!]
+                \center
+                \begin{tabular}{|c||c|c||c|c||c|c||c|c||c|c||c|c||c|c||c|c|}
+                 \hline
+                 $x_0$ &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$  &  $Q_0$ & $Q_1$ \\ \hline
+                       &    0   &   0    &    0   &   1    &    1   &   0    &    1   &   1   \\ \hline
+                    0  &   0-   &  0-    &   1-   &  -0    &   -1   &  0-    &   -1   &  -1   \\ \hline
+                    1  &   1-   &  0-    &   0-   &  -1    &   -1   &  1-    &   -1   &  -0   \\ \hline
+                       &$J_0K_0$&$J_1K_1$&$J_0K_0$&$J_1K_1$&$J_0K_0$&$J_1K_1$&$J_0K_0$&$J_1K_1$ \\ \hline
+                %      & 00              & 11               & 00             & 00 
+                %      & 10              & 00               & 01             & 01 
+                \end{tabular}
+                \caption{Таблица сигналов функции возбуждения: $R_0S_0R_1S_1 = \mu(Q_0,Q_1,x_0)$}
+            \end{table}
+        ДНФ: \\
+        $J_0 = x_0 \bar{Q_0} \bar{Q_1} \lor \bar{x_0} \bar{Q_0} Q_1$ \\
+        $K_0 = \bar{x_0} Q_0 \bar{Q_1} \lor x_0 Q_0 \bar{Q_1} \lor \bar{x_0} Q_0 Q_1 \lor x_0 Q_0 Q_1$ \\
+        $J_1 = x_0 Q_0 \bar{Q_1}$ \\
+        $K_1 = x_0 \bar{Q_0} Q_1 \lor \bar{x_0} Q_0 Q_1$ \\ 
+        $y_0 = x_0\bar{Q_0} \bar{Q_1}  \lor \bar{x_0}\bar{Q_0} Q_1  \lor \bar{x_0}Q_0 Q_1 $ \\
+		$J_0 = 1 \lor 2$ \\
+		$K_0 = 3 \lor 4 \lor 5 \lor 6$ \\
+		$J_1 = 4 $\\
+		$K_1 = 7 \lor 5$ \\
+		$y_0 = 1 \lor 2 \lor 5$
 
-		ДНФ: \\
-		$J_0 = x_0 \bar{Q_0} \bar{Q_1} \lor \bar{x_0} \bar{Q_0} Q_1$ \\
-		$K_0 = \bar{x_0} Q_0 \bar{Q_1} \lor x_0 Q_0 \bar{Q_1} \lor \bar{x_0} Q_0 Q_1 \lor x_0 Q_0 Q_1$ \\
-		$J_1 = x_0 Q_0 \bar{Q_1}$ \\
-		$K_1 = x_0 \bar{Q_0} Q_1 \lor \bar{x_0} Q_0 Q_1$ \\ 
-    	$y_0 = \bar{Q_0} \bar{Q_1} x_0 \lor \bar{Q_0} Q_1 \bar{x_0} \lor Q_0 Q_1 \bar{x_0}$ \\
+\newpage
+        \begin{figure}[h!]
+            \begin{circuitikz}
+                \draw
+%K0
+                    (1,0)     node[and port] (and1) {3}
+                    (0,1.3)   node[and port] (and2) {4}
+					(0,2.5)   node[and port] (and3) {5}
+                    (1,3.7)   node[and port] (and4) {6}
+					(3,2) 	  node[or4]  (or1) { }
 
-		ДНФ для схемы: \\
-		$J_0 = \bar{Q_0} (x_0 \oplus Q_1)$ \\
-		$K_0 = Q_0$ \\
-		$J_1 = x_0 Q_0 \bar{Q_1}$ \\
-		$K_1 = Q_1 (x_0 \oplus Q_0)$\\
-		$y_0 = J_0 || \bar{x_0} Q_0 Q_1$
+					(and4.out) |- (or1.in1)
+					(and3.out) |- (or1.in2)
+					(and2.out) |- (or1.in3)
+					(and1.out) |- (or1.in4)
 
-		\begin{figure}[h!]
-			\begin{circuitikz}
-				\draw
-					(0,6) node[xor port] (xor1)   {}
-					(0,4) node[and port] (and2)   {}
-					(0,1.7) node[xor port] (xor3) {}
-					(0,0.3) node[and port] (and4) {}
-				
-					(2,0.3) node[and port] (and8) {}
-					(2,1.7) node[and port] (and7) {}
-					(2,4) node[and port] (and6) {}
-					(2,6) node[and port] (and5) {}
+					(and1.in 1) node[anchor=east] {$\bar{Q_1}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and1.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and1.in 2) node[anchor=east] {$Q_0$}
 
-					(4,1) node[jkff] (rsff0) {$JK1$}
-					(4,6.5) node[jkff] (rsff1) {$JK0$}
-					(4,4) node[or port] (or10) {$10$}
+					(and2.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and2.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and2.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and2.in 1) node[anchor=east] {$x_0$}
+					(and2.in 2) node[anchor=east] {$\bar{Q_1}$}
 
-				 	(and4.in 1) node[anchor=east] {$Q_0$}
-				 	(and4.in 2) node[anchor=east] {$\bar{Q_1}$}
-				 	(xor3.in 1) node[anchor=east] {$x_0$}
-				 	(xor3.in 2) node[anchor=east] {$Q_0$}
-				 	(and2.in 1) node[anchor=east] {$Q_0$}
-				 	(and2.in 2) node[anchor=east] {$Q_1$}
-				 	(xor1.in 1) node[anchor=east] {$x_0$}
-				 	(xor1.in 2) node[anchor=east] {$Q_1$}
+					(and3.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and3.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and3.in 2) node[anchor=east] {$Q_1$}
 
-					(and4.out) -| (and8.in 1)
-					(and8.in 2) node[anchor=east] {$x_0$}
-					(xor3.out) -| (and7.in 1)
-					(and7.in 2) node[anchor=east] {$Q_1$}
-					(and2.out) -| (and6.in 1)
-					(and6.in 2) node[anchor=east] {$\bar{x_0}$}
-					(xor1.out) -| (and5.in 1)
-					(and5.in 2) node[anchor=east] {$\bar{Q_0}$}
-					(and5.out) -| (or10.in 1)
-					(and5.out) -| (rsff1.in2)
-					(and6.out) -| (or10.in 2)
-					%(rsff1.in1) node[anchor=east] {$Q_0$}
-					(3,7.1) node[anchor=east] {$Q_0$}
-					(3,7.1) -- (rsff1.in1)
-					(rsff1.out1) -- (5,7.1)
-					(5,7.1) node[anchor=west] {$Q_0'$}
-					(or10.out) node[anchor=west] {$y_0$}
-					(and7.out) -| (rsff0.in1)
-					(and8.out) -| (rsff0.in2)
-					(rsff0.out1) -- (5,1.6)
-					(5,1.6) node[anchor=west] {$Q_1'$}
-					;
-			\end{circuitikz}
-		\end{figure}
-		Входное закодированное слово: $[0,0,1,1,0,1,0,0,1,1,1]$\\
-		Выходное закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$ \\
-		Ожидаемое закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$
+					(and4.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and4.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and4.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and4.in 1) node[anchor=east] {$x_0$}
+					(and4.in 2) node[anchor=east] {$Q_1$}
+% J0
+                    (0,5)   node[and port] (and1) {1}
+					(0,6.3) node[and port] (and3) {2}
+					(2,5.6)   node[or port]  (or2) { }
+
+					(and3.out) -| (or2.in 1)
+					(and1.out) -| (or2.in 2)
+
+					(and3.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and3.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and3.in 2) node[anchor=east] {$Q_1$}
+
+					(and1.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and1.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) node[anchor=east] {$x_0$}
+					(and1.in 2) node[anchor=east] {$\bar{Q_1}$}
+
+					(4,5) node[jkff] (jkff0) {\text{JK}}
+					(or1.out) |- (jkff0.in2)
+					(or2.out) |- (jkff0.in1)
+
+					(jkff0.out1) -- ([xshift=0.3cm]jkff0.out1)
+        			([xshift=0.3cm]jkff0.out1) node[anchor=west] {$Q_0$}
+
+% y0
+                    (0,8)   node[and port] (and1) {1}
+					(0,9.3) node[and port] (and2) {2}
+					(0,10.6) node[and port] (and3) {5}
+					
+					(2,9.3) node[or port] (or3) { }
+
+					(and3.out) -| (or3.in 1)
+					(and1.out) -| (or3.in 2)
+					(and2.out) --  ([xshift=0.43cm,yshift=-0.27cm]or3.in 1) %($(or1.in 1)!0.50!(or1.in 2)$)
+
+					(or3.out) node[anchor=west] {$y_0$}
+
+					(and1.in 1) node[anchor=east] {$\bar{Q_0}$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and1.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) node[anchor=east] {$x_0$}
+					(and1.in 2) node[anchor=east] {$\bar{Q_1}$}
+
+					(and3.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and3.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and3.in 2) node[anchor=east] {$Q_1$}
+
+					(and2.in 1) node[anchor=east] {$Q_1$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and2.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and2.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and2.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and2.in 2) node[anchor=east] {$\bar{Q_0}$}
+
+% K1
+                    (0,12) node[and port] (and1) {7}
+					(0,13.4) node[and port] (and3) {5}
+					(2,12.6) node[or port]  (or2) { }
+
+					(and3.out) -| (or2.in 1)
+					(and1.out) -| (or2.in 2)
+
+					(and3.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and3.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) node[anchor=east] {$\bar{x_0}$}
+					(and3.in 2) node[anchor=east] {$Q_1$}
+
+					(and1.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and1.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and1.in 1) node[anchor=east] {$x_0$}
+					(and1.in 2) node[anchor=east] {$\bar{Q_1}$}
+
+% J1
+
+                    (0,14.6) node[and port] (and3) {4}
+
+					(and3.in 1) node[anchor=east] {$Q_0$}
+                	([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) -- ([xshift=0.25cm,yshift=-0.27cm]and3.in 1)
+					([xshift=-0.3cm,yshift=-0.27cm]and3.in 1) node[anchor=east] {$x_0$}
+					(and3.in 2) node[anchor=east] {$\bar{Q_1}$}
+
+					(4,14) node[jkff] (jkff0) {\text{JK}}
+					(or2.out) |- (jkff0.in2)
+					(and3.out) |- (jkff0.in1)
+
+					(jkff0.out1) -- ([xshift=0.3cm]jkff0.out1)
+        			([xshift=0.3cm]jkff0.out1) node[anchor=west] {$Q_1$}
+
+%                    (0,6) node[xor port] (xor1)   {}
+%                    (0,4) node[and port] (and2)   {}
+%                    (0,1.7) node[xor port] (xor3) {}
+%                    (0,0.3) node[and port] (and4) {}
+%                
+%                    (2,0.3) node[and port] (and8) {}
+%                    (2,1.7) node[and port] (and7) {}
+%                    (2,4) node[and port] (and6) {}
+%                    (2,6) node[and port] (and5) {}
+%
+%                    (4,1) node[jkff] (rsff0) {$JK1$}
+%                    (4,6.5) node[jkff] (rsff1) {$JK0$}
+%                    (4,4) node[or port] (or10) {$10$}
+%
+%                    (and4.in 1) node[anchor=east] {$Q_0$}
+%                    (and4.in 2) node[anchor=east] {$\bar{Q_1}$}
+%                    (xor3.in 1) node[anchor=east] {$x_0$}
+%                    (xor3.in 2) node[anchor=east] {$Q_0$}
+%                    (and2.in 1) node[anchor=east] {$Q_0$}
+%                    (and2.in 2) node[anchor=east] {$Q_1$}
+%                    (xor1.in 1) node[anchor=east] {$x_0$}
+%                    (xor1.in 2) node[anchor=east] {$Q_1$}
+%
+%                    (and4.out) -| (and8.in 1)
+%                    (and8.in 2) node[anchor=east] {$x_0$}
+%                    (xor3.out) -| (and7.in 1)
+%                    (and7.in 2) node[anchor=east] {$Q_1$}
+%                    (and2.out) -| (and6.in 1)
+%                    (and6.in 2) node[anchor=east] {$\bar{x_0}$}
+%                    (xor1.out) -| (and5.in 1)
+%                    (and5.in 2) node[anchor=east] {$\bar{Q_0}$}
+%                    (and5.out) -| (or10.in 1)
+%                    (and5.out) -| (rsff1.in2)
+%                    (and6.out) -| (or10.in 2)
+%                    %(rsff1.in1) node[anchor=east] {$Q_0$}
+%                    (3,7.1) node[anchor=east] {$Q_0$}
+%                    (3,7.1) -- (rsff1.in1)
+%                    (rsff1.out1) -- (5,7.1)
+%                    (5,7.1) node[anchor=west] {$Q_0'$}
+%                    (or10.out) node[anchor=west] {$y_0$}
+%                    (and7.out) -| (rsff0.in1)
+%                    (and8.out) -| (rsff0.in2)
+%                    (rsff0.out1) -- (5,1.6)
+%                    (5,1.6) node[anchor=west] {$Q_1'$}
+                    ;
+            \end{circuitikz}
+        \end{figure}
+        Входное закодированное слово: $[0,0,1,1,0,1,0,0,1,1,1]$\\
+        Выходное закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$ \\
+        Ожидаемое закодированное слово: $[0,0,1,0,1,0,1,1,1,0,0]$
+
 \section*{Вывод}
 В ходе лабораторной работы был изучен структурный автомат и принципы постоения схем на его основе.
 Были пострены схемы с памятью на основе исходного автомата на D-, T-, RS- и JK-триггерах. Из всех
