@@ -14,7 +14,7 @@ send(void *self, local_id dst, const Message *msg) {
         return -1;
 
     size_t pnum = p->io->procnum;
-    int    fd   = p->io->fds[INDEX(src, dst,pnum)][WRITE_FD];
+    int    fd   = p->io->fds[INDEX(src, dst,pnum)].w;
     return write(fd, msg, sizeof(Message));
 }
 
@@ -38,7 +38,7 @@ receive(void *self, local_id from, Message *msg) {
         return -1;
 
     size_t pnum = p->io->procnum;
-    int    fd   = p->io->fds[INDEX(from, to,pnum)][READ_FD];
+    int    fd   = p->io->fds[INDEX(from, to,pnum)].r;
 
     return read(fd, msg, sizeof(Message)) > 0 ? 0 : -1;
 }

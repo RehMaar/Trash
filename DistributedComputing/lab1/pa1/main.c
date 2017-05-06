@@ -58,9 +58,11 @@ get_attributes(int argc, char *argv[], size_t *procnum) {
 static int
 create_pipes(IO *io) {
     io->pipesnum = pipes_num(io->procnum+1);
+    io->fds = (struct pipe_t*)malloc(sizeof(struct pipe_t)*io->pipesnum);
+    fprintf(io->pipes_log_stream, "Pipes num: %d\n", io->pipesnum);
     for (int i = 0; i < io->pipesnum; i++) {
         fprintf(io->pipes_log_stream, "Created pipe number %d.\n", i+1);
-        if (pipe2(io->fds[i], O_NONBLOCK) < 0) {
+        if (pipe2((int*)&io->fds[i], O_NONBLOCK) < 0) {
            perror("pipe");
            return -1;
         }
@@ -73,7 +75,7 @@ wait_msg(proc_t *p) {
     Message msg = { {0} };
     for (size_t i = 1; i <= p->io->procnum; i++) {
         while(receive((void*)p, i, &msg) != 0);
-        fprintf(stderr, "Msg len: %d\n", msg.s_header.s_payload_len);
+        //fprintf(stderr, "Msg len: %d\n", msg.s_header.s_payload_len);
     }
 }
 
@@ -93,19 +95,12 @@ wait_all(IO *io) {
 }
 
 int
-main(int argc, char *argv[]) {
+main(int argc, char *argv[]){
     IO io = {0};
     size_t procnum = 0;
 
     if (get_attributes(argc, argv, &procnum) < 0)
         return -1;
-
-    for (size_t i = 0; i <= procnum; i++) {
-        for (size_t j = 0; j <= procnum; j++) {
-            if (i != j)
-                fprintf(stderr, "%zu -- %zu : %lu\n", i, j, INDEX(i, j, procnum));
-        }
-    }
 
     io.procnum = procnum;
     io.events_log_stream = fopen(events_log, "w+");
@@ -114,14 +109,21 @@ main(int argc, char *argv[]) {
         return -1;
     }
 
-    io.pipes_log_stream = fopen(pipes_log, "w");
+    io.pipes_log_stream = stderr; //fopen(pipes_log, "w");
     if (io.pipes_log_stream == NULL) {
         perror("fopen");
         return -1;
     }
+
+    for (size_t i = 0; i <= procnum; i++) {
+        for (size_t j = 0; j <= procnum; j++) {
+            if (i != j)
+                fprintf(io.pipes_log_stream, "%zu -- %zu : %lu\n", i, j, INDEX(i, j, procnum));
+        }
+    }
+
     if (create_pipes(&io) < 0)
         return -1;
-    fclose(io.pipes_log_stream);
 
     for (int i = 1; i <= io.procnum; i++) {
         pid_t pid = fork();
@@ -135,6 +137,8 @@ main(int argc, char *argv[]) {
     }
     close_unsed_fds(&io, PARENT_ID);
     wait_all(&io);
+    free(io.fds);
     fclose(io.events_log_stream);
+    fclose(io.pipes_log_stream);
     return 0;
 }
