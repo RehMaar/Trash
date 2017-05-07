@@ -2,6 +2,7 @@
 #define __IFMO_DISTRIBUTED_CLASS_IO__H
 
 #include <stdio.h>
+#include "ipc.h"
 
 #define MAX_PROC    10
 #define MAX_PIPES   110
@@ -10,21 +11,14 @@
 #define READ_FD     0
 #define WRITE_FD    1
 
-#define INDEX(from_id, to_id, pnum) \
-    (from_id*pnum + (to_id > from_id || to_id == pnum ? to_id - 1 : to_id))
 
-struct pipe_t {
-    int r, w;
-} __attribute__((packed));
 typedef struct {
-    size_t procnum;
-    size_t pipesnum;
+    local_id procnum;
    
     FILE *events_log_stream;
     FILE *pipes_log_stream;
 
-    struct pipe_t *fds;
-    //int fds[MAX_PIPES][MAX_PROC];
-} __attribute__((packed)) IO;
+    int fds[MAX_PROC+1][MAX_PROC+1][NUM_FD];
+} IO;
 
 #endif /* __IFMO_DISTRIBUTED_CLASS_IO__H */

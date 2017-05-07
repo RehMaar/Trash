@@ -13,42 +13,28 @@
 #include "pa1.h"
 #include "child.h"
 
-
-/** Eval number of pipes.
- * 
- * @param n  Number of processes.
- * 
- * @algo
- *   Complete graph has E = n(n-1)/2 edges for n nodes.
- *   We need two pipes between two nodes, or E*2, or
- *   E' = n(n - 1).
- */
-static inline int
-pipes_num(int n) {
-    return n*(n - 1);
-}
-
 /** Get attributes of the process from the command line.
  * 
  * @param argc      Argument count.
  * @param argv      Argument vector.
  * @param procnum   Total count of the child processes. 
  */
-static inline int
-get_attributes(int argc, char *argv[], size_t *procnum) {
+static inline size_t
+get_options(int argc, char *argv[]) {
+    size_t procnum = -1;
     switch(getopt(argc, argv, "p:")) {
         case 'p': {
             char *endptr = NULL;
-            *procnum = strtol(optarg, &endptr, 10);   
-            if (optarg == endptr || *procnum > MAX_PROC || *procnum <= 0) {
-                return -1;
+            procnum = strtol(optarg, &endptr, 10);   
+            if (optarg == endptr || procnum > MAX_PROC || procnum <= 0) {
+                return 0;
             }
             break;
         }
         default:
-            return -1;
+            return 0;
     }
-    return 0;
+    return procnum;
 }
 
 /** Creates pipes for IPC.
@@ -57,13 +43,20 @@ get_attributes(int argc, char *argv[], size_t *procnum) {
  */
 static int
 create_pipes(IO *io) {
-    io->pipesnum = pipes_num(io->procnum+1);
-    io->fds = (struct pipe_t*)malloc(sizeof(struct pipe_t)*io->pipesnum);
-    for (int i = 0; i < io->pipesnum; i++) {
-        fprintf(io->pipes_log_stream, "Created pipe number %d.\n", i+1);
-        if (pipe2((int*)&(io->fds[i]), O_NONBLOCK) < 0) {
-           perror("pipe");
-           return -1;
+    int count = 1;
+    for (int i = 0; i <= io->procnum; i++) {
+        for (int j = 0; j <= io->procnum; j++) {
+            if (i == j) {
+                io->fds[i][j][0] = -1;
+                io->fds[i][j][1] = -1;
+                continue;
+            }
+            fprintf(io->pipes_log_stream, "Created pipe number %d.\n", count++);
+
+            if (pipe2(io->fds[i][j], O_DIRECT) < 0) {
+               perror("pipe");
+               return -1;
+            }
         }
     }
     return 0;
@@ -93,55 +86,40 @@ wait_all(IO *io) {
 }
 
 int
-main(int argc, char *argv[]){
-    IO *io;
-    size_t procnum = 0;
+main(int argc, char *argv[]) {
+    IO io = {0};
 
-    if (get_attributes(argc, argv, &procnum) < 0)
+    if ((io.procnum = get_options(argc, argv)) == 0)
         return -1;
 
-    io = (IO*)malloc(sizeof(IO));
-    if (io == NULL)
-        return -1;
-    io->procnum = procnum;
-    io->events_log_stream = fopen(events_log, "w+");
-    if (io->events_log_stream == NULL) {
+    io.events_log_stream = fopen(events_log, "w+");
+    if (io.events_log_stream == NULL) {
         perror("fopen");
         return -1;
     }
 
-    io->pipes_log_stream = fopen(pipes_log, "w");
-    if (io->pipes_log_stream == NULL) {
+    io.pipes_log_stream = fopen(pipes_log, "w");
+    if (io.pipes_log_stream == NULL) {
         perror("fopen");
         return -1;
     }
 
-    for (size_t i = 0; i <= procnum; i++) {
-        for (size_t j = 0; j <= procnum; j++) {
-            if (i != j)
-                fprintf(io->pipes_log_stream, "%zu -- %zu : %lu\n", i, j, INDEX(i, j, procnum));
-        }
-    }
-
-    if (create_pipes(io) < 0)
+    if (create_pipes(&io) < 0)
         return -1;
 
-    fflush(io->pipes_log_stream);
-    for (int i = 1; i <= io->procnum; i++) {
+    for (int i = 1; i <= io.procnum; i++) {
         pid_t pid = fork();
         if (0 > pid) {
             exit(EXIT_FAILURE);
         } else if (0 == pid) {
             /* Child. */
-            int ret = child(io, i);
+            int ret = child(&io, i);
             exit(ret);
         }
     }
-
-    close_unsed_fds(io, PARENT_ID);
-    wait_all(io);
-    free(io->fds);
-    fclose(io->events_log_stream);
-    fclose(io->pipes_log_stream);
+    close_unsed_fds(&io, PARENT_ID);
+    wait_all(&io);
+    fclose(io.pipes_log_stream);
+    fclose(io.events_log_stream);
     return 0;
 }

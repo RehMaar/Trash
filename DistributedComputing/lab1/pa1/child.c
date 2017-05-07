@@ -1,7 +1,8 @@
-#include <malloc.h>
+#define _DEFAULT_SOURCE
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 #include "common.h"
@@ -20,54 +21,50 @@
  */ 
 void
 close_unsed_fds(IO *io, local_id id) {
-    fprintf(io->pipes_log_stream, "ID %d close r/w.\n", id);
-    fflush(io->pipes_log_stream);
-    for (size_t i = 0; i <= io->procnum; i++) {
-        if (i != id) {
-            int retw = close(io->fds[INDEX(i,id, io->procnum)].w);
-            int retr = close(io->fds[INDEX(id,i, io->procnum)].r);
-            fprintf(io->pipes_log_stream, "ID %d closes r(%lu)[%d] w(%lu)[%d]\n",
-                    id, INDEX(id,i,io->procnum), retr,
-                        INDEX(i,id,io->procnum), retw);
-            fflush(io->pipes_log_stream);
-        }
-    }
-    fprintf(io->pipes_log_stream, "ID: %d close unused\n", id);
-    fflush(io->pipes_log_stream);
-    for (size_t i = 0; i <= io->procnum; i++) {
-        for (size_t j = 0; j <= io->procnum; j++) {
-            if (i != j && i != id && j != id) {
-                int retw = close(io->fds[INDEX(i, j, io->procnum)].w);
-                int retr = close(io->fds[INDEX(i, j, io->procnum)].r);
-                fprintf(io->pipes_log_stream, "ID %d closes %zu [%d, %d]\n",
-                        id, INDEX(i, j, io->procnum), retr, retw);
-                fflush(io->pipes_log_stream);
+
+    for (local_id i = 0; i <= io->procnum; i++) {
+        for (local_id j = 0; j <= io->procnum; j++) {
+            if (i != j) {
+                if (i == id) {
+                    close(io->fds[i][j][READ_FD]);
+                    fprintf(io->pipes_log_stream, "ID %d closes read(%hhd -- %hhd)\n", id, i,j);
+                }
+
+                if (j == id) {
+                    close(io->fds[i][j][WRITE_FD]);
+                    fprintf(io->pipes_log_stream, "ID %d closes write(%hhd -- %hhd)\n", id, i,j);
+                }
+
+                if (i != id && j != id) {
+                    fprintf(io->pipes_log_stream, "ID %d closes pipe(%hhd -- %hhd)\n", id, i,j);
+                    close(io->fds[i][j][WRITE_FD]);
+                    close(io->fds[i][j][READ_FD]);
+                }
             }
         }
     }
+
+    fprintf(io->pipes_log_stream, "ID %d closes all fds.\n", id);
 }
+
 
 /** Syncronization cycle.
  */
 static void
-sync(proc_t *p, MessageType type, char *payload, size_t payload_len) {
-    Message msg = {{ 0 }};
+sync_state(proc_t *p, MessageType type, char *payload, size_t payload_len) {
+    Message msg;
     msg.s_header = (MessageHeader) {
             .s_magic       = MESSAGE_MAGIC,
             .s_payload_len = payload_len,
             .s_type        = type,
             .s_local_time  = 0
     };
-
     strncpy(msg.s_payload, payload, payload_len);
 
     send_multicast((void*)p, (const Message *)&msg);
-
-    size_t get = p->io->procnum-1;
-    while (get) {
-        if (receive_any((void*)p, &msg) == 0) {
-            get--;
-        }
+    for (size_t i = 1; i <= p->io->procnum; i++) {
+       if (i != p->self_id)
+           while(receive((void*)p, i, &msg) != 0);
     }
 }
 
@@ -80,9 +77,10 @@ sync(proc_t *p, MessageType type, char *payload, size_t payload_len) {
 int
 child(IO *io, local_id id) {
 
-    char payload[MAX_PAYLOAD_LEN] = { 0 };
+    proc_t p;
+    char payload[MAX_PAYLOAD_LEN];
     size_t len;
-    proc_t p = (proc_t){
+    p = (proc_t){
         .io      = io,
         .self_id = id
     };
@@ -92,7 +90,7 @@ child(IO *io, local_id id) {
     len = sprintf(payload, log_started_fmt, id, getpid(), getppid());
     fputs(payload, io->events_log_stream); 
     /* Proces sync with others. */
-    sync(&p, STARTED, payload, len);
+    sync_state(&p, STARTED, payload, len);
 
     fprintf(io->events_log_stream, log_received_all_started_fmt, id);
     /* Work. */
@@ -100,12 +98,7 @@ child(IO *io, local_id id) {
     len = sprintf(payload, log_done_fmt, id);
     fputs(payload, io->events_log_stream); 
     /* Process syncs wih ohers. */
-    sync(&p, DONE, payload, len);
+    sync_state(&p, DONE, payload, len);
     fprintf(io->events_log_stream, log_received_all_done_fmt, id);
-
-    free(io->fds);
-    fclose(io->events_log_stream);
-    fclose(io->pipes_log_stream);
-    
     return 0;
 }
