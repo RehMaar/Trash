@@ -12,12 +12,12 @@ function execute_netconfig {
 
 	maxid=$((maxid-1))
 	list=${list/$1}
-
     for i in $(seq 1 $maxid); do
 		local host=${list[i]}
-    	scp root@$host:~ netconfig.bash
 		i=$((i+1))
-    	ssh root@$host "bash netconfig.bash $version 24 $i $maxid"
+		echo "$host $i"
+    	scp netconfig.bash $host:~
+    	ssh $host "bash netconfig.bash $version 24 $i"
     done
 }
 
@@ -32,11 +32,14 @@ function execut_check_hosts {
 
     for i in $(seq 1 $maxid); do
 		local host=${list[i]}
-    	scp root@$host:~ check_hosts.bash
+		echo $host
+    	scp check_hosts.bash root@$host:~ 
 		i=$((i+1))
     	ssh root@$host "bash check_hosts.bash $version $i $maxid"
     done
 }
 
+echo "configure: Configure netwrok."
 execute_netconfig $@
+echo "configure: Test hosts."
 execut_check_hosts $@

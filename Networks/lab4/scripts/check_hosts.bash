@@ -24,7 +24,7 @@ function check_hosts {
 	local ip=""
 	local cmd=""
 
-	echo "Check other hosts."
+	echo "check_hosts: Check other hosts."
 	maxid=$((maxid+1))
 	for i in $(seq 2 $maxid); do
 		if [ ! "$i" = "$id" ] ; then
@@ -38,14 +38,14 @@ function check_hosts {
 					cmd="ping -6 -c 1 -I $dev $ip"
 					;;
 				*)
-					echo "Wrong IP version"
+					echo "check_hosts: Wrong IP version"
 					exit 1
 					;;
 			esac
 			if $($cmd > /dev/null) ; then
-				echo "Host $ip is alive."
+				echo "check_hosts: Host $ip is alive."
 			else
-				echo "Host $ip is dead."
+				echo "check_hosts: Host $ip is dead."
 			fi
 		fi
 	done

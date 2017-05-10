@@ -17,13 +17,13 @@ function set_ip {
 	local ip=$2
 	local mask=$3
 	local dev=$4
-
+	local cmd="false"
 	case $version in
 		"ipv4") 
-			ip a add $ip/$mask dev $dev
+				ip a add $ip/$mask dev $dev || echo "netconfig: Cannot set $ip address to $dev"
 			;;
 		"ipv6")
-			ip -6 a add $ip/$mask dev $dev
+				ip -6 a add $ip/$mask dev $dev || echo "netconfig: Cannot set $ip address to $dev"
 			;;
 	esac
 }
@@ -72,7 +72,6 @@ function set_forwarding {
 VERSION=$1
 MASK=$2
 ID=$3
-ID=$((ID+1))
 
 IP=""
 
@@ -85,12 +84,17 @@ case $VERSION in
 esac
 
 # Clear device
+echo "netconfig: Down device enp0s3"
 down_dev "enp0s3"  
+echo "netconfig: Unset IP addresses on the device"
 unset_ip "enp0s3"
 
 # Set ip and up device
+echo "netconfig: Set new IP address $IP"
 set_ip $VERSION $IP $MASK "enp0s3"
+echo "netconfig: Up device enp0s3"
 up_dev "enp0s3"
 
 #Set ip forwarding
+echo "netconfig: Set forwarding"
 set_forwarding  $VERSION
