@@ -1,0 +1,15 @@
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+# Запретить передачу пакетов, которые отправлены на заданный TCP-порт.
+-A OUTPUT -o enp0s3 -p tcp --dport 1337 -j REJECT
+# Запретить приём пакетов, которые отправлены на заданный UDP-порт.
+-A INPUT -i enp0s3 -p udp --dport 1337 -j REJECT
+# Запретить передачу пакетов, которые отправлены с хоста (Kreia).
+-A OUTPUT -o enp0s3 -s 5.7.1.2 -j REJECT
+# Запретить приём пакетов, которые отправлены на хост (Rufus).
+-A INPUT -i enp0s3 -d 5.7.1.3 -j REJECT
+# Запретить приём ICMP пакетов (размер > 1000 байт & TTL < 10)
+-A INPUT -i enp0s3 -p icmp -m length ! --length 0:1000 -m ttl --ttl-lt 10 -j REJECT
+COMMIT

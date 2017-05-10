@@ -1,0 +1,100 @@
+\documentclass[12pt, a4paper] {ncc}
+\usepackage[utf8] {inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english, russian] {babel}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{listings,a4wide,longtable,amsmath,amsfonts,graphicx,tikz}
+\usepackage{pgfplots}
+\usepackage{indentfirst}
+\usepackage{bytefield}
+\usepackage{multirow}
+\usepackage{tabularx}
+
+\begin{document}
+\frenchspacing
+\pagestyle{empty}
+\begin{center}
+     Национальный исследовательский университет информационных технологий,
+                              механики и оптики\\
+                        Кафедра вычислительной техники\\
+                          Сети ЭВМ и телекоммуникации
+\end{center}
+\vspace{\stretch{2}}
+\begin{center}
+                            Учебно-исследовательская работа №3\\
+                        <<Основы администрирования маршрутизируюмых компьютерных сетей>
+								Варианты 38
+\end{center}
+\vspace{\stretch{3}}
+\begin{flushright}
+                                          Студентка:\\
+                                                         {\it Куклина М., P3301} \\
+										  Преподаватель:\\
+														 {\it Шинкарук Д.Н. }
+\end{flushright}
+\vspace{\stretch{4}}
+\begin{center}
+                             Санкт-Петербург, 2017
+\end{center}
+\newpage
+
+
+\section*{Цели работы}
+	Изучение основных методов настройки маршрутизируемых компьютерных сетей на примере сети,
+	состоящей из компьютеров под управлением ОС Linux.
+
+\section*{Общая часть}
+	\subsection*{Настройка сети}
+    	Для реализации задания была создана сеть из двух хостов, состоящих в одной
+    	внутренней сети. Для обеспечения сетевой доступности были выполнены следющие команды.
+\begin{verbatim}
+        # ip a addr 5.7.1.Y/24 dev enp0s3
+\end{verbatim}
+
+    	Адреса хостов отличаются значением Y.
+
+	\subsection*{nc}
+
+		Запуск на хосте Б -- сервере.
+
+\begin{verbatim}
+        # nc -l -p 1337
+\end{verbatim}
+
+		Запуск на хосте А -- клиента.
+
+\begin{verbatim}
+        # nc 5.7.1.2 1337
+\end{verbatim}
+	
+	\subsection*{iptables}
+
+	\begin{enumerate}
+		\item Запретить передачу пакетов, которые отправлены на заданный TCP-порт.
+            \begin{verbatim}
+            -A OUTPUT -o enp0s3 -p tcp --dport 1337 -j REJECT
+            \end{verbatim}
+		\item Запретить приём пакетов, которые отправлены на заданный UDP-порт.
+            \begin{verbatim}
+            -A INPUT -i enp0s3 -p udp --dport 1337 -j REJECT
+            \end{verbatim}
+		\item Запретить передачу пакетов, которые отправлены с хоста B.
+            \begin{verbatim}
+            -A OUTPUT -o enp0s3 -s 5.7.1.2 -j REJECT
+            \end{verbatim}
+		\item Запретить приём пакетов, которые отправлены на хост A.
+            \begin{verbatim}
+            -A INPUT -i enp0s3 -d 5.7.1.3 -j REJECT
+            \end{verbatim}
+		\item Запретить приём ICMP пакетов, размер которых больше 1000 байт и TTL меньше 10.
+            \begin{verbatim}
+            -A INPUT -i enp0s3 -p icmp -m length ! --length 0:1000 -m ttl  --ttl-lt 10 -j REJECT
+            \end{verbatim}
+	\end{enumerate}
+	
+\section{V1: вариант 3}
+
+\section{V2: вариант 8}
+
+
+\end{document} 
