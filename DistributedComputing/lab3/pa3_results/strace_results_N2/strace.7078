@@ -1,0 +1,174 @@
+     0.000000 execve(".././pa3", [".././pa3", "-p", "2", "10", "20"], [/* 31 vars */]) = 0
+     0.000275 brk(0)                    = 0x1839000
+     0.000073 access("/etc/ld.so.nohwcap", F_OK) = -1 ENOENT (No such file or directory)
+     0.000097 mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc84ea08000
+     0.000039 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+     0.000033 open("/tmp/tmpuBOXY_/pa3/tls/x86_64/libruntime.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+     0.000027 stat("/tmp/tmpuBOXY_/pa3/tls/x86_64", 0x7fffa30aab00) = -1 ENOENT (No such file or directory)
+     0.000023 open("/tmp/tmpuBOXY_/pa3/tls/libruntime.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+     0.000025 stat("/tmp/tmpuBOXY_/pa3/tls", 0x7fffa30aab00) = -1 ENOENT (No such file or directory)
+     0.000016 open("/tmp/tmpuBOXY_/pa3/x86_64/libruntime.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+     0.000017 stat("/tmp/tmpuBOXY_/pa3/x86_64", 0x7fffa30aab00) = -1 ENOENT (No such file or directory)
+     0.000016 open("/tmp/tmpuBOXY_/pa3/libruntime.so", O_RDONLY|O_CLOEXEC) = 3
+     0.000018 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\300\16\0\0\0\0\0\0"..., 832) = 832
+     0.000019 fstat(3, {st_mode=S_IFREG|0777, st_size=32607, ...}) = 0
+     0.000018 mmap(NULL, 2118816, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fc84e5e2000
+     0.000017 mprotect(0x7fc84e5e6000, 2093056, PROT_NONE) = 0
+     0.000018 mmap(0x7fc84e7e5000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3000) = 0x7fc84e7e5000
+     0.000021 mmap(0x7fc84e7e7000, 1184, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fc84e7e7000
+     0.000019 close(3)                  = 0
+     0.000017 open("/tmp/tmpuBOXY_/pa3/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+     0.000019 open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+     0.000016 fstat(3, {st_mode=S_IFREG|0644, st_size=87046, ...}) = 0
+     0.000017 mmap(NULL, 87046, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fc84e9f2000
+     0.000016 close(3)                  = 0
+     0.000015 access("/etc/ld.so.nohwcap", F_OK) = -1 ENOENT (No such file or directory)
+     0.000020 open("/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+     0.000018 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P \2\0\0\0\0\0"..., 832) = 832
+     0.000017 fstat(3, {st_mode=S_IFREG|0755, st_size=1840928, ...}) = 0
+     0.000018 mmap(NULL, 3949248, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fc84e21d000
+     0.000016 mprotect(0x7fc84e3d7000, 2097152, PROT_NONE) = 0
+     0.000017 mmap(0x7fc84e5d7000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1ba000) = 0x7fc84e5d7000
+     0.000020 mmap(0x7fc84e5dd000, 17088, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fc84e5dd000
+     0.000019 close(3)                  = 0
+     0.000016 open("/tmp/tmpuBOXY_/pa3/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+     0.000018 access("/etc/ld.so.nohwcap", F_OK) = -1 ENOENT (No such file or directory)
+     0.000018 open("/lib/x86_64-linux-gnu/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+     0.000018 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\320\16\0\0\0\0\0\0"..., 832) = 832
+     0.000016 fstat(3, {st_mode=S_IFREG|0644, st_size=14664, ...}) = 0
+     0.000017 mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc84e9f1000
+     0.000018 mmap(NULL, 2109744, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fc84e019000
+     0.000015 mprotect(0x7fc84e01c000, 2093056, PROT_NONE) = 0
+     0.000016 mmap(0x7fc84e21b000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7fc84e21b000
+     0.000020 close(3)                  = 0
+     0.000021 mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc84e9ef000
+     0.000019 arch_prctl(ARCH_SET_FS, 0x7fc84e9ef740) = 0
+     0.000054 mprotect(0x7fc84e5d7000, 16384, PROT_READ) = 0
+     0.000024 mprotect(0x7fc84e21b000, 4096, PROT_READ) = 0
+     0.000017 mprotect(0x7fc84e7e5000, 4096, PROT_READ) = 0
+     0.000017 mprotect(0x603000, 4096, PROT_READ) = 0
+     0.000017 mprotect(0x7fc84ea0a000, 4096, PROT_READ) = 0
+     0.000016 munmap(0x7fc84e9f2000, 87046) = 0
+     0.000062 brk(0)                    = 0x1839000
+     0.000015 brk(0x185a000)            = 0x185a000
+     0.000020 open("events.log", O_RDWR|O_CREAT|O_TRUNC, 0666) = 3
+     0.000030 open("pipes.log", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 4
+     0.000027 fstat(4, {st_mode=S_IFREG|0666, st_size=0, ...}) = 0
+     0.000018 mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc84ea07000
+     0.000021 pipe2([5, 6], O_NONBLOCK|O_DIRECT) = 0
+     0.000020 pipe2([7, 8], O_NONBLOCK|O_DIRECT) = 0
+     0.000017 pipe2([9, 10], O_NONBLOCK|O_DIRECT) = 0
+     0.000016 pipe2([11, 12], O_NONBLOCK|O_DIRECT) = 0
+     0.000017 pipe2([13, 14], O_NONBLOCK|O_DIRECT) = 0
+     0.000017 pipe2([15, 16], O_NONBLOCK|O_DIRECT) = 0
+     0.000018 mmap(NULL, 8, PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, -1, 0) = 0x7fc84ea06000
+     0.000022 mmap(NULL, 8, PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, -1, 0) = 0x7fc84ea05000
+     0.000018 mmap(NULL, 2000, PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANONYMOUS, -1, 0) = 0x7fc84ea04000
+     0.000025 clone(child_stack=0, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x7fc84e9efa10) = 7079
+     0.000053 clone(child_stack=0, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x7fc84e9efa10) = 7080
+     0.000019 close(5)                  = 0
+     0.000004 close(7)                  = 0
+     0.000003 close(10)                 = 0
+     0.000003 close(12)                 = 0
+     0.000005 close(11)                 = 0
+     0.000009 close(14)                 = 0
+     0.000005 close(16)                 = 0
+     0.000005 close(15)                 = 0
+     0.000008 fstat(9, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000023 read(9, 0x7fffa30a3e80, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000025 nanosleep({0, 1000000}, NULL) = 0
+     0.000013 fstat(9, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000014 read(9, "\257\257D\0\0\0\1\0000: process 1 (pid  7079,"..., 4096) = 76
+     0.000018 fstat(3, {st_mode=S_IFREG|0666, st_size=192, ...}) = 0
+     0.000018 mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc84ea03000
+     0.000021 write(3, "0: ID 0 got 76 bytes from 1 with"..., 47) = 47
+     0.000021 fstat(13, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000017 read(13, "\257\257D\0\0\0\1\0000: process 2 (pid  7080,"..., 4096) = 76
+     0.000018 write(3, "2: ID 0 got 76 bytes from 2 with"..., 47) = 47
+     0.000020 write(3, "3: process 0 received all STARTE"..., 43) = 43
+     0.000019 nanosleep({0, 1000000}, NULL) = 0
+     0.000005 fstat(6, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000017 write(6, "\257\257\4\0\4\0\4\0\1\2\1\0", 12) = 12
+     0.000019 write(3, "4: ID 0 send 12 bytes to 1.\n", 28) = 28
+     0.000019 fstat(13, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000017 read(13, 0x7fffa30a3e50, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000017 nanosleep({0, 1000000}, NULL) = 0
+     0.000059 fstat(13, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000017 read(13, 0x7fffa30a3e50, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000017 nanosleep({0, 1000000}, NULL) = 0
+     0.000022 fstat(13, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000021 read(13, 0x7fffa30a3e50, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000020 nanosleep({0, 1000000}, NULL) = 0
+     0.000006 fstat(13, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000004 read(13, 0x7fffa30a3e50, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000004 nanosleep({0, 1000000}, NULL) = 0
+     0.000072 fstat(13, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000005 read(13, 0x7fffa30a3e50, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000005 nanosleep({0, 1000000}, NULL) = 0
+     0.000022 fstat(13, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000016 read(13, "\257\257\0\0\2\0\10\0", 4096) = 8
+     0.000015 write(3, "4: ID 0 got 8 bytes from 2 with "..., 46) = 46
+     0.000015 nanosleep({0, 1000000}, NULL) = 0
+     0.000016 fstat(8, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000016 write(8, "\257\257\4\0\4\0\n\0\2\1\1\0", 12) = 12
+     0.000016 write(3, "10: ID 0 send 12 bytes to 2.\n", 29) = 29
+     0.000023 fstat(9, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000021 read(9, 0x7fffa30a3e50, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000020 nanosleep({0, 1000000}, NULL) = 0
+     0.000040 fstat(9, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000021 read(9, 0x7fffa30a3e50, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000020 nanosleep({0, 1000000}, NULL) = 0
+     0.000015 fstat(9, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000020 read(9, 0x7fffa30a3e50, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000020 nanosleep({0, 1000000}, NULL) = 0
+     0.000015 fstat(9, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000016 read(9, "\257\257\0\0\2\0\16\0", 4096) = 8
+     0.000018 write(3, "10: ID 0 got 8 bytes from 1 with"..., 48) = 48
+     0.000015 nanosleep({0, 1000000}, NULL) = 0
+     0.000016 fstat(6, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000015 write(6, "\257\257\0\0\3\0\20\0", 8) = 8
+     0.000015 write(3, "16: ID 0 send 8 bytes to 1.\n", 28) = 28
+     0.000022 nanosleep({0, 1000000}, NULL) = 0
+     0.000016 fstat(8, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000016 write(8, "\257\257\0\0\3\0\20\0", 8) = 8
+     0.000014 write(3, "16: ID 0 send 8 bytes to 2.\n", 28) = 28
+     0.000015 fstat(9, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000021 read(9, 0x7fffa30a3e80, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000019 nanosleep({0, 1000000}, NULL) = 0
+     0.000016 fstat(9, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000016 read(9, "\257\257(\0\1\0\22\00017: process 1 has DONE w"..., 4096) = 48
+     0.000021 write(3, "16: ID 0 got 48 bytes from 1 wit"..., 49) = 49
+     0.000022 fstat(13, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000021 read(13, 0x7fffa30a3e80, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000019 nanosleep({0, 1000000}, NULL) = 0
+     0.000014 fstat(13, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000016 read(13, "\257\257(\0\1\0\22\00017: process 2 has DONE w"..., 4096) = 48
+     0.000022 write(3, "19: ID 0 got 48 bytes from 2 wit"..., 49) = 49
+     0.000023 write(3, "20: process 0 received all DONE "..., 41) = 41
+     0.000022 fstat(9, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000021 read(9, 0x7fffa30a3e80, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000020 nanosleep({0, 1000000}, NULL) = 0
+     0.000042 fstat(9, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000020 read(9, 0x7fffa30a3e80, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000020 nanosleep({0, 1000000}, NULL) = 0
+     0.000030 fstat(9, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000018 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=7080, si_status=0, si_utime=0, si_stime=0} ---
+     0.000005 read(9, "\257\257x\0\5\0\24\0\1\24\n\0\0\0\0\0\n\0\1\0\0\0\n\0\2\0\0\0\n\0\3\0"..., 4096) = 128
+     0.000022 write(3, "20: ID 0 got 128 bytes from 1 wi"..., 50) = 50
+     0.000008 fstat(13, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000022 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=7079, si_status=0, si_utime=0, si_stime=0} ---
+     0.000011 read(13, "\257\257x\0\5\0\24\0\2\24\24\0\0\0\0\0\24\0\1\0\0\0\24\0\2\0\0\0\24\0\3\0"..., 4096) = 128
+     0.000029 write(3, "21: ID 0 got 128 bytes from 2 wi"..., 50) = 50
+     0.000038 fstat(1, {st_mode=S_IFREG|0666, st_size=0, ...}) = 0
+     0.000021 mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc84ea02000
+     0.000046 wait4(-1, NULL, 0, NULL)  = 7079
+     0.000024 wait4(-1, NULL, 0, NULL)  = 7080
+     0.000024 wait4(-1, NULL, 0, NULL)  = -1 ECHILD (No child processes)
+     0.000020 write(4, "Created pipe number 1.\nCreated p"..., 311) = 311
+     0.000024 close(4)                  = 0
+     0.000020 munmap(0x7fc84ea07000, 4096) = 0
+     0.000025 close(3)                  = 0
+     0.000019 munmap(0x7fc84ea03000, 4096) = 0
+     0.000027 write(1, "\nFull balance history for time r"..., 2001) = 2001
+     0.000029 exit_group(0)             = ?
+     0.000060 +++ exited with 0 +++

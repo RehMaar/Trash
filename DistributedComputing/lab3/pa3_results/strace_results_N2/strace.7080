@@ -1,0 +1,93 @@
+     0.000043 close(6)                  = 0
+     0.000003 close(5)                  = 0
+     0.000003 close(8)                  = 0
+     0.000010 close(10)                 = 0
+     0.000012 close(9)                  = 0
+     0.000010 close(12)                 = 0
+     0.000003 close(13)                 = 0
+     0.000004 close(15)                 = 0
+     0.000004 getppid()                 = 7078
+     0.000010 fstat(3, {st_mode=S_IFREG|0666, st_size=0, ...}) = 0
+     0.000014 mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc84ea03000
+     0.000007 write(3, "0: process 2 (pid  7080, parent "..., 68) = 68
+     0.000013 nanosleep({0, 1000000}, NULL) = 0
+     0.000959 fstat(14, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000018 write(14, "\257\257D\0\0\0\1\0000: process 2 (pid  7080,"..., 76) = 76
+     0.000019 write(3, "1: ID 2 send 76 bytes to 0.\n", 28) = 28
+     0.000019 nanosleep({0, 1000000}, NULL) = 0
+     0.000844 fstat(16, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000017 write(16, "\257\257D\0\0\0\1\0000: process 2 (pid  7080,"..., 76) = 76
+     0.000018 write(3, "1: ID 2 send 76 bytes to 1.\n", 28) = 28
+     0.000018 fstat(11, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000014 read(11, 0x7fffa30a8840, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000013 nanosleep({0, 1000000}, NULL) = 0
+     0.000843 fstat(11, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000017 read(11, "\257\257D\0\0\0\1\0000: process 1 (pid  7079,"..., 4096) = 76
+     0.000018 write(3, "1: ID 2 got 76 bytes from 1 with"..., 47) = 47
+     0.000019 write(3, "2: process 2 received all STARTE"..., 43) = 43
+     0.000018 fstat(7, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000017 read(7, 0x7fffa30a8850, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000016 nanosleep({0, 1000000}, NULL) = 0
+     0.000919 fstat(11, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000021 read(11, 0x7fffa30a8850, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000019 nanosleep({0, 1000000}, NULL) = 0
+     0.000918 fstat(7, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000020 read(7, 0x7fffa30a8850, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000020 nanosleep({0, 1000000}, NULL) = 0
+     0.000895 fstat(11, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000021 read(11, "\257\257\4\0\4\0\6\0\1\2\1\0", 4096) = 12
+     0.000022 write(3, "2: ID 2 got 12 bytes from 1 with"..., 47) = 47
+     0.000024 write(3, "8: process 2 received $ 1 from p"..., 41) = 41
+     0.000023 nanosleep({0, 1000000}, NULL) = 0
+     0.000942 fstat(14, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000020 write(14, "\257\257\0\0\2\0\10\0", 8) = 8
+     0.000022 write(3, "8: ID 2 send 8 bytes to 0.\n", 27) = 27
+     0.000023 fstat(7, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000020 read(7, 0x7fffa30a8850, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000019 nanosleep({0, 1000000}, NULL) = 0
+     0.000989 fstat(11, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000020 read(11, 0x7fffa30a8850, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000020 nanosleep({0, 1000000}, NULL) = 0
+     0.000922 fstat(7, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000021 read(7, "\257\257\4\0\4\0\n\0\2\1\1\0", 4096) = 12
+     0.000022 write(3, "8: ID 2 got 12 bytes from 0 with"..., 48) = 48
+     0.000021 nanosleep({0, 1000000}, NULL) = 0
+     0.000944 fstat(16, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000021 write(16, "\257\257\4\0\4\0\f\0\2\1\1\0", 12) = 12
+     0.000020 write(3, "12: ID 2 send 12 bytes to 1.\n", 29) = 29
+     0.000015 write(3, "12: process 2 transferred $ 1 to"..., 43) = 43
+     0.000014 fstat(7, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000016 read(7, 0x7fffa30a8850, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000015 nanosleep({0, 1000000}, NULL) = 0
+     0.001013 fstat(11, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000016 read(11, 0x7fffa30a8850, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000018 nanosleep({0, 1000000}, NULL) = 0
+     0.000990 fstat(7, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000022 read(7, 0x7fffa30a8850, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000019 nanosleep({0, 1000000}, NULL) = 0
+     0.000968 fstat(11, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000021 read(11, 0x7fffa30a8850, 4096) = -1 EAGAIN (Resource temporarily unavailable)
+     0.000019 nanosleep({0, 1000000}, NULL) = 0
+     0.000911 fstat(7, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000020 read(7, "\257\257\0\0\3\0\20\0", 4096) = 8
+     0.000021 write(3, "12: ID 2 got 8 bytes from 0 with"..., 48) = 48
+     0.000025 write(3, "17: process 2 has DONE with bala"..., 40) = 40
+     0.000021 nanosleep({0, 1000000}, NULL) = 0
+     0.000891 fstat(14, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000020 write(14, "\257\257(\0\1\0\22\00017: process 2 has DONE w"..., 48) = 48
+     0.000021 write(3, "18: ID 2 send 48 bytes to 0.\n", 29) = 29
+     0.000022 nanosleep({0, 1000000}, NULL) = 0
+     0.000827 fstat(16, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000020 write(16, "\257\257(\0\1\0\22\00017: process 2 has DONE w"..., 48) = 48
+     0.000021 write(3, "18: ID 2 send 48 bytes to 1.\n", 29) = 29
+     0.000021 fstat(11, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000020 read(11, "\257\257(\0\1\0\22\00017: process 1 has DONE w"..., 4096) = 48
+     0.000021 write(3, "18: ID 2 got 48 bytes from 1 wit"..., 49) = 49
+     0.000005 write(3, "19: process 2 received all DONE "..., 41) = 41
+     0.000004 nanosleep({0, 1000000}, NULL) = 0
+     0.000928 fstat(14, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+     0.000020 write(14, "\257\257x\0\5\0\24\0\2\24\24\0\0\0\0\0\24\0\1\0\0\0\24\0\2\0\0\0\24\0\3\0"..., 128) = 128
+     0.000021 write(3, "20: ID 2 send 128 bytes to 0.\n", 30) = 30
+     0.000016 write(4, "Created pipe number 1.\nCreated p"..., 311) = 311
+     0.000020 exit_group(0)             = ?
+     0.000011 +++ exited with 0 +++
