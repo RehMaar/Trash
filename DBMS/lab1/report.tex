@@ -1,0 +1,60 @@
+\documentclass[12pt, a4paper] {ncc}
+\usepackage[utf8] {inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english, russian] {babel}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{listings,a4wide,longtable,amsmath,amsfonts,graphicx,tikz}
+\usepackage{pgfplots}
+\usepackage{indentfirst}
+\usepackage{bytefield}
+\usepackage{multirow}
+\usepackage{tabularx}
+
+
+\lstdefinestyle{SQLStyle}{
+    basicstyle=\footnotesize\ttfamily,
+    language={SQL},
+    keywordstyle=\bfseries,
+    showstringspaces=false,
+    commentstyle={},
+    escapebegin=\begin{russian}\commentfont,
+    escapeend=\end{russian},
+}
+\newcommand{\commentfont}{\ttfamily}
+
+\begin{document}
+\frenchspacing
+\pagestyle{empty}
+\begin{center}
+     Национальный исследовательский университет информационных технологий,
+                              механики и оптики\\
+                        Кафедра вычислительной техники\\
+					Системы управления базами данных
+\end{center}
+\vspace{\stretch{2}}
+\begin{center}
+                            Лабораторная работа №1\\
+\end{center}
+\vspace{\stretch{3}}
+\vspace{\stretch{4}}
+\begin{center}
+                             Санкт-Петербург, 2017
+\end{center}
+\newpage
+
+
+\section{Цели работы}
+    Используя сведения из представлений словаря данных получить информацию о любой таблице: 
+	Номер по порядку, Имя столбца, Атрибуты (в атрибуты столбца включить тип данных, ограничение типа CHECK).
+
+\section{Листинг}
+	
+\lstinputlisting[style=SQLStyle,inputencoding=cp1251]{./l.sql}
+
+\section*{Вывод}
+
+В ходе выполнения лабораторной работы было проведено изучение словаря данных Oracle DB. Оказалось, что
+словарь данных является описанием БД и содержит именя и атрибуты всех объектов базы; представляет собой
+набор таблиц и представлений. 
+
+\end{document}
