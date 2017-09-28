@@ -1,5 +1,3 @@
-# TODO: tests, try block.
-
 # 1. 
 # Вх: список строк, Возвр: кол-во строк
 # где строка > 2 символов и первый символ == последнему
@@ -13,7 +11,7 @@ def me(words):
 # за искл всех строк начинающихся с 'x', которые попадают в начало списка.
 # ['tix', 'xyz', 'apple', 'xacadu', 'aabbbccc'] -> ['xacadu', 'xyz', 'aabbbccc', 'apple', 'tix']
 def fx(words):
-  return list(sorted(words, key=lambda s: (s[0] != 'x', s)));
+  return list(sorted(words, key=lambda s: (len(s) != 0 and s[0] != 'x', s)));
 
 
 # 3. 
@@ -34,11 +32,18 @@ def test(f, data, expected):
 
 def main():
     test(me, ['aa', 'ba', 'ca', 'acccca', 'bab', 'a'], 2);
-    test(fx, ['tix', 'xyz', 'apple', 'xacadu', 'aabbbccc'],
-            ['xacadu', 'xyz', 'aabbbccc', 'apple', 'tix']);
-    test(sort_by_sec, [(1, 7), (1, 3), (3, 4, 5), (), (2, 2)],
-                      [(), (2, 2), (1, 3), (3, 4, 5), (1, 7)]);
+    test(me, ['aa', 'a', 'bb', 'acb'],  0);
+    test(me, [], 0);
+    test(me, ['', '', ''], 0);
 
+    test(fx, ['tix', 'xyz', 'apple', 'xacadu', 'aabbbccc'], ['xacadu', 'xyz', 'aabbbccc', 'apple', 'tix']);
+    test(fx, [], []);
+    test(fx, ['', 'b', 'c', 'a'], ['', 'a', 'b', 'c']);
+    
+    test(sort_by_sec, [(1, 7), (1, 3), (3, 4, 5), (2, 2)],
+                      [(2, 2), (1, 3), (3, 4, 5), (1, 7)]);
+    test(sort_by_sec, [(1, 4), (), (4, 1)], [(), (4, 1), (1, 4)]);
+    test(sort_by_sec, [(), ()], [(), ()]);
 # Test
 if __name__ == '__main__':
   main()
