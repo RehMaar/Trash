@@ -1,0 +1,101 @@
+\documentclass[12pt, a4paper] {ncc}
+\usepackage[utf8] {inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english, russian] {babel}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{listings,a4wide,longtable,amsmath,amsfonts,graphicx}
+\usepackage{indentfirst}
+\usepackage{bytefield}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
+\usepackage{tabularx}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+
+\begin{document}
+\setcounter{figure}{0}
+\frenchspacing
+\pagestyle{empty}
+\begin{center}
+                            Университет ИТМО    \\
+                        Кафедра вычислительной техники
+
+\vspace{\stretch{2}}
+                    Технологии программрования
+\end{center}
+\vspace{\stretch{2}}
+\begin{center}
+                            Лабораторная работа №2\\
+\end{center}
+\vspace{\stretch{3}}
+\begin{flushright}
+                                    Студенты:\\
+                                    {\it Куклина Мария,}\\
+                                    {\it Кириллова Анастасия, P3401}\\
+                                    Преподаватель: \\
+                                    {\it Оголюк А.А.}
+\end{flushright}
+\vspace{\stretch{4}}
+\begin{center}
+                             Санкт-Петербург, 2017
+\end{center}
+\newpage
+
+\section{Ход работы}
+    \subsection{Задание 1}
+        \subsubsection{Листинг}
+        \begin{description}
+            \item[Входные данные:] список чисел.
+            \item[Выходные данные:] список чисел без повторений. 
+        \end{description}
+
+        \lstset{language=Python}
+        \begin{lstlisting}
+def rm_adj(nums):
+    return reduce(lambda xs, x: xs if x in xs else xs + [x], nums, []);
+        \end{lstlisting}
+
+        \subsubsection{Тест}
+
+        \begin{lstlisting}
+nums = [0, 0, 0, 0]
+exp  = [0]
+res = rm_adj(nums)
+test_print(exp, res)
+
+nums = [0, 2, 2, 3]
+exp  = [0, 2, 3]
+res = rm_adj(nums)
+test_print(exp, res)
+        \end{lstlisting}
+
+    \subsection{Задание 2}
+
+        \subsubsection{Листинг}
+        \begin{description}
+            \item[Входные данные:] два упоорядоченных по возрастанию списка.
+            \item[Выходные данные:] объединенный упорядоченный список. 
+        \end{description}
+
+        \begin{lstlisting}
+def merge(lst1, lst2):
+    return sorted(lst1 + lst2);
+        \end{lstlisting}
+    Встроенная функция сортировки производит сортировку по алгоритму Timsort, который
+    в худшем случае выполняется за $O(n log n)$, а в лучшем -- за $O(n)$. Однако, насмотря
+    на то, что алгоритм \textit{Merge} работает за $\Theta(n)$, опытные данные показали,
+    что текущая реализация merge эффективнее.
+
+        \subsubsection{Тест}
+
+        \begin{lstlisting}
+lst1 = [0, 2, 4, 6]
+lst2 = [1, 3, 5]
+res = merge(lst1, lst2);
+exp = [0, 1, 2, 3, 4, 5, 6];
+test_print(exp, res);
+        \end{lstlisting}
+\end{document}
