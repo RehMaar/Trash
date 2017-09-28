@@ -21,23 +21,23 @@ def fx(words):
 # Возвр: список сортир по возрастанию последнего элемента в каждом корт.
 # [(1, 7), (1, 3), (3, 4, 5), (2, 2)] -> [(2, 2), (1, 3), (3, 4, 5), (1, 7)]
 def sort_by_sec(lst):
-	return sorted(lst, key=lambda pair: bool(pair) and pair[-1])
+    return sorted(lst, key=lambda pair: bool(pair) and pair[-1])
 
 def test(f, data, expected):
 
-	print("Data:\n", data);
-	res = f(data);
-	print("Output:\n", res);
-	print("Excepted:\n", expected);
-	print("PASSED" if res == expected else "FAILED");
-	print("");
+    print("Data:\n", data);
+    res = f(data);
+    print("Output:\n", res);
+    print("Excepted:\n", expected);
+    print("PASSED" if res == expected else "FAILED");
+    print("");
 
 def main():
-	test(me, ['aa', 'ba', 'ca', 'acccca', 'bab', 'a'], 2);
-	test(fx, ['tix', 'xyz', 'apple', 'xacadu', 'aabbbccc'],
-			['xacadu', 'xyz', 'aabbbccc', 'apple', 'tix']);
-	test(sort_by_sec, [(1, 7), (1, 3), (3, 4, 5), (), (2, 2)],
-					  [(), (2, 2), (1, 3), (3, 4, 5), (1, 7)]);
+    test(me, ['aa', 'ba', 'ca', 'acccca', 'bab', 'a'], 2);
+    test(fx, ['tix', 'xyz', 'apple', 'xacadu', 'aabbbccc'],
+            ['xacadu', 'xyz', 'aabbbccc', 'apple', 'tix']);
+    test(sort_by_sec, [(1, 7), (1, 3), (3, 4, 5), (), (2, 2)],
+                      [(), (2, 2), (1, 3), (3, 4, 5), (1, 7)]);
 
 # Test
 if __name__ == '__main__':
