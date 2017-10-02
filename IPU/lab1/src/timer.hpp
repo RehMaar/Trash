@@ -1,6 +1,7 @@
 #ifndef __SLAVE_TIMER_H__
 #define __SLAVE_TIMER_H__
 
+#include <stdint.h>
 #include "systemc.h"
 
 SC_MODULE (timer) {
@@ -13,30 +14,52 @@ SC_MODULE (timer) {
 
     sc_out<uint32_t> data_o;
 
-
     uint32_t tmr;
     uint32_t tval;
 
-    /**
-     * Bit 0: 0 -- inc, 1 -- dec.
-     * Bit 1: 0 -- stop, 1 -- run.
-     * 
-     * Bit 2--31: reserved.
-     */
-
-#define SET_MODE(tconf, mode)   (tconf[0] = mode)
-#define IS_INC_MODE(tconf) 		(tconf[0] == INC)
-#define SET_RUN (tconf, type)   (tconf[1] = type)
-#define IS_RUN(tconf) 			(tconf[1] == RUN)
-    enum {
+/**
+ * Bit 0: 0 -- inc, 1 -- dec.
+ * Bit 1: 0 -- stop, 1 -- run.
+ * 
+ * Bit 2--31: reserved.
+ */
+enum {
+    TYPE_BIT = 0x0,
         INC  = 0x0,
         DEC  = 0x1,
-        RUN  = 0x0,
+    RUN_BIT  = 0x1,
         STOP = 0x1,
-    };
-    sc_bv<32> tconf;
+        RUN  = 0x0,
+};
+
+#define READ_BIT(buf_, bit_) ((buf_ >> bit_) & 1)
+
+#define TOGGLE_BIT(buf_, bit_, val_)\
+		(but_ ^ (((but_ >> bit_) ^ val_) << bit_))
+
+#define SET_MODE(mode_, bit_) \
+    (tconf = READ_BIT(tconf, bit_) == mode_ ?: TOGGLE_BIT(tconf, bit_, mode_))
+
+    uint32_t tconf;
+
+	enum {
+		TMR_ADDR = 0,
+		TVAL_ADDR,
+		TCONF_ADDR,
+		REG_NUM
+	};
+
+	uint32_t * reg_map[REG_NUM] = { 
+    	&tmr,
+    	&tval,
+    	&tconf
+	};
+
+private:
+	uint32_t *get_register(uint32_t addr);
 
 public:
+
     void reset();
     void read();
     void write();
