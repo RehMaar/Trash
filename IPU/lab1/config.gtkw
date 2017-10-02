@@ -1,0 +1,29 @@
+[*]
+[*] GTKWave Analyzer v3.3.82 (w)1999-2017 BSI
+[*] Mon Oct  2 19:08:50 2017
+[*]
+[dumpfile] "/home/maar/stdy/Trash/IPU/lab1/wave.vcd"
+[dumpfile_mtime] "Mon Oct  2 19:05:56 2017"
+[dumpfile_size] 1068
+[savefile] "/home/maar/stdy/Trash/IPU/lab1/config.gtkw"
+[timestart] 0
+[size] 1362 721
+[pos] -1 -1
+*-14.708692 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 213
+[signals_width] 126
+[sst_expanded] 1
+[sst_vpaned_height] 190
+@22
+SystemC.addr[31:0]
+@28
+SystemC.clk
+@22
+SystemC.data_i[31:0]
+SystemC.data_o[31:0]
+@28
+SystemC.rd
+SystemC.reset
+SystemC.wr
+[pattern_trace] 1
+[pattern_trace] 0
