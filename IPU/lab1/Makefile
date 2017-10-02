@@ -1,14 +1,11 @@
 CPP = g++
-SYSTEMC_HOME    = /opt/systemc-2.3.1
+SYSTEMC_INCLUDE    = /usr/include/systemc
 TARGET_ARCH     = linux64
 
-SYSTEMC_INC_DIR = $(SYSTEMC_HOME)/include
-SYSTEMC_LIB_DIR = $(SYSTEMC_HOME)/lib-$(TARGET_ARCH)
 
 FLAGS           = -g -Wall -pedantic -Wno-long-long \
-                 -DSC_INCLUDE_DYNAMIC_PROCESSES -fpermissive \
-                 -I$(SYSTEMC_INC_DIR)
-LDFLAGS         = -L$(SYSTEMC_LIB_DIR) -lsystemc -lm
+                 -DSC_INCLUDE_DYNAMIC_PROCESSES -fpermissive
+LDFLAGS         = -lsystemc -lm
 
 SRCS = src/timer.cpp
 OBJS = $(SRCS:.cpp=.o)
@@ -30,10 +27,13 @@ $(BIN): $(SRCS)
 
 compile_test: $(TEST_OBJECTS)
 
+run_test:
+	$(foreach var,$(TEST_OBJECTS), ./$(var); )
+
 run:
 	./$(BIN)
 
 wave:
 	gtkwave -z $(WAVE).vcd
 
-.PHONY: wave run compile_test
+.PHONY: wave run compile_test run_test
