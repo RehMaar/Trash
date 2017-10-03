@@ -16,7 +16,7 @@ SC_MODULE (timer) {
 
     uint32_t tmr;
     uint32_t tval;
-
+    uint32_t tconf;
 /**
  * Bit 0: 0 -- inc, 1 -- dec.
  * Bit 1: 0 -- stop, 1 -- run.
@@ -40,30 +40,23 @@ enum {
 #define SET_MODE(mode_, bit_) \
     (tconf = READ_BIT(tconf, bit_) == mode_ ?: TOGGLE_BIT(tconf, bit_, mode_))
 
-    uint32_t tconf;
 
-	enum {
+private:
+	uint32_t *get_register(uint32_t addr);
+
+    void count();
+
+public:
+	enum reg_map_addr {
 		TMR_ADDR = 0,
 		TVAL_ADDR,
 		TCONF_ADDR,
 		REG_NUM
 	};
 
-	uint32_t * reg_map[REG_NUM] = { 
-    	&tmr,
-    	&tval,
-    	&tconf
-	};
-
-private:
-	uint32_t *get_register(uint32_t addr);
-
-public:
-
     void reset();
     void read();
     void write();
-    void count();
 
     SC_CTOR (timer) {
         SC_METHOD (reset);
@@ -75,6 +68,14 @@ public:
         SC_METHOD (write);
             sensitive << clk_i.pos();
     }
+
+private:
+
+	uint32_t * reg_map[reg_map_addr::REG_NUM] = { 
+    	&tmr,
+    	&tval,
+    	&tconf
+	};
 };
 
 #endif  /* __SLAVE_TIMER_H__ */
