@@ -34,6 +34,6 @@ run:
 	./$(BIN)
 
 wave:
-	gtkwave -z $(WAVE).vcd
+	gtkwave $(WAVE).vcd config.gtkw
 
 .PHONY: wave run compile_test run_test
