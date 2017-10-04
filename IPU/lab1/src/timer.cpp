@@ -1,15 +1,15 @@
 #include "timer.hpp"
 
-uint32_t *timer::get_register(uint32_t addr) {
+sc_uint<32> *timer::get_register(uint32_t addr) {
     return reg_map[addr < REG_NUM ? addr : 0];
 }
 
 void timer::count() {
-    if (READ_BIT(tconf, RUN_BIT)) {
-        if (READ_BIT(tconf, TYPE_BIT) == INC) {
+    if (tconf[RUN_BIT]) {
+        if (tconf[TYPE_BIT] == INC) {
             tval = tval == tmr ? 0 : tval + 1;
         } else {
-            tval = tval == 0 ? tmr : tval - 1;
+            tval = tval == 0 ? tmr : sc_uint<32>(tval - 1);
         }
     }
 }
@@ -28,7 +28,7 @@ void timer::read() {
 
 void timer::write() {
     if (wr_i) {
-        uint32_t *reg = get_register(addr_i.read());
+        sc_uint<32> *reg = get_register(addr_i.read());
         *reg = data_i.read();
     }
 }

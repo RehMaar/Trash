@@ -7,6 +7,7 @@
 SC_MODULE (timer) {
     sc_in_clk       clk_i;
     sc_in<bool>     rst_i;
+    /* Bus interface. */
     sc_in<uint32_t> addr_i;
     sc_in<uint32_t> data_i;
     sc_in<bool>     rd_i;
@@ -14,9 +15,34 @@ SC_MODULE (timer) {
 
     sc_out<uint32_t> data_o;
 
-    uint32_t tmr;
-    uint32_t tval;
-    uint32_t tconf;
+public:
+	enum reg_map_addr {
+		TMR_ADDR = 0,
+		TVAL_ADDR,
+		TCONF_ADDR,
+		REG_NUM
+	};
+
+    void reset();	/* Reset timer.   */
+    void read(); 	/* Read from bus. */
+    void write();	/* Write to bus.  */
+
+    SC_CTOR (timer) {
+        SC_METHOD (reset);
+            sensitive << rst_i;
+        SC_METHOD (count);
+        	sensitive << clk_i.pos();
+        SC_METHOD (read);
+            sensitive << clk_i.pos();
+        SC_METHOD (write);
+            sensitive << clk_i.pos();
+    }
+
+private:
+
+    sc_uint<32> tmr;
+    sc_uint<32> tval;
+    sc_uint<32> tconf;
 /**
  * Bit 0: 0 -- inc, 1 -- dec.
  * Bit 1: 0 -- stop, 1 -- run.
@@ -32,50 +58,16 @@ enum {
         RUN  = 0x0,
 };
 
-#define READ_BIT(buf_, bit_) ((buf_ >> bit_) & 1)
-
-#define TOGGLE_BIT(buf_, bit_, val_)\
-		(but_ ^ (((but_ >> bit_) ^ val_) << bit_))
-
-#define SET_MODE(mode_, bit_) \
-    (tconf = READ_BIT(tconf, bit_) == mode_ ?: TOGGLE_BIT(tconf, bit_, mode_))
-
-
-private:
-	uint32_t *get_register(uint32_t addr);
-
-    void count();
-
-public:
-	enum reg_map_addr {
-		TMR_ADDR = 0,
-		TVAL_ADDR,
-		TCONF_ADDR,
-		REG_NUM
-	};
-
-    void reset();
-    void read();
-    void write();
-
-    SC_CTOR (timer) {
-        SC_METHOD (reset);
-            sensitive << rst_i;
-        SC_METHOD (count);
-        	sensitive << clk_i.pos();
-        SC_METHOD (read);
-            sensitive << clk_i.pos();
-        SC_METHOD (write);
-            sensitive << clk_i.pos();
-    }
-
-private:
-
-	uint32_t * reg_map[reg_map_addr::REG_NUM] = { 
+	sc_uint<32> * reg_map[reg_map_addr::REG_NUM] = { 
     	&tmr,
     	&tval,
     	&tconf
 	};
+
+	sc_uint<32> *get_register(uint32_t addr);
+
+    void count();
+
 };
 
 #endif  /* __SLAVE_TIMER_H__ */
