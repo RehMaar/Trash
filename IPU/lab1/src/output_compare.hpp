@@ -38,6 +38,10 @@ private:
     sc_uint<32> occonf;
     sc_uint<32> ocr;
 
+	bool simple_mode;
+	bool pwm_mode;
+	bool logic_rst;
+
 	/* Bits ranges. */
     enum oc_conf {
         OC_MODE_START = 0,
@@ -48,8 +52,8 @@ private:
     /* OC modes. */
     enum oc_mode {
         OFF = 0x0,
-        TO_ONE,
-        TO_ZERO,
+        SIMPLE_TO_ONE,
+        SIMPLE_TO_ZERO,
         TOGGLE,
         PWM_TO_ONE,
         PWM_TO_ZERO
@@ -72,7 +76,9 @@ private:
     void read();
     void write();
 
+
 	bool cmp_ocr();
+	void init_new_mode();
 	void out_logic();
 
     sc_uint<32> *oc::get_register(uint32_t addr);
