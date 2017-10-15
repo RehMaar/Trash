@@ -11,7 +11,7 @@ SC_MODULE (test_timer) {
 
 private:
 
-    void write_register(timer::reg_map_addr reg, sc_uint<32> val) {
+    void write_register(timer::timer_reg_map reg, sc_uint<32> val) {
         addr.write(reg);
         data_i.write(val);
         wr.write(true);
@@ -20,7 +20,7 @@ private:
         wait();
     }
 
-    sc_uint<32> read_register(timer::reg_map_addr reg) {
+    sc_uint<32> read_register(timer::timer_reg_map reg) {
         addr.write(reg);
         rd.write(true);
         wait();
@@ -40,8 +40,8 @@ private:
 
     void test_set_tmr(uint32_t tmr) {
         cout << "Test: set value: " << tmr << endl;
-        write_register(timer::reg_map_addr::TMR_ADDR, tmr);
-        sc_uint<32> val = read_register(timer::reg_map_addr::TMR_ADDR);
+        write_register(timer::timer_reg_map::TMR_ADDR, tmr);
+        sc_uint<32> val = read_register(timer::timer_reg_map::TMR_ADDR);
         cout << "Test: read after setting TMR: " <<  val << endl;
     }
     
@@ -50,7 +50,7 @@ private:
     }
 
     void test_conf(timer::timer_mode run, timer::timer_mode type) {
-        sc_uint<32> val = read_register(timer::reg_map_addr::TCONF_ADDR);
+        sc_uint<32> val = read_register(timer::timer_reg_map::TCONF_ADDR);
         cout << "Test: read tconf: " << val << endl;
 
         val[timer::timer_mode::RUN_BIT]  = run;
@@ -58,15 +58,15 @@ private:
 
         cout << "Test: set time in run mode: " << val << endl;
 
-        write_register(timer::reg_map_addr::TCONF_ADDR, val);
+        write_register(timer::timer_reg_map::TCONF_ADDR, val);
         cout << "Test: write tconf" << endl;
 
-        val = read_register(timer::reg_map_addr::TCONF_ADDR);
+        val = read_register(timer::timer_reg_map::TCONF_ADDR);
         cout << "Test: read tconf: " << val << endl;
     }
 
     void test_read_val() {
-        sc_uint<32> val = read_register(timer::reg_map_addr::TVAL_ADDR);
+        sc_uint<32> val = read_register(timer::timer_reg_map::TVAL_ADDR);
         cout << "Test: tval: " << val << endl;
     }
 
@@ -101,7 +101,7 @@ public:
 
         cout << ">>> Test: overflow decrement timer" << endl;
         cout << "Test: set TVAL to zero" << endl;
-        write_register(timer::reg_map_addr::TVAL_ADDR, 0);
+        write_register(timer::timer_reg_map::TVAL_ADDR, 0);
         test_read_val();
 
         test_conf(timer::timer_mode::RUN, timer::timer_mode::DEC);
@@ -115,7 +115,7 @@ public:
 
         cout << ">>> Test: overflow increment timer" << endl;
         cout << "Test: set TVAL to TMR" << endl;
-        write_register(timer::reg_map_addr::TVAL_ADDR, 100);
+        write_register(timer::timer_reg_map::TVAL_ADDR, 100);
         test_read_val();
 
         test_conf(timer::timer_mode::RUN, timer::timer_mode::INC);

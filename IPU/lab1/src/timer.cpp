@@ -1,5 +1,19 @@
 #include "timer.hpp"
 
+timer::timer(sc_module_name nm) : sc_module(nm) {
+    /* Public methods. */
+    SC_METHOD (reset);
+        sensitive << rst_i;
+    SC_METHOD (read);
+        sensitive << clk_i.pos();
+    SC_METHOD (write);
+        sensitive << clk_i.pos();
+
+    /* Private methods. */
+    SC_METHOD (count);
+    sensitive << clk_i.pos();
+}
+
 sc_uint<32> *timer::get_register(uint32_t addr) {
     return reg_map[addr < REG_NUM ? addr : 0];
 }
