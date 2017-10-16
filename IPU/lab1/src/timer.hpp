@@ -16,6 +16,7 @@ SC_MODULE (timer) {
     sc_out<sc_uint<32>> data_o;
     /* Timer interface. */
     sc_out<sc_uint<32>> tval_o;
+    sc_out<bool>		tm_of;
 
     sc_uint<32> tmr;
     sc_uint<32> tval;
@@ -51,7 +52,7 @@ public:
 
 private:
 
-	sc_uint<32> * reg_map[reg_map_addr::REG_NUM] = { 
+	sc_uint<32> * reg_map[timer_reg_map::REG_NUM] = { 
     	&tmr,
     	&tval,
     	&tconf

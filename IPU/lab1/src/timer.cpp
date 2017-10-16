@@ -8,7 +8,6 @@ timer::timer(sc_module_name nm) : sc_module(nm) {
         sensitive << clk_i.pos();
     SC_METHOD (write);
         sensitive << clk_i.pos();
-
     /* Private methods. */
     SC_METHOD (count);
     sensitive << clk_i.pos();
@@ -22,10 +21,15 @@ void timer::count() {
     if (tconf[RUN_BIT]) {
         if (tconf[TYPE_BIT] == INC) {
             tval = tval == tmr ? 0 : tval + 1;
+            tm_of.write(tval == tmr);
         } else {
             tval = tval == 0 ? tmr : sc_uint<32>(tval - 1);
+            tm_of.write(tval == 0);
         }
+    } else {
+        tm_of.write(false);
     }
+    tval_o.write(tval);
 }
 
 void timer::reset() {
