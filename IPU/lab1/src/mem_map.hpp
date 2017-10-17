@@ -1,7 +1,7 @@
-#ifndef src/mem_map_hpp_INCLUDED
-#define src/mem_map_hpp_INCLUDED
+#ifndef mem_map_hpp_INCLUDED
+#define mem_map_hpp_INCLUDED
 
-enum mem_map_addr {
+enum mem_map {
 	TMR_TM1    = 0x0,
 	TVAL_TM1   = 0x4,
 	TCONF_TM1  = 0x8,
@@ -12,4 +12,4 @@ enum mem_map_addr {
 	OCR_OC 	   = 0x1C
 };
 
-#endif // src/mem_map_hpp_INCLUDED
+#endif // mem_map_hpp_INCLUDED
