@@ -1,0 +1,81 @@
+[*]
+[*] GTKWave Analyzer v3.3.82 (w)1999-2017 BSI
+[*] Tue Oct 17 18:57:03 2017
+[*]
+[dumpfile] "/home/maar/stdy/Trash/IPU/lab1/wave_bus.vcd"
+[dumpfile_mtime] "Tue Oct 17 18:55:21 2017"
+[dumpfile_size] 2415
+[savefile] "/home/maar/stdy/Trash/IPU/lab1/config_bus.gtkw"
+[timestart] 0
+[size] 1362 721
+[pos] -1 -1
+*-15.056596 60000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 213
+[signals_width] 235
+[sst_expanded] 1
+[sst_vpaned_height] 190
+@24
+SystemC.rst
+SystemC.clk
+SystemC.addr_i[31:0]
+SystemC.data_i[31:0]
+SystemC.data_o[31:0]
+SystemC.rd_i
+SystemC.wr_i
+SystemC.tm1_addr_o[31:0]
+SystemC.tm1_data_i[31:0]
+SystemC.tm1_rd_o
+SystemC.tm1_wr_o
+SystemC.tm1_tm_of
+SystemC.tm1_tval_o[31:0]
+SystemC.tm2_addr_o[31:0]
+SystemC.tm2_data_i[31:0]
+SystemC.tm2_rd_o
+SystemC.tm2_wr_o
+SystemC.tm2_tm_of
+@25
+SystemC.tm2_tval_o[31:0]
+@24
+SystemC.oc_addr_o[31:0]
+@c00024
+SystemC.oc_data_i[31:0]
+@28
+(0)SystemC.oc_data_i[31:0]
+(1)SystemC.oc_data_i[31:0]
+(2)SystemC.oc_data_i[31:0]
+(3)SystemC.oc_data_i[31:0]
+(4)SystemC.oc_data_i[31:0]
+(5)SystemC.oc_data_i[31:0]
+(6)SystemC.oc_data_i[31:0]
+(7)SystemC.oc_data_i[31:0]
+(8)SystemC.oc_data_i[31:0]
+(9)SystemC.oc_data_i[31:0]
+(10)SystemC.oc_data_i[31:0]
+(11)SystemC.oc_data_i[31:0]
+(12)SystemC.oc_data_i[31:0]
+(13)SystemC.oc_data_i[31:0]
+(14)SystemC.oc_data_i[31:0]
+(15)SystemC.oc_data_i[31:0]
+(16)SystemC.oc_data_i[31:0]
+(17)SystemC.oc_data_i[31:0]
+(18)SystemC.oc_data_i[31:0]
+(19)SystemC.oc_data_i[31:0]
+(20)SystemC.oc_data_i[31:0]
+(21)SystemC.oc_data_i[31:0]
+(22)SystemC.oc_data_i[31:0]
+(23)SystemC.oc_data_i[31:0]
+(24)SystemC.oc_data_i[31:0]
+(25)SystemC.oc_data_i[31:0]
+(26)SystemC.oc_data_i[31:0]
+(27)SystemC.oc_data_i[31:0]
+(28)SystemC.oc_data_i[31:0]
+(29)SystemC.oc_data_i[31:0]
+(30)SystemC.oc_data_i[31:0]
+(31)SystemC.oc_data_i[31:0]
+@1401200
+-group_end
+@24
+SystemC.oc_rd_o
+SystemC.oc_wr_o
+[pattern_trace] 1
+[pattern_trace] 0
