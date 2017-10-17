@@ -4,8 +4,8 @@
 SC_MODULE (test_timer) {
     sc_in_clk clk;
 
-    sc_signal<bool> reset, rd, wr;
-    sc_signal<sc_uint<32>> data_i, data_o, addr, tval_o;
+    sc_signal<bool> reset, rd, wr, tm_of;
+    sc_signal<uint32_t> data_i, data_o, addr, tval_o;
 
     timer *timer1;
 
@@ -39,90 +39,90 @@ private:
     }
 
     void test_set_tmr(uint32_t tmr) {
-        cout << "Test: set value: " << tmr << endl;
+        cout << "@" << sc_time_stamp() << " Test: set value: " << tmr << endl;
         write_register(timer::timer_reg_map::TMR_ADDR, tmr);
         sc_uint<32> val = read_register(timer::timer_reg_map::TMR_ADDR);
-        cout << "Test: read after setting TMR: " <<  val << endl;
+        cout << "@" << sc_time_stamp() << " Test: read after setting TMR: " <<  val << endl;
     }
     
     void test_overflow() {
-        cout << "Test: " << __FUNCTION__ << "()" << endl;
+        cout << "@" << sc_time_stamp() << " Test: " << __FUNCTION__ << "()" << endl;
     }
 
     void test_conf(timer::timer_mode run, timer::timer_mode type) {
         sc_uint<32> val = read_register(timer::timer_reg_map::TCONF_ADDR);
-        cout << "Test: read tconf: " << val << endl;
+        cout << "@" << sc_time_stamp() << " Test: read tconf: " << val << endl;
 
         val[timer::timer_mode::RUN_BIT]  = run;
         val[timer::timer_mode::TYPE_BIT] = type;
 
-        cout << "Test: set time in run mode: " << val << endl;
+        cout << "@" << sc_time_stamp() << " Test: set time in run mode: " << val << endl;
 
         write_register(timer::timer_reg_map::TCONF_ADDR, val);
-        cout << "Test: write tconf" << endl;
+        cout << "@" << sc_time_stamp() << " Test: write tconf" << endl;
 
         val = read_register(timer::timer_reg_map::TCONF_ADDR);
-        cout << "Test: read tconf: " << val << endl;
+        cout << "@" << sc_time_stamp() << " Test: read tconf: " << val << endl;
     }
 
     void test_read_val() {
         sc_uint<32> val = read_register(timer::timer_reg_map::TVAL_ADDR);
-        cout << "Test: tval: " << val << endl;
+        cout << "@" << sc_time_stamp() << " Test: tval: " << val << endl;
     }
 
 public:
     void test() {
-        cout << ">>> Test: reset timer." << endl;
+        cout << "@" << sc_time_stamp() << " >>> Test: reset timer." << endl;
         test_reset();
         wait();
 
-        cout << ">>> Test: set TMR" << endl;
+        cout << "@" << sc_time_stamp() << " >>> Test: set TMR" << endl;
         test_set_tmr(100);
 
-        cout << ">>> Test: set RUN on increment timer" << endl;
+        cout << "@" << sc_time_stamp() << " >>> Test: set RUN on increment timer" << endl;
         test_conf(timer::timer_mode::RUN, timer::timer_mode::INC);
         test_read_val();
         test_read_val();
 
-        cout << ">>> Test: set STOP" << endl;
+        cout << "@" << sc_time_stamp() << " >>> Test: set STOP" << endl;
         test_conf(timer::timer_mode::STOP, timer::timer_mode::INC);
         test_read_val();
         test_read_val();
 
-        cout << ">>> Test: set RUN on decrement timer" << endl;
+        cout << "@" << sc_time_stamp() << " >>> Test: set RUN on decrement timer" << endl;
         test_conf(timer::timer_mode::RUN, timer::timer_mode::DEC);
         test_read_val();
         test_read_val();
 
-        cout << ">>> Test: set STOP" << endl;
+        cout << "@" << sc_time_stamp() << " >>> Test: set STOP" << endl;
         test_conf(timer::timer_mode::STOP, timer::timer_mode::INC);
         test_read_val();
         test_read_val();
 
-        cout << ">>> Test: overflow decrement timer" << endl;
-        cout << "Test: set TVAL to zero" << endl;
-        write_register(timer::timer_reg_map::TVAL_ADDR, 0);
+        cout << "@" << sc_time_stamp() << " >>> Test: overflow decrement timer" << endl;
+        cout << "@" << sc_time_stamp() << " Test: set TVAL to zero" << endl;
+        write_register(timer::timer_reg_map::TVAL_ADDR, 1);
         test_read_val();
 
         test_conf(timer::timer_mode::RUN, timer::timer_mode::DEC);
         test_read_val();
         test_read_val();
 
-        cout << ">>> Test: stop timer" << endl;
+        cout << "@" << sc_time_stamp() << " >>> Test: stop timer" << endl;
         test_conf(timer::timer_mode::STOP, timer::timer_mode::INC);
         test_read_val();
         test_read_val();
 
-        cout << ">>> Test: overflow increment timer" << endl;
-        cout << "Test: set TVAL to TMR" << endl;
-        write_register(timer::timer_reg_map::TVAL_ADDR, 100);
+        cout << "@" << sc_time_stamp() << " >>> Test: overflow increment timer" << endl;
+        cout << "@" << sc_time_stamp() << " Test: set TVAL to TMR" << endl;
+        write_register(timer::timer_reg_map::TVAL_ADDR, 100 - 1);
         test_read_val();
 
         test_conf(timer::timer_mode::RUN, timer::timer_mode::INC);
         test_read_val();
         test_read_val();
 
-        cout << ">>> Test: stop timer" << endl;
+        cout << "@" << sc_time_stamp() << " >>> Test: stop timer" << endl;
         test_conf(timer::timer_mode::STOP, timer::timer_mode::INC);
         test_read_val();
         test_read_val();
@@ -132,7 +132,11 @@ public:
     }
 
     void read_value () {
-        cout << "Test: read tval: " << tval_o.read() << endl;
+        cout << "@" << sc_time_stamp() << " Test: read tval: " << tval_o.read() << endl;
+    }
+
+    void catch_overflow() {
+        cout << "@" << sc_time_stamp() << " Test: tm_of is: " << tm_of.read() << endl;
     }
 
     SC_CTOR (test_timer) {
@@ -145,6 +149,10 @@ public:
         timer1->data_o(data_o);
         timer1->addr_i(addr);
         timer1->tval_o(tval_o);
+        timer1->tm_of(tm_of);
+
+        SC_METHOD(catch_overflow)
+            sensitive << tm_of;
 
         SC_THREAD (test);
             sensitive << clk.pos();
@@ -169,6 +177,7 @@ sc_main(int argc, char *argv[]) {
     sc_trace(wf, obj.wr    , "wr"    );
     sc_trace(wf, obj.rd    , "rd"    );
     sc_trace(wf, obj.tval_o, "tval_o");
+    sc_trace(wf, obj.tm_of , "tm_of");
 
     sc_start();
 
