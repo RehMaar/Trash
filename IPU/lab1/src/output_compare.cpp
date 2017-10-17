@@ -4,14 +4,13 @@ oc::oc(sc_module_name nm) : sc_module(nm) {
     /* Base operations. */
     SC_METHOD (reset);
         sensitive << rst_i;
+    SC_METHOD (out_logic);
+        sensitive << clk_i.pos();
     SC_METHOD (read);
         sensitive << clk_i.pos();
     SC_METHOD (write);
         sensitive << clk_i.pos();
-    SC_METHOD (set_new_mode);
-        sensitive << occonf;
-    SC_METHOD (out_logic);
-        sensitive << clk_i.pos();
+
 }
 
 sc_uint<32> *oc::get_register(uint32_t addr) {
@@ -44,26 +43,30 @@ void oc::read() {
  */
 void oc::write() {
     if (wr_i) {
-        sc_uint<32> *reg = get_register(addr_i.read());
-        *reg = data_i.read();
+        switch (addr_i.read()) {
+            case OCCONF_ADDR: {
+                occonf = data_i.read();
+                set_new_mode();
+                break;
+            }
+            case OCR_ADDR: {
+                ocr = data_i.read();
+                break;
+            }
+        }
     }
-}
-
-/**
- * Compare OCR value with chosen timer.
- */
-bool oc::cmp_ocr() {  
-    return ocr == tms[occonf[oc_conf::TM_WRK]].read();
 }
 
 /**
  * Detect currenct OC mode and set internal configuration for it.
  */
-void set_new_mode() {
+void oc::set_new_mode() {
     simple_mode = false;
     pwm_mode    = false;
-    switch (occonf.range(oc::oc_conf::OC_MODE_START,
-                         oc::oc_conf::OC_MODE_END)) {
+    toggle_mode = false;
+
+    cout << "@" << sc_time_stamp() << "OC: set_new_mode" << endl;
+    switch (occonf.range(2,0)) {
         case OFF: {
             return;
         }
@@ -78,7 +81,7 @@ void set_new_mode() {
             break;
         }
         case TOGGLE: {
-            outs.write(!outs.read());
+            toggle_mode = true;
             return;
         }
         case PWM_TO_ONE: {
@@ -88,27 +91,24 @@ void set_new_mode() {
         }
         case PWM_TO_ZERO: {
             logic_rst = true;
-            pwn_mode = true;
+            pwm_mode = true;
             break;
         }
     }
-    outs.write(logic_rst);
 }
 
 void oc::out_logic() {
-    if (simple_mode) {
-        if (cmp_ocr()) {
-            outs.write(!logic_rst);
-        } else {
-            outs.write(logic_rst); 
-        }
+    cout << "@" << sc_time_stamp() << " OC: read tval" << endl;
+    bool eq = ocr == tms[occonf[oc_conf::TM_WRK]].read();
+    if (toggle_mode) {
+        if (eq)
+            outs.write(!outs.read());
+    } else if (simple_mode) {
+        outs.write(logic_rst ^ eq);
     } else if (pwm_mode) {
-        if (cmp_ocr()) {
-            if (tms_overflow[occonf[oc_conf::TM_WRK]].read()) {
-                outs.write(logic_rst);
-            } else {
-                outs.write(!logic_rst);
-            }
+        bool tm_wrk = tms_overflow[occonf[oc_conf::TM_WRK]].read();
+        if (eq && !tm_wrk) {
+            outs.write(!logic_rst);
         } else {
             outs.write(logic_rst);
         }

@@ -1,7 +1,9 @@
 #ifndef output_capture_hpp_INCLUDED
 #define output_capture_hpp_INCLUDED
 
-SC_MODULE (output_compare) {
+#include <systemc.h>
+
+SC_MODULE (oc) {
 
     sc_in_clk   clk_i;
     sc_in<bool> rst_i;
@@ -26,27 +28,8 @@ public:
     /* Register addresses in the module. */
     enum oc_reg_map {
         OCCONF_ADDR = 0x0,
-        OCR_ADDR
+        OCR_ADDR,
         REG_NUM
-    };
-
-    SC_CTOR (output_compare);
-
-private:
-
-    /* OC registers. */
-    sc_uint<32> occonf;
-    sc_uint<32> ocr;
-
-	bool simple_mode;
-	bool pwm_mode;
-	bool logic_rst;
-
-	/* Bits ranges. */
-    enum oc_conf {
-        OC_MODE_START = 0,
-        OC_MODE_END   = 2,
-        TM_WRK     	  = 3;
     };
 
     /* OC modes. */
@@ -59,15 +42,33 @@ private:
         PWM_TO_ZERO
     };
 
+	/* Bits ranges. */
+    enum oc_conf {
+        OC_MODE_START = 0,
+        OC_MODE_END   = 2,
+        TM_WRK     	  = 3
+    };
+
+    SC_CTOR (oc);
+
+private:
+
+    /* OC registers. */
+    sc_uint<32> occonf;
+    sc_uint<32> ocr;
+
+	bool simple_mode;
+	bool pwm_mode;
+	bool toggle_mode;
+	bool logic_rst;
+
     /* Timers' addreses in the module. */
     enum oc_timer {
         TIMER1 = 0x0,
         TIMER2
     };
 	
-
-
-    sc_uint<32> reg_map[REG_NUM] = {
+    sc_uint<32> * reg_map[REG_NUM] = {
         &occonf,
         &ocr
     };
@@ -78,10 +79,10 @@ private:
 
 
 	bool cmp_ocr();
-	void init_new_mode();
+	void set_new_mode();
 	void out_logic();
 
-    sc_uint<32> *oc::get_register(uint32_t addr);
+    sc_uint<32> *get_register(uint32_t addr);
 };
 
 #endif // output_capture_hpp_INCLUDED
