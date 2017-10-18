@@ -88,32 +88,45 @@ SC_MODULE (test_oc) {
         val = oc::oc_mode::PWM_TO_ZERO;
         write_register( oc::oc_reg_map::OCCONF_ADDR, val);
     }
-
+void sig() {
+        wait(2);
+        test_set_mode5(0);
+        wait(3);
+        test_set_mode3(0);
+}
     void test() {
         test_reset();
-        set_timer1(5);
-        test_set_mode1(3);
-        wait(10);
 
-        test_reset();
-        set_timer1(5);
-        test_set_mode2(3);
-        wait(10);
-
-        test_reset();
+        test_set_mode5(0);
         set_timer1(3);
-        test_set_mode3(2);
+        test_set_mode3(0);
+        sig();
+        sig();
+        //cout << "@ " << sc_time_stamp() << endl;
+        //sig();
+        //sig();
+        //sig();
         wait(20);
 
-        test_reset();
-        set_timer1(5);
-        test_set_mode4(0);
-        wait(20);
-
-        test_reset();
-        set_timer1(5);
-        test_set_mode5(4);
-        wait(20);
+//        test_reset();
+//        set_timer1(5);
+//        test_set_mode2(3);
+//        wait(10);
+//
+//        test_reset();
+//        set_timer1(3);
+//        test_set_mode3(2);
+//        wait(20);
+//
+//        test_reset();
+//        set_timer1(5);
+//        test_set_mode4(0);
+//        wait(20);
+//
+//        test_reset();
+//        set_timer1(5);
+//        test_set_mode5(4);
+//        wait(20);
 
         sc_stop();
     }
@@ -158,7 +171,7 @@ sc_main(int argc, char *argv[]) {
     test_oc obj("test_oc");
     obj.clk(clock);
 
-    sc_trace_file *wf = sc_create_vcd_trace_file("wave");
+    sc_trace_file *wf = sc_create_vcd_trace_file("wave_oc");
 
     sc_trace(wf, obj.clk, "clk");
     sc_trace(wf, obj.rst, "rst");

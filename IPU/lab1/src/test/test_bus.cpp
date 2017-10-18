@@ -66,6 +66,7 @@ SC_MODULE (test_bus) {
 
         test_read(mem_map::TVAL_TM1);
 
+        wait(1);
         
         test_read(mem_map::TVAL_TM2);
 

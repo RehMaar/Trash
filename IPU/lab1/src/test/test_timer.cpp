@@ -168,7 +168,7 @@ sc_main(int argc, char *argv[]) {
     test_timer obj("test_timer");
     obj.clk(clock);
 
-    sc_trace_file *wf = sc_create_vcd_trace_file("wave");
+    sc_trace_file *wf = sc_create_vcd_trace_file("wave_timer");
     sc_trace(wf, obj.clk   , "clk"   );
     sc_trace(wf, obj.reset , "reset" );
     sc_trace(wf, obj.data_i, "data_i");
