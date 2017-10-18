@@ -21,15 +21,15 @@ SC_MODULE (bus) {
 
     /* To slaves. */
     /* Timer 1. */
-    sc_in<uint32_t>  tm1_data_i;
-    sc_out<uint32_t> tm1_addr_o;
+    sc_in<uint32_t>  tm1_data_i; /* From slave. */
+    sc_out<uint32_t> tm1_addr_o; /* To slave.   */
     sc_out<bool>     tm1_rd_o;
     sc_out<bool>     tm1_wr_o;
     /* Timer 2. */
     sc_in<uint32_t>  tm2_data_i;
     sc_out<uint32_t> tm2_addr_o;
-    sc_out<bool>      tm2_rd_o;
-    sc_out<bool>      tm2_wr_o;
+    sc_out<bool>     tm2_rd_o;
+    sc_out<bool>     tm2_wr_o;
 
     /* Output Compare. */
     sc_in<uint32_t>  oc_data_i;
