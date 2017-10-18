@@ -8,12 +8,12 @@ SC_MODULE (timer) {
     sc_in_clk       clk_i;
     sc_in<bool>     rst_i;
     /* Bus interface. */
-    sc_in<uint32_t> addr_i;
-    sc_in<uint32_t> data_i;
+    sc_in<uint32_t> addr_i; /* From master. */
+    sc_in<uint32_t> data_i; /* From master. */
     sc_in<bool>     rd_i;
     sc_in<bool>     wr_i;
 
-    sc_out<uint32_t> data_o;
+    sc_out<uint32_t> data_o; /* To master. */
     /* Timer interface. */
     sc_out<uint32_t> tval_o;
     sc_out<bool>     tm_of;
