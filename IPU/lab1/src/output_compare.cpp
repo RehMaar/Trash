@@ -5,7 +5,7 @@ oc::oc(sc_module_name nm) : sc_module(nm) {
     SC_METHOD (reset);
         sensitive << rst_i;
     SC_METHOD (out_logic);
-        sensitive << clk_i.pos();
+        sensitive << tms[0] << tms[1];
     SC_METHOD (read);
         sensitive << clk_i.pos();
     SC_METHOD (write);
@@ -46,11 +46,13 @@ void oc::write() {
         switch (addr_i.read()) {
             case OCCONF_ADDR: {
                 occonf = data_i.read();
+                cout << "OC: occonf = " << occonf << endl;
                 set_new_mode();
                 break;
             }
             case OCR_ADDR: {
                 ocr = data_i.read();
+                cout << "OC: ocr = " << ocr << endl;
                 break;
             }
         }
@@ -98,7 +100,6 @@ void oc::set_new_mode() {
 }
 
 void oc::out_logic() {
-    cout << "@" << sc_time_stamp() << " OC: read tval" << endl;
     bool eq = ocr == tms[occonf[oc_conf::TM_WRK]].read();
     if (toggle_mode) {
         if (eq)

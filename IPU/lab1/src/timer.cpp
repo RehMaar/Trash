@@ -19,13 +19,12 @@ sc_uint<32> *timer::get_register(uint32_t addr) {
 
 void timer::count() {
     if (tconf[RUN_BIT]) {
-        cout << sc_time_stamp() << " Timer: count" << endl;
         if (tconf[TYPE_BIT] == INC) {
-            tm_of.write(tval == tmr);
             tval = tval == tmr ? 0 : tval + 1;
+            tm_of.write(tval == tmr);
         } else {
-            tm_of.write(tval == 0);
             tval = tval == 0 ? tmr : sc_uint<32>(tval - 1);
+            tm_of.write(tval == 0);
         }
     } else {
         tm_of.write(false);

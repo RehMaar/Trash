@@ -18,7 +18,7 @@ SC_MODULE (oc) {
 
     /* Timers. */
     sc_in<uint32_t>  tms[2];
-    sc_in<bool>		 tms_overflow[2];
+    sc_in<bool>      tms_overflow[2];
 
 
     /* Output signal. */
@@ -42,13 +42,19 @@ public:
         PWM_TO_ZERO
     };
 
-	/* Bits ranges. */
+    /* Bits ranges. */
     enum oc_conf {
         OC_MODE_START = 0,
         OC_MODE_END   = 2,
-        TM_WRK     	  = 3
+        TM_WRK        = 3
     };
 
+    /* Timers' addreses in the module. */
+    enum oc_timer {
+        TIMER1 = 0x0,
+        TIMER2
+    };
+    
     SC_CTOR (oc);
 
 private:
@@ -57,30 +63,25 @@ private:
     sc_uint<32> occonf;
     sc_uint<32> ocr;
 
-	bool simple_mode;
-	bool pwm_mode;
-	bool toggle_mode;
-	bool logic_rst;
+    bool simple_mode;
+    bool pwm_mode;
+    bool toggle_mode;
+    bool logic_rst;
 
-    /* Timers' addreses in the module. */
-    enum oc_timer {
-        TIMER1 = 0x0,
-        TIMER2
-    };
-	
+
     sc_uint<32> * reg_map[REG_NUM] = {
         &occonf,
         &ocr
     };
-	/* Base operations. */
+    /* Base operations. */
     void reset(); 
     void read();
     void write();
 
 
-	bool cmp_ocr();
-	void set_new_mode();
-	void out_logic();
+    bool cmp_ocr();
+    void set_new_mode();
+    void out_logic();
 
     sc_uint<32> *get_register(uint32_t addr);
 };
