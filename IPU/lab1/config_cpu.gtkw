@@ -1,0 +1,67 @@
+[*]
+[*] GTKWave Analyzer v3.3.82 (w)1999-2017 BSI
+[*] Fri Oct 20 18:09:43 2017
+[*]
+[dumpfile] "/home/maar/stdy/Trash/IPU/lab1/wave_cpu.vcd"
+[dumpfile_mtime] "Fri Oct 20 18:09:23 2017"
+[dumpfile_size] 7651
+[savefile] "/home/maar/stdy/Trash/IPU/lab1/config_cpu.gtkw"
+[timestart] 36800
+[size] 1362 721
+[pos] -1 -1
+*-15.964594 262800 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 213
+[signals_width] 190
+[sst_expanded] 1
+[sst_vpaned_height] 190
+@24
+SystemC.cpu_clk
+SystemC.oc_outs
+SystemC.oc_tms_1[31:0]
+SystemC.oc_tm2_val[31:0]
+@25
+SystemC.oc_tm1_of
+@24
+SystemC.oc_tm2_of
+SystemC.bus_addr_i[31:0]
+SystemC.bus_data_o[31:0]
+SystemC.bus_oc_addr_o[31:0]
+SystemC.bus_oc_data_i[31:0]
+SystemC.bus_oc_rd_o
+SystemC.bus_oc_wr_o
+SystemC.bus_rd_i
+SystemC.bus_tm1_addr_o[31:0]
+SystemC.bus_tm1_data_i[31:0]
+SystemC.bus_tm1_rd_o
+SystemC.bus_tm1_wr_o
+SystemC.bus_tm2_addr_o[31:0]
+SystemC.bus_tm2_data_i[31:0]
+SystemC.bus_tm2_rd_o
+SystemC.bus_tm2_wr_o
+SystemC.bus_wr_i
+SystemC.cpu_addr_o[31:0]
+SystemC.cpu_data_i[31:0]
+SystemC.cpu_data_o[31:0]
+SystemC.cpu_rd_o
+SystemC.cpu_wr_o
+SystemC.oc_addr_o[31:0]
+SystemC.oc_data_o[31:0]
+SystemC.oc_oc_data_i[31:0]
+SystemC.oc_oc_rd_o
+SystemC.oc_oc_wr_o
+SystemC.tm1_addr_i[31:0]
+SystemC.tm1_data_i[31:0]
+SystemC.tm1_data_o[31:0]
+SystemC.tm1_of
+SystemC.tm1_rd_o
+SystemC.tm1_val[31:0]
+SystemC.tm1_wr_o
+SystemC.tm2_addr_i[31:0]
+SystemC.tm2_data_i[31:0]
+SystemC.tm2_data_o[31:0]
+SystemC.tm2_of
+SystemC.tm2_rd_o
+SystemC.tm2_val[31:0]
+SystemC.tm2_wr_o
+[pattern_trace] 1
+[pattern_trace] 0
