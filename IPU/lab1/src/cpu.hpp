@@ -16,19 +16,18 @@ SC_MODULE(cpu) {
 	sc_in<uint32_t> data_i;
 
     void generate_signal();
-	void write(mem_map addr, uint32_t val);
+	void write_reg(mem_map addr, uint32_t val);
 	uint32_t read(mem_map addr);
+	void set_oc(oc::oc_mode mode, oc::oc_timer tm);
 
 	SC_HAS_PROCESS(cpu);
 
 	uint32_t w;
 
 	enum fsm_state {
-    	SET_OC,
 		SET_TIMER,
 		FIRST_SIGNAL,
 		SECOND_SIGNAL,
-		THIRD_SIGNAL
 	};
 
 public:
