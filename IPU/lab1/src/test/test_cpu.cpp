@@ -17,7 +17,7 @@ int sc_main(int argc, char * argv[]) {
     sc_signal<uint32_t> oc_data_i, oc_addr_o;
     sc_signal<bool> oc_rd_o, oc_wr_o, outs;
 
-    cpu obj("cpu", 1);
+    cpu obj("cpu", 4);
     obj.clk_i(clock);
     obj.data_i(data_i);
     obj.data_o(data_o);
@@ -64,7 +64,7 @@ int sc_main(int argc, char * argv[]) {
     timer tm2("tm2");
     tm2.clk_i(clock);
     tm2.rst_i(rst);
-    tm2.addr_i(tm1_addr_o);
+    tm2.addr_i(tm2_addr_o);
     tm2.data_i(data_o);
     tm2.data_o(tm2_data_i);
     tm2.rd_i(tm2_rd_o);
@@ -75,7 +75,7 @@ int sc_main(int argc, char * argv[]) {
     oc oc1("oc1");
     oc1.clk_i(clock);
     oc1.rst_i(rst);
-    oc1.addr_i(addr_o);
+    oc1.addr_i(oc_addr_o);
     oc1.data_i(data_o);
     oc1.data_o(oc_data_i);
     oc1.rd_i(oc_rd_o);

@@ -25,7 +25,6 @@ SC_MODULE(cpu) {
 	uint32_t w;
 
 	enum fsm_state {
-		SET_TIMER,
 		FIRST_SIGNAL,
 		SECOND_SIGNAL,
 	};
