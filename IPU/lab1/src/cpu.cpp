@@ -104,45 +104,20 @@ void cpu::generate_signal_long(uint32_t width)  {
     /* Duration of the seq. */
     uint32_t i = 0;
     while (true) {
-        if (i == (2 * width - 3)) {
+        //if (i == 2) {
+        if (i == (2 * width - 2)) {
             cout << "FC: " << i << endl;
             set_oc(oc::oc_mode::TOGGLE, oc::oc_timer::TIMER1);
         }
-        if (i == (3 * width - 2)) {
+        //if (i == 2) {
+        if (i == (3 * width - 3)) {
             cout << "SC: " << i << endl;
             set_oc(oc::oc_mode::TOGGLE, oc::oc_timer::TIMER2);
             i = 2;
-            continue;
-       }
-       i++;
-
-            /*
-        switch (state) {
-            case FIRST_SIGNAL: {
-                //if (i == 2) {
-                if (i == (2 * width - 3)) {
-                    //cout << "FC: " << i << endl;
-                    set_oc(oc::oc_mode::TOGGLE, oc::oc_timer::TIMER1);
-                    state = SECOND_SIGNAL;
-                   break;
-                }
-                i++;
-                break;
-            }
-            case SECOND_SIGNAL: {
-                //if ( i == 2 ) {
-                if (i == (3 * width - 6)) {
-                    //cout << "SC: " << i << endl;
-                    set_oc(oc::oc_mode::TOGGLE, oc::oc_timer::TIMER2);
-                    state = FIRST_SIGNAL;
-                    i = 0;
-                    break;
-                }
-                i++;
-                break;
-            }
+            goto cont;
         }
-            */
+        i++;
+cont: 
         DEBUG_COUNT_DECR(1);
         wait();
     } 
