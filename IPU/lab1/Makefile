@@ -18,14 +18,11 @@ WAVE = wave
 
 all: $(BIN)
 
-$(BIN): $(SRCS)
+$(BIN): $(TEST_PATH)/test_cpu.cpp $(SRCS)
 	$(CPP) -o $@ $(LDFLAGS) $(FLAGS) $^ -Isrc
 
-%.o: %.cpp
-	$(CPP) -o $@ $(LDFLAGS) $(FLAGS) $^ -Isrc
-
-run:
-	./$(BIN)
+wave:
+	gtkwave wave_cpu.vcd config_cpu.gtkw;
 
 test_timer.test: $(TEST_PATH)/test_timer.cpp $(SRC_PATH)/timer.cpp
 	$(CPP) -o $@ $(LDFLAGS) $(FLAGS) $^ -Isrc
@@ -36,7 +33,11 @@ test_oc.test: $(TEST_PATH)/test_oc.cpp $(SRC_PATH)/timer.cpp $(SRC_PATH)/output_
 test_bus.test: $(TEST_PATH)/test_bus.cpp $(SRCS)
 	$(CPP) -o $@ $(LDFLAGS) $(FLAGS) $^ -Isrc
 
-compile_test: test_timer.test test_oc.test test_bus.test
+test_cpu.test: $(TEST_PATH)/test_cpu.cpp $(SRCS)
+	$(CPP) -o $@ $(LDFLAGS) $(FLAGS) $^ -Isrc
+
+
+compile_test: test_timer.test test_oc.test test_bus.test test_cpu.test
 
 test_timer: test_timer.test
 	./$^
@@ -50,6 +51,10 @@ test_bus: test_bus.test
 	./$^
 	gtkwave wave_bus.vcd config_bus.gtkw;
 
+test_cpu: test_cpu.test
+	./$^
+	gtkwave wave_cpu.vcd config_cpu.gtkw;
+
 clean:
 	rm $(TEST_PATH)/*.test
 	rm $(BIN)
@@ -57,4 +62,4 @@ clean:
 report:
 	pdflatex report/report.tex --output-directory=report
 	
-.PHONY: wave run compile_test test_timer test_oc clean report
+.PHONY: wave run compile_test test_timer test_oc clean report test_cpu
