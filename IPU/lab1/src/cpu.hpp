@@ -16,7 +16,7 @@ SC_MODULE(cpu) {
 	sc_in<uint32_t> data_i;
 
 	void generate_signal();
-    void generate_signal_simple(uint32_t width);
+    void generate_signal_simple();
     void generate_signal_long(uint32_t width);
 
 	void write_reg(mem_map addr, uint32_t val);
@@ -28,11 +28,6 @@ SC_MODULE(cpu) {
 	SC_HAS_PROCESS(cpu);
 
 	uint32_t w;
-
-	enum fsm_state {
-		FIRST_SIGNAL,
-		SECOND_SIGNAL,
-	};
 
 public:
     cpu(sc_module_name nm, uint32_t w_ = 1) : sc_module(nm), w(w_) {

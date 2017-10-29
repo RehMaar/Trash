@@ -1,8 +1,18 @@
+#include <stdlib.h>
 #include <systemc.h>
 
 #include "cpu.hpp"
 
 int sc_main(int argc, char * argv[]) {
+
+    int i = 4;
+
+    if (argc > 1) {
+        i = atoi(argv[1]);
+    }
+
+    cout << "Duration: " << i << endl;
+    
     sc_clock clock("clk", sc_time(10, SC_NS));
 
     sc_signal<uint32_t> data_i, data_o, addr_o;
@@ -17,7 +27,7 @@ int sc_main(int argc, char * argv[]) {
     sc_signal<uint32_t> oc_data_i, oc_addr_o;
     sc_signal<bool> oc_rd_o, oc_wr_o, outs;
 
-    cpu obj("cpu", 4);
+    cpu obj("cpu", i);
     obj.clk_i(clock);
     obj.data_i(data_i);
     obj.data_o(data_o);

@@ -28,31 +28,29 @@ void cpu::set_timer(mem_map addr, timer::timer_mode m, timer::timer_mode t) {
 }
 
 void cpu::generate_signal() {
-
-    switch (w) {
-        case 1: {
-            generate_signal_simple(w);
-            break;
-        }
-        default:
-            generate_signal_long(w);
+    /* To generate signal with w == 1 it's possible just to use
+     * one of the OC modes.*/
+    if (w == 1) {
+        generate_signal_simple();
+    } else {
+        generate_signal_long(w);
     }
-
     sc_stop();
-
 }
 
 #define DEBUG_COUNT_INIT(c_) uint32_t count = c_;
 #define DEBUG_COUNT_DECR(v_) \
     {if (count == 0) { break; } else {count -= v_;} }
 
-void cpu::generate_signal_simple(uint32_t width) {
+void cpu::generate_signal_simple() {
     DEBUG_COUNT_INIT(100);
 
-    write_reg(mem_map::OCR_OC, 1);
+    write_reg(mem_map::OCR_OC, 2);
     write_reg(mem_map::TMR_TM1, 2);
+
     set_oc(oc::oc_mode::SIMPLE_TO_ZERO, oc::oc_timer::TIMER1);
-    set_timer(mem_map::TMR_TM1, timer::timer_mode::RUN,
+
+    set_timer(mem_map::TCONF_TM1, timer::timer_mode::RUN,
               timer::timer_mode::DEC);
 
     while (true) { 
@@ -91,29 +89,28 @@ void cpu::generate_signal_long(uint32_t width)  {
         } else if (j == triple_period - 2) {
             break;
         }
-
         j++;
         wait();
     }
 
     /* Here both TMRs is 0. */
-
-    cout << sc_time_stamp() << endl;
-
-    fsm_state state = FIRST_SIGNAL;
     /* Duration of the seq. */
     uint32_t i = 0;
+
+    /* Set moments when we need to switch timers.
+     * The case when w == 2 is a special one because
+     * of the time duration of data writing.
+     */
+    uint32_t first_switch  = width == 2 ? 2 : 2 * width - 3;
+    uint32_t second_switch = width == 2 ? 2 : 3 * width - 4;
+
     while (true) {
-        //if (i == 2) {
-        if (i == (2 * width - 2)) {
-            cout << "FC: " << i << endl;
+        if (i == first_switch) {
             set_oc(oc::oc_mode::TOGGLE, oc::oc_timer::TIMER1);
         }
-        //if (i == 2) {
-        if (i == (3 * width - 3)) {
-            cout << "SC: " << i << endl;
+        if (i == second_switch) {
             set_oc(oc::oc_mode::TOGGLE, oc::oc_timer::TIMER2);
-            i = 2;
+            i = 1;
             goto cont;
         }
         i++;

@@ -46,13 +46,11 @@ void oc::write() {
         switch (addr_i.read()) {
             case OCCONF_ADDR: {
                 occonf = data_i.read();
-                cout << "OC: occonf = " << occonf << endl;
                 set_new_mode();
                 break;
             }
             case OCR_ADDR: {
                 ocr = data_i.read();
-                cout << "OC: ocr = " << ocr << endl;
                 break;
             }
         }
@@ -67,7 +65,6 @@ void oc::set_new_mode() {
     pwm_mode    = false;
     toggle_mode = false;
 
-    cout << "@" << sc_time_stamp() << "OC: set_new_mode" << endl;
     switch (occonf.range(2,0)) {
         case OFF: {
             return;
