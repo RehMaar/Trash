@@ -15,10 +15,15 @@ SC_MODULE(cpu) {
 	/* From slaves. */
 	sc_in<uint32_t> data_i;
 
-    void generate_signal();
+	void generate_signal();
+    void generate_signal_simple(uint32_t width);
+    void generate_signal_long(uint32_t width);
+
 	void write_reg(mem_map addr, uint32_t val);
 	uint32_t read(mem_map addr);
 	void set_oc(oc::oc_mode mode, oc::oc_timer tm);
+    void set_timer(mem_map addr, timer::timer_mode m,
+                   timer::timer_mode t);
 
 	SC_HAS_PROCESS(cpu);
 
