@@ -4,8 +4,10 @@ use std::f32::consts::PI;
 
 const MINIMUM_FHT_SUBSEQ: usize = 4;
 
-fn cas(angle: f32) -> f32{
-     angle.cos() + angle.sin()
+fn cas(angle: f32, wsize: usize, rtype: RoundingType) -> i32 {
+    let c = round(&vec![angle.cos() as i32], wsize, rtype)[0];
+    let s = round(&vec![angle.sin() as i32], wsize, rtype)[0];
+    round(&vec![c + s], wsize, rtype)[0]
 }
 
 /** (2 pi j k) / n */
@@ -23,7 +25,7 @@ pub fn dht(a: &mut Vec<i32>, rsize: usize, wsize: usize, rtype: RoundingType) {
     let n = a.len();
     *a = (0..n).map(|k|
           round(&vec![(0..n).map(|j| {
-                    let w = round(&vec![(cas(angle(k, j, n)) * 10.0) as i32], wsize, rtype)[0];
+                    let w = round(&vec![cas(angle(k, j, n), wsize, rtype) * 10], wsize, rtype)[0];
                     round(&vec![a[j] * w / 10], rsize, rtype)[0]
                 }).sum()], rsize, rtype)[0]
     ).collect::<Vec<i32>>();

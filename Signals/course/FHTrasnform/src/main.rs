@@ -2,9 +2,13 @@ mod ht;
 mod ht_fixed;
 mod round;
 
-use round::{round, RoundingType};
 extern crate rand;
 use rand::Rng;
+
+use round::{round, RoundingType};
+
+use std::io::prelude::*;
+use std::fs::File;
 
 fn generate_vector(n: usize) -> Vec<f64> {
     let mut v = Vec::with_capacity(n);
@@ -15,50 +19,71 @@ fn generate_vector(n: usize) -> Vec<f64> {
     v
 }
 
+fn pow(i: f64) -> f64 {
+    i * i
+}
+fn stdev(std: &Vec<f64>, cmp: &Vec<i32>) -> f64 {
+    let div: f64 = (0..std.len()).map(|x| pow(std[x] - cmp[x] as f64)).sum();
+        (div / std.len() as f64).sqrt()
+}
+
+fn len_stdev(v: &mut Vec<f64>, vsize: usize, rsize: usize, wsize: usize,
+             rtype: RoundingType) -> f64 {
+
+    let mut vf = round(&v.iter().map(|&x| x as i32).collect::<Vec<i32>>(),
+                       vsize, rtype);
+    ht::fht(v);
+    ht_fixed::fht(&mut vf, rsize, wsize, rtype);
+
+    stdev(&v, &vf)
+}
+
 fn main() {
-    let mut v  = generate_vector(8); //vec![255.0, 136.0, 2.0, 69.0, 8.0, 89.0, 107.0, 1.0];
-    let vf = v.iter().map(|&x| x as i32).collect::<Vec<i32>>(); //vec![255, 136, 2, 69, 8, 89, 107, 1];
 
-    println!("Float point");
-    println!("{:?}", v);
-    let mut v1 = v.clone();
-    ht::dht(&mut v);
-    println!("DHT: {:?}", v);
-    ht::fht(&mut v1);
-    println!("FHT: {:?}", v1);
+    /* 1. Length - stdev correlation. */
+    {
+        let mut f = File::create("stdev.dat").unwrap();
+        for i in 1..10 {
+            let mut v = generate_vector(2 << i);
+            let mut v1 = v.clone();
+            let mut v2 = v.clone();
+            let r  = len_stdev(&mut v,  8, 16, 8, RoundingType::Round);
+            let r1 = len_stdev(&mut v1, 8, 16, 8, RoundingType::Cut);
+            let r2 = len_stdev(&mut v2, 8, 16, 8, RoundingType::CutInc);
+            if let Err(_) = write!(f, "{} {} {} {}\n", 2 << i, r, r1, r2) {
+                println!("Error while writing data to file");
+                return
+            }
+        }
+    }
+    /* 2. 2/4-bit input. */
+    {
+        let mut f = File::create("stdev_i.dat").unwrap();
+        for i in 1..10 {
+            let mut v = generate_vector(2 << i);
+            let mut v1 = v.clone();
 
-    println!("Fixed point");
+            let r  = len_stdev(&mut v,  2, 16, 8, RoundingType::Round);
+            let r1 = len_stdev(&mut v1, 4, 16, 8, RoundingType::Round);
+            if let Err(_) = write!(f, "{} {} {}\n", 2 << i, r, r1) {
+                println!("Error while writing data to file");
+                return
+            }
+        }
+    }
+    /* 3. 2/4-bit weight. */
+    {
+        let mut f = File::create("stdev_w.dat").unwrap();
+        for i in 1..10 {
+            let mut v = generate_vector(2 << i);
+            let mut v1 = v.clone();
 
-    let asize = 8;
-    let rsize = 16;
-    let wsize = 8;
-    println!("Cut");
-    let rtype = RoundingType::Cut;
-    let mut vf_r = round(&vf, asize, rtype);
-    println!("{:?}", vf_r);
-    let mut vf1 = vf_r.clone();
-    ht_fixed::dht(&mut vf_r, rsize, wsize, rtype);
-    println!("DHT: {:?}", vf_r);
-    ht_fixed::fht(&mut vf1, rsize, wsize, rtype);
-    println!("FHT: {:?}", vf1);
-
-    println!("IncCut");
-    let rtype = RoundingType::CutInc;
-    let mut vf_r = round(&vf, asize, rtype);
-    println!("{:?}", vf_r);
-    let mut vf1 = vf_r.clone();
-    ht_fixed::dht(&mut vf_r, rsize, wsize, rtype);
-    println!("DHT: {:?}", vf_r);
-    ht_fixed::fht(&mut vf1, rsize, wsize, rtype);
-    println!("FHT: {:?}", vf1);
-
-    println!("Cut");
-    let rtype = RoundingType::Round;
-    let mut vf_r = round(&vf, asize, rtype);
-    println!("{:?}", vf_r);
-    let mut vf1 = vf_r.clone();
-    ht_fixed::dht(&mut vf_r, rsize, wsize, rtype);
-    println!("DHT: {:?}", vf_r);
-    ht_fixed::fht(&mut vf1, rsize, wsize, rtype);
-    println!("FHT: {:?}", vf1);
+            let r  = len_stdev(&mut v,  8, 16, 2, RoundingType::Round);
+            let r1 = len_stdev(&mut v1, 8, 16, 4, RoundingType::Round);
+            if let Err(_) = write!(f, "{} {} {}\n", 2 << i, r, r1) {
+                println!("Error while writing data to file");
+                return
+            }
+        }
+    }
 }

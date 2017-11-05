@@ -1,5 +1,6 @@
 use std::f64::consts::PI;
 
+    
 const MINIMUM_FHT_SUBSEQ: usize = 4;
 
 fn cas(angle: f64) -> f64{
@@ -64,11 +65,7 @@ fn hartley(a: &mut Vec<f64>, k: usize) -> f64 {
         let n = if k == h { 1 } else { 2*(n - k) + 1};
         (-1.0, k - h, 2 * (k - h), 2*(k - h) + 1, n )
     };
-//        println!("> {} : 1: {:2}; 2: {:2}; 3: {:2}; angle: {:.3}", k, idx_x1, idx_x2, idx_x2_n, ang);
-//        println!("a[{}] = a({:.3}) + {} * a({:.3}) * {:.3} + {} * a({:.3}) * {:.3}",
-//            k, a[idx_x1], signed, a[idx_x2],(angle(ang, 1, n)).cos(),
-//                                  signed, a[idx_x2_n],(angle(ang, 1, n)).sin()
-//        );
+
     a[idx_x1] + signed * a[idx_x2]   * (angle(ang, 1, n)).cos()
                      + signed * a[idx_x2_n] * (angle(ang, 1, n)).sin()
 
