@@ -1,0 +1,54 @@
+\documentclass[12pt, a4paper] {ncc}
+\usepackage[utf8] {inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english, russian] {babel}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{listings,a4wide,longtable,amsmath,amsfonts,graphicx}
+\usepackage{indentfirst}
+\usepackage{bytefield}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
+\usepackage{tabularx}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+
+\begin{document}
+\setcounter{figure}{0}
+\frenchspacing
+\pagestyle{empty}
+\begin{center}
+                            Университет ИТМО    \\
+                        Кафедра вычислительной техники
+
+\vspace{\stretch{2}}
+                    Технологии программрования
+\end{center}
+\vspace{\stretch{2}}
+\begin{center}
+                            Лабораторная работа №5\\
+\end{center}
+\vspace{\stretch{3}}
+\begin{flushright}
+                                    Студенты:\\
+                                    {\it Куклина Мария,}\\
+                                    {\it Кириллова Анастасия, P3401}\\
+                                    Преподаватель: \\
+                                    {\it Оголюк А.А.}
+\end{flushright}
+\vspace{\stretch{4}}
+\begin{center}
+                             Санкт-Петербург, 2017
+\end{center}
+\newpage
+
+\section{Листинг}
+	
+	\lstinputlisting[basicstyle=\small,breaklines=true,language=python]{./server.py}
+	\lstinputlisting[basicstyle=\small,breaklines=true,language=html]{./index.html}
+	\lstinputlisting[basicstyle=\small,breaklines=true,language=html]{./game.html}
+
+
+\end{document}
