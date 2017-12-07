@@ -1,0 +1,56 @@
+<html>
+	<title>Game!</title>
+	<head>
+		<script type="text/javascript">
+		    function get_next_image() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                    	var res = this.responseText;
+                    	console.log('get res: ' + res);
+                    	document.getElementById("image").setAttribute('src', res);
+                    }
+                };
+                xhttp.open("GET", "image", true);
+                xhttp.send();
+		    }
+            function send_data(text) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                    	var res = this.responseText;
+                        var prev = document.getElementById("res").innerHTML;
+                        document.getElementById("res").innerHTML = parseInt(res);
+                    }
+                };
+                xhttp.open("GET", "?submit=" + text, true);
+                xhttp.send();
+            }
+
+			function handle_submit(form) {
+				var t = document.getElementById("text_id");
+				send_data(t.value);
+				get_next_image();
+			}
+
+			get_next_image();
+		</script>
+	</head>
+	<body>
+		<!-- Image -->
+		<div id="image_pane">
+			<img id="image" src="" width="400" height="200">
+		</div>
+		<!-- Textbox -->
+		<div id="textbox">
+			<form id="form" onsubmit="handle_submit(this);return false;">
+    			<br><input id="text_id" type="text" size=50 required="required"></br>
+    			<br><input type="submit" value="Submit"></br>
+			</form>
+		</div>
+		<!-- Score -->
+		<div id="score">
+			<br>Score: <span id="res">0</span></br>
+		</div>
+	</body>
+</html>
