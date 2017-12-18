@@ -2,14 +2,14 @@ module timer(
 	input clk_i,
 	input rst_i,
 
-	input addr_i,
-	input data_i,
-	input rd_i,
-	input wr_i,
+	input [12:0] addr_i,
+	input [31:0] data_i,
+	input 		 en_i,
+	input [3:0]  we_i,
 
-	output data_o,
-	output tval_o,
-	output tm_of
+	output reg [31:0] data_o,
+	output     [31:0] tval_o,
+	output reg tm_of
 );
 
 	reg [31:0] tmr;
@@ -18,32 +18,37 @@ module timer(
 
 	assign tval_o = tval;
 
-	enum {
-		TMR_ADDR,
-		TVAL_ADDR,
-		TCONF_ADDR
-	};
+	localparam TMR_ADDR   = 'h0;
+	localparam TVAL_ADDR  = 'h4;
+	localparam TCONF_ADDR = 'h8;
 
-	enum {
-		TYPE_BIT,
-		RUN_BIT
-	};
-	enum { INC, DEC };
-	enum { STOP, RUN };
+	localparam TYPE_BIT = 0;
+	localparam RUN_BIT  = 1;
 
-	always @(posedge clk_i)
+	localparam INC = 0;
+	localparam DEC = 1;
+
+	localparam STOP = 0;
+	localparam RUN  = 1;
+
+	always @(negedge clk_i)
 	begin
 		if (rst_i)
 		begin
-    		tmr   = 0;
-    		tconf = 0;
-    		tval  = 0;
+    		tmr    <= 0;
+    		tconf  <= 0;
+    		tval   <= 0;
+    		data_o <= 0;
     	end
-	end
-
-	always @(posedge clk_i)
-	begin
-		if (rd_i)
+		else if (en_i && we_i)
+		begin
+			case (addr_i)
+				TMR_ADDR:   tmr   <= data_i;
+    			TVAL_ADDR:  tval  <= data_i;
+        		TCONF_ADDR: tconf <= data_i;
+            endcase
+		end
+		else if (en_i)
 		begin
 			case (addr_i)
 				TMR_ADDR:   data_o <= tmr;
@@ -51,17 +56,8 @@ module timer(
         		TCONF_ADDR: data_o <= tconf;
             endcase
 		end
-	end
-
-	always @(posedge clk_i)
-	begin
-		if (wr_i)
-		begin
-			case (addr_i)
-				TMR_ADDR:   tmr   <= data_o;
-    			TVAL_ADDR:  tval  <= data_o;
-        		TCONF_ADDR: tconf <= data_o;
-            endcase
+		else begin
+			data_o <= 'h0;
 		end
 	end
 
@@ -84,4 +80,4 @@ module timer(
 			tm_of <= 0;
 	end
 
-endmodule;
+endmodule

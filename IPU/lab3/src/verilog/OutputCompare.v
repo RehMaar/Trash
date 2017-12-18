@@ -1,125 +1,96 @@
-module oc (
-    input        clk,
-    input        rst,
+module output_compare (
+    input        clk_i,
+    input        rst_i,
 
-    input [31:0] addr_i,
+    input [12:0] addr_i,
     input [31:0] data_i,
-    input        rd_i,
-    input        wr_i,
+    input        en_i,
+    input [3:0]	 we_i,
 
     input [31:0] tm1,
     input        tm1_of,
     input [31:0] tm2,
     input        tm2_of,
     
-    output       data_o,
+    output reg [31:0]   data_o,
 
-    output       outs
+    output reg outs
 );
 
     /* Timers */
-    enum {
-        OC_TM1 = 0,
-        OC_TM2
-    };
+    localparam OC_TM1 = 0;
+    localparam OC_TM2 = 1;
 
     /* OC conf*/
-    enum {
-        OC_MODE_START = 0,
-        OC_MODE_END   = 2,
-        OC_TM_WRK     = 3;
-    };
+    localparam OC_MODE_START = 0;
+    localparam OC_MODE_END   = 2;
+    localparam OC_TM_WRK     = 3;
 
     /* OC modes. */
-    enum {
-        OC_OFF = 0,
-        OC_SIMPLE_TO_ONE,
-        OC_SIMPLE_TO_ZERO,
-        OC_TOGGLE,
-        PWM_TO_ONE,
-        PWM_TO_ZERO
-    };
+    localparam OC_OFF            = 'h0;
+    localparam OC_SIMPLE_TO_ONE  = 'h1;
+    localparam OC_SIMPLE_TO_ZERO = 'h2;
+    localparam OC_TOGGLE         = 'h3;
+    localparam PWM_TO_ONE        = 'h4;
+    localparam PWM_TO_ZERO       = 'h5;
 
     /* Register addresses. */
-    enum {
-        OCCONF_ADDR,
-        OCR_ADDR
-    };
+    localparam OCCONF_ADDR     = 'h0;
+    localparam OCR_ADDR 	   = 'h4;
 
     reg [31:0] occonf;
     reg [31:0] ocr;
 
-    reg reg_outs;
-    assign outs = reg_outs;
-
-    /* Reset registers. */
-    always @(posedge rst)
+    always @(posedge rst_i or posedge clk_i)
     begin
-        occonf    <= 0;
-        ocr       <= 0;
-        reg_outs  <= 0;
+    	if (rst_i)
+    	begin
+			occonf <= 0;
+			ocr    <= 0;
+			outs   <= 0;
+			data_o <= 0;
+    	end
+        else if (en_i && we_i)
+        begin
+        	case (addr_i)
+                OCCONF_ADDR: occonf <= data_i;
+                OCR_ADDR:    ocr    <= data_i;
+            endcase
+        end
+    	else if (en_i)
+    	begin
+        	case (addr_i)
+                OCCONF_ADDR: data_o <= occonf;
+                OCR_ADDR:    data_o <= ocr;
+            endcase
+        end
     end
 
-    /* Read block. */
-    always @(posedge clk)
-    begin
-        if (rd_i) {
-            if (add_i == OCCONF_ADDR) {
-                data_o = occonf;
-            } else if (addr_i == OCR_ADDR) {
-                data_o = ocr;
-            }
-        }
-    end
-
-    /* Write block. */
-    always @(posedge clk)
-    begin
-        if (wr_i) {
-            if (add_i == OCCONF_ADDR) {
-                occonf = data_i;
-            } else if (addr_i == OCR_ADDR) {
-                ocr = data_i;
-            }
-        }
-    end
-
-    wire eq = occonf[OC_TM_WRK] == OC_TM1 ? tms1 : tms2;
-    wire of = occonf[OC_TM_WRK] == OC_TM1 ? tms1_of : tms2_of;
+    wire eq = (occonf[OC_TM_WRK] == OC_TM1 ? tm1 : tm2) == ocr;
+    wire of = occonf[OC_TM_WRK] == OC_TM1 ? tm1_of : tm2_of;
 
     /* Out logic. */
     always @*
     begin
-        case (occonf[OC_MODE_START:OC_MODE_END])
-            OC_SIMPLE_TO_ONE:
-                begin
-                    reg_outs = 0 ^ eq;
-                end
-            OC_SIMPLE_TO_ZERO:
-                begin
-                    reg_outs = 1 ^ eq;
-                end
-            OC_TOGGLE:
-                begin
-                    reg_outs = ~reg_outs;
-                end
+        case (occonf[OC_MODE_END:OC_MODE_START])
+            OC_SIMPLE_TO_ONE:  outs = 0 ^ eq;
+            OC_SIMPLE_TO_ZERO: outs = 1 ^ eq;
+            OC_TOGGLE:         outs = ~outs;
             PWM_TO_ONE:
-                begin
-					reg_outs = eq && ~of;
-                    //if (eq && ~of)
-                    //    reg_outs = 1;
-                    //else
-                    //    reg_outs = 0;
-                end
+            begin
+            	if (eq && ~of)
+                    outs = 1;
+                else if (of)
+                	outs = 0;
+            end
             PWM_TO_ZERO:
-                begin
-					reg_outs = ~(eq && ~of)
-                    //if (eq && ~of)
-                    //    reg_outs = 0;
-                    //else
-                    //    reg_outs = 1;
-                end
+            begin
+            	if (eq && ~of)
+                    outs = 0;
+                else if (of)
+                	outs = 1;
+            end
         endcase
     end
 
-endmodule;
+endmodule
