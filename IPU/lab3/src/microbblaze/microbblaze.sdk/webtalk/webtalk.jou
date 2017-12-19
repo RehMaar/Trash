@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2017.3 (64-bit)
+# SW Build 2018833 on Wed Oct  4 19:58:07 MDT 2017
+# 
+# Start of session at: Tue Dec 19 17:01:54 2017
+# Process ID: 9578
+# Current directory: /mnt/microbblaze/microbblaze.sdk/webtalk
+# Command line: wbtcv -mode batch -source sdk_webtalk.tcl
+# Log file: /mnt/microbblaze/microbblaze.sdk/webtalk/webtalk.log
+# Journal file: /mnt/microbblaze/microbblaze.sdk/webtalk/webtalk.jou
+#-----------------------------------------------------------
+source sdk_webtalk.tcl

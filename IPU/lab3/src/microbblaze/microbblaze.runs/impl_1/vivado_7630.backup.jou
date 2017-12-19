@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2017.3 (64-bit)
+# SW Build 2018833 on Wed Oct  4 19:58:07 MDT 2017
+# IP Build 2016188 on Wed Oct  4 21:52:56 MDT 2017
+# Start of session at: Tue Dec 19 16:52:03 2017
+# Process ID: 7630
+# Current directory: /mnt/microbblaze/microbblaze.runs/impl_1
+# Command line: vivado -log uc_system_wrapper.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source uc_system_wrapper.tcl -notrace
+# Log file: /mnt/microbblaze/microbblaze.runs/impl_1/uc_system_wrapper.vdi
+# Journal file: /mnt/microbblaze/microbblaze.runs/impl_1/vivado.jou
+#-----------------------------------------------------------
+source uc_system_wrapper.tcl -notrace

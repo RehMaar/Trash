@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="sim_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="axi_bram_ctrl_funcs" />
+            <top_module name="glbl" />
+            <top_module name="ipif_pkg" />
+            <top_module name="lib_pkg" />
+            <top_module name="lmb_bram_if_funcs" />
+            <top_module name="sim_tb" />
+            <top_module name="tc_types" />
+            <top_module name="vcomponents" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="1121000000fs"></ZoomStartTime>
+      <ZoomEndTime time="2765000001fs"></ZoomEndTime>
+      <Cursor1Time time="1395000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="144"></NameColumnWidth>
+      <ValueColumnWidth column_width="87"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="13" />
+   <wvobject type="logic" fp_name="/sim_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_tb/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_tb/gpios">
+      <obj_property name="ElementShortName">gpios[15:0]</obj_property>
+      <obj_property name="ObjectShortName">gpios[15:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_tb/rxd">
+      <obj_property name="ElementShortName">rxd</obj_property>
+      <obj_property name="ObjectShortName">rxd</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_tb/txd">
+      <obj_property name="ElementShortName">txd</obj_property>
+      <obj_property name="ObjectShortName">txd</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_tb/uc/uc_system_i/timer_0/inst/tval">
+      <obj_property name="ElementShortName">tval[31:0]</obj_property>
+      <obj_property name="ObjectShortName">tval[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_tb/uc/uc_system_i/timer_1/inst/tval">
+      <obj_property name="ElementShortName">tval[31:0]</obj_property>
+      <obj_property name="ObjectShortName">tval[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_tb/uc/uc_system_i/output_compare_0/inst/ocr">
+      <obj_property name="ElementShortName">ocr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ocr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_tb/uc/uc_system_i/output_compare_0/inst/occonf">
+      <obj_property name="ElementShortName">occonf[31:0]</obj_property>
+      <obj_property name="ObjectShortName">occonf[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_tb/uc/uc_system_i/output_compare_0/inst/tm1">
+      <obj_property name="ElementShortName">tm1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">tm1[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_tb/uc/uc_system_i/output_compare_0/inst/eq">
+      <obj_property name="ElementShortName">eq</obj_property>
+      <obj_property name="ObjectShortName">eq</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_tb/uc/uc_system_i/output_compare_0/inst/of">
+      <obj_property name="ElementShortName">of</obj_property>
+      <obj_property name="ObjectShortName">of</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_tb/uc/uc_system_i/output_compare_0/outs">
+      <obj_property name="ElementShortName">outs</obj_property>
+      <obj_property name="ObjectShortName">outs</obj_property>
+   </wvobject>
+</wave_config>
