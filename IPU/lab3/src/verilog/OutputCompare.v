@@ -47,7 +47,6 @@ module output_compare (
     	begin
 			occonf <= 0;
 			ocr    <= 0;
-			outs   <= 0;
 			data_o <= 0;
     	end
         else if (en_i && we_i)
@@ -73,6 +72,7 @@ module output_compare (
     always @*
     begin
         case (occonf[OC_MODE_END:OC_MODE_START])
+        	OC_OFF:			   outs = 0;
             OC_SIMPLE_TO_ONE:  outs = 0 ^ eq;
             OC_SIMPLE_TO_ZERO: outs = 1 ^ eq;
             OC_TOGGLE:         outs = ~outs;

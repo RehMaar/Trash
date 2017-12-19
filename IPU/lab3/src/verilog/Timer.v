@@ -15,6 +15,7 @@ module timer(
 	reg [31:0] tmr;
 	reg [31:0] tconf;
 	reg [31:0] tval;
+	reg [31:0] tval_new;
 
 	assign tval_o = tval;
 
@@ -31,7 +32,7 @@ module timer(
 	localparam STOP = 0;
 	localparam RUN  = 1;
 
-	always @(negedge clk_i)
+	always @(posedge clk_i)
 	begin
 		if (rst_i)
 		begin
@@ -48,19 +49,40 @@ module timer(
         		TCONF_ADDR: tconf <= data_i;
             endcase
 		end
-		else if (en_i)
+		else
 		begin
-			case (addr_i)
-				TMR_ADDR:   data_o <= tmr;
-    			TVAL_ADDR:  data_o <= tval;
-        		TCONF_ADDR: data_o <= tconf;
-            endcase
-		end
-		else begin
-			data_o <= 'h0;
-		end
+
+    		if (en_i)
+    		begin
+    			case (addr_i)
+    				TMR_ADDR:   data_o <= tmr;
+        			TVAL_ADDR:  data_o <= tval;
+            		TCONF_ADDR: data_o <= tconf;
+                endcase
+    		end
+    		else begin
+    			data_o <= 'h0;
+    		end
+
+    		if (tconf[RUN_BIT] == RUN)
+    		begin
+    			if (tconf[TYPE_BIT] == INC)
+    			begin
+        			tval  <= tval == tmr ? 0 : tval + 1;
+        			tm_of <= tval == tmr;
+        		end
+        		else
+    			begin
+    				tval  <= tval == 0 ? tmr : tval - 1;
+    				tm_of <= tval == 0;
+    			end
+    		end
+    		else
+    			tm_of <= 0;
+    	end
 	end
 
+/*
 	always @(posedge clk_i)
 	begin
 		if (tconf[RUN_BIT] == RUN)
@@ -79,5 +101,5 @@ module timer(
 		else
 			tm_of <= 0;
 	end
-
+*/
 endmodule
