@@ -2,8 +2,8 @@
 # Vivado v2017.3 (64-bit)
 # SW Build 2018833 on Wed Oct  4 19:58:07 MDT 2017
 # IP Build 2016188 on Wed Oct  4 21:52:56 MDT 2017
-# Start of session at: Tue Dec 19 16:41:18 2017
-# Process ID: 7078
+# Start of session at: Tue Dec 19 18:19:26 2017
+# Process ID: 15239
 # Current directory: /mnt/microbblaze/microbblaze.runs/synth_1
 # Command line: vivado -log uc_system_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source uc_system_wrapper.tcl
 # Log file: /mnt/microbblaze/microbblaze.runs/synth_1/uc_system_wrapper.vds
@@ -13,15 +13,15 @@ source uc_system_wrapper.tcl -notrace
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/mnt/vivado/Vivado/2017.3/data/ip'.
-add_files: Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 1170.531 ; gain = 13.777 ; free physical = 363 ; free virtual = 3825
+add_files: Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1170.531 ; gain = 13.777 ; free physical = 1221 ; free virtual = 3584
 Command: synth_design -top uc_system_wrapper -part xc7a100tcsg324-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 7119 
+INFO: Helper process launched with PID 15279 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:18 ; elapsed = 00:00:34 . Memory (MB): peak = 1287.344 ; gain = 92.000 ; free physical = 250 ; free virtual = 3703
+Starting RTL Elaboration : Time (s): cpu = 00:00:19 ; elapsed = 00:00:35 . Memory (MB): peak = 1287.344 ; gain = 92.000 ; free physical = 1046 ; free virtual = 3451
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'uc_system_wrapper' [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/hdl/uc_system_wrapper.v:12]
 INFO: [Synth 8-638] synthesizing module 'uc_system' [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/synth/uc_system.v:1059]
@@ -1114,11 +1114,11 @@ INFO: [Synth 8-256] done synthesizing module 'axi_uartlite' (40#1) [/mnt/microbb
 INFO: [Synth 8-256] done synthesizing module 'uc_system_axi_uartlite_0_0' (41#1) [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/ip/uc_system_axi_uartlite_0_0/synth/uc_system_axi_uartlite_0_0.vhd:86]
 WARNING: [Synth 8-350] instance 'axi_uartlite_0' of module 'uc_system_axi_uartlite_0_0' requires 22 connections, but only 21 given [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/synth/uc_system.v:1327]
 INFO: [Synth 8-638] synthesizing module 'uc_system_bram_interconnect_0_0' [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/ip/uc_system_bram_interconnect_0_0/synth/uc_system_bram_interconnect_0_0.v:57]
-INFO: [Synth 8-638] synthesizing module 'bram_interconnect' [/mnt/verilog/BRAMInterconnect.v:1]
-INFO: [Synth 8-155] case statement is not full and has no default [/mnt/verilog/BRAMInterconnect.v:41]
-INFO: [Synth 8-155] case statement is not full and has no default [/mnt/verilog/BRAMInterconnect.v:70]
-INFO: [Synth 8-155] case statement is not full and has no default [/mnt/verilog/BRAMInterconnect.v:95]
-INFO: [Synth 8-256] done synthesizing module 'bram_interconnect' (42#1) [/mnt/verilog/BRAMInterconnect.v:1]
+INFO: [Synth 8-638] synthesizing module 'bram_interconnect' [/mnt/microbblaze/verilog_src/BRAMInterconnect.v:1]
+INFO: [Synth 8-155] case statement is not full and has no default [/mnt/microbblaze/verilog_src/BRAMInterconnect.v:41]
+INFO: [Synth 8-155] case statement is not full and has no default [/mnt/microbblaze/verilog_src/BRAMInterconnect.v:70]
+INFO: [Synth 8-155] case statement is not full and has no default [/mnt/microbblaze/verilog_src/BRAMInterconnect.v:95]
+INFO: [Synth 8-256] done synthesizing module 'bram_interconnect' (42#1) [/mnt/microbblaze/verilog_src/BRAMInterconnect.v:1]
 INFO: [Synth 8-256] done synthesizing module 'uc_system_bram_interconnect_0_0' (43#1) [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/ip/uc_system_bram_interconnect_0_0/synth/uc_system_bram_interconnect_0_0.v:57]
 INFO: [Synth 8-638] synthesizing module 'uc_system_clk_wiz_0_0' [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/ip/uc_system_clk_wiz_0_0/uc_system_clk_wiz_0_0.v:70]
 INFO: [Synth 8-638] synthesizing module 'uc_system_clk_wiz_0_0_clk_wiz' [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/ip/uc_system_clk_wiz_0_0/uc_system_clk_wiz_0_0_clk_wiz.v:68]
@@ -1881,7 +1881,7 @@ INFO: [Synth 8-256] done synthesizing module 'uc_system_lmb_bram_0' (137#1) [/mn
 WARNING: [Synth 8-350] instance 'lmb_bram' of module 'uc_system_lmb_bram_0' requires 16 connections, but only 14 given [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/synth/uc_system.v:895]
 INFO: [Synth 8-256] done synthesizing module 'microblaze_0_local_memory_imp_1DGYSR8' (138#1) [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/synth/uc_system.v:678]
 INFO: [Synth 8-638] synthesizing module 'uc_system_output_compare_0_1' [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/ip/uc_system_output_compare_0_1/synth/uc_system_output_compare_0_1.v:57]
-INFO: [Synth 8-638] synthesizing module 'output_compare' [/mnt/verilog/OutputCompare.v:1]
+INFO: [Synth 8-638] synthesizing module 'output_compare' [/mnt/microbblaze/verilog_src/OutputCompare.v:1]
 	Parameter OC_TM1 bound to: 0 - type: integer 
 	Parameter OC_TM2 bound to: 1 - type: integer 
 	Parameter OC_MODE_START bound to: 0 - type: integer 
@@ -1895,10 +1895,10 @@ INFO: [Synth 8-638] synthesizing module 'output_compare' [/mnt/verilog/OutputCom
 	Parameter PWM_TO_ZERO bound to: 5 - type: integer 
 	Parameter OCCONF_ADDR bound to: 0 - type: integer 
 	Parameter OCR_ADDR bound to: 4 - type: integer 
-INFO: [Synth 8-155] case statement is not full and has no default [/mnt/verilog/OutputCompare.v:54]
-INFO: [Synth 8-155] case statement is not full and has no default [/mnt/verilog/OutputCompare.v:61]
-INFO: [Synth 8-155] case statement is not full and has no default [/mnt/verilog/OutputCompare.v:74]
-INFO: [Synth 8-256] done synthesizing module 'output_compare' (139#1) [/mnt/verilog/OutputCompare.v:1]
+INFO: [Synth 8-155] case statement is not full and has no default [/mnt/microbblaze/verilog_src/OutputCompare.v:54]
+INFO: [Synth 8-155] case statement is not full and has no default [/mnt/microbblaze/verilog_src/OutputCompare.v:61]
+INFO: [Synth 8-155] case statement is not full and has no default [/mnt/microbblaze/verilog_src/OutputCompare.v:74]
+INFO: [Synth 8-256] done synthesizing module 'output_compare' (139#1) [/mnt/microbblaze/verilog_src/OutputCompare.v:1]
 INFO: [Synth 8-256] done synthesizing module 'uc_system_output_compare_0_1' (140#1) [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/ip/uc_system_output_compare_0_1/synth/uc_system_output_compare_0_1.v:57]
 INFO: [Synth 8-638] synthesizing module 'uc_system_proc_sys_reset_0_0' [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/ip/uc_system_proc_sys_reset_0_0/synth/uc_system_proc_sys_reset_0_0.vhd:74]
 	Parameter C_FAMILY bound to: artix7 - type: string 
@@ -1974,7 +1974,7 @@ INFO: [Synth 8-256] done synthesizing module 'proc_sys_reset' (145#1) [/mnt/micr
 INFO: [Synth 8-256] done synthesizing module 'uc_system_proc_sys_reset_0_0' (146#1) [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/ip/uc_system_proc_sys_reset_0_0/synth/uc_system_proc_sys_reset_0_0.vhd:74]
 WARNING: [Synth 8-350] instance 'proc_sys_reset_0' of module 'uc_system_proc_sys_reset_0_0' requires 10 connections, but only 9 given [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/synth/uc_system.v:1579]
 INFO: [Synth 8-638] synthesizing module 'uc_system_timer_0_2' [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/ip/uc_system_timer_0_2/synth/uc_system_timer_0_2.v:57]
-INFO: [Synth 8-638] synthesizing module 'timer' [/mnt/verilog/Timer.v:1]
+INFO: [Synth 8-638] synthesizing module 'timer' [/mnt/microbblaze/verilog_src/Timer.v:1]
 	Parameter TMR_ADDR bound to: 0 - type: integer 
 	Parameter TVAL_ADDR bound to: 4 - type: integer 
 	Parameter TCONF_ADDR bound to: 8 - type: integer 
@@ -1984,9 +1984,9 @@ INFO: [Synth 8-638] synthesizing module 'timer' [/mnt/verilog/Timer.v:1]
 	Parameter DEC bound to: 1 - type: integer 
 	Parameter STOP bound to: 0 - type: integer 
 	Parameter RUN bound to: 1 - type: integer 
-INFO: [Synth 8-155] case statement is not full and has no default [/mnt/verilog/Timer.v:46]
-INFO: [Synth 8-155] case statement is not full and has no default [/mnt/verilog/Timer.v:57]
-INFO: [Synth 8-256] done synthesizing module 'timer' (147#1) [/mnt/verilog/Timer.v:1]
+INFO: [Synth 8-155] case statement is not full and has no default [/mnt/microbblaze/verilog_src/Timer.v:46]
+INFO: [Synth 8-155] case statement is not full and has no default [/mnt/microbblaze/verilog_src/Timer.v:57]
+INFO: [Synth 8-256] done synthesizing module 'timer' (147#1) [/mnt/microbblaze/verilog_src/Timer.v:1]
 INFO: [Synth 8-256] done synthesizing module 'uc_system_timer_0_2' (148#1) [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/ip/uc_system_timer_0_2/synth/uc_system_timer_0_2.v:57]
 INFO: [Synth 8-638] synthesizing module 'uc_system_timer_1_2' [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/ip/uc_system_timer_1_2/synth/uc_system_timer_1_2.v:57]
 INFO: [Synth 8-256] done synthesizing module 'uc_system_timer_1_2' (149#1) [/mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/ip/uc_system_timer_1_2/synth/uc_system_timer_1_2.v:57]
@@ -2094,7 +2094,7 @@ WARNING: [Synth 8-3331] design blk_mem_gen_v8_4_0_synth has unconnected port S_A
 WARNING: [Synth 8-3331] design blk_mem_gen_v8_4_0_synth has unconnected port S_AXI_AWADDR[19]
 INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:02:23 ; elapsed = 00:02:55 . Memory (MB): peak = 1826.172 ; gain = 630.828 ; free physical = 433 ; free virtual = 3496
+Finished RTL Elaboration : Time (s): cpu = 00:02:24 ; elapsed = 00:02:56 . Memory (MB): peak = 1826.172 ; gain = 630.828 ; free physical = 786 ; free virtual = 3224
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -2104,7 +2104,7 @@ Report Check Netlist:
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:02:24 ; elapsed = 00:02:56 . Memory (MB): peak = 1826.172 ; gain = 630.828 ; free physical = 468 ; free virtual = 3532
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:02:26 ; elapsed = 00:02:57 . Memory (MB): peak = 1826.172 ; gain = 630.828 ; free physical = 821 ; free virtual = 3259
 ---------------------------------------------------------------------------------
 INFO: [Netlist 29-17] Analyzing 850 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -2165,16 +2165,16 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   RAM32M => RAM32M (RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMS32, RAMS32): 16 instances
   SRL16 => SRL16E: 1 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.03 . Memory (MB): peak = 1921.938 ; gain = 0.000 ; free physical = 115 ; free virtual = 3214
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.03 . Memory (MB): peak = 1920.938 ; gain = 0.000 ; free physical = 467 ; free virtual = 2942
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:02:56 ; elapsed = 00:03:39 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 253 ; free virtual = 3352
+Finished Constraint Validation : Time (s): cpu = 00:02:58 ; elapsed = 00:03:41 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 605 ; free virtual = 3080
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tcsg324-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:02:56 ; elapsed = 00:03:39 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 253 ; free virtual = 3352
+Finished Loading Part and Timing Information : Time (s): cpu = 00:02:58 ; elapsed = 00:03:41 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 605 ; free virtual = 3080
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -2208,7 +2208,7 @@ Applied set_property DONT_TOUCH = true for uc_system_i/proc_sys_reset_0. (constr
 Applied set_property DONT_TOUCH = true for uc_system_i/timer_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for uc_system_i/timer_1. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:02:56 ; elapsed = 00:03:40 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 256 ; free virtual = 3355
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:02:58 ; elapsed = 00:03:41 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 608 ; free virtual = 3083
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5544] ROM "max_wrap_burst" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "max_wrap_burst" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
@@ -2380,9 +2380,9 @@ INFO: [Synth 8-3354] encoded FSM with state register 'rd_data_sm_cs_reg' using e
             w8_last_data |                              100 |                              011
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'rlast_sm_cs_reg' using encoding 'sequential' in module 'rd_chnl'
-WARNING: [Synth 8-327] inferring latch for variable 'outs_reg' [/mnt/verilog/OutputCompare.v:75]
+WARNING: [Synth 8-327] inferring latch for variable 'outs_reg' [/mnt/microbblaze/verilog_src/OutputCompare.v:75]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:03:03 ; elapsed = 00:03:47 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 339 ; free virtual = 3438
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:03:05 ; elapsed = 00:03:48 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 679 ; free virtual = 3154
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -3385,7 +3385,7 @@ INFO: [Synth 8-3886] merging instance 'uc_system_i/microblaze_0_local_memory/lmb
 INFO: [Synth 8-3886] merging instance 'uc_system_i/microblaze_0_local_memory/lmb_bram/U0/inst_blk_mem_gen/gnbram.gnative_mem_map_bmg.native_mem_map_blk_mem_gen/valid.cstr/ramloop[0].ram.r/SAFETY_CKT_GEN.RSTA_SHFT_REG_reg[4]' (FD) to 'uc_system_i/microblaze_0_local_memory/lmb_bram/U0/inst_blk_mem_gen/gnbram.gnative_mem_map_bmg.native_mem_map_blk_mem_gen/valid.cstr/ramloop[1].ram.r/SAFETY_CKT_GEN.RSTA_SHFT_REG_reg[4]'
 INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:03:20 ; elapsed = 00:04:05 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 301 ; free virtual = 3403
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:03:22 ; elapsed = 00:04:07 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 656 ; free virtual = 3133
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -3399,13 +3399,13 @@ Start Applying XDC Timing Constraints
 INFO: [Synth 8-5578] Moved timing constraint from pin 'uc_system_i/microblaze_0/U0/Reset' to pin 'uc_system_i/proc_sys_reset_0/U0/FDRE_inst/Q'
 INFO: [Synth 8-5819] Moved 1 constraints on hierarchical pins to their respective driving/loading pins
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:03:27 ; elapsed = 00:04:15 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 187 ; free virtual = 3296
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:03:29 ; elapsed = 00:04:17 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 542 ; free virtual = 3026
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:03:42 ; elapsed = 00:04:31 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 137 ; free virtual = 3221
+Finished Timing Optimization : Time (s): cpu = 00:03:45 ; elapsed = 00:04:32 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 466 ; free virtual = 2951
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -3417,7 +3417,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:03:46 ; elapsed = 00:04:35 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 137 ; free virtual = 3221
+Finished Technology Mapping : Time (s): cpu = 00:03:49 ; elapsed = 00:04:36 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 466 ; free virtual = 2951
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -3441,7 +3441,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:03:47 ; elapsed = 00:04:36 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 136 ; free virtual = 3221
+Finished IO Insertion : Time (s): cpu = 00:03:50 ; elapsed = 00:04:37 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 466 ; free virtual = 2950
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -3454,7 +3454,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:03:47 ; elapsed = 00:04:36 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 136 ; free virtual = 3221
+Finished Renaming Generated Instances : Time (s): cpu = 00:03:50 ; elapsed = 00:04:38 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 466 ; free virtual = 2950
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -3466,25 +3466,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:03:48 ; elapsed = 00:04:37 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 136 ; free virtual = 3221
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:03:50 ; elapsed = 00:04:38 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 466 ; free virtual = 2951
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:03:48 ; elapsed = 00:04:37 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 136 ; free virtual = 3221
+Finished Renaming Generated Ports : Time (s): cpu = 00:03:50 ; elapsed = 00:04:38 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 466 ; free virtual = 2951
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:03:48 ; elapsed = 00:04:37 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 136 ; free virtual = 3221
+Finished Handling Custom Attributes : Time (s): cpu = 00:03:51 ; elapsed = 00:04:39 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 466 ; free virtual = 2951
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:03:48 ; elapsed = 00:04:37 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 136 ; free virtual = 3221
+Finished Renaming Generated Nets : Time (s): cpu = 00:03:51 ; elapsed = 00:04:39 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 466 ; free virtual = 2951
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -4318,11 +4318,11 @@ Report Instance Areas:
 |752   |                  \prim_noinit.ram                                                   |blk_mem_gen_v8_4_0_blk_mem_gen_prim_wrapper__parameterized0 |     5|
 +------+-------------------------------------------------------------------------------------+------------------------------------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:03:48 ; elapsed = 00:04:37 . Memory (MB): peak = 1921.938 ; gain = 726.594 ; free physical = 136 ; free virtual = 3221
+Finished Writing Synthesis Report : Time (s): cpu = 00:03:51 ; elapsed = 00:04:39 . Memory (MB): peak = 1920.938 ; gain = 725.594 ; free physical = 466 ; free virtual = 2951
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 28618 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:03:26 ; elapsed = 00:04:04 . Memory (MB): peak = 1921.938 ; gain = 630.828 ; free physical = 187 ; free virtual = 3271
-Synthesis Optimization Complete : Time (s): cpu = 00:03:48 ; elapsed = 00:04:37 . Memory (MB): peak = 1921.945 ; gain = 726.594 ; free physical = 193 ; free virtual = 3278
+Synthesis Optimization Runtime : Time (s): cpu = 00:03:28 ; elapsed = 00:04:05 . Memory (MB): peak = 1920.938 ; gain = 630.828 ; free physical = 518 ; free virtual = 3003
+Synthesis Optimization Complete : Time (s): cpu = 00:03:51 ; elapsed = 00:04:39 . Memory (MB): peak = 1920.945 ; gain = 725.594 ; free physical = 519 ; free virtual = 3004
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 720 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -4343,8 +4343,8 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 INFO: [Common 17-83] Releasing license: Synthesis
 902 Infos, 200 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:03:54 ; elapsed = 00:04:42 . Memory (MB): peak = 1921.945 ; gain = 751.414 ; free physical = 264 ; free virtual = 3349
+synth_design: Time (s): cpu = 00:03:56 ; elapsed = 00:04:44 . Memory (MB): peak = 1920.945 ; gain = 750.414 ; free physical = 594 ; free virtual = 3080
 INFO: [Common 17-1381] The checkpoint '/mnt/microbblaze/microbblaze.runs/synth_1/uc_system_wrapper.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file uc_system_wrapper_utilization_synth.rpt -pb uc_system_wrapper_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.07 . Memory (MB): peak = 1945.949 ; gain = 0.000 ; free physical = 260 ; free virtual = 3348
-INFO: [Common 17-206] Exiting Vivado at Tue Dec 19 16:46:25 2017...
+report_utilization: Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.07 . Memory (MB): peak = 1944.949 ; gain = 0.000 ; free physical = 591 ; free virtual = 3079
+INFO: [Common 17-206] Exiting Vivado at Tue Dec 19 18:24:34 2017...

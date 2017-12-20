@@ -97,12 +97,12 @@ set_generate_module(unsigned int period)
 	SET_BIT(occonf, OC_TM_WRK, OC_TM1);
 	occonf |= OC_PWM_TO_ZERO;
 
-    Xil_Out32(OC_OCR_ADDR, period);
+    Xil_Out32(OC_OCR_ADDR, period - 1);
 	Xil_Out32(OC_OCCONF_ADDR, occonf);
 
 
 	/* Set Timers. */
-	Xil_Out32(TIMER1_TMR_ADDR, period * 3);
+	Xil_Out32(TIMER1_TMR_ADDR, period * 3 - 1);
 
 	unsigned int tconf = 0;
 	SET_BIT(tconf, TCONF_TYPE_BIT, DEC);
@@ -161,7 +161,7 @@ int
 main(void)
 {
     init_platform();
-    set_generate_module(300);
+    set_generate_module(1000);
 
     /* Set interrupt clear bit to reset interrupts.*/
     unsigned int tcsr = 0x0;
@@ -224,13 +224,14 @@ main(void)
 
                     Xil_Out32(TCSR1, tcsr);
 
-
-                    //Xil_Out32(GPIO_ADDR, 0xffff);
-                    //Xil_Out32(GPIO_ADDR, (interval_zero));
-                    //Xil_Out32(GPIO_ADDR, ((val1) - (val0)));
                     char buf[30];
                     put_msg(buf, interval_zero, (val1 - val0));
                     print(buf);
+
+                    Xil_Out32(GPIO_ADDR, 0xffff);
+                    Xil_Out32(GPIO_ADDR, (interval_zero));
+                    Xil_Out32(GPIO_ADDR, ((val1) - (val0)));
+
                     state = READ_ZERO;
                 }
             }

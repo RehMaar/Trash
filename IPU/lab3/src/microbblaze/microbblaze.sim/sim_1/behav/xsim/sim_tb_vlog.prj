@@ -1,8 +1,8 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  --include "../../../../microbblaze.srcs/sources_1/bd/uc_system/ipshared/5123" --include "../../../../microbblaze.srcs/sources_1/bd/uc_system/ipshared/ec67/hdl" \
-"../../../../../verilog/BRAMInterconnect.v" \
-"../../../../../verilog/OutputCompare.v" \
-"../../../../../verilog/Timer.v" \
+"../../../../verilog_src/BRAMInterconnect.v" \
+"../../../../verilog_src/OutputCompare.v" \
+"../../../../verilog_src/Timer.v" \
 "../../../../microbblaze.ip_user_files/bd/uc_system/ip/uc_system_clk_wiz_0_0/uc_system_clk_wiz_0_0_clk_wiz.v" \
 "../../../../microbblaze.ip_user_files/bd/uc_system/ip/uc_system_clk_wiz_0_0/uc_system_clk_wiz_0_0.v" \
 "../../../../microbblaze.ip_user_files/bd/uc_system/ip/uc_system_xbar_1/sim/uc_system_xbar_1.v" \

@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1513691461">
-  <File Type="PA-TCL" Name="uc_system_wrapper.tcl"/>
-  <File Type="REPORTS-TCL" Name="uc_system_wrapper_reports.tcl"/>
-  <File Type="RDS-RDS" Name="uc_system_wrapper.vds"/>
+<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1513696765">
+  <File Type="VDS-TIMING-PB" Name="uc_system_wrapper_timing_summary_synth.pb"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="uc_system_wrapper_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="uc_system_wrapper.dcp"/>
   <File Type="RDS-UTIL-PB" Name="uc_system_wrapper_utilization_synth.pb"/>
   <File Type="RDS-UTIL" Name="uc_system_wrapper_utilization_synth.rpt"/>
+  <File Type="RDS-PROPCONSTRS" Name="uc_system_wrapper_drc_synth.rpt"/>
+  <File Type="RDS-RDS" Name="uc_system_wrapper.vds"/>
+  <File Type="REPORTS-TCL" Name="uc_system_wrapper_reports.tcl"/>
+  <File Type="PA-TCL" Name="uc_system_wrapper.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
-    <File Path="$PPRDIR/../../../../../../../mnt/verilog/BRAMInterconnect.v">
+    <File Path="$PPRDIR/verilog_src/BRAMInterconnect.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../../../mnt/verilog/OutputCompare.v">
+    <File Path="$PPRDIR/verilog_src/OutputCompare.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../../../../../../mnt/verilog/Timer.v">
+    <File Path="$PPRDIR/verilog_src/Timer.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>

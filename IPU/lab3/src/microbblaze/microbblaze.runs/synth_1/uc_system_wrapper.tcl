@@ -30,9 +30,9 @@ set_property target_language Verilog [current_project]
 set_property ip_output_repo /mnt/microbblaze/microbblaze.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_verilog -library xil_defaultlib {
-  /mnt/verilog/BRAMInterconnect.v
-  /mnt/verilog/OutputCompare.v
-  /mnt/verilog/Timer.v
+  /mnt/microbblaze/verilog_src/BRAMInterconnect.v
+  /mnt/microbblaze/verilog_src/OutputCompare.v
+  /mnt/microbblaze/verilog_src/Timer.v
   /mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/hdl/uc_system_wrapper.v
 }
 add_files /mnt/microbblaze/microbblaze.srcs/sources_1/bd/uc_system/uc_system.bd
