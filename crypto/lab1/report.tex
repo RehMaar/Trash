@@ -1,0 +1,101 @@
+\documentclass[12pt, a4paper] {ncc}
+\usepackage[utf8] {inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english, russian] {babel}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{listings,a4wide,longtable,amsmath,amsfonts,graphicx}
+\usepackage{indentfirst}
+\usepackage{bytefield}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
+\usepackage{tabularx}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+
+\begin{document}
+\setcounter{figure}{0}
+\frenchspacing
+\pagestyle{empty}
+\begin{center}
+                            Университет ИТМО    \\
+                        Кафедра вычислительной техники
+
+\vspace{\stretch{2}}
+						Лабораторная работа № 1 \\
+				по дисциплине: \\
+				<<Методы и средства защиты компьютерной информации>>\\
+Вариант: 5
+\end{center}
+\vspace{\stretch{2}}
+\begin{center}
+
+\end{center}
+\vspace{\stretch{3}}
+\begin{flushright}
+                                    Студент:\\
+                                    {\it Куклина Мария, гр. P3401}\\
+                                    Преподаватель: \\
+                                    {\it Ожиганов А.А}
+\end{flushright}
+\vspace{\stretch{4}}
+\begin{center}
+                             Санкт-Петербург, 2018
+\end{center}
+\newpage
+
+\section{Цель работы}
+
+Используя частотный анализ, дешифровать криптограмму, зашифрованную методом
+моноалфавитных подстановок.
+
+\section{Расшифрованный исходный текст}
+
+    \texttt{Я ПОШЕЛ ВПРАВО ЧЕРЕЗ КУСТЫ МЕЖДУ ТЕМ НОЧЬ ПРИБЛИЖАЛАСЬ И
+			РОСЛА КАК ГРОЗОВАЯ ТУЧА КАЗАЛОСЬ ВМЕСТЕ С ВЕЧЕРНИМИ ПАРАМИ
+			ОТОВСЮДУ ПОДНИМАЛАСЬ И ДАЖЕ С ВЫШИНЫ ЛИЛАСЬ ТЕМНОТА МНЕ 
+			ПОПАЛАСЬ КАКАЯ ТО НЕТОРНАЯ ЗАРОСШАЯ ДОРОЖКА Я ОТПРАВИЛСЯ 
+			ПО НЕЙ ВНИМАТЕЛЬНО ПОГЛЯДЫВАЯ ВПЕРЕД ВСЕ КРУГОМ БЫСТРО 
+			ЧЕРНЕЛО И УТИХАЛО ОДНИ ПЕРЕПЕЛА ИЗРЕДКА КРИЧАЛИ}
+
+\section{Ключ}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		Нормативный алфавит & А & Б & В & Г& Д& Е& Ж& З& И& К& Л& М& Н& О& П \\ \hline
+		Алфавит шифрования  & П & Р & У & Ь& Ю& Ц& Ъ& Л& А& Н& К& Ч& Е& С& Ы \\ \hline \hline
+		Нормативный алфавит & Р 	 & С& Т& У& Х& Ч& Ш& Ы& Ь& Я & & & & &\\ \hline
+		Алфавит шифрования  & пробел & З& О& Т& Б& Ж& Ф& Ш& Щ& Й & & & & & \\ \hline
+		
+	\end{tabular}
+
+
+\section{Краткий протокол криптоанализа}
+
+	\begin{enumerate}
+		\item Руководствуясь таблицей статистики, заменяем Я на пробел.
+		\item Обнаруживаем, что есть два слова: НПН и НПНПЙ, -- под которые
+			  подходят слова КАК и КАКАЯ соответственно.
+		\item Предполагаем, что слово УЗЦ обозначает ВСЕ. 
+		\item Видимо слово В-ЕС-Е (УЧЦЗОЦ), которое очень похоже на ВМЕСТЕ; У - М, Т - О.
+		\item Видим словов ТЕМ--ТА (ОЦЧЕСОП), которое очень похоже на ТЕМНОТА; Е - Н, С - О.
+		\item Заменяем пропуски в слове ВН-МАТЕ--НО на ВНИМАТЕЛЬНО; А - И, К - Л, Щ - Ь.
+		\item В--АВО заменяет на ВПРАВО; Ы - П, Р - ' '.
+		\item ПО-ЕЛ на ПОШЕЛ; Ф - Ш.
+		\item НО-Ь на НОЧЬ; Ж - Ч.
+		\item Т-ЧА на ТУЧА; Т - У.
+		\item КА-АЛОСЬ на КАЗАЛОСЬ; Л - З.
+		\item ИЗРЕ-КА на ИЗРЕДКА; Ю - Д.
+		\item КУСТ- на КУСТЫ; Ш - Ы.
+		\item МЕ-ДУ на МЕЖДУ; Ъ - Ж.
+		\item КРУ-ОМ на КРУГОМ; Ь - Г.
+		\item -ЫСТРО на БЫСТРО; Р - Б.
+		\item НЕ- на НЕТ; Э - Т.
+		\item ОТОВС-ДУ на ОТОВСЮДУ; В - Ю.
+		\item УТИ-АЛО на УТИХАЛО; Б - Х.
+
+	\end{enumerate}
+
+
+\end{document}
