@@ -87,26 +87,25 @@
 
 \subsection{Граф}
 
-	\begin{tikzpicture}[node distance=3cm]
+	\begin{tikzpicture}[node distance=4cm]
         \tikzstyle{st} = [circle, fill=white, thick, draw=black, minimum size=2em];
-		\node [st] (a) {$1$};
-		\node [st, right of = a] (b) {$2$};
-		\node [st, below of = a] (c) {$3$};
-		\node [st, below of = b] (d) {$4$};
-		\node [st, below right of = c] (e) {$5$};
-		\node [st, left of = e] (f) {$6$};
+		\node [st] (a1) {$1$};
+		\node [st, below of = a1] (b2) {$2$};
+		\node [st, right of = a1] (c3) {$3$};
+		\node [st, right of = b2] (d4) {$4$};
+		\node [st, above right of = a1] (e5) {$5$};
+		\node [st, below right of = a1] (f6) {$6$};
 
 
-		\path (a) edge node{$ $} (b)
-			  (a) edge node{$ $} (c)
-			  (a) edge node{$ $} (d)
-			  (a) edge node{$ $} (f)
-			  (b) edge node{$ $} (c)
-			  (b) edge node{$ $} (d)
-			  (c) edge node{$ $} (f)
-			  (d) edge node{$ $} (e)
-			  (d) edge node{$ $} (f)
-			  (e) edge node{$ $} (f);
+		\path (a1) edge node{$ $} (b2)
+			  (a1) edge node{$ $} (c3)
+			  (a1) edge node{$ $} (e5)
+			  (b2) edge node{$ $} (f6)
+			  (b2) edge node{$ $} (d4)
+			  (c3) edge node{$ $} (d4)
+			  (c3) edge node{$ $} (e5)
+			  (d4) edge node{$ $} (f6)
+			  (e5) edge node{$ $} (f6);
 
 	\end{tikzpicture}
 
@@ -114,12 +113,12 @@
 	\begin{tabular} {|c|c|c|c|c|c|c|}
 		\hline
 		Вершины & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
-		1	    & 0 & 1 & 1 & 1 & 0 & 1 \\ \hline
-		2	    & 1 & 0 & 1 & 1 & 0 & 0 \\ \hline
-		3	    & 1 & 1 & 0 & 0 & 0 & 1 \\ \hline
-		4	    & 1 & 1 & 0 & 0 & 1 & 1 \\ \hline
-		5	    & 0 & 0 & 0 & 1 & 0 & 1 \\ \hline
-		6	    & 1 & 0 & 1 & 1 & 1 & 0 \\ \hline
+		1	    & 0 & 1 & 1 & 0 & 1 & 0 \\ \hline
+		2	    & 1 & 0 & 0 & 1 & 0 & 1 \\ \hline
+		3	    & 1 & 0 & 0 & 1 & 1 & 0 \\ \hline
+		4	    & 0 & 1 & 1 & 0 & 0 & 1 \\ \hline
+		5	    & 1 & 0 & 1 & 0 & 0 & 1 \\ \hline
+		6	    & 0 & 1 & 0 & 1 & 1 & 0 \\ \hline
 	\end{tabular}
 
 \subsection{Краткий протокол криптоанализа}
