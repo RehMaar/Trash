@@ -36,9 +36,9 @@
 \vspace{\stretch{3}}
 \begin{flushright}
                                     Студент:\\
-                                    {\it Куклина М.Д.}\\
+                                    {\it Куклина М.Д., P3401}\\
                                     Преподаватель: \\
-                                    {\it }
+                                    {\it Кремлев А.С.}
 \end{flushright}
 \vspace{\stretch{4}}
 \begin{center}
@@ -46,22 +46,32 @@
 \end{center}
 \newpage
 
-\section{Пояснения к моделям}
-	Блок, отвечающий за время симуляции.\\
-	\includegraphics[scale=0.6]{end.png}
+\section{Математические модели динамических систем и соответствующие им схемы моделирования}
 
-	Блок, который нужен для того, чтобы отображалось два графика $u(t)$ и $y(t)$. \\
-	\includegraphics[scale=0.6]{mux.png}
+	См. рисунки 1-4.
 
-	Блоки, отвечающие за отображение графиков. Блок часов определяет период и начальное время. \\
-	\includegraphics[scale=0.6]{plot.png}
+		\begin{figure}[ht!]
+    		\includegraphics[scale=0.5]{./modelio1t.png}
+			\caption{Схема моделирования для входного воздействия $u = 1(t)$ для модели вход-выход}
+		\end{figure}
 
-\section{Исследование модели вход-выход}
-    \subsection{Задание}
-		Порядок: 3. $a_0 = 7, a_1 = 5, a_2 = 2, b_0 = 10, b_1 = 3, b_2 = 1.5$ \\
-		$ y(0) = 1, \dot{y}(0) = -0.5, \ddot{y}(0) = 0$
+		\begin{figure}[ht!]
+    		\includegraphics[scale=0.5]{./modeliosin.png}
+			\caption{Схема моделирования для входного воздействия $u = 2\sin(t)$ для модели вход-выход}
+		\end{figure}
 
-	\subsection{Расчёт начальных условий интеграторов}
+		\begin{figure}[ht]
+    		\includegraphics[scale=0.5]{./modelios1t.png}
+			\caption{Схема моделирования для входного воздействия $u = 1(t)$ для модели вход-состояние-выход}
+		\end{figure}
+
+		\begin{figure}[ht]
+    		\includegraphics[scale=0.5]{./modeliossin.png}
+			\caption{Схема моделирования для входного воздействия $u = 2\sin(t)$ для модели вход-состояние-выход}
+		\end{figure}
+
+
+\section{Расчёт начальных условий интеграторов}
 
 		Дифференциальное уравнение.\\
 		$y^{(3)} + 2 y^{(2)} + 5 y^{(1)} + 7 y = 1.5 u^{(2)} + 3 u^{(1)} + 10 u $ \\
@@ -85,72 +95,17 @@
 				  $z_3(0) = -1 + 5 = 4$
 		\end{enumerate}
 
-		\section{Результаты}
-
-			См. рисунки 1-5.
-
-
-\section{Исследование модели вход-состояние-выход}
-    \subsection{Задание}
-		Порядок: $n = 2$.
-
-		Матрицы:
-		\[A = 
-		\begin{vmatrix}
-			0  & 1 \\
-			-5 & -0.5 \\
-		\end{vmatrix}
-		B = 
-		\begin{vmatrix}
-			0.5 \\
-			1 \\
-		\end{vmatrix}
-		C = 
-		\begin{vmatrix}
-			5 \\
-			0.5 \\
-		\end{vmatrix}
-		\]
-
-		Варианты начальных условий: $x_1(0) = 0.2, x_2(0) = -0.1$.
-
-		Исходная система:\\
-		\[
-			\begin{cases}
-				\dot{x_1} = x_2 + 0.5 u\\
-				\dot{x_2} = -5 x_1 - 0.5 x_2 + u\\
-				y = 5 x_1 + 0.5 x_2 \\
-			\end{cases}
-		\]
-
-	\subsection{Результаты}
-			См. рисунки 6-10.
-    \section{Вывод}
-
-        В ходе выполнения лабораторной работы происходили исследования моделей вход-выход и вход-состояние-выход в
-        системе Scilab/Xcos. В результате выяснилось, что возможности Xcos в рамаках данной лабораторной работы
-        полностью соответствуют возможностям SIMULINK.
-
-	\section{Схемы моделирования и графики}
-
-		\begin{figure}[ht!]
-    		\includegraphics[scale=0.5]{./modelio1t.png}
-			\caption{Схема моделирования для входного воздействия $u = 1(t)$ для модели вход-выход}
-		\end{figure}
+	\section{Результаты моделрования}
+		См. рисунки 5-10.
 
 		\begin{figure}[ht!]
     		\includegraphics[scale=0.4]{./plotio1t1.png}
-			\caption{График при входном воздействии $u = 1(t)$}
-		\end{figure}
-
-		\begin{figure}[ht!]
-    		\includegraphics[scale=0.5]{./modeliosin.png}
-			\caption{Схема моделирования для входного воздействия $u = 2\sin(t)$ для модели вход-выход}
+			\caption{График при входном воздействии $u = 1(t)$ для модели вход-выход}
 		\end{figure}
 
 		\begin{figure}[ht!]
     		\includegraphics[scale=0.4]{./plotiosin.png}
-			\caption{График при входном воздействии $u = 2\sin(t)$}
+			\caption{График при входном воздействии $u = 2\sin(t)$ для модели вход-выход}
 		\end{figure}
 
 		\begin{figure}[ht!]
@@ -159,23 +114,13 @@
 		\end{figure}
 
 		\begin{figure}[ht]
-    		\includegraphics[scale=0.5]{./modelios1t.png}
-			\caption{Схема моделирования для входного воздействия $u = 1(t)$ для модели вход-состояние-выход}
-		\end{figure}
-
-		\begin{figure}[ht]
     		\includegraphics[scale=0.4]{./plotios1t.png}
-			\caption{График при входном воздействии $u = 1(t)$}
-		\end{figure}
-
-		\begin{figure}[ht]
-    		\includegraphics[scale=0.5]{./modeliossin.png}
-			\caption{Схема моделирования для входного воздействия $u = 2\sin(t)$ для модели вход-состояние-выход}
+			\caption{График при входном воздействии $u = 1(t)$ для модели вход-состояние-выход}
 		\end{figure}
 
 		\begin{figure}[ht]
     		\includegraphics[scale=0.4]{./plotiossin.png}
-			\caption{График при входном воздействии $u = 2\sin(t)$}
+			\caption{График при входном воздействии $u = 2\sin(t)$ для модели вход-состояние-выход}
 		\end{figure}
 
 		\begin{figure}[ht]
@@ -184,9 +129,11 @@
 		\end{figure}
 
 
-% Описать модель вход-выход
-% Описать модель вход-состояние-выход
-% Описать результаты свободного движения
-% Описать сранвнеие моделей
+    \section{Вывод}
+
+        В ходе выполнения лабораторной работы происходили исследования моделей вход-выход и вход-состояние-выход в
+        системе Scilab/Xcos. В результате выяснилось, что возможности Xcos в рамаках данной лабораторной работы
+        полностью соответствуют возможностям SIMULINK.
+
 
 \end{document}
