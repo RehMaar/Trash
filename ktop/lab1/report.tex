@@ -197,7 +197,7 @@
 
 	$a = 5.1 (\text{мм}), b = 2 (\text{мм})$.
 	
-
+\newpage
 \section{Слои}
 	\begin{tabular}{|c|c|c|}
 		\hline
@@ -231,9 +231,7 @@
 
 	Площадь навесных элементов (всегда 2 элемента VT1 и VT2): $S_{\text{НЭ}} = 1 * 2 = 2 (\text{см}^2)$
 
-
-
-\tikzstyle{capac}=[pattern=north east lines]
+\tikzstyle{capac}=[pattern=north east lines, preaction={fill,white}]
 \tikzstyle{backl}=[pattern=north west lines, preaction={fill, white}]
 \tikzstyle{resis}=[preaction={fill, white}, pattern=dots, pattern color=gray]
 \tikzstyle{iarea}=[pattern=north east lines, preaction={fill, white},
@@ -241,117 +239,161 @@
 \tikzstyle{dielc}=[dotted, fill=white]
 \tikzstyle{exter}=[fill=white]
 
+	Обозначеня на схеме.
+	\begin{enumerate}
+		\item Резистивный слой.
+
+			\begin{tikzpicture}
+				\draw[resis] (1,0) rectangle (0,1);
+			\end{tikzpicture}
+
+		\item Проводящий.
+
+			\begin{tikzpicture}
+				\draw[backl] (1,0) rectangle (0,1);
+			\end{tikzpicture}
+		\item Диэлектрический. 
+
+			\begin{tikzpicture}
+				\draw[dielc] (1,0) rectangle (0,1);
+			\end{tikzpicture}
+		\item Проводящий.
+
+			\begin{tikzpicture}
+				\draw[capac] (1,0) rectangle (0,1);
+			\end{tikzpicture}
+		\item Защитный. 
+
+			\begin{tikzpicture}
+				\draw[thick,dashed] (1,0) rectangle (0,1);
+			\end{tikzpicture}
+	\end{enumerate}
+
+\newpage
+\section{Схема}
+
+
+
 \begin{center}
     \begin{tikzpicture}[pattern color=gray]
-        \draw[very thin, lightgray, step=0.1] (1, 1) grid (12, 12);
-        \draw[thin, gray, step=1] (1, 1) grid (12, 12);
-        \draw (1, 1) rectangle (12, 12);
+        \draw[very thin, lightgray, step=0.1] (1, 0) grid (12, 12);
+        \draw[thin, gray, step=1] (1, 0) grid (12, 12);
+        \draw (1, 0) rectangle (12, 12);
 
 		% First (left) part
-        \draw[dielc] (1.6, 4.6) rectangle (4.4, 10.5);
-        \draw[backl]  (4, 4.8) --   (1.8, 4.8) |-
-					  (4.2, 10.3) --(4.2, 3.5)
+        \draw[dielc] (1.8, 4.6) rectangle (4.6, 10.5);
+        \draw[backl]  (4.2, 4.8) --   (2, 4.8) |-
+					  (4.4, 10.3) --(4.4, 3.5)
 					%--(4.4, 3.5) |- (4.2, 2.7)
-				    --(4.2, 2) 	 -- (4, 2)
-					--(4, 2.2) --   (3.7, 2.2)
-					--(3.7, 4.4) -- (4, 4.4) -- cycle;
+				    --(4.4, 1) 	 -- (4.2, 1)
+					--(4.2, 1.8) --   (3.9, 1.8)
+					--(3.9, 4) -- (4.2, 4) -- cycle;
 
 
-        \draw[capac] (4, 10.1) |- (2, 5.0) |-
-					 (3.8, 10.1) |- (4, 11.1) -- cycle;
+        \draw[capac] (4.2, 10.1) |- (2.2, 5.0) |-
+					 (4, 10.1) |- (4.2, 11.1) -- cycle;
         \draw(3.3,7.5) node {$C_1$};
 		% C output
-        \draw[iarea] (3.7, 11.0) rectangle (4.1, 11.4);
+        \draw[iarea] (3.9, 11.0) rectangle (4.3, 11.4);
 
 		% R1
-        \draw[resis] (4.2, 4) rectangle (4.6, 2.66) node[pos=.5] {\scriptsize $R_1$};
-		\draw[backl] (4.6, 4.2) -- (4.8, 4.2)
-				   --(4.8, 2) --   (4.6, 2) -- cycle;
+        \draw[resis] (4.4, 3.8) rectangle (4.8, 2.46) node[pos=.5] {\scriptsize $R_1$};
+		\draw[backl] (4.8, 4) rectangle (5, 1);
+				   %--(4.8, 1) -- (4.6, 1) -- cycle;
 
 		% R1 output
-        \draw[iarea] (4.4, 1.6) rectangle (4.8, 2);
+        \draw[iarea] (4.6, 0.6) rectangle (5.0, 1);
 		% Middle out
-        \draw[iarea] (4, 2) rectangle (4.4, 1.6);
+        \draw[iarea] (4.2, 0.6) rectangle (4.6, 1);
 		% R2
-        \draw[resis] (2.4, 2.4) rectangle (3.7, 4.2) node[pos=.5] {\scriptsize $R_2$};
-        \draw[backl] (2.2, 2) rectangle (2.4, 4.4);
+        \draw[resis] (2.55, 2) rectangle (3.9, 3.8) node[pos=.5] {\scriptsize $R_2$};
+        \draw[backl] (2.35, 1) rectangle (2.55, 4);
 		% R2 out
-        \draw[iarea] (2.1, 2) rectangle (2.5, 1.6);
-		% KP for VT1 out and VT2
-		\draw[iarea] (5.5, 2) rectangle (5.9, 1.6) ;
-		\draw[iarea] (5.9, 2) rectangle (6.3, 1.6) ;
-		\draw[iarea] (6.3, 2) rectangle (6.7, 1.6) ;
+        \draw[iarea] (2.3, 1) rectangle (2.7, 0.6);
+
+		% KP for VT1
+        \draw[iarea] (5.0, 1) rectangle (5.4, 0.6);
+
+		%% KP for VT1 out and VT2
+		\draw[iarea] (5.9, 1) rectangle (6.3, 0.6) ;
+		\draw[iarea] (6.3, 1) rectangle (6.7, 0.6) ;
+		\draw[iarea] (6.7, 1) rectangle (7.1, 0.6) ;
 
 		% Middle part
 		% R3 out
-        \draw[iarea] (4.9, 11.0) rectangle (5.3, 11.4);
+        \draw[iarea] (5.4, 11.0) rectangle (5.8, 11.4);
 		% of R3
-		\draw[backl] (5, 11) rectangle (5.2, 8);
+		\draw[backl] (5.5, 11) rectangle (5.7, 8);
 
 		% R3
-        \draw[resis] (5.9, 10.4) rectangle (5.2, 8.4) node[pos=.5] {\scriptsize $R_3$};
-
-		% KP for VT1
-        \draw[iarea] (4.8, 2) rectangle (5.2, 1.6);
+        \draw[resis] (6.4, 10.4) rectangle (5.7, 8.4) node[pos=.5] {\scriptsize $R_3$};
 
 		% middle
-		\draw[backl] (5.9, 11) rectangle (6.1, 8);
+		\draw[backl] (6.4, 11) rectangle (6.6, 8.2);
 
 		% R4
-        \draw[resis] (6.8, 10.4) rectangle (6.1, 8.4) node[pos=.5] {\scriptsize $R_4$};
+        \draw[resis] (7.3, 10.4) rectangle (6.6, 8.4) node[pos=.5] {\scriptsize $R_4$};
 		% of R4
-		\draw[backl] (6.8, 11) rectangle (7, 8);
+		\draw[backl] (7.3, 11) rectangle (7.5, 8);
 
 		% outs
-        \draw[iarea] (5.8, 11.0) rectangle (6.2, 11.4);
-        \draw[iarea] (6.7, 11.0) rectangle (7.1, 11.4);
+        \draw[iarea] (6.3, 11.0) rectangle (6.7, 11.4);
+        \draw[iarea] (7.2, 11.0) rectangle (7.6, 11.4);
 
 		% KP left
-        \draw[iarea] (4.9, 7.6) rectangle (5.3, 8);
+        \draw[iarea] (5.4, 7.6) rectangle (5.8, 8);
 		% right
-        \draw[iarea] (6.7, 7.6) rectangle (7.1, 8);
+        \draw[iarea] (7.2, 7.6) rectangle (7.6, 8);
 
-        \draw[exter] (4.9, 5.1) rectangle (5.9, 6.1) node[pos=.5] {$VT_1$};
-        \draw (5.2, 5.2) to[bend left=10] (5, 1.7);
-        \draw (5.8, 5.9) to[bend right=15] (5, 7.7);
-		\draw (5.8, 5.2) to[bend right=10] (5.6, 1.7);
+        \draw[exter] (5.2, 4.6) rectangle (6.2, 5.6) node[pos=.5] {$VT_1$};
+        \draw (5.3, 4.7) to[bend left=10] (5.3, 0.7);
+        \draw (5.8, 5.5) to[bend right=15] (5.5, 7.7);
+		\draw (5.8, 4.7) to[bend left=5] (6.1, 0.7);
+
 
 		% Second (right) part
-        \draw[dielc] (8.6, 4.6) rectangle (11.4, 10.5);
-		\draw[backl] (8.8, 4.8) |- (11.2, 10.3)
-				  -- (11.2, 4.8)-- (9, 4.8)
-				  -- (9, 4.4) --   (9.3, 4.4)
-				  -- (9.3, 2.2) -- (9, 2.2)
-				  -- (9, 2) -- (8.8, 2) -- cycle;
+        \draw[dielc] (8.4, 4.6) rectangle (11.2, 10.5);
+		\draw[backl] (8.6, 4.8) |- (11.0, 10.3)
+				  -- (11.0, 4.8)--   (8.8, 4.8)
+				  -- (8.8, 4) --     (9.1, 4)
+				  -- (9.1, 1.8) --   (8.8, 1.8)
+				  -- (8.8, 1) --     (8.6, 1) -- cycle;
 
-		\draw[capac] (9, 5) --    (11, 5)
-				   --(11, 10.1) --(9.2, 10.1)
-				   --(9.2, 11) -- (9, 11)-- cycle;
+		\draw[capac] (8.8, 5) --    (10.8, 5)
+				   --(10.8, 10.1) --(9.0, 10.1)
+				   --(9.0, 11) -- (8.8, 11)-- cycle;
 
-        \draw(10.3,7.5) node {$C_2$};
+        \draw(10.1,7.5) node {$C_2$};
 
 		% C output
-        \draw[iarea] (9.3, 11.0) rectangle (8.9, 11.4);
+        \draw[iarea] (9.1, 11.0) rectangle (8.7, 11.4);
 
-		% R1
-        \draw[resis] (8.4, 4) rectangle (8.8, 2.66) node[pos=.5] {\scriptsize $R_1$};
-		\draw[backl] (8.2, 4.2) rectangle (8.4, 2);
+		% R5
+        \draw[resis] (8.2, 3.8) rectangle (8.6, 2.46) node[pos=.5] {\scriptsize $R_5$};
+		\draw[backl] (8.0, 4) rectangle (8.2, 1);
 
+		% R6
+        \draw[resis] (9.1, 2) rectangle (10.45, 3.8) node[pos=.5] {\scriptsize $R_6$};
+        \draw[backl] (10.45, 1) rectangle (10.65, 4);
 
-		% R2
-        \draw[resis] (9.3, 2.4) rectangle (10.7, 4.2) node[pos=.5] {\scriptsize $R_2$};
-        \draw[backl] (10.7, 2) rectangle (10.9, 4.4);
 		%% R2 out
-        \draw[iarea] (10.6, 2) rectangle (11, 1.6);
+        \draw[iarea] (10.4, 1) rectangle (10.8, 0.6);
 		%% KP for VT1 out and VT2
-		\draw[iarea] (7.8, 2) rectangle (8.2, 1.6);
-		\draw[iarea] (8.2, 2) rectangle (8.6, 1.6);
-		\draw[iarea] (8.6, 2) rectangle (9, 1.6);
+		\draw[iarea] (7.6, 1) rectangle (8.0, 0.6);
+		\draw[iarea] (8.0, 1) rectangle (8.4, 0.6);
+		\draw[iarea] (8.4, 1) rectangle (8.8,   0.6);
 
-        \draw[exter] (6.7, 5.1) rectangle (7.7,6.1) node[pos=.5] {$VT_1$};
-        \draw (7.2, 5.2) to[bend right=15] (6.6, 1.7);
-        \draw (7.4, 5.9) to[bend left=15] (7, 7.7);
-		\draw (7.6, 5.2) to[bend right=10] (8, 1.7);
+        \draw[exter] (6.8, 4.6) rectangle (7.8,5.6) node[pos=.5] {$VT_2$};
+        \draw (6.9, 4.7) to[bend right=15] (6.9, 0.7);
+        \draw (7.4, 5.4) to[bend left=15] (7.4, 7.7);
+		\draw (7.6, 4.7) to[bend right=10] (7.8, 0.7);
+
+		\draw[thick, dashed] (5, 1.8) --    (2.4, 1.8) --
+							 (2.4, 4.3) --  (1.6, 4.3) --
+							 (1.6, 10.7) -- (11.4, 10.7) --
+							 (11.4 , 4.3) --(10.7, 4.3) --
+						     (10.7, 1.8) -- (8,   1.8) --
+							 (8, 8.2)   --  (5, 8.2)  -- cycle ;
 
     \end{tikzpicture}
 \end{center}
