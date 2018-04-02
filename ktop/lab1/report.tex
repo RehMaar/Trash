@@ -302,9 +302,9 @@
 				   %--(4.8, 1) -- (4.6, 1) -- cycle;
 
 		% R1 output
-        \draw[iarea] (4.6, 0.6) rectangle (5.0, 1);
+        \draw[iarea] (4.7, 0.6) rectangle (5.1, 1);
 		% Middle out
-        \draw[iarea] (4.2, 0.6) rectangle (4.6, 1);
+        \draw[iarea] (4.1, 0.6) rectangle (4.5, 1);
 		% R2
         \draw[resis] (2.55, 2) rectangle (3.9, 3.8) node[pos=.5] {\scriptsize $R_2$};
         \draw[backl] (2.35, 1) rectangle (2.55, 4);
@@ -312,7 +312,7 @@
         \draw[iarea] (2.3, 1) rectangle (2.7, 0.6);
 
 		% KP for VT1
-        \draw[iarea] (5.0, 1) rectangle (5.4, 0.6);
+        \draw[iarea] (3.7, 0.6) rectangle (4.1, 1);
 
 		%% KP for VT1 out and VT2
 		\draw[iarea] (5.9, 1) rectangle (6.3, 0.6) ;
@@ -346,7 +346,7 @@
         \draw[iarea] (7.2, 7.6) rectangle (7.6, 8);
 
         \draw[exter] (5.2, 4.6) rectangle (6.2, 5.6) node[pos=.5] {$VT_1$};
-        \draw (5.3, 4.7) to[bend left=10] (5.3, 0.7);
+        \draw (5.3, 4.7) to[bend left=10] (3.8, 0.7);
         \draw (5.8, 5.5) to[bend right=15] (5.5, 7.7);
 		\draw (5.8, 4.7) to[bend left=5] (6.1, 0.7);
 
@@ -379,14 +379,15 @@
 		%% R2 out
         \draw[iarea] (10.4, 1) rectangle (10.8, 0.6);
 		%% KP for VT1 out and VT2
-		\draw[iarea] (7.6, 1) rectangle (8.0, 0.6);
-		\draw[iarea] (8.0, 1) rectangle (8.4, 0.6);
-		\draw[iarea] (8.4, 1) rectangle (8.8,   0.6);
+		%\draw[iarea] (7.6, 1) rectangle (8.0, 0.6);
+		\draw[iarea] (7.9, 1) rectangle (8.3, 0.6);
+		\draw[iarea] (8.5, 1) rectangle (8.9,   0.6);
+		\draw[iarea] (8.9, 1) rectangle (9.3,   0.6);
 
         \draw[exter] (6.8, 4.6) rectangle (7.8,5.6) node[pos=.5] {$VT_2$};
         \draw (6.9, 4.7) to[bend right=15] (6.9, 0.7);
         \draw (7.4, 5.4) to[bend left=15] (7.4, 7.7);
-		\draw (7.6, 4.7) to[bend right=10] (7.8, 0.7);
+		\draw (7.6, 4.7) to[bend right=10] (9, 0.7);
 
 		\draw[thick, dashed] (5, 1.8) --    (2.4, 1.8) --
 							 (2.4, 4.3) --  (1.6, 4.3) --
