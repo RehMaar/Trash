@@ -1,0 +1,640 @@
+\documentclass[12pt, a4paper] {ncc}
+\usepackage[utf8] {inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english, russian] {babel}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{listings,a4wide,longtable,amsmath,amsfonts,graphicx,tikz}
+\usepackage{indentfirst}
+\usepackage{bytefield}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
+\usepackage{tabularx}
+
+\usetikzlibrary{positioning}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+
+\begin{document}
+\setcounter{figure}{0}
+\frenchspacing
+\pagestyle{empty}
+\begin{center}
+                            Университет ИТМО    \\
+                        Кафедра вычислительной техники
+
+\vspace{\stretch{2}}
+
+\end{center}
+\vspace{\stretch{2}}
+\begin{center}
+			Лабораторная работа № 1\\
+		по дисциплине:\\
+	<<Теория принятия решений>>
+\end{center}
+\vspace{\stretch{3}}
+\begin{flushright}
+                                    Студент:\\
+                                    {\it Куклина М.Д., P3401}\\
+                                    Преподаватель: \\
+                                    {\it Богатырев В.А. }
+\end{flushright}
+\vspace{\stretch{4}}
+\begin{center}
+                             Санкт-Петербург, 2018
+\end{center}
+\newpage
+
+\section{Задание}
+	Стоимость блока обработки $C = 5$, системы хранения $C = 6$ и коммутатора $C = 4$.
+
+	Среднее время обслуживания запроса в блоке обработки $V = 4$, систем ханения $V = 2$ и коммутаторов $V = 3$.
+
+	Вероятности работоспособности (коэффициент готовности) блока обработки $p = 0.95$,
+	системы хранения $p = 0.95$ и коммутатора: $p = 0.96$.
+
+	Интенсивность входного потока: $\lambda = 0.9 \lambda_0$, $\lambda_0$ -- рассчитываемое
+	значение предельной интенсивности входного потока, выдерживаемой конфигурацией.
+
+	Структуры: 1, 2, 14, 19, 16.\\
+
+\section{Структура 1}
+
+	\includegraphics[scale=0.5]{./1.png}
+    \subsection{Оценка надёжности структуры}
+
+		Для данной системы нужно, чтобы работали два элемента P и М. \\
+	    Вероятность безотказной работы: $P_1 = P_P \cdot P_M$.\\
+		$P_1 = 0.95 \cdot 0.95 = 0.9025$
+
+
+        \subsection{Оценка среднего времени пребывания запросов в системе}
+
+			М/М/1 имеет следующий вид.\\
+
+            \tikzset{my2/.style={circle, draw, black, fill=white}}
+            \begin{center}
+                \begin{tikzpicture}[node distance=3em]
+                    \node (s) {};
+                    \node[my2, right = of s] (p) {$\mu_P$};
+                    \node[my2, right = of p] (m) {$\mu_M$};
+                    \node[right = of m] (e) {};
+                    \draw[->] (s) -- node[midway,above] {} (p);
+                    \draw[->] (p) -- node[midway,above] {} (m);
+                    \draw[->] (m) -- node[midway,above] {} (e);
+                \end{tikzpicture}
+            \end{center}
+
+			$u = \dfrac {1} {\mu - \lambda} $ -- время пребывания заявки в системе.
+
+			В данном случае:
+
+			$u_1 = u_P + u_M = \dfrac {1} {\mu_p - \lambda} + \dfrac {1} {\mu_M - \lambda}$.
+
+        %\subsection{Предельно допустимая интенсивность запросов}
+        %\subsection{Затраты на построение системы}
+        %\subsection{Облать эффективных решений}
+        %	\subsubsection{Определение области Парето}
+        %	\subsubsection{Выбор наилушего варианта}
+        %\subsection{Сравнение результатов многокритериального выбора структуры вычислительной системы}
+        %\subsection{Выбор варианта структуры}
+        %\subsection{Рекомендации по улучшению выбранного варианта}
+
+
+\section{Структура 2}
+
+	\includegraphics[scale=0.5]{./2.png}
+    \subsection{Оценка надёжности структуры}
+		Для данной систему нужно, чтобы работал коммутатор и либо права ветка,
+				  левая ветка полностью: \\
+				  $P_P \cdot P_M$ -- вероятность работы одной ветки.\\
+				  $1 - P_P \cdot P_M$ -- вероятность, что одна ветка работать не будет.\\
+				  $(1 - P_P \cdot P_M)^2$ -- вероятность, что две ветки работать не будут.\\
+				  $1 - (1 - P_P \cdot P_M)^2$ -- вероятность того, что хотя бы одна ветка должна работать.\\
+				  $P_2 = P_K \cdot (1 - (1 - P_P \cdot P_M)^2)$ \\ 
+				  $P_2 = 0.96 \cdot (1 - (1 - 0.95 \cdot 0.95) ^ 2 = 0.8664$
+
+        \subsection{Оценка среднего времени пребывания запросов в системе}
+            \begin{center}
+                \begin{tikzpicture}[node distance=3em and 3em]
+                    \node (s) {};
+                    \node[my2, right = of s] (k)  {$\mu_K$};
+                    \node[right = of  k] (q2) {};
+                    \node[above = of q2] (q1) {};
+                    \node[my2, right = of q1] (p1) {$\mu_P$};
+                    \node[my2, right = of q2] (p2) {$\mu_P$};
+                    \node[my2, right = of p1] (m1) {$\mu_M$};
+                    \node[my2, right = of p2] (m2) {$\mu_M$};
+                    \node[right = of m1] (e1) {};
+                    \node[right = of m2] (e2) {};
+                    \draw[->] (s) -- node[midway,above] {} (k);
+                    \draw (k) -- node[midway,above]     {} (q2.center);
+                    \draw (q1.center) -- (q2.center);
+                    \draw[->] (q1.center) -- node[midway,above] {} (p1);
+                    \draw[->] (q2.center) -- node[midway,above] {} (p2);
+                    \draw[->] (p1)        -- node[midway,above] {} (m1);
+                    \draw[->] (p2)        -- node[midway,above] {} (m2);
+                    \draw[->] (m1)        -- node[midway,above] {} (e1);
+                    \draw[->] (m2)        -- node[midway,above] {} (e2);
+                \end{tikzpicture}
+            \end{center}		
+
+			$u_{2} = u_K + 2 \cdot (\dfrac {1}{2} (u_P + u_M)) = \dfrac {1} {\mu_K - \lambda} + \dfrac {1} {\mu_P - \frac{\lambda}{2}} + \dfrac {1} {\mu_M - \frac{\lambda} {2}}$
+
+        %\subsection{Предельно допустимая интенсивность запросов}
+        %\subsection{Затраты на построение системы}
+        %\subsection{Облать эффективных решений}
+        %	\subsubsection{Определение области Парето}
+        %	\subsubsection{Выбор наилушего варианта}
+        %\subsection{Сравнение результатов многокритериального выбора структуры вычислительной системы}
+        %\subsection{Выбор варианта структуры}
+        %\subsection{Рекомендации по улучшению выбранного варианта}
+
+
+
+\section{Структура 14}
+
+	\includegraphics[scale=0.5]{./14.png}
+
+
+    \subsection{Оценка надёжности структуры}
+
+		Для данной системы нужно, чтобы всегда работал коммутатор и
+   	    одна из трёх веток; при работе второй или третьей веток нужна
+   	    работа коммутатора и один из трёх элементов памяти.\\
+  	    $P_P \cdot P_M$ -- вероятность работы первой ветки.\\
+   	    $(1 - P_P \cdot P_M)$ -- вероятность, что первая ветка не работает.\\
+   	    $(1 - P_M)$ -- вероятность, что откажет элемент памяти.\\
+   	    $(1 - P_M)^3$ -- вероятность, что откажут три элемента памяти.\\
+   	    $1 - (1 - P_M)^3$ -- вероятность, что не откажет хотя бы один элемент.\\
+   	    $P_K' = P_K \cdot (1 - (1 - P_M)^3)$ -- вероятность, что не откажет хотя бы один элемент при рабочем коммутаторе.\\
+   	    $(1 - P_P)^2 \cdot P_K'$ -- вероятность, что ни одна ветка не работает.\\
+		$P_{14} = P_K \cdot (1 - (1 - P_P \cdot P_M) \cdot (1 - P_P)^2 P_K') = $\\
+		$= P_K \cdot (1 - (1 - P_P \cdot P_M) \cdot (1 - P_P)^2 \cdot P_K \cdot (1 - (1 - P_M)^3))$ \\
+		$P_{14} = 0.949$
+
+        \subsection{Оценка среднего времени пребывания запросов в системе}
+            \begin{center}
+                \begin{tikzpicture}[node distance=3em and 3em]
+                    \node (s) {};
+                    \node[my2, right = of s] (k)  {$\mu_K$};
+                    \node[right = of  k] (q2) {};
+                    \node[above = of q2] (q1) {};
+                    \node[below = of q2] (q3) {};
+                    \node[right = of q3] (q4) {};
+                    \node[below = of q4] (q5) {};
+                    \node[above = of q4] (q6) {};
+
+                    \node[my2, right = of q1] (p1) {$\mu_P$};
+                    \node[my2, right = of p1] (m1) {$\mu_M$};
+
+                    \node[my2, right = of q5] (p2) {$\mu_P$};
+                    \node[my2, right = of q6] (p3) {$\mu_P$};
+
+					\node[right = of p3] (q7) {};
+					\node[below = of q7] (q8) {};
+					\node[below = of q8] (q9) {};
+
+                    \node[my2, right = of q8] (k1) {$\mu_K$};
+
+					\node[my2, above right = of k1] (m2) {$\mu_M$};
+					\node[my2, below = of m2] (m3) {$\mu_M$};
+					\node[my2, below = of m3] (m4) {$\mu_M$};
+
+                    \node[right = of m1] (e1) {};
+                    \node[right = of m2] (e2) {};
+                    \node[right = of m3] (e3) {};
+                    \node[right = of m4] (e4) {};
+
+                   \draw[->] (s) -- node[midway,above] {} (k);
+                   \draw     (k) -- node[midway,above] {} (q2.center);
+                   \draw     (q1.center) -- (q2.center) -- (q3.center);
+				   \draw     (q3.center) -- (q4.center) -- (q5.center) -- (q6.center);
+                   \draw[->] (m1)        -- node[midway,above] {} (e1);
+
+                   \draw[->] (q1.center) -- node[midway,above] {} (p1);
+                   \draw[->] (p1)        -- node[midway,above] {} (m1);
+
+
+                   \draw[->] (q5.center) -- node[midway,above] {} (p2);
+                   \draw[->] (q6.center) -- node[midway,above] {} (p3);
+				   \draw (p2) -- (q9.center) -- (q8.center) -- (q7.center) -- (p3);
+				   \draw[->] (q8.center) -- (k1);
+
+                   \draw[->] (k1)        -- node[midway,above] {} (m2);
+                   \draw[->] (k1)        -- node[midway,above] {} (m3);
+                   \draw[->] (k1)        -- node[midway,above] {} (m4);
+                   \draw[->] (m2)        -- node[midway,above] {} (e2);
+                   \draw[->] (m3)        -- node[midway,above] {} (e3);
+                   \draw[->] (m4)        -- node[midway,above] {} (e4);
+                \end{tikzpicture}
+            \end{center}
+
+
+		$u = u_k + u_1 + u_2 = 
+		\dfrac {1} {\mu_K - \lambda} + 
+		\dfrac {1} {\mu_P - \frac {\lambda} {2}} + \dfrac {1} {\mu_M - \frac {\lambda} {2}} +
+		\dfrac {2} {\mu_P - \frac {\lambda}{4}} +
+		\dfrac {1} {\mu_K - \frac {\lambda}{2}} +
+		\dfrac {3} {\mu_K - \frac {\lambda}{6}}$
+
+        %\subsection{Предельно допустимая интенсивность запросов}
+        %\subsection{Затраты на построение системы}
+        %\subsection{Облать эффективных решений}
+        %	\subsubsection{Определение области Парето}
+        %	\subsubsection{Выбор наилушего варианта}
+        %\subsection{Сравнение результатов многокритериального выбора структуры вычислительной системы}
+        %\subsection{Выбор варианта структуры}
+        %\subsection{Рекомендации по улучшению выбранного варианта}
+
+
+\section{Структура 19}
+	\includegraphics[scale=0.5]{./19.png}
+
+    \subsection{Оценка надёжности структуры}
+
+		Для данной системы нужно, чтобы всегда работал первый коммутатор и одна из веток;\\
+	    во второй ветку нужно, чтобы работал один из коммутаторов.\\
+	    $P_P \cdot P_M$ -- вероятность работы первой ветки.\\
+	    $P_K \cdot P_M$ -- вероятность работы связки коммутатор-память.\\
+	    $1 - P_K \cdot P_M$ -- вероятность, что связка коммутатор память-работать не будет.\\
+	    $(1 - P_K \cdot _PM)^2$ -- вероятность, что ни одна связка коммутатор-память работать не будет.\\
+	    $1 - (1 - P_K \cdot P_M)^2$ -- вероятность, что будет работать хотя бы одна связка.\\
+	    $P_P \cdot (1 - (1 - P_K \cdot P_M)^2)$ -- вероятность того, что будет работать блок обработки и его зависимости.\
+	    $1 - P_P \cdot (1 - (1 - P_K \cdot P_M)^2)$ -- вероятность того, что эта часть работать не будет.\\
+	    $(1 - P_P \cdot P_M) \cdot (1 - P_P \cdot (1 - (1 - P_K \cdot P_M)^2))$ -- вероятность того, что две ветки не будут работать.\\
+	    $P_{19} = P_K \cdot (1 - (1 - P_P \cdot P_M) \cdot (1 - P_P \cdot (1 - (1 - P_K \cdot P_M)^2)))$.\\
+		$P_{19} = 0.955$
+
+        \subsection{Оценка среднего времени пребывания запросов в системе}
+            \begin{center}
+                \begin{tikzpicture}[node distance=3em and 3em]
+                    \node (s) {};
+                    \node[my2, right = of s] (k)  {$\mu_K$};
+					\node[my2, above right = of k] (p1) {$\mu_P$};
+					\node[my2, right = of p1] (m1) {$\mu_M$};
+					\node[my2, below right = of k] (p2) {$\mu_P$};
+					\node[my2, right = of p2] (k1) {$\mu_K$};
+					\node[my2, right = of k1] (m2) {$\mu_M$};
+					\node[my2, below = of k1] (k2) {$\mu_K$};
+					\node[my2, right = of k2] (m3) {$\mu_M$};
+					\draw[->] (s) -- (k);
+					\draw[->] (k) -- (p1);
+					\draw[->] (p1) -- (m1);
+					\draw[->] (k) -- (p2);
+					\draw[->] (p2) -- (k1);
+					\draw[->] (p2) -- (k2);
+					\draw[->] (k1) -- (m2);
+					\draw[->] (k2) -- (m3);
+				\end{tikzpicture}
+			\end{center}
+
+			$u = \dfrac {1} {\mu_K - \lambda} + \dfrac {2} {\mu_K - \frac {\lambda}{4}} +
+			 \dfrac {1} {\mu_P - \frac {\lambda} {2}} + \dfrac {1} {\mu_P - \frac {\lambda}{2}} +
+			 \dfrac {1} {\mu_M - \frac {\lambda} {2}} + 
+			 \dfrac {2} {\mu_M - \frac {\lambda} {4}}$
+
+
+        %\subsection{Предельно допустимая интенсивность запросов}
+
+        %\subsection{Затраты на построение системы}
+        %\subsection{Облать эффективных решений}
+        %	\subsubsection{Определение области Парето}
+        %	\subsubsection{Выбор наилушего варианта}
+        %\subsection{Сравнение результатов многокритериального выбора структуры вычислительной системы}
+        %\subsection{Выбор варианта структуры}
+        %\subsection{Рекомендации по улучшению выбранного варианта}
+
+
+\section{Структура 16}
+
+	\includegraphics[scale=0.5]{./16.png}
+    \subsection{Оценка надёжности структуры}
+
+		$P_K' = (1 - (1 - P_M)^2) \cdot P_K$ -- работа коммутатора с одним из элементов памяти. \\
+		$P_P' = (1 - (1 - P_K')^2) \cdot P_P$ -- работа одного из блоков обработчика.\\
+		$P_{16} = P_K \cdot (1 - (1 - P_P')^2) = $ \\
+		$= P_K \cdot (1 - (1 - (1 - (1 - (1 - (1 - P_M)^2) \cdot P_K)^2) \cdot P_P )^2)$\\
+		$P_{16} = 0.957$
+
+
+        \subsection{Оценка среднего времени пребывания запросов в системе}
+            \begin{center}
+                \begin{tikzpicture}[node distance=2em and 2em]
+                    \node (s) {};
+                    \node[my2, right = of s] (k)  {$\mu_K$};
+                    \node[right = of  k] (q2) {};
+                    \node[above = of q2] (q1) {};
+                    \node[below = of q2] (q3) {};
+					\node[my2, right = of q1] (p1) {$\mu_P$};
+					\node[my2, right = of q3] (p2) {$\mu_P$};
+					\node[right = of p1] (t1) {};
+					\node[below = of t1] (t2) {};
+					\node[below = of t2] (t3) {};
+					
+					\node[right = of t2] (r2) {};
+					\node[above = of r2] (r1) {};
+					\node[below = of r2] (r3) {};
+					\node[my2, right = of r1] (k1) {$\mu_K$};
+					\node[my2, right = of r3] (k2) {$\mu_K$};
+					\node[right = of k1] (e1) {};
+					\node[below = of e1] (e2) {};
+    				\node[below = of e2] (e3) {};
+
+					\node[right = of e1] (w1) {};
+					\node[right = of e2] (w2) {};
+					\node[right = of e3] (w3) {};
+					\node[my2, right = of w1] (m1) {$\mu_M$};
+					\node[my2, right = of w3] (m2) {$\mu_M$};
+
+					\node[right = of m1] (o1) {};
+					\node[right = of m2] (o2) {};
+
+					\draw[->] (s) -- (k);
+					\draw (k) -- (q2.center) -- (q1.center);
+					\draw (q2.center) -- (q3.center);
+					\draw (q1.center) -- (p1);
+					\draw (q3.center) -- (p2);
+					\draw (p1) -- (t1.center) -- (t2.center) -- (t3.center) -- (p2);
+					\draw (t2.center) -- (r2.center);
+					\draw (e2.center) -- (w2.center);
+					\draw (k1) -- (r1.center) -- (r2.center) -- (r3.center) -- (k2);
+					\draw (k1) -- (e1.center) -- (e2.center) -- (e3.center) -- (k2);
+					\draw (m1) -- (w1.center) -- (w2.center) -- (w3.center) -- (m2);
+					\draw[->] (m1) -- (o1.center);
+					\draw[->] (m2) -- (o2.center);
+
+				\end{tikzpicture}
+			\end{center}
+
+			$u = \dfrac {1} {\mu_k - \lambda} + \dfrac {1} {\mu_P - \frac{\lambda}{2}} + \dfrac {1} {\mu_K - \frac {\lambda}{2}} + \dfrac {1}{\mu_M - \frac {\lambda}{2}}$
+
+
+
+        %\subsection{Затраты на построение системы}
+        %\subsection{Облать эффективных решений}
+        %	\subsubsection{Определение области Парето}
+        %	\subsubsection{Выбор наилушего варианта}
+        %\subsection{Сравнение результатов многокритериального выбора структуры вычислительной системы}
+        %\subsection{Выбор варианта структуры}
+        %\subsection{Рекомендации по улучшению выбранного варианта}
+\section{Предельно допустимая интенсивность запросов}
+
+
+Максимальная интенсивность, при которой не происходит перегрузка, легко
+определяется так: в каждом знаменателе при расчёте среднего времени
+пребывания в случае без перегрузки положительное число. Исходя из
+ этого, имеем:
+
+	\begin{description}
+		\item[1:]  $\lambda < min(\mu_P, \mu_M)$
+		\item[2:]  $\lambda < min(2\mu_P, 2\mu_M, \mu_K)$
+		\item[14:] $\lambda < min(4\mu_P, 2\mu_M, 6\mu_K)$
+		\item[19:] $\lambda < min(2\mu_P, 4\mu_M, 4\mu_K)$
+		\item[16:] $\lambda < min(2\mu_P, 2\mu_M, 2\mu_K)$
+	\end{description}
+
+	Таким образом, интенсивность, не вызывающая перегрузки системы:
+	$\lambda_0 < min(\mu_P, \mu_M, \mu_K)$.
+
+	Тогда получаем:
+
+    \begin{tabular}{|c|c|}
+    \hline
+    $N$    & $\lambda$ \\ \hline
+    \hline
+    \bf 1  & $0.0435$ \\ \hline
+    \bf 2  & $0.0769$ \\ \hline
+    \bf 14 & $0.1304$ \\ \hline
+    \bf 19 & $0.0870$ \\ \hline
+    \bf 16 & $0.0435$ \\ \hline
+    \hline
+    \bf 0  & $0.0435$ \\ \hline
+    \end{tabular}
+
+\subsection{Расчёт среднего времени ожидания}
+
+Мы имеем формулы вида $\sum\limits_i \dfrac{1}{k_i \mu_i - b_i \lambda}$ для
+расчёта среднего времени пребывания. В таком случае формулой для
+соответствующего времени ожидания будет
+
+$$\sum\limits_i \dfrac{1}{k_i \mu_i - b_i\lambda} - \dfrac{1}{k_i \mu_i} =
+u - \sum\limits_i \dfrac{b_i}{k_i}$$
+
+\begin{description}
+\item[1.]   $w = u - b_P - b_M$
+\item[2.]   $w = u - b_P - b_M - 2 b_K$
+\item[14.]  $w = u - b_P - b_K - b_M$
+\item[19.]  $w = u - b_P - 2 b_K - b_M$
+\item[16.]  $w = u - b_P - b_K - b_M$
+\end{description}
+
+Подставляем $\lambda = 0.7 \lambda_0 = 0.7 \mu_P$:
+
+\begin{tabular}{|c|c|c|}
+\hline
+$N$    & $u$     & $w$     \\ \hline
+\bf 1  & $98.18$ & $62.18$ \\ \hline
+\bf 2  & $84.50$ & $38.50$ \\ \hline
+\bf 14 & $50.87$ & $ 9.87$ \\ \hline
+\bf 19 & $59.30$ & $15.80$ \\ \hline
+\bf 16 & $98.28$ & $57.28$ \\ \hline
+\end{tabular}
+\subsection{Расчёт затрат на построение}
+
+Требуется всего лишь подсчитать количество элементов каждого вида.
+
+\begin{description}
+\item[1.]  $C_P + C_M$
+\item[2.]  $2 \cdot C_P + C_M + C_K$
+\item[14.] $3 \cdot C_P + 3 \cdot C_M + C_K$
+\item[19.] $2 \cdot C_P + 3 \cdot C_M + 2 \cdot C_K$
+\item[16.] $C_P + 2 \cdot C_M + 2 \cdot C_K$
+\end{description}
+
+На конкретных значениях получим:
+
+\begin{tabular}{|c|c|}
+\hline
+$N$    & $C$ \\ \hline
+\bf 1  & $11$ \\ \hline
+\bf 2  & $20$ \\ \hline
+\bf 14 & $37$ \\ \hline
+\bf 19 & $36$ \\ \hline
+\bf 16 & $25$ \\ \hline
+\end{tabular}
+
+\subsection{Определение области эффективных решений}
+
+Представим все варианты в порядке ухудшения каждой характеристики:
+
+% p1 = 0.9025
+% p2 = 0.8664
+% p14 = 0.949
+% p19 = 0.955
+% p16 = 0.957
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+$P$ & $u$ & $\Lambda$ & $C$ \\ \hline
+\hline
+16  & 14  & 14        &  1 \\ \hline
+19  & 19  & 19        & 16 \\ \hline
+14  &  2  &  2        &  2 \\ \hline
+1   &  1  &  1        & 19 \\ \hline
+2   & 16  & 16        & 14 \\ \hline
+\end{tabular}
+
+Обнаруживаем, что ни один вариант не лучше никакого другого по всем критериям.
+
+\subsection{Поиск наилучшего варианта}
+
+Для поиска варианта требуется выбрать способ нормализации значений: нельзя
+сравнивать доллары и секунды, нужно перейти к безразмерным величинам.
+
+Существуют, к примеру, такие способы нормализации:
+
+\begin{tabular}{|c|c|}
+\hline
+\bf Название & \bf Формула \\ \hline
+Естественная & $\dfrac{f(i) - \min_i f(i)}{\max_i f(i) - \min_i f(i)}$ \\ \hline
+Относительная & $\dfrac{f(i)}{\max_i f(i)}$ \\ \hline
+Контекстуальная & $\dfrac{f(i) - t}{T - t}$ \\ \hline
+\end{tabular}
+
+Под $t$ и $T$ при контекстуальной нормализации подразумеваются заранее
+определённые максимальные и минимальные значения: к примеру, имеющийся бюджет
+может быть определён как наибольшая допустимая стоимость, а заранее определённый
+ожидаемый поток посетителей~--- как наименьшая интенсивность входящих заявок.
+
+Мы выбираем контекстуальную нормализацию с такими минимальными и максимальными
+значениями:
+
+\begin{description}
+\item[Надёжность] Максимальная возможная надёжность~--- $100\%$, минимальная~---
+та, при которой не происходит никакого резервирования и заявка должна пройти
+через обработчик и устройство памяти: $P_M \cdot P_P = 86.49\%$.
+\item[Среднее время пребывания] Очевидно, что в идеальном случае заявка
+находится в системе ровно столько, сколько необходимо, чтобы она прошла через
+устройства обработки и хранения: $u = u_M + u_P = 13 + 23 = 36$. Худшим случаем
+является бесконечное время ожидания, однако зададим конечную величину, значения
+выше которой мы считаем неприемлемыми: $108$, в три раза больше минимальной.
+\item[Интенсивность] Определим границы как $0.01$ и $0.4$.
+\item[Стоимость] В стоимость входят как минимум один обработчик и одно
+устройство памяти: $C = C_P + C_M = 15 + 6 = 21$. За максимальную стоимость
+примем $250$, данное в условии к следующей лабораторной работе.
+\end{description}
+
+Условимся, что $1.0$~--- наилучшее значение для данного критерия, $0.0$~---
+наихудшее. Те критерии, которые требуется минимизировать, а не максимизировать,
+следует преобразовать так: $f_n(i) := 1.0 - f_n(i)$.
+
+Получаем:
+
+\begin{tabular}{|c||c|c|c|c|}
+\hline
+$N$ & $P$    & $u$     & $\Lambda$ & $C$ \\ \hline
+\hline
+1   & $0.00$ & $0.136$ & $0.09$    & $1.00$ \\ \hline
+2   & $0.04$ & $0.326$ & $0.17$    & $0.93$ \\ \hline
+14  & $0.54$ & $0.793$ & $0.31$    & $0.81$ \\ \hline
+19  & $0.43$ & $0.676$ & $0.20$    & $0.87$ \\ \hline
+16  & $0.42$ & $0.135$ & $0.09$    & $0.96$ \\ \hline
+\end{tabular}
+
+\subsubsection{Минимаксный критерий}
+
+Минимаксный метод заключается в том, что к матрице нормализованных значений
+критериев приписывается дополнительный столбец, в котором размещается наименьшее
+значение на данной строке. В качестве принимаемого решения выбирается то, на
+строке которого в дополнительном столбце наибольшее число.
+
+$$\min_i f_n(i) \rightarrow \max$$
+
+\begin{tabular}{|c||c|c|c|c||c|}
+\hline
+$N$ & $P$    & $u$     & $\Lambda$ & $C$    &        \\ \hline
+\hline
+1   & $0.00$ & $0.136$ & $0.09$    & $1.00$ & $0.00$ \\ \hline
+2   & $0.04$ & $0.326$ & $0.17$    & $0.93$ & $0.04$ \\ \hline
+14  & $0.54$ & $0.793$ & $0.31$    & $0.81$ & $0.31$ \\ \hline
+19  & $0.43$ & $0.676$ & $0.20$    & $0.87$ & $0.20$ \\ \hline
+16  & $0.42$ & $0.135$ & $0.09$    & $0.96$ & $0.09$ \\ \hline
+\end{tabular}
+
+Мы выбрали решение $14$: самая слабая его сторона~--- пропускная способность, но
+у остальных она ещё меньше. Эта система стоит значительно больше, чем остальные,
+однако стоимость для нас не так значима.
+
+\subsubsection{Мультипликативный критерий}
+
+Мультипликативный метод заключается в максимизации произведения значений разных
+критериев:
+
+$$\prod_i f_n(i) \rightarrow \max$$
+
+\begin{tabular}{|c||c|c|c|c||c|}
+\hline
+$N$ & $P$    & $u$     & $\Lambda$ & $C$    &          \\ \hline
+\hline
+1   & $0.00$ & $0.136$ & $0.09$    & $1.00$ & $0.0000$ \\ \hline
+2   & $0.04$ & $0.326$ & $0.17$    & $0.93$ & $0.0021$ \\ \hline
+14  & $0.54$ & $0.793$ & $0.31$    & $0.81$ & $0.1075$ \\ \hline
+19  & $0.43$ & $0.676$ & $0.20$    & $0.87$ & $0.0506$ \\ \hline
+16  & $0.42$ & $0.135$ & $0.09$    & $0.96$ & $0.0049$ \\ \hline
+\end{tabular}
+
+Очевидный победитель~--- решение $14$.
+
+\subsubsection{Аддитивный критерий}
+
+Требуется максимизировать сумму значений разных критериев:
+
+$$\sum_i f_n(i) \rightarrow \max$$
+
+\begin{tabular}{|c||c|c|c|c||c|}
+\hline
+$N$ & $P$    & $u$     & $\Lambda$ & $C$    &         \\ \hline
+\hline
+1   & $0.00$ & $0.136$ & $0.09$    & $1.00$ & $1.226$ \\ \hline
+2   & $0.04$ & $0.326$ & $0.17$    & $0.93$ & $1.466$ \\ \hline
+14  & $0.54$ & $0.793$ & $0.31$    & $0.81$ & $2.453$ \\ \hline
+19  & $0.43$ & $0.676$ & $0.20$    & $0.87$ & $2.176$ \\ \hline
+16  & $0.42$ & $0.135$ & $0.09$    & $0.96$ & $1.605$ \\ \hline
+\end{tabular}
+
+На первом месте по аддитивному критерию~--- решение $14$, самое дорогое, но в
+остальных аспектах лидирующее. На втором месте $19$, которое по всем параметрам
+рядом с $14$.
+
+\subsubsection{Метод отклонения от идеала}
+
+Идеальный прибор мы определяем как обладающий максимальными значениями,
+описанными при выборе метода нормализации.
+
+Его характеристики, таким образом, выглядят так:
+
+\begin{tabular}{|c||c|c|c|}
+\hline
+$P$    & $u$     & $\Lambda$ & $C$ \\ \hline
+\hline
+$1.00$ & $1.00$  & $1.00$    & $1.00$ \\ \hline
+\end{tabular}
+
+Теперь определим качество прибора как его близость к идеальному:
+
+$$\sum_i f_I(i) - f_n(i) \rightarrow \min$$
+
+Несложно заметить, что в силу выбора нормализации результат в данном случае
+совпадает с результатом выбора по аддитивному критерию.
+
+\subsection{Выводы}
+
+В результате проделанной работы мы применили свои знания в теории надёжности,
+математическом моделировании и базовой арифметике для получения численных метрик
+вычислительной системы, а также изучили основные методы принятия решений в
+условиях, где не заданы заранее критерии оптимизации.
+
+\end{document}
